@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -180,13 +180,13 @@ const studyboard = () => {
       lineNumber: 33
     },
     __self: undefined
-  }, " \uC804\uCCB4 20\uAC74"), __jsx(Text, {
+  }, " \uC804\uCCB425\uAC74"), __jsx(Text, {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 34
     },
     __self: undefined
-  }, "(1/10)\uD398\uC774\uC9C0"), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+  }, "(1/5)\uD398\uC774\uC9C0"), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
     type: "primary",
     style: {
       marginLeft: "20px"
@@ -427,7 +427,7 @@ const studyboard = () => {
 
 /***/ }),
 
-/***/ 3:
+/***/ 8:
 /*!************************************!*\
   !*** multi ./pages/studyboard.jsx ***!
   \************************************/

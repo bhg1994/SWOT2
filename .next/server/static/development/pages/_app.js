@@ -112,8 +112,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "prop-types");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/styles */ "@material-ui/core/styles");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! redux */ "redux");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var next_redux_wrapper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! next-redux-wrapper */ "next-redux-wrapper");
+/* harmony import */ var next_redux_wrapper__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(next_redux_wrapper__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/styles */ "@material-ui/core/styles");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _reducers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../reducers */ "./reducers/index.js");
 var _jsxFileName = "/Users/jaykim/SWOT2/pages/_app.jsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -126,6 +131,9 @@ const {
   Content,
   Footer
 } = antd__WEBPACK_IMPORTED_MODULE_3__["Layout"];
+
+
+
 
 
 
@@ -148,7 +156,7 @@ const SWOT = ({
   return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_head__WEBPACK_IMPORTED_MODULE_1___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 21
+      lineNumber: 24
     },
     __self: undefined
   }, __jsx("link", {
@@ -156,20 +164,20 @@ const SWOT = ({
     href: "https://cdnjs.cloudflare.com/ajax/libs/antd/3.16.2/antd.css",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 22
+      lineNumber: 25
     },
     __self: undefined
   }), __jsx("script", {
     src: "https://cdnjs.cloudflare.com/ajax/libs/antd/3.16.2/antd.js",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 26
+      lineNumber: 29
     },
     __self: undefined
   })), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Layout"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 28
+      lineNumber: 31
     },
     __self: undefined
   }, __jsx(Sider, {
@@ -178,14 +186,14 @@ const SWOT = ({
     collapsed: collapsed,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 29
+      lineNumber: 32
     },
     __self: undefined
   }, __jsx("div", {
     className: "logo",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 30
+      lineNumber: 33
     },
     __self: undefined
   }), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Menu"], {
@@ -194,205 +202,277 @@ const SWOT = ({
     defaultSelectedKeys: ["1"],
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 31
+      lineNumber: 34
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Menu"].Item, {
     key: "1",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 32
+      lineNumber: 35
     },
     __self: undefined
   }, __jsx(next_Link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 33
+      lineNumber: 36
     },
     __self: undefined
   }, __jsx("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 34
+      lineNumber: 37
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Icon"], {
     type: "home",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 35
+      lineNumber: 38
     },
     __self: undefined
   }), __jsx("span", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 36
+      lineNumber: 39
     },
     __self: undefined
   }, "Home")))), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Menu"].Item, {
     key: "2",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 40
+      lineNumber: 43
     },
     __self: undefined
   }, __jsx(next_Link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/signup",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 41
+      lineNumber: 44
     },
     __self: undefined
   }, __jsx("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 42
+      lineNumber: 45
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Icon"], {
     type: "user-add",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 43
+      lineNumber: 46
     },
     __self: undefined
   }), __jsx("span", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 44
+      lineNumber: 47
     },
     __self: undefined
   }, "Register")))), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Menu"].Item, {
     key: "3",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 48
+      lineNumber: 51
     },
     __self: undefined
   }, __jsx(next_Link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/login",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 49
+      lineNumber: 52
     },
     __self: undefined
   }, __jsx("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 50
+      lineNumber: 53
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Icon"], {
     type: "login",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 51
+      lineNumber: 54
     },
     __self: undefined
   }), __jsx("span", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 52
+      lineNumber: 55
     },
     __self: undefined
   }, "Login")))), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Menu"].Item, {
     key: "4",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56
+      lineNumber: 59
+    },
+    __self: undefined
+  }, __jsx(next_Link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    href: "/notification",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 60
+    },
+    __self: undefined
+  }, __jsx("a", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 61
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Icon"], {
+    type: "notification",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 62
+    },
+    __self: undefined
+  }), __jsx("span", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 63
+    },
+    __self: undefined
+  }, "Notification")))), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Menu"].Item, {
+    key: "5",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 67
+    },
+    __self: undefined
+  }, __jsx(next_Link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    href: "/profile",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 68
+    },
+    __self: undefined
+  }, __jsx("a", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 69
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Icon"], {
     type: "user",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 57
+      lineNumber: 70
     },
     __self: undefined
   }), __jsx("span", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 58
+      lineNumber: 71
     },
     __self: undefined
-  }, "MyPage")), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Menu"].Item, {
-    key: "5",
+  }, "MyPage")))), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Menu"].Item, {
+    key: "6",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 60
+      lineNumber: 75
+    },
+    __self: undefined
+  }, __jsx(next_Link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    href: "/Reservation",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 76
+    },
+    __self: undefined
+  }, __jsx("a", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 77
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Icon"], {
     type: "schedule",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 61
+      lineNumber: 78
     },
     __self: undefined
   }), __jsx("span", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 62
+      lineNumber: 79
     },
     __self: undefined
-  }, "Reservation")), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Menu"].Item, {
-    key: "6",
+  }, "Reservation")))), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Menu"].Item, {
+    key: "7",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 64
+      lineNumber: 83
     },
     __self: undefined
   }, __jsx(next_Link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/studyboard",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 65
+      lineNumber: 84
     },
     __self: undefined
   }, __jsx("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 66
+      lineNumber: 85
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Icon"], {
     type: "read",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 67
+      lineNumber: 86
     },
     __self: undefined
   }), __jsx("span", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 68
+      lineNumber: 87
     },
     __self: undefined
   }, "StudyBoard")))), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Menu"].Item, {
-    key: "7",
+    key: "8",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 72
+      lineNumber: 91
+    },
+    __self: undefined
+  }, __jsx(next_Link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    href: "/qa",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 92
+    },
+    __self: undefined
+  }, __jsx("a", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 93
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Icon"], {
     type: "check-circle",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 73
+      lineNumber: 94
     },
     __self: undefined
   }), __jsx("span", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 74
+      lineNumber: 95
     },
     __self: undefined
-  }, "Q&A")))), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Layout"], {
+  }, "Q&A")))))), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Layout"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 78
+      lineNumber: 101
     },
     __self: undefined
   }, __jsx(Header, {
@@ -402,7 +482,7 @@ const SWOT = ({
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 79
+      lineNumber: 102
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Icon"], {
@@ -415,20 +495,20 @@ const SWOT = ({
     onClick: toggle,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 80
+      lineNumber: 103
     },
     __self: undefined
   }), __jsx(next_Link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 89
+      lineNumber: 112
     },
     __self: undefined
   }, __jsx("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 90
+      lineNumber: 113
     },
     __self: undefined
   }, __jsx("img", {
@@ -441,20 +521,20 @@ const SWOT = ({
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 91
+      lineNumber: 114
     },
     __self: undefined
   }))), __jsx(next_Link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/profile",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 102
+      lineNumber: 125
     },
     __self: undefined
   }, __jsx("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 103
+      lineNumber: 126
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Avatar"], {
@@ -466,7 +546,7 @@ const SWOT = ({
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 104
+      lineNumber: 127
     },
     __self: undefined
   })))), __jsx(Content, {
@@ -478,13 +558,13 @@ const SWOT = ({
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 115
+      lineNumber: 138
     },
     __self: undefined
   }, __jsx(Component, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 123
+      lineNumber: 146
     },
     __self: undefined
   })), __jsx(Footer, {
@@ -493,45 +573,45 @@ const SWOT = ({
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 125
+      lineNumber: 148
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Row"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 126
+      lineNumber: 149
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Col"], {
     span: 12,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 127
+      lineNumber: 150
     },
     __self: undefined
   }, "\uC804\uD654\uBC88\uD638 02-2610-4114 ", __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 128
+      lineNumber: 151
     },
     __self: undefined
   }), " SWOT, \uC11C\uC6B8\uD2B9\uBCC4\uC2DC \uAD6C\uB85C\uAD6C \uC624\uB9582\uB3D9 \uC5F0\uB3D9\uB85C 320 ", __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 129
+      lineNumber: 152
     },
     __self: undefined
   }), " Seoul, KR 08359"), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Col"], {
     span: 12,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 131
+      lineNumber: 154
     },
     __self: undefined
   }, __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 132
+      lineNumber: 155
     },
     __self: undefined
   }), "\uC800\uC791\uAD8C \uBCF4\uD638 \xA9 SWOT Companies Inc. \uBAA8\uB4E0 \uAD8C\uB9AC \uC720\uBCF4"))))));
@@ -539,8 +619,36 @@ const SWOT = ({
 
 SWOT.Proptypes = {
   Component: prop_types__WEBPACK_IMPORTED_MODULE_4__["elementType"]
-};
+}; // export default withRedux((initialState, options) => {
+//   const middlewares = [];
+//   const enhancer = compose(
+//     applyMiddleware(...middlewares),
+//     !options.isServer && window.__REDUX_DEVTOOLS_EXTENSION__ !== "undefined"
+//       ? window.__REDUX_DEVTOOLS_EXTENSION__()
+//       : f => f
+//   );
+//   const store = createStore(reducer, initialState, enhancer);
+//   return store;
+// })(SWOT);
+
 /* harmony default export */ __webpack_exports__["default"] = (SWOT);
+
+/***/ }),
+
+/***/ "./reducers/index.js":
+/*!***************************!*\
+  !*** ./reducers/index.js ***!
+  \***************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "redux");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);
+
+const rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({});
+/* harmony default export */ __webpack_exports__["default"] = (rootReducer);
 
 /***/ }),
 
@@ -575,6 +683,17 @@ module.exports = require("@material-ui/core/styles");
 /***/ (function(module, exports) {
 
 module.exports = require("antd");
+
+/***/ }),
+
+/***/ "next-redux-wrapper":
+/*!*************************************!*\
+  !*** external "next-redux-wrapper" ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("next-redux-wrapper");
 
 /***/ }),
 
@@ -619,6 +738,17 @@ module.exports = require("prop-types");
 /***/ (function(module, exports) {
 
 module.exports = require("react");
+
+/***/ }),
+
+/***/ "redux":
+/*!************************!*\
+  !*** external "redux" ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("redux");
 
 /***/ })
 

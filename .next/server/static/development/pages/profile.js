@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -123,11 +123,56 @@ const NicknameEditForm = () => {
       lineNumber: 5
     },
     __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
-    addonBefore: "\uB2C9\uB124\uC784",
+  }, __jsx("div", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 12
+    },
+    __self: undefined
+  }, __jsx("div", {
+    style: {
+      display: "flex"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 13
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"].Meta, {
+    style: {
+      marginTop: "2px"
+    },
+    avatar: __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Avatar"], {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 16
+      },
+      __self: undefined
+    }, "S"),
+    title: "Seong_Jin",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 14
+    },
+    __self: undefined
+  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+    style: {
+      marginLeft: "30px"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 19
+    },
+    __self: undefined
+  }, "\uB85C\uADF8\uC544\uC6C3")), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
+    addonBefore: "\uB2C9\uB124\uC784",
+    style: {
+      width: "50%",
+      marginRight: "50px"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 21
     },
     __self: undefined
   }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
@@ -137,10 +182,10 @@ const NicknameEditForm = () => {
     type: "primary",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 13
+      lineNumber: 25
     },
     __self: undefined
-  }, "\uC218\uC815"));
+  }, "\uC218\uC815")));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (NicknameEditForm);
@@ -166,18 +211,112 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
+const data = [{
+  title: "1",
+  content: "승연관",
+  studypurpose: "JAVA Study"
+}, {
+  title: "2",
+  content: "미가엘관",
+  studypurpose: "회의"
+}, {
+  title: "3",
+  content: "새천년관",
+  studypurpose: "동아리"
+}];
 
 const Profile = () => {
   return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 8
+      lineNumber: 26
     },
     __self: undefined
   }, __jsx(_components_NicknameEditForm_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 9
+      lineNumber: 27
+    },
+    __self: undefined
+  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["List"], {
+    itemLayout: "horizontal",
+    style: {
+      marginBottom: "20px"
+    },
+    grid: {
+      gutter: 16,
+      xs: 1,
+      sm: 2,
+      md: 4,
+      lg: 4,
+      xl: 6,
+      xxl: 3
+    },
+    size: "small",
+    header: __jsx("div", {
+      style: {
+        textAlign: "center",
+        fontSize: "20px"
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 34
+      },
+      __self: undefined
+    }, "\uAC15\uC758\uC2E4 \uC608\uC57D \uD604\uD669"),
+    loadMore: __jsx("div", {
+      style: {
+        textAlign: "center"
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 39
+      },
+      __self: undefined
+    }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      style: {
+        width: "50%",
+        marginBottom: "30px"
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 40
+      },
+      __self: undefined
+    }, "\uAC15\uC758\uC2E4 \uB354 \uBCF4\uAE30")),
+    bordered: true,
+    dataSource: data,
+    renderItem: item => __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["List"].Item, {
+      style: {
+        maraginTop: "20px"
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 48
+      },
+      __self: undefined
+    }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"], {
+      style: {
+        marginTop: "20px"
+      },
+      title: item.title,
+      extra: __jsx("a", {
+        href: "Notification",
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 52
+        },
+        __self: undefined
+      }, "More"),
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 49
+      },
+      __self: undefined
+    })),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 28
     },
     __self: undefined
   }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["List"], {
@@ -185,131 +324,85 @@ const Profile = () => {
       marginBottom: "20px"
     },
     grid: {
-      gutter: 4,
-      xs: 2,
-      md: 3
+      gutter: 16,
+      xs: 1,
+      sm: 2,
+      md: 4,
+      lg: 4,
+      xl: 6,
+      xxl: 3
     },
     size: "small",
     header: __jsx("div", {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 14
-      },
-      __self: undefined
-    }, "\uD314\uB85C\uC789 \uBAA9\x1C\uB85D"),
-    loadMore: __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
       style: {
-        width: "100%"
+        textAlign: "center",
+        fontSize: "20px"
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 15
+        lineNumber: 62
       },
       __self: undefined
-    }, "\uB354 \uBCF4\uAE30"),
+    }, "\uC2A4\uD130\uB514 \uC608\uC57D \uD604\uD669"),
+    loadMore: __jsx("div", {
+      style: {
+        textAlign: "center"
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 67
+      },
+      __self: undefined
+    }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      style: {
+        width: "50%",
+        marginBottom: "30px"
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 68
+      },
+      __self: undefined
+    }, "\uC2A4\uD130\uB514 \uB354 \uBCF4\uAE30")),
     bordered: true,
-    dataSource: ["Seong_Jin", "SWOT", "SWOT프로젝트를 위한 연습"],
+    dataSource: data,
     renderItem: item => __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["List"].Item, {
       style: {
         maraginTop: "20px"
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 19
+        lineNumber: 76
       },
       __self: undefined
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"], {
-      actions: [__jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
-        key: "stop",
-        type: "stop",
+      style: {
+        marginTop: "20px"
+      },
+      title: item.title,
+      extra: __jsx("a", {
+        href: "Notification",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 20
+          lineNumber: 80
         },
         __self: undefined
-      })],
+      }, "More"),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 20
+        lineNumber: 77
       },
       __self: undefined
-    }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"].Meta, {
-      description: item,
+    }, item.content, " ", __jsx("br", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 21
+        lineNumber: 82
       },
       __self: undefined
-    }))),
+    }), item.studypurpose)),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 10
-    },
-    __self: undefined
-  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["List"], {
-    style: {
-      marginBottom: "20px"
-    },
-    grid: {
-      gutter: 4,
-      xs: 2,
-      md: 3
-    },
-    size: "small",
-    header: __jsx("div", {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 30
-      },
-      __self: undefined
-    }, "\uD314\uB85C\uC6CC \uBAA9\x1C\uB85D"),
-    loadMore: __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
-      style: {
-        width: "100%"
-      },
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 31
-      },
-      __self: undefined
-    }, "\uB354 \uBCF4\uAE30"),
-    bordered: true,
-    dataSource: ["Seong_Jin", "SWOT", "SWOT프로젝트를 위한 연습"],
-    renderItem: item => __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["List"].Item, {
-      style: {
-        maraginTop: "20px"
-      },
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 35
-      },
-      __self: undefined
-    }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"], {
-      actions: [__jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
-        key: "stop",
-        type: "stop",
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 36
-        },
-        __self: undefined
-      })],
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 36
-      },
-      __self: undefined
-    }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"].Meta, {
-      description: item,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 37
-      },
-      __self: undefined
-    }))),
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 26
+      lineNumber: 57
     },
     __self: undefined
   })));
@@ -319,7 +412,7 @@ const Profile = () => {
 
 /***/ }),
 
-/***/ 8:
+/***/ 6:
 /*!*********************************!*\
   !*** multi ./pages/profile.jsx ***!
   \*********************************/

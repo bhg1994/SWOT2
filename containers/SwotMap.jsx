@@ -59,6 +59,8 @@ export default function SWOTMap() {
   const mapView = (
     <ImageMapper
       src="static/images/SWOTMAP.png"
+      width={550}
+      height={700}
       map={lectureRoom}
       onClick={imageClick}
     />

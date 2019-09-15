@@ -8,6 +8,10 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
+    "/Reservation": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
     "/_app": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
@@ -20,15 +24,19 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/login": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
     "/next/dist/pages/_error": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
+    "/notification": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
     "/profile": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
+    "/qa": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],

@@ -4,7 +4,10 @@ import Link from "next/Link";
 import { Layout, Menu, Icon, Avatar, Row, Col } from "antd";
 const { Header, Sider, Content, Footer } = Layout;
 import Proptypes, { elementType } from "prop-types";
+import { createStore, compose, applyMiddleware } from "redux";
+import withRedux from "next-redux-wrapper";
 import "@material-ui/core/styles";
+import reducer from "../reducers";
 
 const SWOT = ({ Component }) => {
   const [collapsed, setCollapsed] = useState(true);
@@ -54,14 +57,30 @@ const SWOT = ({ Component }) => {
               </Link>
             </Menu.Item>
             <Menu.Item key="4">
-              <Icon type="user" />
-              <span>MyPage</span>
+              <Link href="/notification">
+                <a>
+                  <Icon type="notification" />
+                  <span>Notification</span>
+                </a>
+              </Link>
             </Menu.Item>
             <Menu.Item key="5">
-              <Icon type="schedule" />
-              <span>Reservation</span>
+              <Link href="/profile">
+                <a>
+                  <Icon type="user" />
+                  <span>MyPage</span>
+                </a>
+              </Link>
             </Menu.Item>
             <Menu.Item key="6">
+              <Link href="/Reservation">
+                <a>
+                  <Icon type="schedule" />
+                  <span>Reservation</span>
+                </a>
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="7">
               <Link href="/studyboard">
                 <a>
                   <Icon type="read" />
@@ -69,9 +88,13 @@ const SWOT = ({ Component }) => {
                 </a>
               </Link>
             </Menu.Item>
-            <Menu.Item key="7">
-              <Icon type="check-circle" />
-              <span>Q&A</span>
+            <Menu.Item key="8">
+              <Link href="/qa">
+                <a>
+                  <Icon type="check-circle" />
+                  <span>Q&A</span>
+                </a>
+              </Link>
             </Menu.Item>
           </Menu>
         </Sider>
@@ -143,5 +166,17 @@ const SWOT = ({ Component }) => {
 SWOT.Proptypes = {
   Component: elementType
 };
+
+// export default withRedux((initialState, options) => {
+//   const middlewares = [];
+//   const enhancer = compose(
+//     applyMiddleware(...middlewares),
+//     !options.isServer && window.__REDUX_DEVTOOLS_EXTENSION__ !== "undefined"
+//       ? window.__REDUX_DEVTOOLS_EXTENSION__()
+//       : f => f
+//   );
+//   const store = createStore(reducer, initialState, enhancer);
+//   return store;
+// })(SWOT);
 
 export default SWOT;

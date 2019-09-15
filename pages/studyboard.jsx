@@ -30,8 +30,8 @@ const studyboard = () => {
         <header style={{ display: "flex" }}>
           <div>
             <Icon type="bell" />
-            <Text strong> 전체 20건</Text>
-            <Text>(1/10)페이지</Text>
+            <Text strong> 전체25건</Text>
+            <Text>(1/5)페이지</Text>
             <Button type="primary" style={{ marginLeft: "20px" }}>
               스터디 추가
             </Button>

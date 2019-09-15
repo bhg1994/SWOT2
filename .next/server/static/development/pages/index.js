@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -773,6 +773,8 @@ function SWOTMap() {
 
   const mapView = __jsx(react_image_mapper__WEBPACK_IMPORTED_MODULE_2___default.a, {
     src: "static/images/SWOTMAP.png",
+    width: 550,
+    height: 700,
     map: lectureRoom,
     onClick: imageClick,
     __source: {
@@ -785,13 +787,13 @@ function SWOTMap() {
   return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 69
+      lineNumber: 71
     },
     __self: this
   }, __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 70
+      lineNumber: 72
     },
     __self: this
   }, mapView)));
@@ -832,155 +834,160 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components */ "./components/index.js");
-/* harmony import */ var _containers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../containers */ "./containers/index.js");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! antd */ "antd");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "@material-ui/core/styles");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _containers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../containers */ "./containers/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! antd */ "antd");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_4__);
 var _jsxFileName = "/Users/jaykim/SWOT2/pages/index.jsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
+
  // import MainCarousel from "../components/MainCarousel";
 
-class Home extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
-  componentDidMount() {
-    console.log("test");
-
-    if (false) {}
+const useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["makeStyles"])({
+  ["@media (max-width:780px)"]: {
+    map: {
+      display: "none",
+      backgroundColor: "red"
+    }
   }
+});
 
-  render() {
-    return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Row"], {
-      gutter: 24,
-      type: "flex",
+const Home = () => {
+  const classes = useStyles();
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(antd__WEBPACK_IMPORTED_MODULE_4__["Row"], {
+    gutter: 24,
+    type: "flex",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 27
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_4__["Card"], {
+    bordered: false,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 28
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+    xs: 24,
+    md: 12,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 29
+    },
+    __self: undefined
+  }, __jsx(_components__WEBPACK_IMPORTED_MODULE_1__["Notification"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 30
+    },
+    __self: undefined
+  })), __jsx(antd__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+    xs: 24,
+    md: 12,
+    style: {
+      marginBottom: "70px"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 32
+    },
+    __self: undefined
+  }, __jsx(_components__WEBPACK_IMPORTED_MODULE_1__["Notification"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 33
+    },
+    __self: undefined
+  })), __jsx("div", {
+    style: {
+      textAlign: "center"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 35
+    },
+    __self: undefined
+  }, __jsx(_components__WEBPACK_IMPORTED_MODULE_1__["NotifiactionPagination"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 36
+    },
+    __self: undefined
+  }))), __jsx(antd__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+    xs: 24,
+    md: 12,
+    style: {
+      marginTop: "50px",
+      minHeight: 900
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 39
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_4__["Card"], {
+    extra: __jsx("a", {
+      href: "#",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 23
+        lineNumber: 41
       },
-      __self: this
-    }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Card"], {
-      bordered: false,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 24
-      },
-      __self: this
-    }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-      xs: 24,
-      md: 12,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 25
-      },
-      __self: this
-    }, __jsx(_components__WEBPACK_IMPORTED_MODULE_1__["Notification"], {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 26
-      },
-      __self: this
-    })), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-      xs: 24,
-      md: 12,
-      style: {
-        marginBottom: "70px"
-      },
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 28
-      },
-      __self: this
-    }, __jsx(_components__WEBPACK_IMPORTED_MODULE_1__["Notification"], {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 29
-      },
-      __self: this
-    })), __jsx("div", {
-      style: {
-        textAlign: "center"
-      },
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 31
-      },
-      __self: this
-    }, __jsx(_components__WEBPACK_IMPORTED_MODULE_1__["NotifiactionPagination"], {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 32
-      },
-      __self: this
-    }))), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-      xs: 24,
-      md: 12,
-      style: {
-        marginTop: "50px",
-        minHeight: 900
-      },
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 35
-      },
-      __self: this
-    }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Card"], {
-      extra: __jsx("a", {
-        href: "#",
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 37
-        },
-        __self: this
-      }, "Lecture >"),
-      title: "SWOT MAP",
-      hoverable: true,
-      style: {
-        textAlign: "center"
-      },
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 36
-      },
-      __self: this
-    }, __jsx(_containers__WEBPACK_IMPORTED_MODULE_2__["SwotMap"], {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 42
-      },
-      __self: this
-    }), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Card"], {
-      style: {
-        marginTop: "30px"
-      },
-      title: "\uAC15\uC758\uC2E4 \uC608\uC57D\uD604\uD669",
-      hoverable: true,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 43
-      },
-      __self: this
-    }, __jsx(_components__WEBPACK_IMPORTED_MODULE_1__["LectureRoominfo"], {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 48
-      },
-      __self: this
-    }))))), __jsx(_containers__WEBPACK_IMPORTED_MODULE_2__["Study"], {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 53
-      },
-      __self: this
-    }));
-  }
-
-}
+      __self: undefined
+    }, "Lecture >"),
+    title: "SWOT MAP",
+    hoverable: true,
+    style: {
+      textAlign: "center"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 40
+    },
+    __self: undefined
+  }, __jsx(_containers__WEBPACK_IMPORTED_MODULE_3__["SwotMap"], {
+    className: classes.map,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 46
+    },
+    __self: undefined
+  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_4__["Card"], {
+    style: {
+      marginTop: "30px"
+    },
+    title: "\uAC15\uC758\uC2E4 \uC608\uC57D\uD604\uD669",
+    hoverable: true,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 47
+    },
+    __self: undefined
+  }, __jsx(_components__WEBPACK_IMPORTED_MODULE_1__["LectureRoominfo"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 52
+    },
+    __self: undefined
+  }))))), __jsx(_containers__WEBPACK_IMPORTED_MODULE_3__["Study"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 57
+    },
+    __self: undefined
+  }));
+};
 
 /* harmony default export */ __webpack_exports__["default"] = (Home);
 
 /***/ }),
 
-/***/ 7:
+/***/ 3:
 /*!*******************************!*\
   !*** multi ./pages/index.jsx ***!
   \*******************************/
