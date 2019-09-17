@@ -1,8 +1,6 @@
 import React from "react";
 import { Card } from "antd";
 const Studyinfo = ({ studyInfo }) => {
-  console.log(studyInfo);
-
   return (
     <>
       <Card style={{ marginBottom: "30px" }} hoverable>

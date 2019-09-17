@@ -28,14 +28,14 @@ const studyboard = () => {
           <img src="static/images/studyboard_logo.png" />
         </div>
         <header style={{ display: "flex" }}>
-          <div>
+          <div style={{ width: "150px" }}>
             <Icon type="bell" />
             <Text strong> 전체25건</Text>
             <Text>(1/5)페이지</Text>
-            <Button type="primary" style={{ marginLeft: "20px" }}>
-              스터디 추가
-            </Button>
           </div>
+          <Button type="primary" style={{ marginLeft: "20px" }}>
+            스터디 추가
+          </Button>
 
           <div
             style={{

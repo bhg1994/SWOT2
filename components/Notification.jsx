@@ -68,8 +68,7 @@ const Notification = () => {
           </Col>
         </Row> */}
         <Card
-          title="공지사항1"
-          extra={<a href="Notification">More</a>}
+          title="스터디 모집 게시글"
           style={{ margin: "50px 0 0 0", width: 300 }}
           hoverable
           cover={<img alt="example" src="static/images/lectureroom.jpg" />}
@@ -79,11 +78,10 @@ const Notification = () => {
           <p>Card content</p>
         </Card>
         <Card
-          title="공지사항2"
-          extra={<a href="Notification">More</a>}
+          title="스터디 모집 게시글"
           hoverable
           style={{ margin: "100px 0 0 0", width: 300 }}
-          cover={<img alt="example" src="static/images/lectureroom.jpg" />}
+          cover={<img alt="example" src="static/images/lectureroom2.jpg" />}
         >
           <p>Card content</p>
           <p>Card content</p>

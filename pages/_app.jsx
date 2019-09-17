@@ -10,15 +10,16 @@ import "@material-ui/core/styles";
 import reducer from "../reducers";
 
 const SWOT = ({ Component }) => {
-  const [collapsed, setCollapsed] = useState(true);
+  // const [collapsed, setCollapsed] = useState(true);
 
-  const toggle = () => {
-    if (collapsed === true) {
-      setCollapsed(false);
-    } else {
-      setCollapsed(true);
-    }
-  };
+  // const toggle = () => {
+  //   if (collapsed === true) {
+  //     setCollapsed(false);
+  //   } else {
+  //     setCollapsed(true);
+  //   }
+  // };
+
   return (
     <>
       <Head>
@@ -29,9 +30,19 @@ const SWOT = ({ Component }) => {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/antd/3.16.2/antd.js" />
       </Head>
       <Layout>
-        <Sider trigger={null} collapsible collapsed={collapsed}>
+        <Sider
+          style={{
+            overflow: "auto",
+            height: "100vh",
+            position: "fixed",
+            left: 0
+          }}
+          trigger={null}
+          // collapsible
+          // collapsed={collapsed}
+        >
           <div className="logo" />
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
+          <Menu theme="dark" mode="inline">
             <Menu.Item key="1">
               <Link href="/">
                 <a>
@@ -89,18 +100,34 @@ const SWOT = ({ Component }) => {
               </Link>
             </Menu.Item>
             <Menu.Item key="8">
-              <Link href="/qa">
+              <Link href="/questionAnswer">
                 <a>
                   <Icon type="check-circle" />
                   <span>Q&A</span>
                 </a>
               </Link>
             </Menu.Item>
+            <Menu.Item key="9">
+              <Link href="/master">
+                <a>
+                  <Icon type="github" />
+                  <span>Master</span>
+                </a>
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="10">
+              <Link href="/reservationForm">
+                <a>
+                  <Icon type="github" />
+                  <span>reservationForm</span>
+                </a>
+              </Link>
+            </Menu.Item>
           </Menu>
         </Sider>
-        <Layout>
+        <Layout style={{ marginLeft: "200px" }}>
           <Header style={{ background: "#fff", padding: 0 }}>
-            <Icon
+            {/* <Icon
               style={{
                 fontSize: "20px",
                 padding: "0 20px",
@@ -108,7 +135,7 @@ const SWOT = ({ Component }) => {
               }}
               type={collapsed ? "menu-unfold" : "menu-fold"}
               onClick={toggle}
-            />
+            /> */}
             <Link href="/">
               <a>
                 <img
@@ -137,7 +164,7 @@ const SWOT = ({ Component }) => {
           </Header>
           <Content
             style={{
-              margin: "24px 16px",
+              margin: "20px 20px 0",
               padding: 24,
               background: "#fff",
               minHeight: 1000

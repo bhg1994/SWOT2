@@ -140,23 +140,18 @@ const {
 const SWOT = ({
   Component
 }) => {
-  const {
-    0: collapsed,
-    1: setCollapsed
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true);
-
-  const toggle = () => {
-    if (collapsed === true) {
-      setCollapsed(false);
-    } else {
-      setCollapsed(true);
-    }
-  };
-
+  // const [collapsed, setCollapsed] = useState(true);
+  // const toggle = () => {
+  //   if (collapsed === true) {
+  //     setCollapsed(false);
+  //   } else {
+  //     setCollapsed(true);
+  //   }
+  // };
   return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_head__WEBPACK_IMPORTED_MODULE_1___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 24
+      lineNumber: 25
     },
     __self: undefined
   }, __jsx("link", {
@@ -164,315 +159,389 @@ const SWOT = ({
     href: "https://cdnjs.cloudflare.com/ajax/libs/antd/3.16.2/antd.css",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 25
+      lineNumber: 26
     },
     __self: undefined
   }), __jsx("script", {
     src: "https://cdnjs.cloudflare.com/ajax/libs/antd/3.16.2/antd.js",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 29
+      lineNumber: 30
     },
     __self: undefined
   })), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Layout"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 31
+      lineNumber: 32
     },
     __self: undefined
   }, __jsx(Sider, {
-    trigger: null,
-    collapsible: true,
-    collapsed: collapsed,
+    style: {
+      overflow: "auto",
+      height: "100vh",
+      position: "fixed",
+      left: 0
+    },
+    trigger: null // collapsible
+    // collapsed={collapsed}
+    ,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 32
+      lineNumber: 33
     },
     __self: undefined
   }, __jsx("div", {
     className: "logo",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 33
+      lineNumber: 44
     },
     __self: undefined
   }), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Menu"], {
     theme: "dark",
     mode: "inline",
-    defaultSelectedKeys: ["1"],
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 34
+      lineNumber: 45
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Menu"].Item, {
     key: "1",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 35
+      lineNumber: 46
     },
     __self: undefined
   }, __jsx(next_Link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 36
+      lineNumber: 47
     },
     __self: undefined
   }, __jsx("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 37
+      lineNumber: 48
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Icon"], {
     type: "home",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 38
+      lineNumber: 49
     },
     __self: undefined
   }), __jsx("span", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 39
+      lineNumber: 50
     },
     __self: undefined
   }, "Home")))), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Menu"].Item, {
     key: "2",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 43
+      lineNumber: 54
     },
     __self: undefined
   }, __jsx(next_Link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/signup",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 44
+      lineNumber: 55
     },
     __self: undefined
   }, __jsx("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 45
+      lineNumber: 56
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Icon"], {
     type: "user-add",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 46
+      lineNumber: 57
     },
     __self: undefined
   }), __jsx("span", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 47
+      lineNumber: 58
     },
     __self: undefined
   }, "Register")))), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Menu"].Item, {
     key: "3",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 51
+      lineNumber: 62
     },
     __self: undefined
   }, __jsx(next_Link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/login",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 52
+      lineNumber: 63
     },
     __self: undefined
   }, __jsx("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 53
+      lineNumber: 64
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Icon"], {
     type: "login",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 54
+      lineNumber: 65
     },
     __self: undefined
   }), __jsx("span", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 55
+      lineNumber: 66
     },
     __self: undefined
   }, "Login")))), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Menu"].Item, {
     key: "4",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 59
+      lineNumber: 70
     },
     __self: undefined
   }, __jsx(next_Link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/notification",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 60
+      lineNumber: 71
     },
     __self: undefined
   }, __jsx("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 61
+      lineNumber: 72
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Icon"], {
     type: "notification",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 62
+      lineNumber: 73
     },
     __self: undefined
   }), __jsx("span", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 63
+      lineNumber: 74
     },
     __self: undefined
   }, "Notification")))), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Menu"].Item, {
     key: "5",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 67
+      lineNumber: 78
     },
     __self: undefined
   }, __jsx(next_Link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/profile",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 68
+      lineNumber: 79
     },
     __self: undefined
   }, __jsx("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 69
+      lineNumber: 80
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Icon"], {
     type: "user",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 70
+      lineNumber: 81
     },
     __self: undefined
   }), __jsx("span", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 71
+      lineNumber: 82
     },
     __self: undefined
   }, "MyPage")))), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Menu"].Item, {
     key: "6",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 75
+      lineNumber: 86
     },
     __self: undefined
   }, __jsx(next_Link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/Reservation",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 76
+      lineNumber: 87
     },
     __self: undefined
   }, __jsx("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 77
+      lineNumber: 88
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Icon"], {
     type: "schedule",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 78
+      lineNumber: 89
     },
     __self: undefined
   }), __jsx("span", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 79
+      lineNumber: 90
     },
     __self: undefined
   }, "Reservation")))), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Menu"].Item, {
     key: "7",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 83
+      lineNumber: 94
     },
     __self: undefined
   }, __jsx(next_Link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/studyboard",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 84
+      lineNumber: 95
     },
     __self: undefined
   }, __jsx("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 85
+      lineNumber: 96
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Icon"], {
     type: "read",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 86
+      lineNumber: 97
     },
     __self: undefined
   }), __jsx("span", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 87
+      lineNumber: 98
     },
     __self: undefined
   }, "StudyBoard")))), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Menu"].Item, {
     key: "8",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 91
+      lineNumber: 102
     },
     __self: undefined
   }, __jsx(next_Link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    href: "/qa",
+    href: "/questionAnswer",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 92
+      lineNumber: 103
     },
     __self: undefined
   }, __jsx("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 93
+      lineNumber: 104
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Icon"], {
     type: "check-circle",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 94
+      lineNumber: 105
     },
     __self: undefined
   }), __jsx("span", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 95
+      lineNumber: 106
     },
     __self: undefined
-  }, "Q&A")))))), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Layout"], {
+  }, "Q&A")))), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Menu"].Item, {
+    key: "9",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 101
+      lineNumber: 110
+    },
+    __self: undefined
+  }, __jsx(next_Link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    href: "/master",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 111
+    },
+    __self: undefined
+  }, __jsx("a", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 112
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Icon"], {
+    type: "github",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 113
+    },
+    __self: undefined
+  }), __jsx("span", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 114
+    },
+    __self: undefined
+  }, "Master")))), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Menu"].Item, {
+    key: "10",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 118
+    },
+    __self: undefined
+  }, __jsx(next_Link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    href: "/reservationForm",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 119
+    },
+    __self: undefined
+  }, __jsx("a", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 120
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Icon"], {
+    type: "github",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 121
+    },
+    __self: undefined
+  }), __jsx("span", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 122
+    },
+    __self: undefined
+  }, "reservationForm")))))), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Layout"], {
+    style: {
+      marginLeft: "200px"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 128
     },
     __self: undefined
   }, __jsx(Header, {
@@ -482,33 +551,20 @@ const SWOT = ({
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 102
+      lineNumber: 129
     },
     __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Icon"], {
-    style: {
-      fontSize: "20px",
-      padding: "0 20px",
-      lineHeight: "64px"
-    },
-    type: collapsed ? "menu-unfold" : "menu-fold",
-    onClick: toggle,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 103
-    },
-    __self: undefined
-  }), __jsx(next_Link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+  }, __jsx(next_Link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 112
+      lineNumber: 139
     },
     __self: undefined
   }, __jsx("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 113
+      lineNumber: 140
     },
     __self: undefined
   }, __jsx("img", {
@@ -521,20 +577,20 @@ const SWOT = ({
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 114
+      lineNumber: 141
     },
     __self: undefined
   }))), __jsx(next_Link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/profile",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 125
+      lineNumber: 152
     },
     __self: undefined
   }, __jsx("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 126
+      lineNumber: 153
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Avatar"], {
@@ -546,25 +602,25 @@ const SWOT = ({
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 127
+      lineNumber: 154
     },
     __self: undefined
   })))), __jsx(Content, {
     style: {
-      margin: "24px 16px",
+      margin: "20px 20px 0",
       padding: 24,
       background: "#fff",
       minHeight: 1000
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 138
+      lineNumber: 165
     },
     __self: undefined
   }, __jsx(Component, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 146
+      lineNumber: 173
     },
     __self: undefined
   })), __jsx(Footer, {
@@ -573,45 +629,45 @@ const SWOT = ({
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 148
+      lineNumber: 175
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Row"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 149
+      lineNumber: 176
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Col"], {
     span: 12,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 150
+      lineNumber: 177
     },
     __self: undefined
   }, "\uC804\uD654\uBC88\uD638 02-2610-4114 ", __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 151
+      lineNumber: 178
     },
     __self: undefined
   }), " SWOT, \uC11C\uC6B8\uD2B9\uBCC4\uC2DC \uAD6C\uB85C\uAD6C \uC624\uB9582\uB3D9 \uC5F0\uB3D9\uB85C 320 ", __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 152
+      lineNumber: 179
     },
     __self: undefined
   }), " Seoul, KR 08359"), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Col"], {
     span: 12,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 154
+      lineNumber: 181
     },
     __self: undefined
   }, __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 155
+      lineNumber: 182
     },
     __self: undefined
   }), "\uC800\uC791\uAD8C \uBCF4\uD638 \xA9 SWOT Companies Inc. \uBAA8\uB4E0 \uAD8C\uB9AC \uC720\uBCF4"))))));

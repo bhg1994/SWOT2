@@ -1,65 +1,87 @@
 import React, { useEffect } from "react";
-import InfiniteCarousel from "react-leaf-carousel";
+import Slider from "react-slick";
+
+let settings = {
+  centerMode: true,
+  dots: true,
+  infinite: true,
+  autoplay: true,
+  autoplaySpeed: 2000,
+  speed: 500,
+  slidesToShow: 4,
+  slidesToScroll: 1,
+  initialSlide: 0,
+
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        infinite: true,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2,
+        initialSlide: 2
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+  ]
+};
 
 const MainCarousel = () => {
   return (
     <>
-      <InfiniteCarousel
-        breakpoints={[
-          {
-            breakpoint: 500,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 2
-            }
-          },
-          {
-            breakpoint: 768,
-            settings: {
-              slidesToShow: 3,
-              slidesToScroll: 3
-            }
-          }
-        ]}
-        dots={true}
-        showSides={true}
-        // sidesOpacity={0.5}
-        sideSize={0.1}
-        autoCycle={true}
-        slidesToScroll={5}
-        slidesToShow={5}
-        scrollOnDevice={true}
-        responsive={true}
-        cycleInterval={2000}
-      >
-        <div>
-          <img alt="그루트" src="static/images/그루트.jpg" />
-        </div>
-        <div>
-          <img alt="" src="static/images/아이언맨.jpg" />
-        </div>
-        <div>
-          <img alt="" src="static/images/캡틴.jpg" />
-        </div>
-        <div>
-          <img alt="그루트" src="static/images/그루트.jpg" />
-        </div>
-        <div>
-          <img alt="" src="static/images/아이언맨.jpg" />
-        </div>
-        <div>
-          <img alt="" src="static/images/캡틴.jpg" />
-        </div>
-        <div>
-          <img alt="그루트" src="static/images/그루트.jpg" />
-        </div>
-        <div>
-          <img alt="" src="static/images/아이언맨.jpg" />
-        </div>
-        <div>
-          <img alt="" src="static/images/캡틴.jpg" />
-        </div>
-      </InfiniteCarousel>
+      <link
+        rel="stylesheet"
+        type="text/css"
+        charSet="UTF-8"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
+      />
+      <link
+        rel="stylesheet"
+        type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
+      />
+      <div>
+        <Slider {...settings}>
+          <div>
+            <img src="static/images/lectureroom.jpg"></img>
+          </div>
+          <div>
+            <img src="static/images/lectureroom2.jpg"></img>
+          </div>
+          <div>
+            <img src="static/images/lectureroom3.jpg"></img>
+          </div>
+          <div>
+            <img src="static/images/lectureroom4.jpg"></img>
+          </div>
+          <div>
+            <img src="static/images/lectureroom.jpg"></img>
+          </div>
+          <div>
+            <img src="static/images/lectureroom2.jpg"></img>
+          </div>
+          <div>
+            <img src="static/images/lectureroom3.jpg"></img>
+          </div>
+          <div>
+            <img src="static/images/lectureroom4.jpg"></img>
+          </div>
+        </Slider>
+      </div>
     </>
   );
 };

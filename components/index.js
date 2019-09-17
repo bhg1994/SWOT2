@@ -1,12 +1,17 @@
 import Notification from './Notification';
-import LectureRoominfo from './LectureRoominfo';
+import ReservationRoominfo from './ReservationRoominfo';
 import Studyinfo from './Studyinfo';
-import NotifiactionPagination from './NotificationPagination'
-
+import NotifiactionPagination from './NotificationPagination';
+import LectureRoominfo from './LectureRoominfo';
+import MainCarousel from './MainCarousel';
+import LectureRoomModal from './LectureRoomModal';
 
 export {
-    LectureRoominfo,
+    MainCarousel,
+    ReservationRoominfo,
     Notification,
     Studyinfo,
     NotifiactionPagination,
+    LectureRoominfo,
+    LectureRoomModal
 };

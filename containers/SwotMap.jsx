@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import ImageMapper from "react-image-mapper";
-
+import LectureRoomModal from "../components/LectureRoomModal";
+import Link from "next/link";
 const useStyles = makeStyles({
-  root: {}
+  root: {},
+  ["@media (max-width:1520px)"]: {
+    map: {
+      display: "none"
+    }
+  }
 });
 
 const lectureRoom = {
@@ -40,14 +46,14 @@ const lectureRoom = {
     {
       name: "6",
       shape: "circle",
-      coords: [515, 160, 18],
+      coords: [440, 130, 18],
       preFillColor: "blue",
       fillColor: "purple"
     }
   ]
 };
 
-export default function SWOTMap() {
+const SWOTMap = () => {
   const classes = useStyles();
 
   const imageClick = (area, event) => {
@@ -59,8 +65,9 @@ export default function SWOTMap() {
   const mapView = (
     <ImageMapper
       src="static/images/SWOTMAP.png"
-      width={550}
-      height={700}
+      width={600}
+      height={400}
+      imgWidth={500}
       map={lectureRoom}
       onClick={imageClick}
     />
@@ -69,8 +76,11 @@ export default function SWOTMap() {
   return (
     <>
       <div>
-        <div>{mapView}</div>
+        {/* {modalstatus === true ? <LectureRoomModal /> : ""} */}
+        {mapView}
       </div>
     </>
   );
-}
+};
+
+export default SWOTMap;

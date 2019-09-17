@@ -109,14 +109,14 @@ const studyboard = () => {
           <img src="static/images/notification_logo.png" />
         </div>
         <header style={{ display: "flex" }}>
-          <div>
+          <div style={{ width: "200px" }}>
             <Icon type="bell" />
             <Text strong> 전체 30건</Text>
             <Text>(1/5)페이지</Text>
-            <Button type="danger" size="large" style={{ marginLeft: "20px" }}>
-              공지사항 추가
-            </Button>
           </div>
+          <Button type="danger" size="large" style={{ marginLeft: "20px" }}>
+            공지사항 추가
+          </Button>
           <div
             style={{
               width: 1200,

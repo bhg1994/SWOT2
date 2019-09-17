@@ -1,9 +1,9 @@
-import { Table, Divider, Tag } from "antd";
+import { Table, Tag, Card, Button } from "antd";
 
 const columns = [
   {
-    title: "예약자",
-    dataIndex: "name",
+    title: "강의실 이미지",
+    dataIndex: "lectureroomimage",
     key: "name"
   },
   {
@@ -13,37 +13,32 @@ const columns = [
     render: text => <a>{text}</a>
   },
   {
-    title: "위치",
-    dataIndex: "location",
-    key: "location"
+    title: "최소 인원수",
+    dataIndex: "minimum",
+    key: "minimum"
   },
   {
-    title: "예약 목적",
-    key: "tags",
-    dataIndex: "tags",
-    render: tags => (
+    title: "최대 인원수",
+    dataIndex: "maximum",
+    key: "maximum"
+  },
+  {
+    title: "예약 상태",
+    dataIndex: "status",
+    key: "status",
+    render: status => (
       <span>
-        {tags.map(tag => {
-          let color = tag.length > 5 ? "geekblue" : "green";
-          if (tag === "동아리 활동") {
+        {status.map(status => {
+          let color = status === "예약 가능" ? "geekblue" : "green";
+          if (status === "예약 중") {
             color = "volcano";
           }
           return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
+            <Tag color={color} key={status}>
+              {status}
             </Tag>
           );
         })}
-      </span>
-    )
-  },
-  {
-    title: "예약 날짜",
-    key: "date",
-    render: (text, record) => (
-      <span>
-        <a>{record.date}</a>
-        {/* <Divider type="vertical" /> */}
       </span>
     )
   }
@@ -52,42 +47,48 @@ const columns = [
 const data = [
   {
     key: "1",
-    name: "김성진",
-    lectureName: "승연관",
-    location: "1502호",
-    date: "9월 20일",
-    tags: ["자바스크립트 스터디"]
+    lectureroomimage: "김성진",
+    lectureName: "M401호",
+    minimum: "3명",
+    maximum: "6명",
+    status: ["예약 중"]
   },
   {
     key: "2",
-    name: "방효근",
-    lectureName: "미가엘관",
-    location: "M401",
-    date: "9월 27일",
-    tags: ["동아리 활동"]
+    lectureroomimage: "방효근",
+    lectureName: "M404호",
+    minimum: "5명",
+    maximum: "10명",
+    status: ["예약 가능"]
   },
   {
     key: "3",
-    name: "박혜린",
-    lectureName: "정보과학관",
-    location: "4201호",
-    date: "9월 25일",
-    tags: ["회의"]
+    lectureroomimage: "박혜린",
+    lectureName: "M201호",
+    minimum: "3명",
+    maximum: "9명",
+    status: ["예약 중"]
   },
   {
     key: "4",
-    name: "서주은",
-    lectureName: "새천년관",
-    location: "7302호",
-    date: "10월 11일",
-    tags: ["조모임 활동"]
+    lectureroomimage: "서주은",
+    lectureName: "M304호",
+    minimum: "10명",
+    maximum: "20명",
+    status: ["예약 가능"]
   }
 ];
 
 const LectureRoominfo = () => {
   return (
     <>
-      <Table columns={columns} dataSource={data} pagination={false} />
+      <Card
+        style={{ marginRight: "30px", textAlign: "center" }}
+        title="미가엘관"
+        hoverable
+      >
+        <Table columns={columns} dataSource={data} pagination={false} />
+      </Card>
     </>
   );
 };
