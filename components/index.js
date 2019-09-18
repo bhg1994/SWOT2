@@ -5,7 +5,9 @@ import NotifiactionPagination from './NotificationPagination';
 import LectureRoominfo from './LectureRoominfo';
 import MainCarousel from './MainCarousel';
 import LectureRoomModal from './LectureRoomModal';
-
+import ReservationTable from './ReservationTable';
+import Facilityrental from './ Facilityrental';
+import SuccessResult from './SuccessResult';
 export {
     MainCarousel,
     ReservationRoominfo,
@@ -13,5 +15,8 @@ export {
     Studyinfo,
     NotifiactionPagination,
     LectureRoominfo,
-    LectureRoomModal
+    LectureRoomModal,
+    ReservationTable,
+    Facilityrental,
+    SuccessResult
 };

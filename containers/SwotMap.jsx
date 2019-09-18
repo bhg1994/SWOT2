@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import ImageMapper from "react-image-mapper";
-import LectureRoomModal from "../components/LectureRoomModal";
+// import LectureRoomModal from "../components/LectureRoomModal";
 import Link from "next/link";
+
 const useStyles = makeStyles({
   root: {},
   ["@media (max-width:1520px)"]: {

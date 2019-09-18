@@ -12,10 +12,6 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/reservation": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
     "/reservationForm": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
