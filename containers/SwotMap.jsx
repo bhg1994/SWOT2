@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import ImageMapper from "react-image-mapper";
-// import LectureRoomModal from "../components/LectureRoomModal";
-import Link from "next/link";
+import { Modal, Typography } from "antd";
+import LectureRoomList from "../components/LectureRoomList";
+
+const { Text } = Typography;
 
 const useStyles = makeStyles({
   root: {},
@@ -33,7 +35,7 @@ const lectureRoom = {
     {
       name: "3",
       shape: "circle",
-      coords: [520, 245, 18],
+      coords: [310, 110, 15],
       preFillColor: "yellow",
       fillColor: "blue"
     },
@@ -56,11 +58,22 @@ const lectureRoom = {
 
 const SWOTMap = () => {
   const classes = useStyles();
+  const [visible, setVisible] = useState(false);
+  const [Lectureroom, setLectureroom] = useState("미가엘관");
+
+  const handleCancel = () => {
+    setVisible(false);
+  };
+
+  const handleOk = () => {
+    setVisible(false);
+  };
 
   const imageClick = (area, event) => {
     console.log(event);
     console.log(area);
     console.log(area.name);
+    setVisible(true);
   };
 
   const mapView = (
@@ -77,11 +90,23 @@ const SWOTMap = () => {
   return (
     <>
       <div>
-        {/* {modalstatus === true ? <LectureRoomModal /> : ""} */}
         {mapView}
+        <Modal
+          title="강의실 정보"
+          // centered
+          visible={visible}
+          onOk={handleOk}
+          onCancel={handleCancel}
+        >
+          <div style={{ marginBottom: "30px", textAlign: "center" }}>
+            <Text style={{ fontSize: "17px" }} type="secondary">
+              {Lectureroom}
+            </Text>
+          </div>
+          <LectureRoomList />
+        </Modal>
       </div>
     </>
   );
 };
-
 export default SWOTMap;

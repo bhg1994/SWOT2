@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import SuccessResult from './SuccessResult'
 
 import {
   Form,
-  Comment,
   Input,
   Button,
   Checkbox,
   Typography,
   TimePicker,
-  Divider
+  Divider,
+  Modal
 } from "antd";
 
 const { Text } = Typography;
@@ -19,31 +18,41 @@ function onChange(date, dateString) {
   console.log(date, dateString);
 }
 
-function oncontentChange(content){
+function oncontentChange(content) {
   setContent(e.target.value);
 }
 
-
 const Facilityrental = () => {
-  const [content,setContent] = useState('');
+  const [content, setContent] = useState("");
+  const [visible, setVisible] = useState(false);
 
-  const oncontentChange = (e) => {
+  const oncontentChange = e => {
     setContent(e.target.value);
-  }
+  };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
+    setVisible(true);
     console.log(content);
-  }
-  
+  };
+
+  const handleOk = () => {
+    setVisible(false);
+  };
+
+  const handleCancel = () => {
+    setVisible(false);
+  };
 
   return (
     <>
-      <section style={{ width:"50%", marginTop: "50px", border: "1px solid gray" }}>
-        <div style={{marginTop:"20px"}}>
-        <Text strong style={{ fontSize: "18px" }}>
-          시설 대여 신청 : 대여 하고자 하는 양식을 입력해 주세요
-        </Text>
+      <section
+        style={{ width: "50%", marginTop: "50px", border: "1px solid gray" }}
+      >
+        <div style={{ marginTop: "20px" }}>
+          <Text strong style={{ fontSize: "18px" }}>
+            시설 대여 신청 : 대여 하고자 하는 양식을 입력해 주세요
+          </Text>
         </div>
         <Divider />
         <Form style={{ padding: 10 }} onSubmit={handleSubmit}>
@@ -71,21 +80,43 @@ const Facilityrental = () => {
             대여 사유 / 대유 인원 목록
           </Text>
           <Form.Item style={{ marginTop: "20px" }}>
-            <TextArea  value={content} onChange={oncontentChange} autosize={{ minRows: 4, maxRows: 8 }} style={{ width: "50%" }} rows={4} placeholder="강의실 대여 신청자는 학번과 이름을 모두 기재해 주시기 바랍니다. 인원과 차이가 있을 시, 대여 반려의 사유가 됩니다." />
+            <TextArea
+              value={content}
+              onChange={oncontentChange}
+              autosize={{ minRows: 4, maxRows: 8 }}
+              style={{ width: "50%" }}
+              rows={4}
+              placeholder="강의실 대여 신청자는 학번과 이름을 모두 기재해 주시기 바랍니다. 인원과 차이가 있을 시, 대여 반려의 사유가 됩니다."
+            />
           </Form.Item>
 
           <Divider />
           <Form.Item style={{ marginTop: "20px" }}>
-          <Input addonBefore="신청자 전화번호" style={{width:"50%"}} />
+            <Input addonBefore="신청자 전화번호" style={{ width: "50%" }} />
           </Form.Item>
-          <Form.Item >
-          <Text type="secondary">시설물 대여 규정에 동의합니다 : </Text><Checkbox /> 
+          <Form.Item>
+            <Text type="secondary">시설물 대여 규정에 동의합니다 : </Text>
+            <Checkbox />
           </Form.Item>
-          <Form.Item style={{marginLeft:"30px"}}>
-          <Button htmlType="submit">대여 신청</Button>
+          <Form.Item style={{ marginLeft: "30px" }}>
+            <Button htmlType="submit">대여 신청</Button>
+          </Form.Item>
+          <Form.Item>
+            <Modal
+              title="예약 신청 완료"
+              visible={visible}
+              onOk={handleOk}
+              onCancel={handleCancel}
+            >
+              <p>예약신청이 완료 되었습니다.</p>
+              <p>
+                예약 현황은 마이페이지에서 확인이 가능하며 3일 이내에 처리가
+                완료될 예정입니다.
+              </p>
+            </Modal>
           </Form.Item>
         </Form>
-      </section> 
+      </section>
     </>
   );
 };

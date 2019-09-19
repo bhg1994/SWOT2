@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, DatePicker, List, Typography } from "antd";
 import { ReservationTable, Facilityrental } from "../components";
+import PieChart from "react-minimal-pie-chart";
 
 const { Text } = Typography;
 
@@ -20,7 +21,7 @@ const reservationForm = () => {
       </div>
       <List style={{ marginTop: "30px" }}>
         <List.Item>
-          <Text type="danger" style={{ marginRight: "30px",fontSize:"15px" }}>
+          <Text type="danger" style={{ marginRight: "30px", fontSize: "15px" }}>
             대여일자 선택
           </Text>
           <DatePicker onChange={onChange} />
@@ -32,7 +33,21 @@ const reservationForm = () => {
           </Text>
         </List.Item>
       </List>
-      <ReservationTable />
+      <div style={{ width: "500px", height: "500px" }}>
+        <PieChart
+          totalValue="48"
+          radius="40"
+          data={[
+            { title: "One", value: 5, degrees: "10", color: "#E38627" },
+            { title: "Two", value: 5, color: "#C13C37" },
+            { title: "Three", value: 5, color: "#6A2135" },
+            { title: "Four", value: 5, color: "red" },
+            { title: "Five", value: 5, color: "orange" },
+            { title: "Six", value: 5, color: "blue" }
+          ]}
+        />
+      </div>
+      {/* <ReservationTable /> */}
       <Facilityrental />
     </>
   );

@@ -7,7 +7,8 @@ import MainCarousel from './MainCarousel';
 import LectureRoomModal from './LectureRoomModal';
 import ReservationTable from './ReservationTable';
 import Facilityrental from './ Facilityrental';
-import SuccessResult from './SuccessResult';
+import LectureRoomList from './LectureRoomList'
+
 export {
     MainCarousel,
     ReservationRoominfo,
@@ -18,5 +19,5 @@ export {
     LectureRoomModal,
     ReservationTable,
     Facilityrental,
-    SuccessResult
+    LectureRoomList
 };
