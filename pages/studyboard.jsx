@@ -33,7 +33,6 @@ const studyboard = () => {
   const [studystarttime, setStudystarttime] = useState("");
   const [studyendtime, setStudyendtime] = useState("");
   const [studycontent, setStudycontent] = useState("");
-  const [minimum, setMinimum] = useState("");
   const [maximum, setMaximum] = useState("");
 
   const handleCancel = () => {
@@ -58,15 +57,15 @@ const studyboard = () => {
     setStudyendtime(timeString);
   };
 
+  const onChangeMaximum = value => {
+    setMaximum(value);
+  };
+
   const onChangeValue = e => {
     if (e.target.id === "studytitle") {
       setStudytitle(e.target.value);
     } else if (e.target.id === "studycontent") {
       setStudycontent(e.target.value);
-    } else if (e.target.id === "minimum") {
-      setMinimum(e.target.value);
-    } else if (e.target.id === "maximum") {
-      setMaximum(e.target.value);
     }
   };
 
@@ -75,7 +74,6 @@ const studyboard = () => {
     setVisible(false);
     console.log(studytitle);
     console.log(studycontent);
-    console.log(minimum);
     console.log(maximum);
     console.log(studystarttime);
     console.log(studyendtime);
@@ -144,22 +142,13 @@ const studyboard = () => {
               </Form.Item>
               <Form.Item>
                 <div>
-                  <Text type="secondary">최소 인원수 : </Text>
-                  <Input
-                    id="minimum"
-                    onChange={onChangeValue}
-                    min={3}
-                    max={30}
-                    style={{ width: "50%" }}
-                  />
-                </div>
-                <div>
                   <Text type="secondary">최대 인원수 : </Text>
-                  <Input
+                  <InputNumber
                     id="maximum"
-                    onChange={onChangeValue}
+                    onChange={onChangeMaximum}
                     min={3}
                     max={30}
+                    defaultVAlue={3}
                     style={{ width: "50%" }}
                   />
                 </div>
@@ -211,7 +200,6 @@ const studyboard = () => {
                 날짜 : {studystarttime} - {studyendtime}
                 <br />
                 목적 : {studycontent} <br />
-                최소 인원 수 : {minimum}명 <br />
                 최대 인원 수 : {maximum}명 <br />
               </Card>
             </Col>

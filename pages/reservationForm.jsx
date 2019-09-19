@@ -38,7 +38,7 @@ const reservationForm = () => {
           totalValue="48"
           radius="40"
           data={[
-            { title: "One", value: 5, degrees: "10", color: "#E38627" },
+            { title: "One", value: 5, degrees: "20", color: "#E38627" },
             { title: "Two", value: 5, color: "#C13C37" },
             { title: "Three", value: 5, color: "#6A2135" },
             { title: "Four", value: 5, color: "red" },

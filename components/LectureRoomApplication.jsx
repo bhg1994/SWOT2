@@ -1,41 +1,7 @@
 import React from "react";
-import { Table, Divider, Tag } from "antd";
-import Link from "next/link";
+import { Table, Divider, Tag, Button } from "antd";
 
-const columns = [
-  { title: "강의실코드", dataIndex: "lecturecode", key: "lecturecode" },
-  {
-    title: "강의실명",
-    dataIndex: "lecturename",
-    key: "lecturename",
-    render: text => (
-      <Link href="/reservationForm">
-        <a>{text}</a>
-      </Link>
-    )
-  },
-  { title: "수용인원", dataIndex: "capacity", key: "capacity" },
-  {
-    title: "예약 상태",
-    dataIndex: "status",
-    key: "status",
-    render: status => (
-      <span>
-        {status.map(status => {
-          let color = status === "예약 가능" ? "geekblue" : "green";
-          if (status === "예약 불가") {
-            color = "volcano";
-          }
-          return (
-            <Tag color={color} key={status}>
-              {status}
-            </Tag>
-          );
-        })}
-      </span>
-    )
-  }
-];
+const { Column } = Table;
 
 const data = [
   {
@@ -85,7 +51,42 @@ const data = [
 const LectureRoomApplication = () => {
   return (
     <>
-      <Table columns={columns} dataSource={data} pagination={false} />
+      <Table dataSource={data} pagination={false}>
+        <Column title="강의실 코드" dataIndex="lecturecode" key="lecturecode" />
+        <Column title="강의실명" dataIndex="lecturename" key="lecturename" />
+        <Column title="수용인원" dataIndex="capacity" key="capacity" />
+        <Column
+          title="예약 상태"
+          dataIndex="status"
+          key="status"
+          render={status => (
+            <span>
+              {status.map(status => {
+                let color = status === "예약 가능" ? "geekblue" : "green";
+                if (status === "예약 불가") {
+                  color = "volcano";
+                }
+                return (
+                  <Tag color={color} key={status}>
+                    {status}
+                  </Tag>
+                );
+              })}
+            </span>
+          )}
+        />
+        <Column
+          title="확인란"
+          key="action"
+          render={() => (
+            <span>
+              <Button type="primary">수락</Button>
+              <Divider type="vertical" />
+              <Button>거절</Button>
+            </span>
+          )}
+        />
+      </Table>
     </>
   );
 };
