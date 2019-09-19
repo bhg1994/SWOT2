@@ -7,7 +7,7 @@ import {
   MainCarousel
 } from "../components";
 import { makeStyles } from "@material-ui/core/styles";
-import { SwotMap, Study } from "../containers";
+import { SwotMap } from "../containers";
 import { Row, Col, Card } from "antd";
 
 const useStyles = makeStyles({
@@ -61,7 +61,6 @@ const Home = () => {
           </Col>
         </Row>
       </div>
-      <Study />
     </>
   );
 };

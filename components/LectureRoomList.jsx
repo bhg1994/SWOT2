@@ -14,27 +14,7 @@ const columns = [
       </Link>
     )
   },
-  { title: "수용인원", dataIndex: "capacity", key: "capacity" },
-  {
-    title: "예약 상태",
-    dataIndex: "status",
-    key: "status",
-    render: status => (
-      <span>
-        {status.map(status => {
-          let color = status === "예약 가능" ? "geekblue" : "green";
-          if (status === "예약 불가") {
-            color = "volcano";
-          }
-          return (
-            <Tag color={color} key={status}>
-              {status}
-            </Tag>
-          );
-        })}
-      </span>
-    )
-  }
+  { title: "수용인원", dataIndex: "capacity", key: "capacity" }
 ];
 
 const data = [
@@ -42,50 +22,92 @@ const data = [
     key: "1",
     lecturecode: "M201",
     lecturename: "대학원강의실",
-    capacity: "14",
-    status: ["예약 가능"]
+    capacity: "14"
   },
   {
     key: "2",
     lecturecode: "M202",
     lecturename: "대학원강의실",
-    capacity: "14",
-    status: ["예약 가능"]
+    capacity: "14"
   },
   {
     key: "3",
     lecturecode: "M204",
     lecturename: "일반강의실",
-    capacity: "14",
-    status: ["예약 불가"]
+    capacity: "14"
   },
   {
     key: "4",
     lecturecode: "M301",
     lecturename: "일반강의실",
-    capacity: "120",
-    status: ["예약 가능"]
+    capacity: "120"
   },
   {
     key: "5",
     lecturecode: "M401",
     lecturename: "컴퓨터강의실",
-    capacity: "40",
-    status: ["예약 불가"]
+    capacity: "40"
   },
   {
     key: "6",
     lecturecode: "M402",
     lecturename: "일반강의실",
-    capacity: "50",
-    status: ["예약 가능"]
+    capacity: "50"
+  },
+  {
+    key: "7",
+    lecturecode: "M402",
+    lecturename: "일반강의실",
+    capacity: "50"
+  },
+  {
+    key: "8",
+    lecturecode: "M402",
+    lecturename: "일반강의실",
+    capacity: "50"
+  },
+  {
+    key: "9",
+    lecturecode: "M402",
+    lecturename: "일반강의실",
+    capacity: "50"
+  },
+  {
+    key: "10",
+    lecturecode: "M402",
+    lecturename: "일반강의실",
+    capacity: "50"
+  },
+  {
+    key: "11",
+    lecturecode: "M402",
+    lecturename: "일반강의실",
+    capacity: "50"
+  },
+  {
+    key: "12",
+    lecturecode: "M402",
+    lecturename: "일반강의실",
+    capacity: "50"
+  },
+  {
+    key: "13",
+    lecturecode: "M402",
+    lecturename: "일반강의실",
+    capacity: "50"
+  },
+  {
+    key: "14",
+    lecturecode: "M402",
+    lecturename: "일반강의실",
+    capacity: "50"
   }
 ];
 
 const LectureRoomList = () => {
   return (
     <>
-      <Table columns={columns} dataSource={data} pagination={false} />
+      <Table columns={columns} dataSource={data} />
     </>
   );
 };

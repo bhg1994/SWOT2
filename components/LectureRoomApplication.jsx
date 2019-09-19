@@ -8,43 +8,37 @@ const data = [
     key: "1",
     lecturecode: "M201",
     lecturename: "대학원강의실",
-    capacity: "14",
-    status: ["예약 가능"]
+    capacity: "14"
   },
   {
     key: "2",
     lecturecode: "M202",
     lecturename: "대학원강의실",
-    capacity: "14",
-    status: ["예약 가능"]
+    capacity: "14"
   },
   {
     key: "3",
     lecturecode: "M204",
     lecturename: "일반강의실",
-    capacity: "14",
-    status: ["예약 불가"]
+    capacity: "14"
   },
   {
     key: "4",
     lecturecode: "M301",
     lecturename: "일반강의실",
-    capacity: "120",
-    status: ["예약 가능"]
+    capacity: "120"
   },
   {
     key: "5",
     lecturecode: "M401",
     lecturename: "컴퓨터강의실",
-    capacity: "40",
-    status: ["예약 불가"]
+    capacity: "40"
   },
   {
     key: "6",
     lecturecode: "M402",
     lecturename: "일반강의실",
-    capacity: "50",
-    status: ["예약 가능"]
+    capacity: "50"
   }
 ];
 
@@ -55,26 +49,6 @@ const LectureRoomApplication = () => {
         <Column title="강의실 코드" dataIndex="lecturecode" key="lecturecode" />
         <Column title="강의실명" dataIndex="lecturename" key="lecturename" />
         <Column title="수용인원" dataIndex="capacity" key="capacity" />
-        <Column
-          title="예약 상태"
-          dataIndex="status"
-          key="status"
-          render={status => (
-            <span>
-              {status.map(status => {
-                let color = status === "예약 가능" ? "geekblue" : "green";
-                if (status === "예약 불가") {
-                  color = "volcano";
-                }
-                return (
-                  <Tag color={color} key={status}>
-                    {status}
-                  </Tag>
-                );
-              })}
-            </span>
-          )}
-        />
         <Column
           title="확인란"
           key="action"

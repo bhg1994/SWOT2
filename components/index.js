@@ -7,7 +7,11 @@ import MainCarousel from './MainCarousel';
 import LectureRoomModal from './LectureRoomModal';
 import ReservationTable from './ReservationTable';
 import Facilityrental from './ Facilityrental';
-import LectureRoomList from './LectureRoomList'
+import LectureRoomList from './LectureRoomList';
+import MasternameEditForm from './MasternameEditForm';
+import LectureRoomApplication from './LectureRoomApplication'
+import BuildingList from './BuildingList'
+
 
 export {
     MainCarousel,
@@ -19,5 +23,9 @@ export {
     LectureRoomModal,
     ReservationTable,
     Facilityrental,
-    LectureRoomList
+    LectureRoomList,
+    MasternameEditForm,
+    LectureRoomApplication,
+    BuildingList
+
 };

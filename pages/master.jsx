@@ -1,6 +1,9 @@
 import React from "react";
-import MasternameEditForm from "../components/MasternameEditForm";
-import LectureRoomApplication from "../components/LectureRoomApplication";
+import {
+  MasternameEditForm,
+  LectureRoomApplication,
+  BuildingList
+} from "../components";
 
 const master = () => {
   return (
@@ -8,6 +11,7 @@ const master = () => {
       <div>
         <MasternameEditForm />
         <LectureRoomApplication />
+        <BuildingList />
       </div>
     </>
   );

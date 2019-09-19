@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -387,6 +387,440 @@ const Facilityrental = () => {
 
 /***/ }),
 
+/***/ "./components/BuildingList.jsx":
+/*!*************************************!*\
+  !*** ./components/BuildingList.jsx ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/extends */ "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! antd */ "antd");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _LectureRoomList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./LectureRoomList */ "./components/LectureRoomList.jsx");
+
+var _jsxFileName = "/Users/jaykim/SWOT2/components/BuildingList.jsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
+
+
+
+const {
+  TabPane
+} = antd__WEBPACK_IMPORTED_MODULE_2__["Tabs"];
+const {
+  Text
+} = antd__WEBPACK_IMPORTED_MODULE_2__["Typography"];
+
+const BuildingList = () => {
+  const {
+    0: visible,
+    1: setVisible
+  } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false);
+  const {
+    0: image,
+    1: setImage
+  } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])("");
+
+  const showModal = () => {
+    setVisible(true);
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    setVisible(false);
+    console.log(image);
+  };
+
+  const handleCancel = () => {
+    setVisible(false);
+  };
+
+  const props = {
+    name: "file",
+    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
+    listType: "picture",
+    headers: {
+      authorization: "authorization-text"
+    },
+
+    onChange(info) {
+      setImage(info.file.name);
+
+      if (info.file.status !== "uploading") {
+        console.log(info.file, info.fileList);
+      }
+
+      if (info.file.status === "done") {
+        antd__WEBPACK_IMPORTED_MODULE_2__["message"].success(`${info.file.name} file uploaded successfully`);
+      } else if (info.file.status === "error") {
+        antd__WEBPACK_IMPORTED_MODULE_2__["message"].error(`${info.file.name} file upload failed.`);
+      }
+    }
+
+  };
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Modal"], {
+    title: "\uAC15\uC758\uC2E4 \uCD94\uAC00",
+    visible: visible,
+    footer: null,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 58
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Form"], {
+    onSubmit: handleSubmit,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 59
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Form"].Item, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 60
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Upload"], Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 61
+    },
+    __self: undefined
+  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 62
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Icon"], {
+    type: "upload",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 63
+    },
+    __self: undefined
+  }), " Click to Upload"))), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Form"].Item, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 67
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Input"], {
+    addonBefore: "\uAC15\uC758\uC2E4 \uCF54\uB4DC",
+    style: {
+      width: "50%"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 68
+    },
+    __self: undefined
+  })), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Form"].Item, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 70
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Input"], {
+    addonBefore: "\uAC15\uC758\uC2E4\uBA85",
+    style: {
+      width: "50%"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 71
+    },
+    __self: undefined
+  })), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Form"].Item, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 73
+    },
+    __self: undefined
+  }, __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 74
+    },
+    __self: undefined
+  }, __jsx(Text, {
+    type: "secondary",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 75
+    },
+    __self: undefined
+  }, "\uCD5C\uB300 \uC778\uC6D0\uC218 : "), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["InputNumber"], {
+    min: 3,
+    max: 30,
+    defaultVAlue: 3,
+    style: {
+      width: "50%"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 76
+    },
+    __self: undefined
+  }))), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Form"].Item, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 84
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+    type: "primary",
+    style: {
+      marginRight: "20px"
+    },
+    htmlType: "submit",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 85
+    },
+    __self: undefined
+  }, "\uCD94\uAC00"), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+    type: "danger",
+    onClick: handleCancel,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 92
+    },
+    __self: undefined
+  }, "\uCDE8\uC18C")))), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Tabs"], {
+    defaultActiveKey: "11",
+    style: {
+      marginTop: "70px",
+      textAlign: "center"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 98
+    },
+    __self: undefined
+  }, __jsx(TabPane, {
+    tab: "\uC2B9\uC5F0\uAD00",
+    key: "1",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 102
+    },
+    __self: undefined
+  }), __jsx(TabPane, {
+    tab: "\uC77C\uB9CC\uAD00",
+    key: "2",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 103
+    },
+    __self: undefined
+  }), __jsx(TabPane, {
+    tab: "\uC6D4\uB2F9\uAD00",
+    key: "3",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 104
+    },
+    __self: undefined
+  }), __jsx(TabPane, {
+    tab: "\uB098\uB214\uAD00",
+    key: "5",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 105
+    },
+    __self: undefined
+  }), __jsx(TabPane, {
+    tab: "\uC774\uCC9C\uD658\uAD00",
+    key: "6",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 106
+    },
+    __self: undefined
+  }), __jsx(TabPane, {
+    tab: "\uC0C8\uCC9C\uB144\uAD00",
+    key: "7",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 107
+    },
+    __self: undefined
+  }), __jsx(TabPane, {
+    tab: "\uC131\uBBF8\uAC00\uC5D8\uC131\uB2F9",
+    key: "9",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 108
+    },
+    __self: undefined
+  }), __jsx(TabPane, {
+    tab: "\uBBF8\uAC00\uC5D8\uAD00",
+    key: "11",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 109
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+    style: {
+      marginBottom: "20px",
+      textAlign: "right"
+    },
+    type: "primary",
+    onClick: showModal,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 110
+    },
+    __self: undefined
+  }, "\uAC15\uC758\uC2E4 \uCD94\uAC00"), __jsx(_LectureRoomList__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 117
+    },
+    __self: undefined
+  }))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (BuildingList);
+
+/***/ }),
+
+/***/ "./components/LectureRoomApplication.jsx":
+/*!***********************************************!*\
+  !*** ./components/LectureRoomApplication.jsx ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
+var _jsxFileName = "/Users/jaykim/SWOT2/components/LectureRoomApplication.jsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+const {
+  Column
+} = antd__WEBPACK_IMPORTED_MODULE_1__["Table"];
+const data = [{
+  key: "1",
+  lecturecode: "M201",
+  lecturename: "대학원강의실",
+  capacity: "14"
+}, {
+  key: "2",
+  lecturecode: "M202",
+  lecturename: "대학원강의실",
+  capacity: "14"
+}, {
+  key: "3",
+  lecturecode: "M204",
+  lecturename: "일반강의실",
+  capacity: "14"
+}, {
+  key: "4",
+  lecturecode: "M301",
+  lecturename: "일반강의실",
+  capacity: "120"
+}, {
+  key: "5",
+  lecturecode: "M401",
+  lecturename: "컴퓨터강의실",
+  capacity: "40"
+}, {
+  key: "6",
+  lecturecode: "M402",
+  lecturename: "일반강의실",
+  capacity: "50"
+}];
+
+const LectureRoomApplication = () => {
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Table"], {
+    dataSource: data,
+    pagination: false,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 48
+    },
+    __self: undefined
+  }, __jsx(Column, {
+    title: "\uAC15\uC758\uC2E4 \uCF54\uB4DC",
+    dataIndex: "lecturecode",
+    key: "lecturecode",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 49
+    },
+    __self: undefined
+  }), __jsx(Column, {
+    title: "\uAC15\uC758\uC2E4\uBA85",
+    dataIndex: "lecturename",
+    key: "lecturename",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 50
+    },
+    __self: undefined
+  }), __jsx(Column, {
+    title: "\uC218\uC6A9\uC778\uC6D0",
+    dataIndex: "capacity",
+    key: "capacity",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 51
+    },
+    __self: undefined
+  }), __jsx(Column, {
+    title: "\uD655\uC778\uB780",
+    key: "action",
+    render: () => __jsx("span", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 56
+      },
+      __self: undefined
+    }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      type: "primary",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 57
+      },
+      __self: undefined
+    }, "\uC218\uB77D"), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Divider"], {
+      type: "vertical",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 58
+      },
+      __self: undefined
+    }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 59
+      },
+      __self: undefined
+    }, "\uAC70\uC808")),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 52
+    },
+    __self: undefined
+  })));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (LectureRoomApplication);
+
+/***/ }),
+
 /***/ "./components/LectureRoomList.jsx":
 /*!****************************************!*\
   !*** ./components/LectureRoomList.jsx ***!
@@ -433,80 +867,86 @@ const columns = [{
   title: "수용인원",
   dataIndex: "capacity",
   key: "capacity"
-}, {
-  title: "예약 상태",
-  dataIndex: "status",
-  key: "status",
-  render: status => __jsx("span", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 23
-    },
-    __self: undefined
-  }, status.map(status => {
-    let color = status === "예약 가능" ? "geekblue" : "green";
-
-    if (status === "예약 불가") {
-      color = "volcano";
-    }
-
-    return __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Tag"], {
-      color: color,
-      key: status,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 30
-      },
-      __self: undefined
-    }, status);
-  }))
 }];
 const data = [{
   key: "1",
   lecturecode: "M201",
   lecturename: "대학원강의실",
-  capacity: "14",
-  status: ["예약 가능"]
+  capacity: "14"
 }, {
   key: "2",
   lecturecode: "M202",
   lecturename: "대학원강의실",
-  capacity: "14",
-  status: ["예약 가능"]
+  capacity: "14"
 }, {
   key: "3",
   lecturecode: "M204",
   lecturename: "일반강의실",
-  capacity: "14",
-  status: ["예약 불가"]
+  capacity: "14"
 }, {
   key: "4",
   lecturecode: "M301",
   lecturename: "일반강의실",
-  capacity: "120",
-  status: ["예약 가능"]
+  capacity: "120"
 }, {
   key: "5",
   lecturecode: "M401",
   lecturename: "컴퓨터강의실",
-  capacity: "40",
-  status: ["예약 불가"]
+  capacity: "40"
 }, {
   key: "6",
   lecturecode: "M402",
   lecturename: "일반강의실",
-  capacity: "50",
-  status: ["예약 가능"]
+  capacity: "50"
+}, {
+  key: "7",
+  lecturecode: "M402",
+  lecturename: "일반강의실",
+  capacity: "50"
+}, {
+  key: "8",
+  lecturecode: "M402",
+  lecturename: "일반강의실",
+  capacity: "50"
+}, {
+  key: "9",
+  lecturecode: "M402",
+  lecturename: "일반강의실",
+  capacity: "50"
+}, {
+  key: "10",
+  lecturecode: "M402",
+  lecturename: "일반강의실",
+  capacity: "50"
+}, {
+  key: "11",
+  lecturecode: "M402",
+  lecturename: "일반강의실",
+  capacity: "50"
+}, {
+  key: "12",
+  lecturecode: "M402",
+  lecturename: "일반강의실",
+  capacity: "50"
+}, {
+  key: "13",
+  lecturecode: "M402",
+  lecturename: "일반강의실",
+  capacity: "50"
+}, {
+  key: "14",
+  lecturecode: "M402",
+  lecturename: "일반강의실",
+  capacity: "50"
 }];
 
 const LectureRoomList = () => {
   return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Table"], {
     columns: columns,
     dataSource: data,
-    pagination: false,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 88
+      lineNumber: 110
     },
     __self: undefined
   }));
@@ -904,6 +1344,84 @@ const MainCarousel = () => {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (MainCarousel);
+
+/***/ }),
+
+/***/ "./components/MasternameEditForm.jsx":
+/*!*******************************************!*\
+  !*** ./components/MasternameEditForm.jsx ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
+var _jsxFileName = "/Users/jaykim/SWOT2/components/MasternameEditForm.jsx";
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+const MasternameEditForm = () => {
+  return __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"], {
+    style: {
+      margin: "20px 0 20px 0",
+      border: "1px solid #d9d9d9",
+      padding: "20px"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 5
+    },
+    __self: undefined
+  }, __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 12
+    },
+    __self: undefined
+  }, __jsx("div", {
+    style: {
+      display: "flex"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 13
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"].Meta, {
+    style: {
+      marginTop: "2px"
+    },
+    avatar: __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Avatar"], {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 16
+      },
+      __self: undefined
+    }, "M"),
+    title: "Master",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 14
+    },
+    __self: undefined
+  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+    style: {
+      marginLeft: "30px"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 19
+    },
+    __self: undefined
+  }, "\uB85C\uADF8\uC544\uC6C3"))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (MasternameEditForm);
 
 /***/ }),
 
@@ -1562,7 +2080,7 @@ const Studyinfo = ({
 /*!*****************************!*\
   !*** ./components/index.js ***!
   \*****************************/
-/*! exports provided: MainCarousel, ReservationRoominfo, Notification, Studyinfo, NotifiactionPagination, LectureRoominfo, LectureRoomModal, ReservationTable, Facilityrental, LectureRoomList */
+/*! exports provided: MainCarousel, ReservationRoominfo, Notification, Studyinfo, NotifiactionPagination, LectureRoominfo, LectureRoomModal, ReservationTable, Facilityrental, LectureRoomList, MasternameEditForm, LectureRoomApplication, BuildingList */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1596,6 +2114,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony import */ var _LectureRoomList__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./LectureRoomList */ "./components/LectureRoomList.jsx");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LectureRoomList", function() { return _LectureRoomList__WEBPACK_IMPORTED_MODULE_9__["default"]; });
+
+/* harmony import */ var _MasternameEditForm__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./MasternameEditForm */ "./components/MasternameEditForm.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MasternameEditForm", function() { return _MasternameEditForm__WEBPACK_IMPORTED_MODULE_10__["default"]; });
+
+/* harmony import */ var _LectureRoomApplication__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./LectureRoomApplication */ "./components/LectureRoomApplication.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LectureRoomApplication", function() { return _LectureRoomApplication__WEBPACK_IMPORTED_MODULE_11__["default"]; });
+
+/* harmony import */ var _BuildingList__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./BuildingList */ "./components/BuildingList.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BuildingList", function() { return _BuildingList__WEBPACK_IMPORTED_MODULE_12__["default"]; });
+
+
+
 
 
 
@@ -2795,20 +3325,14 @@ const Home = () => {
       lineNumber: 58
     },
     __self: undefined
-  }))))), __jsx(_containers__WEBPACK_IMPORTED_MODULE_3__["Study"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 64
-    },
-    __self: undefined
-  }));
+  }))))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Home);
 
 /***/ }),
 
-/***/ 5:
+/***/ 3:
 /*!*******************************!*\
   !*** multi ./pages/index.jsx ***!
   \*******************************/
