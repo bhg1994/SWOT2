@@ -195,12 +195,18 @@ const studyboard = () => {
                 hoverable
                 onClick={onLecturemore}
               >
-                스터디 주제 : {studytitle}
+                <Text type="warning">스터디 주제 : {studytitle}</Text>
+                <Divider />
+                날짜 :
+                <Text type="danger">
+                  {studystarttime} - {studyendtime}
+                </Text>
                 <br />
-                날짜 : {studystarttime} - {studyendtime}
                 <br />
-                목적 : {studycontent} <br />
-                최대 인원 수 : {maximum}명 <br />
+                목적 : {studycontent}
+                <br />
+                <br />
+                최대 인원 수 : {maximum}명
               </Card>
             </Col>
             <Col xs={24} md={8}>
@@ -209,7 +215,7 @@ const studyboard = () => {
                 title="September 17, 2019"
                 hoverable
               >
-                Card content
+                Empty
               </Card>
             </Col>
             <Col xs={24} md={8}>
@@ -218,7 +224,7 @@ const studyboard = () => {
                 title="September 18, 2019"
                 hoverable
               >
-                Card content
+                Empty
               </Card>
             </Col>
           </Row>
@@ -237,7 +243,7 @@ const studyboard = () => {
                 title="October 23,2019"
                 hoverable
               >
-                Card content
+                Empty
               </Card>
             </Col>
             <Col xs={24} md={8}>
@@ -246,7 +252,7 @@ const studyboard = () => {
                 title="October 24, 2019"
                 hoverable
               >
-                Card content
+                Empty
               </Card>
             </Col>
             <Col xs={24} md={8}>
@@ -255,7 +261,7 @@ const studyboard = () => {
                 title="October 25, 2019"
                 hoverable
               >
-                Card content
+                Empty
               </Card>
             </Col>
           </Row>

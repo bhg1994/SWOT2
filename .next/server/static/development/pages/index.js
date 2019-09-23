@@ -93,300 +93,6 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
-/***/ "./components/ Facilityrental.jsx":
-/*!****************************************!*\
-  !*** ./components/ Facilityrental.jsx ***!
-  \****************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
-var _jsxFileName = "/Users/jaykim/SWOT2/components/ Facilityrental.jsx";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
-
-
-const {
-  Text
-} = antd__WEBPACK_IMPORTED_MODULE_1__["Typography"];
-const {
-  TextArea
-} = antd__WEBPACK_IMPORTED_MODULE_1__["Input"];
-
-function onChange(date, dateString) {
-  console.log(date, dateString);
-}
-
-function oncontentChange(content) {
-  setContent(e.target.value);
-}
-
-const Facilityrental = () => {
-  const {
-    0: content,
-    1: setContent
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("");
-  const {
-    0: visible,
-    1: setVisible
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
-
-  const oncontentChange = e => {
-    setContent(e.target.value);
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    setVisible(true);
-    console.log(content);
-  };
-
-  const handleOk = () => {
-    setVisible(false);
-  };
-
-  const handleCancel = () => {
-    setVisible(false);
-  };
-
-  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx("section", {
-    style: {
-      width: "50%",
-      marginTop: "50px",
-      border: "1px solid gray"
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 49
-    },
-    __self: undefined
-  }, __jsx("div", {
-    style: {
-      marginTop: "20px"
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 52
-    },
-    __self: undefined
-  }, __jsx(Text, {
-    strong: true,
-    style: {
-      fontSize: "18px"
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 53
-    },
-    __self: undefined
-  }, "\uC2DC\uC124 \uB300\uC5EC \uC2E0\uCCAD : \uB300\uC5EC \uD558\uACE0\uC790 \uD558\uB294 \uC591\uC2DD\uC744 \uC785\uB825\uD574 \uC8FC\uC138\uC694")), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Divider"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 57
-    },
-    __self: undefined
-  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"], {
-    style: {
-      padding: 10
-    },
-    onSubmit: handleSubmit,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 58
-    },
-    __self: undefined
-  }, __jsx(Text, {
-    type: "secondary",
-    style: {
-      fontSize: "18px"
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 59
-    },
-    __self: undefined
-  }, "\uB300\uC5EC \uC2DC\uAC04"), __jsx("div", {
-    style: {
-      display: "flex",
-      marginTop: "20px"
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 62
-    },
-    __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"].Item, {
-    style: {
-      display: "flex"
-    } // validateStatus="error"
-    ,
-    label: "Start",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 63
-    },
-    __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["TimePicker"], {
-    style: {
-      marginRight: "20px"
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 68
-    },
-    __self: undefined
-  })), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"].Item, {
-    style: {
-      display: "flex"
-    } // validateStatus="error"
-    ,
-    label: "End",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 70
-    },
-    __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["TimePicker"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 75
-    },
-    __self: undefined
-  }))), __jsx(Text, {
-    type: "secondary",
-    style: {
-      fontSize: "18px"
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 79
-    },
-    __self: undefined
-  }, "\uB300\uC5EC \uC0AC\uC720 / \uB300\uC720 \uC778\uC6D0 \uBAA9\uB85D"), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"].Item, {
-    style: {
-      marginTop: "20px"
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 82
-    },
-    __self: undefined
-  }, __jsx(TextArea, {
-    value: content,
-    onChange: oncontentChange,
-    autosize: {
-      minRows: 4,
-      maxRows: 8
-    },
-    style: {
-      width: "50%"
-    },
-    rows: 4,
-    placeholder: "\uAC15\uC758\uC2E4 \uB300\uC5EC \uC2E0\uCCAD\uC790\uB294 \uD559\uBC88\uACFC \uC774\uB984\uC744 \uBAA8\uB450 \uAE30\uC7AC\uD574 \uC8FC\uC2DC\uAE30 \uBC14\uB78D\uB2C8\uB2E4. \uC778\uC6D0\uACFC \uCC28\uC774\uAC00 \uC788\uC744 \uC2DC, \uB300\uC5EC \uBC18\uB824\uC758 \uC0AC\uC720\uAC00 \uB429\uB2C8\uB2E4.",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 83
-    },
-    __self: undefined
-  })), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Divider"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 93
-    },
-    __self: undefined
-  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"].Item, {
-    style: {
-      marginTop: "20px"
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 94
-    },
-    __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
-    addonBefore: "\uC2E0\uCCAD\uC790 \uC804\uD654\uBC88\uD638",
-    style: {
-      width: "50%"
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 95
-    },
-    __self: undefined
-  })), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"].Item, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 97
-    },
-    __self: undefined
-  }, __jsx(Text, {
-    type: "secondary",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 98
-    },
-    __self: undefined
-  }, "\uC2DC\uC124\uBB3C \uB300\uC5EC \uADDC\uC815\uC5D0 \uB3D9\uC758\uD569\uB2C8\uB2E4 : "), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Checkbox"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 99
-    },
-    __self: undefined
-  })), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"].Item, {
-    style: {
-      marginLeft: "30px"
-    },
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 101
-    },
-    __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
-    htmlType: "submit",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 102
-    },
-    __self: undefined
-  }, "\uB300\uC5EC \uC2E0\uCCAD")), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"].Item, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 104
-    },
-    __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Modal"], {
-    title: "\uC608\uC57D \uC2E0\uCCAD \uC644\uB8CC",
-    visible: visible,
-    onOk: handleOk,
-    onCancel: handleCancel,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 105
-    },
-    __self: undefined
-  }, __jsx("p", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 111
-    },
-    __self: undefined
-  }, "\uC608\uC57D\uC2E0\uCCAD\uC774 \uC644\uB8CC \uB418\uC5C8\uC2B5\uB2C8\uB2E4."), __jsx("p", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 112
-    },
-    __self: undefined
-  }, "\uC608\uC57D \uD604\uD669\uC740 \uB9C8\uC774\uD398\uC774\uC9C0\uC5D0\uC11C \uD655\uC778\uC774 \uAC00\uB2A5\uD558\uBA70 3\uC77C \uC774\uB0B4\uC5D0 \uCC98\uB9AC\uAC00 \uC644\uB8CC\uB420 \uC608\uC815\uC785\uB2C8\uB2E4."))))));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Facilityrental);
-
-/***/ }),
-
 /***/ "./components/BuildingList.jsx":
 /*!*************************************!*\
   !*** ./components/BuildingList.jsx ***!
@@ -688,6 +394,345 @@ const BuildingList = () => {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (BuildingList);
+
+/***/ }),
+
+/***/ "./components/Facilityrental.jsx":
+/*!***************************************!*\
+  !*** ./components/Facilityrental.jsx ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
+var _jsxFileName = "/Users/jaykim/SWOT2/components/Facilityrental.jsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+const {
+  Text
+} = antd__WEBPACK_IMPORTED_MODULE_1__["Typography"];
+const {
+  TextArea
+} = antd__WEBPACK_IMPORTED_MODULE_1__["Input"];
+
+function onChange(date, dateString) {
+  console.log(date, dateString);
+}
+
+function oncontentChange(content) {
+  setContent(e.target.value);
+}
+
+const Facilityrental = () => {
+  const {
+    0: content,
+    1: setContent
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("");
+  const {
+    0: visible,
+    1: setVisible
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
+  const {
+    0: maximum,
+    1: setMaximum
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("");
+
+  const oncontentChange = e => {
+    setContent(e.target.value);
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    setVisible(true);
+    console.log(content);
+  };
+
+  const handleOk = () => {
+    setVisible(false);
+  };
+
+  const handleCancel = () => {
+    setVisible(false);
+  };
+
+  const onChangeMaximum = value => {
+    setMaximum(value);
+  };
+
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx("div", {
+    style: {
+      margin: "auto",
+      width: "50%"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 55
+    },
+    __self: undefined
+  }, __jsx("section", {
+    style: {
+      marginTop: "50px",
+      border: "1px solid gray",
+      textAlign: "center"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 56
+    },
+    __self: undefined
+  }, __jsx("div", {
+    style: {
+      marginTop: "20px"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 63
+    },
+    __self: undefined
+  }, __jsx(Text, {
+    strong: true,
+    style: {
+      marginLeft: "10px",
+      fontSize: "18px"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 64
+    },
+    __self: undefined
+  }, "\uC2DC\uC124 \uB300\uC5EC \uC2E0\uCCAD : \uB300\uC5EC \uD558\uACE0\uC790 \uD558\uB294 \uC591\uC2DD\uC744 \uC785\uB825\uD574 \uC8FC\uC138\uC694")), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Divider"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 68
+    },
+    __self: undefined
+  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"], {
+    style: {
+      padding: 10
+    },
+    onSubmit: handleSubmit,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 69
+    },
+    __self: undefined
+  }, __jsx(Text, {
+    type: "secondary",
+    style: {
+      fontSize: "18px"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 70
+    },
+    __self: undefined
+  }, "\uB300\uC5EC \uC2DC\uAC04"), __jsx("div", {
+    style: {
+      display: "flex",
+      marginTop: "20px",
+      justifyContent: "center"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 73
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"].Item, {
+    style: {
+      display: "flex"
+    },
+    label: "Start",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 80
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["TimePicker"], {
+    style: {
+      marginRight: "20px"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 81
+    },
+    __self: undefined
+  })), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"].Item, {
+    style: {
+      display: "flex"
+    },
+    label: "End",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 83
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["TimePicker"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 84
+    },
+    __self: undefined
+  }))), __jsx(Text, {
+    type: "secondary",
+    style: {
+      fontSize: "18px"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 88
+    },
+    __self: undefined
+  }, "\uB300\uC5EC \uC0AC\uC720"), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"].Item, {
+    style: {
+      marginTop: "20px"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 91
+    },
+    __self: undefined
+  }, __jsx(TextArea, {
+    value: content,
+    onChange: oncontentChange,
+    autosize: {
+      minRows: 4,
+      maxRows: 8
+    },
+    style: {
+      width: "50%"
+    },
+    rows: 4,
+    placeholder: "\uAC15\uC758\uC2E4 \uB300\uC5EC \uC2E0\uCCAD\uC790\uB294 \uD559\uBC88\uACFC \uC774\uB984\uC744 \uBAA8\uB450 \uAE30\uC7AC\uD574 \uC8FC\uC2DC\uAE30 \uBC14\uB78D\uB2C8\uB2E4. \uC778\uC6D0\uACFC \uCC28\uC774\uAC00 \uC788\uC744 \uC2DC, \uB300\uC5EC \uBC18\uB824\uC758 \uC0AC\uC720\uAC00 \uB429\uB2C8\uB2E4.",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 92
+    },
+    __self: undefined
+  })), __jsx(Text, {
+    type: "secondary",
+    style: {
+      fontSize: "18px"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 101
+    },
+    __self: undefined
+  }, "\uC778\uC6D0 \uC218"), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"].Item, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 104
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["InputNumber"], {
+    id: "maximum",
+    onChange: onChangeMaximum,
+    min: 3,
+    max: 30,
+    defaultVAlue: 3,
+    style: {
+      width: "130px"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 105
+    },
+    __self: undefined
+  })), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Divider"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 114
+    },
+    __self: undefined
+  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"].Item, {
+    style: {
+      marginTop: "20px"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 115
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
+    addonBefore: "\uC2E0\uCCAD\uC790 \uC804\uD654\uBC88\uD638",
+    style: {
+      width: "50%"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 116
+    },
+    __self: undefined
+  })), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"].Item, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 118
+    },
+    __self: undefined
+  }, __jsx(Text, {
+    type: "secondary",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 119
+    },
+    __self: undefined
+  }, "\uC2DC\uC124\uBB3C \uB300\uC5EC \uADDC\uC815\uC5D0 \uB3D9\uC758\uD569\uB2C8\uB2E4 : "), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Checkbox"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 120
+    },
+    __self: undefined
+  })), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"].Item, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 122
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+    htmlType: "submit",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 123
+    },
+    __self: undefined
+  }, "\uB300\uC5EC \uC2E0\uCCAD")), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"].Item, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 126
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Modal"], {
+    title: "\uC608\uC57D \uC2E0\uCCAD \uC644\uB8CC",
+    visible: visible,
+    onOk: handleOk,
+    onCancel: handleCancel,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 127
+    },
+    __self: undefined
+  }, __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 133
+    },
+    __self: undefined
+  }, "\uC608\uC57D\uC2E0\uCCAD\uC774 \uC644\uB8CC \uB418\uC5C8\uC2B5\uB2C8\uB2E4."), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 134
+    },
+    __self: undefined
+  }, "\uC608\uC57D \uD604\uD669\uC740 \uB9C8\uC774\uD398\uC774\uC9C0\uC5D0\uC11C \uD655\uC778\uC774 \uAC00\uB2A5\uD558\uBA70 3\uC77C \uC774\uB0B4\uC5D0 \uCC98\uB9AC\uAC00 \uC644\uB8CC\uB420 \uC608\uC815\uC785\uB2C8\uB2E4.")))))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Facilityrental);
 
 /***/ }),
 
@@ -1225,6 +1270,9 @@ const MainCarousel = () => {
     },
     __self: undefined
   }), __jsx("div", {
+    style: {
+      margin: "40px"
+    },
     __source: {
       fileName: _jsxFileName,
       lineNumber: 57
@@ -1347,6 +1395,82 @@ const MainCarousel = () => {
 
 /***/ }),
 
+/***/ "./components/MainFooter.jsx":
+/*!***********************************!*\
+  !*** ./components/MainFooter.jsx ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
+var _jsxFileName = "/Users/jaykim/SWOT2/components/MainFooter.jsx";
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+const {
+  Footer
+} = antd__WEBPACK_IMPORTED_MODULE_1__["Layout"];
+
+const MainFooter = () => {
+  return __jsx(Footer, {
+    style: {
+      textAlign: "center"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 6
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 7
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+    span: 12,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 8
+    },
+    __self: undefined
+  }, "\uC804\uD654\uBC88\uD638 02-2610-4114 ", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 9
+    },
+    __self: undefined
+  }), " SWOT, \uC11C\uC6B8\uD2B9\uBCC4\uC2DC \uAD6C\uB85C\uAD6C \uC624\uB9582\uB3D9 \uC5F0\uB3D9\uB85C 320 ", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 10
+    },
+    __self: undefined
+  }), " Seoul, KR 08359"), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+    span: 12,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 12
+    },
+    __self: undefined
+  }, __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 13
+    },
+    __self: undefined
+  }), "\uC800\uC791\uAD8C \uBCF4\uD638 \xA9 SWOT Companies Inc. \uBAA8\uB4E0 \uAD8C\uB9AC \uC720\uBCF4")));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (MainFooter);
+
+/***/ }),
+
 /***/ "./components/MasternameEditForm.jsx":
 /*!*******************************************!*\
   !*** ./components/MasternameEditForm.jsx ***!
@@ -1425,10 +1549,10 @@ const MasternameEditForm = () => {
 
 /***/ }),
 
-/***/ "./components/Notification.jsx":
-/*!*************************************!*\
-  !*** ./components/Notification.jsx ***!
-  \*************************************/
+/***/ "./components/NotificationBoard.jsx":
+/*!******************************************!*\
+  !*** ./components/NotificationBoard.jsx ***!
+  \******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1436,177 +1560,21 @@ const MasternameEditForm = () => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
-var _jsxFileName = "/Users/jaykim/SWOT2/components/Notification.jsx";
+var _jsxFileName = "/Users/jaykim/SWOT2/components/NotificationBoard.jsx";
+
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
-
-
-const Notification = () => {
-  const {
-    0: maintitle,
-    1: setMaintitle
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("");
-  const {
-    0: subtitle,
-    1: setSubtitle
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("");
-  const {
-    0: content,
-    1: setContent
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("");
-  const {
-    0: noticeimg,
-    1: setNoticeimg
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("");
-  const {
-    0: container,
-    1: setContainer
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]); // useEffect : 클래스형 컴포넌트의 componentDidMount 와 componentDidUpdate 를 합친 형태
-  // useEffect(() => {
-  //   setMaintitle("Main--title");
-  //   setSubtitle("Sub-title");
-  //   setContent(
-  //     "Contents Contents Contents Contents Contents Contents Contents Contents Contents"
-  //   );
-  //   setNoticeimg(<img src="../../../images/groot.jpg"></img>);
-  // }, setContainer);
-  // const onChangeValue = e => {
-  //   e.preventDefault();
-  //   setContainer([
-  //     {
-  //       maintitle,
-  //       subtitle,
-  //       content,
-  //       noticeimg
-  //     }
-  //   ]);
-  //   console.log(container);
-  // };
-
+const NotificationBoard = () => {
   return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx("div", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 36
-    },
-    __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"], {
-    title: "\uC2A4\uD130\uB514 \uBAA8\uC9D1 \uAC8C\uC2DC\uAE00",
-    style: {
-      margin: "50px 0 0 0",
-      width: 300
-    },
-    hoverable: true,
-    cover: __jsx("img", {
-      alt: "example",
-      src: "static/images/lectureroom.jpg",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 74
-      },
-      __self: undefined
-    }),
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 70
-    },
-    __self: undefined
-  }, __jsx("p", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 76
-    },
-    __self: undefined
-  }, "notice__subtitle"), __jsx("p", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 77
-    },
-    __self: undefined
-  }, "notice__content"), __jsx("p", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 78
-    },
-    __self: undefined
-  }, "Card content")), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"], {
-    title: "\uC2A4\uD130\uB514 \uBAA8\uC9D1 \uAC8C\uC2DC\uAE00",
-    hoverable: true,
-    style: {
-      margin: "100px 0 0 0",
-      width: 300
-    },
-    cover: __jsx("img", {
-      alt: "example",
-      src: "static/images/lectureroom2.jpg",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 84
-      },
-      __self: undefined
-    }),
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 80
-    },
-    __self: undefined
-  }, __jsx("p", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 86
-    },
-    __self: undefined
-  }, "Card content"), __jsx("p", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 87
-    },
-    __self: undefined
-  }, "Card content"), __jsx("p", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 88
-    },
-    __self: undefined
-  }, "Card content"))));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Notification);
-
-/***/ }),
-
-/***/ "./components/NotificationPagination.jsx":
-/*!***********************************************!*\
-  !*** ./components/NotificationPagination.jsx ***!
-  \***********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
-var _jsxFileName = "/Users/jaykim/SWOT2/components/NotificationPagination.jsx";
-
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
-
-
-const NotifiactionPagination = () => {
-  return __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Pagination"], {
-    defaultCurrent: 1,
-    total: 100,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 4
     },
     __self: undefined
-  });
+  }, "Hi"));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (NotifiactionPagination);
+/* harmony default export */ __webpack_exports__["default"] = (NotificationBoard);
 
 /***/ }),
 
@@ -1723,7 +1691,8 @@ const data = [{
 const ReservationRoominfo = () => {
   return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"], {
     style: {
-      margin: "30px 30px 0 0"
+      margin: "30px 30px 0 0",
+      width: "600px"
     },
     title: "\uAC15\uC758\uC2E4 \uC608\uC57D\uD604\uD669",
     hoverable: true,
@@ -1978,6 +1947,342 @@ const ReservationTable = () => {
 
 /***/ }),
 
+/***/ "./components/ReservationTime.jsx":
+/*!****************************************!*\
+  !*** ./components/ReservationTime.jsx ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
+var _jsxFileName = "/Users/jaykim/SWOT2/components/ReservationTime.jsx";
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+const {
+  Column
+} = antd__WEBPACK_IMPORTED_MODULE_1__["Table"];
+
+const ReservationTime = ({
+  value
+}) => {
+  const morning = ["00시", "01시", "02시", "03시", "04시", "05시", "06시", "07시", "08시", "09시", "10시", "11시"];
+  const afternoon = ["12시", "13시", "14시", "15시", "16시", "17시", "18시", "19시", "20시", "21시", "22시", "23시"];
+  const moringData = [{
+    key: "moringData",
+    0: "예약불가",
+    1: "예약불가",
+    2: "예약불가",
+    3: "예약불가",
+    4: "예약불가",
+    5: "예약불가",
+    6: "예약불가",
+    7: "예약불가",
+    8: "예약불가",
+    9: "예약가능",
+    10: "예약가능",
+    11: "예약 중"
+  }];
+  const AfternoonData = [{
+    key: "moringData",
+    0: "예약 중",
+    1: "예약 중",
+    2: "예약가능",
+    3: "예약가능",
+    4: "예약가능",
+    5: "예약 중",
+    6: "예약 중",
+    7: "예약 중",
+    8: "예약 중",
+    9: "예약가능",
+    10: "예약불가",
+    11: "예약불가"
+  }];
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Table"], {
+    dataSource: moringData,
+    pagination: false,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 71
+    },
+    __self: undefined
+  }, value ? morning.map((time, i) => __jsx(Column, {
+    title: time,
+    dataIndex: i,
+    key: i,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 74
+    },
+    __self: undefined
+  })) : ""), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Table"], {
+    dataSource: AfternoonData,
+    pagination: false,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 78
+    },
+    __self: undefined
+  }, value ? afternoon.map((time, i) => __jsx(Column, {
+    title: time,
+    dataIndex: i,
+    key: i,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 81
+    },
+    __self: undefined
+  })) : ""));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ReservationTime);
+
+/***/ }),
+
+/***/ "./components/StudyBoard.jsx":
+/*!***********************************!*\
+  !*** ./components/StudyBoard.jsx ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
+var _jsxFileName = "/Users/jaykim/SWOT2/components/StudyBoard.jsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+const {
+  Text
+} = antd__WEBPACK_IMPORTED_MODULE_1__["Typography"];
+
+const StudyBoard = () => {
+  const {
+    0: maintitle,
+    1: setMaintitle
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("");
+  const {
+    0: subtitle,
+    1: setSubtitle
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("");
+  const {
+    0: content,
+    1: setContent
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("");
+  const {
+    0: noticeimg,
+    1: setNoticeimg
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("");
+  const {
+    0: container,
+    1: setContainer
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]); // useEffect : 클래스형 컴포넌트의 componentDidMount 와 componentDidUpdate 를 합친 형태
+  // useEffect(() => {
+  //   setMaintitle("Main--title");
+  //   setSubtitle("Sub-title");
+  //   setContent(
+  //     "Contents Contents Contents Contents Contents Contents Contents Contents Contents"
+  //   );
+  //   setNoticeimg(<img src="../../../images/groot.jpg"></img>);
+  // }, setContainer);
+  // const onChangeValue = e => {
+  //   e.preventDefault();
+  //   setContainer([
+  //     {
+  //       maintitle,
+  //       subtitle,
+  //       content,
+  //       noticeimg
+  //     }
+  //   ]);
+  //   console.log(container);
+  // };
+
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 38
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"], {
+    style: {
+      width: "300px"
+    },
+    title: "\uC2A4\uD130\uB514 \uBAA8\uC9D1 \uAC8C\uC2DC\uAE00",
+    hoverable: true,
+    cover: __jsx("img", {
+      alt: "example",
+      src: "static/images/lectureroom.jpg",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 43
+      },
+      __self: undefined
+    }),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 39
+    },
+    __self: undefined
+  }, __jsx(Text, {
+    type: "warning",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 45
+    },
+    __self: undefined
+  }, "\b\uAC04\uB2E8\uD55C \uC0AC\uC774\uB4DC \uD504\uB85C\uC81D\uD2B8 \uD574\uCEE4\uD1A4"), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Divider"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 46
+    },
+    __self: undefined
+  }), __jsx(Text, {
+    mark: true,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 47
+    },
+    __self: undefined
+  }, "\uB0A0\uC9DC : 9\uC6D4 28\uC77C \uC624\uC804 9\uC2DC ~ \uC624\uD6C4 9\uC2DC"), __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 48
+    },
+    __self: undefined
+  }), __jsx(Text, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 49
+    },
+    __self: undefined
+  }, "\uBAA9\uC801 : \uC8FC\uC81C\uB294 \uD22C\uB450 \uCE98\uB9B0\uB354\uB85C \uD3C9\uC18C\uC5D0 \uC27D\uAC8C \uC811\uD560 \uC218 \uC788\uB294 \uD22C\uB450\uC571 \uBCF4\uB2E4\uB294 \uC544\uC8FC \uC57D\uAC04 \uC870\uAE08\uB354 \uACE0\uB3C4\uD654 \uB420 \uC218 \uC788\uAE30 \uB54C\uBB38\uC5D0 \uC774 \uC810\uC5D0 \uB300\uD574\uC11C \uC778\uC9C0\uD55C \uD6C4 \uC2A4\uD130\uB514 \uC608\uC57D \uC2E0\uCCAD \uBD80\uD0C1 \uB4DC\uB9AC\uACA0\uC2B5\uB2C8\uB2E4."), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Divider"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 54
+    },
+    __self: undefined
+  }), __jsx(Text, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 55
+    },
+    __self: undefined
+  }, "\uCD5C\uB300 \uC778\uC6D0\uC218 : 6\uBA85")), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"], {
+    title: "\uC2A4\uD130\uB514 \uBAA8\uC9D1 \uAC8C\uC2DC\uAE00",
+    hoverable: true,
+    style: {
+      margin: "50px 0 0 0",
+      width: "300px"
+    },
+    cover: __jsx("img", {
+      alt: "example",
+      src: "static/images/lectureroom2.jpg",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 61
+      },
+      __self: undefined
+    }),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 57
+    },
+    __self: undefined
+  }, __jsx(Text, {
+    type: "warning",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 63
+    },
+    __self: undefined
+  }, "\uC790\uBC14\uC2A4\uD06C\uB9BD\uD2B8 \uC2A4\uD130\uB514"), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Divider"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 64
+    },
+    __self: undefined
+  }), __jsx(Text, {
+    mark: true,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 65
+    },
+    __self: undefined
+  }, "\uB0A0\uC9DC : 9\uC6D4 27\uC77C \uC624\uD6C4 1\uC2DC ~ \uC624\uD6C4 5\uC2DC"), __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 66
+    },
+    __self: undefined
+  }), __jsx(Text, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 67
+    },
+    __self: undefined
+  }, "\uBAA9\uC801 : \uC790\uBC14\uC2A4\uD06C\uB9BD\uD2B8\uB97C \uD65C\uC6A9\uD558\uC5EC HTTP\uD1B5\uC2E0, JSON, \uB3D9\uAE30/\uBE44\uB3D9\uAE30, \uB0B4\uC7A5\uAC1D\uCCB4, this\uBC14\uC778\uB529, \uD504\uB85C\uD1A0\uD0C0\uC785\uC5D0 \uAD00\uD558\uC5EC \uAC04\uB2E8\uD558\uAC8C \uAC1C\uB150 \uC815\uB9AC"), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Divider"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 71
+    },
+    __self: undefined
+  }), __jsx(Text, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 72
+    },
+    __self: undefined
+  }, "\uCD5C\uB300 \uC778\uC6D0\uC218 : 4\uBA85"))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (StudyBoard);
+
+/***/ }),
+
+/***/ "./components/StudyBoardPagination.jsx":
+/*!*********************************************!*\
+  !*** ./components/StudyBoardPagination.jsx ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
+var _jsxFileName = "/Users/jaykim/SWOT2/components/StudyBoardPagination.jsx";
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+const StudyBoardPagination = () => {
+  return __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Pagination"], {
+    defaultCurrent: 1,
+    total: 100,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 4
+    },
+    __self: undefined
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (StudyBoardPagination);
+
+/***/ }),
+
 /***/ "./components/Studyinfo.jsx":
 /*!**********************************!*\
   !*** ./components/Studyinfo.jsx ***!
@@ -2080,13 +2385,13 @@ const Studyinfo = ({
 /*!*****************************!*\
   !*** ./components/index.js ***!
   \*****************************/
-/*! exports provided: MainCarousel, ReservationRoominfo, Notification, Studyinfo, NotifiactionPagination, LectureRoominfo, LectureRoomModal, ReservationTable, Facilityrental, LectureRoomList, MasternameEditForm, LectureRoomApplication, BuildingList */
+/*! exports provided: MainCarousel, ReservationRoominfo, StudyBoard, Studyinfo, StudyBoardPagination, LectureRoominfo, LectureRoomModal, ReservationTable, Facilityrental, LectureRoomList, MasternameEditForm, LectureRoomApplication, BuildingList, MainFooter, ReservationTime, NotificationBoard */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Notification__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Notification */ "./components/Notification.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Notification", function() { return _Notification__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+/* harmony import */ var _StudyBoard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StudyBoard */ "./components/StudyBoard.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StudyBoard", function() { return _StudyBoard__WEBPACK_IMPORTED_MODULE_0__["default"]; });
 
 /* harmony import */ var _ReservationRoominfo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ReservationRoominfo */ "./components/ReservationRoominfo.jsx");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ReservationRoominfo", function() { return _ReservationRoominfo__WEBPACK_IMPORTED_MODULE_1__["default"]; });
@@ -2094,8 +2399,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Studyinfo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Studyinfo */ "./components/Studyinfo.jsx");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Studyinfo", function() { return _Studyinfo__WEBPACK_IMPORTED_MODULE_2__["default"]; });
 
-/* harmony import */ var _NotificationPagination__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./NotificationPagination */ "./components/NotificationPagination.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "NotifiactionPagination", function() { return _NotificationPagination__WEBPACK_IMPORTED_MODULE_3__["default"]; });
+/* harmony import */ var _StudyBoardPagination__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./StudyBoardPagination */ "./components/StudyBoardPagination.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StudyBoardPagination", function() { return _StudyBoardPagination__WEBPACK_IMPORTED_MODULE_3__["default"]; });
 
 /* harmony import */ var _LectureRoominfo__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./LectureRoominfo */ "./components/LectureRoominfo.jsx");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LectureRoominfo", function() { return _LectureRoominfo__WEBPACK_IMPORTED_MODULE_4__["default"]; });
@@ -2109,7 +2414,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ReservationTable__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ReservationTable */ "./components/ReservationTable.jsx");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ReservationTable", function() { return _ReservationTable__WEBPACK_IMPORTED_MODULE_7__["default"]; });
 
-/* harmony import */ var _Facilityrental__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./ Facilityrental */ "./components/ Facilityrental.jsx");
+/* harmony import */ var _Facilityrental__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Facilityrental */ "./components/Facilityrental.jsx");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Facilityrental", function() { return _Facilityrental__WEBPACK_IMPORTED_MODULE_8__["default"]; });
 
 /* harmony import */ var _LectureRoomList__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./LectureRoomList */ "./components/LectureRoomList.jsx");
@@ -2124,6 +2429,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _BuildingList__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./BuildingList */ "./components/BuildingList.jsx");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BuildingList", function() { return _BuildingList__WEBPACK_IMPORTED_MODULE_12__["default"]; });
 
+/* harmony import */ var _MainFooter__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./MainFooter */ "./components/MainFooter.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MainFooter", function() { return _MainFooter__WEBPACK_IMPORTED_MODULE_13__["default"]; });
+
+/* harmony import */ var _ReservationTime__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./ReservationTime */ "./components/ReservationTime.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ReservationTime", function() { return _ReservationTime__WEBPACK_IMPORTED_MODULE_14__["default"]; });
+
+/* harmony import */ var _NotificationBoard__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./NotificationBoard */ "./components/NotificationBoard.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "NotificationBoard", function() { return _NotificationBoard__WEBPACK_IMPORTED_MODULE_15__["default"]; });
 
 
 
@@ -2138,6 +2451,61 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+/***/ }),
+
+/***/ "./containers/Map.jsx":
+/*!****************************!*\
+  !*** ./containers/Map.jsx ***!
+  \****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var google_maps_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! google-maps-react */ "google-maps-react");
+/* harmony import */ var google_maps_react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(google_maps_react__WEBPACK_IMPORTED_MODULE_1__);
+var _jsxFileName = "/Users/jaykim/SWOT2/containers/Map.jsx";
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+const mapStyles = {
+  width: "500px",
+  height: "400px"
+};
+
+const KaKaoMap = () => {
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 11
+    },
+    __self: undefined
+  }, __jsx(google_maps_react__WEBPACK_IMPORTED_MODULE_1__["Map"], {
+    google: google,
+    zoom: 17.9,
+    style: mapStyles,
+    initialCenter: {
+      lat: 37.487428,
+      lng: 126.82561
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 12
+    },
+    __self: undefined
+  })));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(google_maps_react__WEBPACK_IMPORTED_MODULE_1__["GoogleApiWrapper"])({
+  apiKey: "AIzaSyAmUqfOQh_jAk-qRLptkuFP-exaXlUX4o0"
+})(KaKaoMap));
 
 /***/ }),
 
@@ -3193,8 +3561,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _containers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../containers */ "./containers/index.js");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! antd */ "antd");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _containers_Map__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../containers/Map */ "./containers/Map.jsx");
 var _jsxFileName = "/Users/jaykim/SWOT2/pages/index.jsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
 
 
 
@@ -3207,19 +3577,65 @@ const useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["
   //   }
   // }
 });
+const {
+  Text
+} = antd__WEBPACK_IMPORTED_MODULE_4__["Typography"];
 
 const Home = () => {
   const classes = useStyles();
+
+  const NotificationTitle = __jsx("div", {
+    style: {
+      textAlign: "center"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 30
+    },
+    __self: undefined
+  }, __jsx(Text, {
+    type: "danger",
+    style: {
+      fontSize: "20px"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 31
+    },
+    __self: undefined
+  }, "\uACF5\uC9C0\uC0AC\uD56D"));
+
+  const SWOTMapTitle = __jsx("div", {
+    style: {
+      textAlign: "center"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 37
+    },
+    __self: undefined
+  }, __jsx(Text, {
+    type: "danger",
+    style: {
+      fontSize: "20px"
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 38
+    },
+    __self: undefined
+  }, "SWOT MAP"));
+
   return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(_components__WEBPACK_IMPORTED_MODULE_1__["MainCarousel"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 27
+      lineNumber: 46
     },
     __self: undefined
   }), __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 28
+      lineNumber: 47
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_4__["Row"], {
@@ -3227,28 +3643,79 @@ const Home = () => {
     type: "flex",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 29
+      lineNumber: 48
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_4__["Card"], {
     bordered: false,
+    style: {
+      marginTop: "50px"
+    },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 30
+      lineNumber: 49
     },
     __self: undefined
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_4__["Card"], {
+    title: NotificationTitle,
+    style: {
+      marginBottom: "50px"
+    },
+    extra: __jsx("a", {
+      href: "Notification",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 53
+      },
+      __self: undefined
+    }, "Notification >"),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 50
+    },
+    __self: undefined
+  }, __jsx(Text, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 55
+    },
+    __self: undefined
+  }, "SWOT[\uC548\uB0B4] \uD648\uD398\uC774\uC9C0 \uC810\uAC80 \uC548\uB0B4 \uACF5\uC9C0 2018.09.21(\uD1A0) 09:00 ~ 10:00"), __jsx(antd__WEBPACK_IMPORTED_MODULE_4__["Divider"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 58
+    },
+    __self: undefined
+  }), __jsx(Text, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 59
+    },
+    __self: undefined
+  }, "SWOT[\uC548\uB0B4] SWOT \uBA64\uBC84\uC2ED \uC571 \uB2E4\uC6B4\uB85C\uB4DC \uC815\uC0C1\uD654 \uC644\uB8CC"), __jsx(antd__WEBPACK_IMPORTED_MODULE_4__["Divider"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 60
+    },
+    __self: undefined
+  }), __jsx(Text, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 61
+    },
+    __self: undefined
+  }, "SWOT[\uC548\uB0B4] \uC571 \uB2E4\uC6B4\uB85C\uB4DC \uC624\uB958 \uC548\uB0B4")), __jsx(antd__WEBPACK_IMPORTED_MODULE_4__["Col"], {
     xs: 24,
     md: 12,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 31
+      lineNumber: 63
     },
     __self: undefined
-  }, __jsx(_components__WEBPACK_IMPORTED_MODULE_1__["Notification"], {
+  }, __jsx(_components__WEBPACK_IMPORTED_MODULE_1__["StudyBoard"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 32
+      lineNumber: 64
     },
     __self: undefined
   })), __jsx(antd__WEBPACK_IMPORTED_MODULE_4__["Col"], {
@@ -3259,13 +3726,13 @@ const Home = () => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 34
+      lineNumber: 66
     },
     __self: undefined
-  }, __jsx(_components__WEBPACK_IMPORTED_MODULE_1__["Notification"], {
+  }, __jsx(_components__WEBPACK_IMPORTED_MODULE_1__["StudyBoard"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 35
+      lineNumber: 67
     },
     __self: undefined
   })), __jsx("div", {
@@ -3274,24 +3741,19 @@ const Home = () => {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 37
+      lineNumber: 69
     },
     __self: undefined
-  }, __jsx(_components__WEBPACK_IMPORTED_MODULE_1__["NotifiactionPagination"], {
+  }, __jsx(_components__WEBPACK_IMPORTED_MODULE_1__["StudyBoardPagination"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 38
+      lineNumber: 70
     },
     __self: undefined
-  }))), __jsx(antd__WEBPACK_IMPORTED_MODULE_4__["Col"], {
-    xs: 24,
-    md: 12,
-    style: {
-      marginTop: "50px"
-    },
+  }))), __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 41
+      lineNumber: 73
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_4__["Card"], {
@@ -3299,33 +3761,42 @@ const Home = () => {
       href: "reservation",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 50
+        lineNumber: 75
       },
       __self: undefined
     }, "Lecture >"),
-    title: "SWOT MAP",
+    title: SWOTMapTitle,
     hoverable: true,
     style: {
-      textAlign: "center"
+      textAlign: "center",
+      marginTop: "74px"
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 49
+      lineNumber: 74
+    },
+    __self: undefined
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+    xs: 24,
+    md: 12,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 83
     },
     __self: undefined
   }, __jsx(_containers__WEBPACK_IMPORTED_MODULE_3__["SwotMap"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 57
+      lineNumber: 84
     },
     __self: undefined
   }), __jsx(_components__WEBPACK_IMPORTED_MODULE_1__["ReservationRoominfo"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 58
+      lineNumber: 85
     },
     __self: undefined
-  }))))));
+  })))))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Home);
@@ -3407,6 +3878,17 @@ module.exports = require("core-js/library/fn/object/define-property");
 /***/ (function(module, exports) {
 
 module.exports = require("core-js/library/fn/object/get-own-property-descriptor");
+
+/***/ }),
+
+/***/ "google-maps-react":
+/*!************************************!*\
+  !*** external "google-maps-react" ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("google-maps-react");
 
 /***/ }),
 

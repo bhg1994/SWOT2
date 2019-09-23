@@ -4,9 +4,9 @@ const NicknameEditForm = () => {
   return (
     <Form
       style={{
-        margin: "20px 0 20px 0",
+        margin: "40px 0 40px 0",
         border: "1px solid #d9d9d9",
-        padding: "20px"
+        padding: "30px"
       }}
     >
       <div>
@@ -18,13 +18,12 @@ const NicknameEditForm = () => {
           />
           <Button style={{ marginLeft: "30px" }}>로그아웃</Button>
         </div>
-        <Input
-          addonBefore="닉네임"
-          style={{ width: "50%", marginRight: "50px" }}
-        />
-        <Button style={{ marginTop: "20px" }} type="primary">
-          수정
-        </Button>
+        <Input addonBefore="닉네임" style={{ marginTop: "50px" }} />
+        <div style={{ textAlign: "right" }}>
+          <Button style={{ marginTop: "20px", width: "100px" }} type="primary">
+            수정
+          </Button>
+        </div>
       </div>
     </Form>
   );

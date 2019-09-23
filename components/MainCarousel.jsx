@@ -54,7 +54,7 @@ const MainCarousel = () => {
         type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
       />
-      <div>
+      <div style={{ margin: "40px" }}>
         <Slider {...settings}>
           <div>
             <img src="static/images/lectureroom.jpg"></img>

@@ -8,10 +8,6 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/Reservation": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
     "/_app": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
@@ -24,31 +20,7 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/login": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
-    "/master": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
-    "/notification": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
-    "/questionAnswer": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
-    "/reservationForm": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
     "/signup": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
-    "/studyboard": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]

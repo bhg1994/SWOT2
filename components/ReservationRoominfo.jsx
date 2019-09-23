@@ -88,7 +88,7 @@ const ReservationRoominfo = () => {
   return (
     <>
       <Card
-        style={{ margin: "30px 30px 0 0" }}
+        style={{ margin: "30px 30px 0 0", width: "600px" }}
         title="강의실 예약현황"
         hoverable
         extra={<a href="reservation">More</a>}
