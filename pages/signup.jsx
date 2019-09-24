@@ -8,7 +8,7 @@ const useStyles = makeStyles({
   wrapper: {
     position: "absolute",
     width: 600,
-    height: 500,
+    height: 550,
     left: "50%",
     top: "50%",
     marginLeft: -300,
@@ -34,8 +34,8 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column"
   },
-  name: {
-    margin: "20px 0 0 20px",
+  duplicate: {
+    margin: "70px 0 0 20px",
     display: "flex",
     flexDirection: "column"
   },
@@ -62,10 +62,17 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column"
   },
-  check: {
+  name: {
     margin: "20px 0 0 20px",
     display: "flex",
     flexDirection: "column"
+  },
+  fifthSection: {
+    display: "flex",
+    flexDirection: "row"
+  },
+  check: {
+    margin: "auto"
   }
 });
 
@@ -173,17 +180,8 @@ const Signup = () => {
                     style={{ width: 225, height: 50 }}
                   />
                 </div>
-                <div className={classes.name}>
-                  <label htmlFor="nameLabel">NAME</label>
-                  <br />
-                  <Input
-                    name="register_name"
-                    value={name}
-                    required
-                    onChange={onChangeName}
-                    placeholder="YOUR NAME"
-                    style={{ width: 225, height: 50 }}
-                  />
+                <div className={classes.duplicate}>
+                  <Button>중복 확인</Button>
                 </div>
               </div>
               <div className={classes.thirdSection}>
@@ -229,10 +227,24 @@ const Signup = () => {
                     value={telephone}
                     required
                     onChange={onChangeTelephone}
-                    placeholder="ENTER VALID TELEPHONENUM"
+                    placeholder="ENTER VALID TELEPHONE"
                     style={{ width: 225, height: 50 }}
                   />
                 </div>
+                <div className={classes.name}>
+                  <label htmlFor="nameLabel">NAME</label>
+                  <br />
+                  <Input
+                    name="register_name"
+                    value={name}
+                    required
+                    onChange={onChangeName}
+                    placeholder="YOUR NAME"
+                    style={{ width: 225, height: 50 }}
+                  />
+                </div>
+              </div>
+              <div className={classes.fifthSection}>
                 <div className={classes.check}>
                   <div>
                     <Checkbox
