@@ -10,6 +10,7 @@ export const initialState = {
     followingList: [], // 팔로잉 리스트
     followerList: [], // 팔로워 리스트
     userInfo: null, // 남의 정보
+    tokens: null,
 };
 
 export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
@@ -62,6 +63,7 @@ export default (state = initialState, action) => {
                 me: action.data,
                 isLoggedIn: true,
                 isLoading: false,
+                
             };
         }
         case LOG_IN_FAILURE: {

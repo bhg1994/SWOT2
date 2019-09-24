@@ -112,6 +112,7 @@ const Signup = () => {
       if (!term) {
         return setTermError(true);
       }
+      console.log(id,name,password,telephone);
 
       dispatch({
         type: SIGN_UP_REQUEST,

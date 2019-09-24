@@ -30,25 +30,44 @@ function logInAPI(loginData) {
     return axios.post(`http://swot.devdogs.kr:8080/api/auth/signin`, form)
         .then(response => {
             console.log("id,password : " + loginData.id, loginData.password);
-            console.log('response : ', JSON.stringify(response, null, 2))
+            console.log('response : ', JSON.stringify(response, null, 2));
+            var result = response.data;
+            return result;
         })
         .catch(error => {
             console.log('failed', error)
+            return error;
         })
 }
 
 function* logIn(action) {
     try {
+        
         const result = yield call(logInAPI, action.data);
-        yield put({ // put은 dispatch 동일
-            type: LOG_IN_SUCCESS,
-            // data: result.data,
-        });
+
+        if(result.statusMsg==="success"){
+            yield put({ // put은 dispatch 동일
+                type: LOG_IN_SUCCESS,
+            });
+            localStorage.setItem("accessToken",result.accessToken);
+            localStorage.setItem("refreshToken",result.refreshToken);
+            alert("로그인 성공");
+            location.href = "/"
+        }
+        else{
+            yield put({
+                type: LOG_IN_FAILURE,
+            });
+            alert("로그인 정보 틀림");
+            location.href = "/login"
+        }
+
     } catch (e) { // loginAPI 실패
         console.error(e);
         yield put({
             type: LOG_IN_FAILURE,
         });
+        alert("통신 장애");
     }
 }
 

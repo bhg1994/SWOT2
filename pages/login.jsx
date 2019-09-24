@@ -167,6 +167,7 @@ const Loginscreen = () => {
   };
 
   const loginBoxes = (
+    
     <section className={classes.wrapper}>
       <div className={classes.loginwrap}>
         <div className={classes.loginContainer}>
@@ -226,7 +227,10 @@ const Loginscreen = () => {
     </div>
   );
 
-  return <>{loginView}</>;
+  return <>
+       
+        {loginView}
+        </>;  
 };
 
 export default Loginscreen;
