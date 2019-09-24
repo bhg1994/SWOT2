@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { Form, Input, Button, Typography, Card } from "antd";
 import Link from "next/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+
+import { LOG_IN_REQUEST } from "../reducers/user";
+import { useDispatch, useSelector } from "react-redux";
 
 const useStyles = makeStyles({
   wrapper: {
@@ -136,9 +139,32 @@ const useStyles = makeStyles({
   }
 });
 
+export const useInput = (initValue = null) => {
+  const [value, setter] = useState(initValue);
+  const handler = useCallback(e => {
+    setter(e.target.value);
+  }, []);
+  return [value, handler];
+};
+
 const Loginscreen = () => {
   const classes = useStyles();
   const matches = useMediaQuery("(min-width:600px)");
+
+  const [id, onChangeId] = useInput("");
+  const [password, onChangePassword] = useInput("");
+  const { isLoggingIn } = useSelector(state => state.user);
+  const dispatch = useDispatch();
+
+  const onClickedLogin = () => {
+    dispatch({
+      type: LOG_IN_REQUEST,
+      data: {
+        id,
+        password
+      }
+    });
+  };
 
   const loginBoxes = (
     <section className={classes.wrapper}>
@@ -152,6 +178,7 @@ const Loginscreen = () => {
               name="login_email"
               type="text"
               placeholder="YOUR EMAIL ADDRESS"
+              onChange={onChangeId}
             />
           </div>
           <div className={classes.password}>
@@ -161,9 +188,10 @@ const Loginscreen = () => {
               name="login_password"
               type="password"
               placeholder="ENTER VALID PASSWORD"
+              onChange={onChangePassword}
             />
           </div>
-          <Button className={classes.loginBtn} htmlType="submit">
+          <Button className={classes.loginBtn} onClick={onClickedLogin}>
             Login
           </Button>
         </div>

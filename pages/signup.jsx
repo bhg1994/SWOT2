@@ -1,6 +1,8 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { Form, Input, Button, Checkbox, Typography } from "antd";
+import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
+import { SIGN_UP_REQUEST } from "../reducers/user";
 
 const useStyles = makeStyles({
   wrapper: {
@@ -50,6 +52,20 @@ const useStyles = makeStyles({
     margin: "20px 0 0 20px",
     display: "flex",
     flexDirection: "column"
+  },
+  fourthSection: {
+    display: "flex",
+    flexDirection: "row"
+  },
+  telephone: {
+    margin: "20px 0 0 0",
+    display: "flex",
+    flexDirection: "column"
+  },
+  check: {
+    margin: "20px 0 0 20px",
+    display: "flex",
+    flexDirection: "column"
   }
 });
 
@@ -65,15 +81,19 @@ export const useInput = (initValue = null) => {
 
 const Signup = () => {
   const [id, setId] = useState("");
-  const [nick, setNick] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
   const [term, setTerm] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [termError, setTermError] = useState(false);
+  const [telephone, setTelephone] = useState("");
 
   const { Text } = Typography;
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const { isSigningUp, me } = useSelector(state => state.user);
+
   // useCallback으로 감쌀때 함수 내부에서 쓰는 state를 deps배열로 넣는다.
   const onSubmit = useCallback(
     e => {
@@ -85,28 +105,35 @@ const Signup = () => {
       if (!term) {
         return setTermError(true);
       }
-      console.log({
-        id,
-        nick,
-        password,
-        passwordCheck,
-        term
+
+      dispatch({
+        type: SIGN_UP_REQUEST,
+        data: {
+          id,
+          name,
+          password,
+          telephone
+        }
       });
     },
-    [password, passwordCheck, term]
+    [id, name, password, passwordCheck, telephone, term]
   );
 
   const onChangeId = e => {
     setId(e.target.value);
   };
 
-  const onChangeNick = e => {
-    setNick(e.target.value);
+  const onChangeName = e => {
+    setName(e.target.value);
   };
 
   const onChangePassword = e => {
     setPasswordError(e.target.value !== passwordCheck);
     setPassword(e.target.value);
+  };
+
+  const onChangeTelephone = e => {
+    setTelephone(e.target.value);
   };
 
   const onChangePasswordChk = useCallback(
@@ -151,9 +178,9 @@ const Signup = () => {
                   <br />
                   <Input
                     name="register_name"
-                    value={nick}
+                    value={name}
                     required
-                    onChange={onChangeNick}
+                    onChange={onChangeName}
                     placeholder="YOUR NAME"
                     style={{ width: 225, height: 50 }}
                   />
@@ -192,23 +219,42 @@ const Signup = () => {
                   비밀번호가 일치하지 않습니다.
                 </div>
               )}
-              <div>
-                <Checkbox
-                  name="user-term"
-                  checked={term}
-                  onChange={onChangeTerm}
-                  style={{ marginTop: "20px" }}
-                >
-                  회원가입 약관에 동의합니다.
-                </Checkbox>
-                {termError && (
-                  <div style={{ color: "red" }}>약관에 동의하셔야 합니다.</div>
-                )}
-              </div>
-              <div style={{ marginTop: "20px" }}>
-                <Button type="primary" htmlType="submit">
-                  가입하기
-                </Button>
+              <div className={classes.fourthSection}>
+                <div className={classes.telephone}>
+                  <label htmlFor="TELEPHONE">TELEPHONE</label>
+                  <br />
+                  <Input
+                    name="register_telephone"
+                    type="text"
+                    value={telephone}
+                    required
+                    onChange={onChangeTelephone}
+                    placeholder="ENTER VALID TELEPHONENUM"
+                    style={{ width: 225, height: 50 }}
+                  />
+                </div>
+                <div className={classes.check}>
+                  <div>
+                    <Checkbox
+                      name="user-term"
+                      checked={term}
+                      onChange={onChangeTerm}
+                      style={{ marginTop: "20px" }}
+                    >
+                      회원가입 약관에 동의합니다.
+                    </Checkbox>
+                    {termError && (
+                      <div style={{ color: "red" }}>
+                        약관에 동의하셔야 합니다.
+                      </div>
+                    )}
+                  </div>
+                  <div style={{ margin: "20px 0 0 50px" }}>
+                    <Button type="primary" htmlType="submit">
+                      가입하기
+                    </Button>
+                  </div>
+                </div>
               </div>
             </Form>
           </section>

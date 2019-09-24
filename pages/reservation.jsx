@@ -15,17 +15,18 @@ const studyboard = () => {
   return (
     <>
       <Layout style={{ backgroundColor: "white" }}>
-        <div>
-          <div style={{ marginBottom: "50px", textAlign: "center" }}>
-            <img src="static/images/Reservation_logo.png" />
-          </div>
+        <div style={{ margin: "30px 110px 20px 0", textAlign: "center" }}>
+          <img src="static/images/Reservation_logo.png" />
         </div>
+
         <div
           style={{
-            margin: "0 auto"
+            margin: "auto"
           }}
         >
-          <SwotMap />
+          <div style={{ marginRight: "100px" }}>
+            <SwotMap />
+          </div>
         </div>
       </Layout>
     </>

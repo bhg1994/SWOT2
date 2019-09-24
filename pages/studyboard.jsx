@@ -212,7 +212,7 @@ const studyboard = () => {
             <Col xs={24} md={8}>
               <Card
                 style={{ width: 300, height: 300 }}
-                title="September 17, 2019"
+                title="September 18, 2019"
                 hoverable
               >
                 Empty
