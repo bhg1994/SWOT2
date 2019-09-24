@@ -3,11 +3,13 @@ import {
 } from "redux";
 import user from './user';
 import post from './post';
+import room from './room';
 
 
 const rootReducer = combineReducers({
     user,
-    post
+    post,
+    room
 });
 
 export default rootReducer;
