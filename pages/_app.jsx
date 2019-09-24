@@ -83,10 +83,7 @@ SWOT.propTypes = {
 const configureStore = (initialState, options) => {
   const sagaMiddleware = createSagaMiddleware();
   const middlewares = [sagaMiddleware];
-  const enhancer =
-    process.env.NODE_ENV === "production"
-      ? compose(applyMiddleware(...middlewares))
-      : compose(
+  const enhancer = compose(
           applyMiddleware(...middlewares),
           !options.isServer &&
             typeof window.__REDUX_DEVTOOLS_EXTENSION__ !== "undefined"

@@ -106,7 +106,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
-var _jsxFileName = "/Users/jaykim/SWOT2/components/MainFooter.jsx";
+var _jsxFileName = "C:\\Users\\6201-20\\SWOT2\\components\\MainFooter.jsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -184,7 +184,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_Link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_Link__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! antd */ "antd");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_2__);
-var _jsxFileName = "/Users/jaykim/SWOT2/containers/Slider.jsx";
+var _jsxFileName = "C:\\Users\\6201-20\\SWOT2\\containers\\Slider.jsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -722,7 +722,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_redux_wrapper__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(next_redux_wrapper__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var _reducers__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../reducers */ "./reducers/index.js");
 /* harmony import */ var _sagas__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../sagas */ "./sagas/index.js");
-var _jsxFileName = "/Users/jaykim/SWOT2/pages/_app.jsx";
+var _jsxFileName = "C:\\Users\\6201-20\\SWOT2\\pages\\_app.jsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -894,7 +894,7 @@ SWOT.propTypes = {
 const configureStore = (initialState, options) => {
   const sagaMiddleware = redux_saga__WEBPACK_IMPORTED_MODULE_9___default()();
   const middlewares = [sagaMiddleware];
-  const enhancer =  false ? undefined : Object(redux__WEBPACK_IMPORTED_MODULE_10__["compose"])(Object(redux__WEBPACK_IMPORTED_MODULE_10__["applyMiddleware"])(...middlewares), !options.isServer && typeof window.__REDUX_DEVTOOLS_EXTENSION__ !== "undefined" ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f);
+  const enhancer = Object(redux__WEBPACK_IMPORTED_MODULE_10__["compose"])(Object(redux__WEBPACK_IMPORTED_MODULE_10__["applyMiddleware"])(...middlewares), !options.isServer && typeof window.__REDUX_DEVTOOLS_EXTENSION__ !== "undefined" ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f);
   const store = Object(redux__WEBPACK_IMPORTED_MODULE_10__["createStore"])(_reducers__WEBPACK_IMPORTED_MODULE_12__["default"], initialState, enhancer);
   sagaMiddleware.run(_sagas__WEBPACK_IMPORTED_MODULE_13__["default"]);
   return store;
@@ -1178,8 +1178,9 @@ const initialState = {
   // 팔로잉 리스트
   followerList: [],
   // 팔로워 리스트
-  userInfo: null // 남의 정보
-
+  userInfo: null,
+  // 남의 정보
+  tokens: null
 };
 const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
 const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
@@ -1399,25 +1400,41 @@ function logInAPI(loginData) {
   return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(`http://swot.devdogs.kr:8080/api/auth/signin`, form).then(response => {
     console.log("id,password : " + loginData.id, loginData.password);
     console.log('response : ', _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()(response, null, 2));
+    var result = response.data;
+    return result;
   }).catch(error => {
     console.log('failed', error);
+    return error;
   });
 }
 
 function* logIn(action) {
   try {
     const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(logInAPI, action.data);
-    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-      // put은 dispatch 동일
-      type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOG_IN_SUCCESS"] // data: result.data,
 
-    });
+    if (result.statusMsg === "success") {
+      yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
+        // put은 dispatch 동일
+        type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOG_IN_SUCCESS"]
+      });
+      localStorage.setItem("accessToken", result.accessToken);
+      localStorage.setItem("refreshToken", result.refreshToken);
+      alert("로그인 성공");
+      location.href = "/";
+    } else {
+      yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
+        type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOG_IN_FAILURE"]
+      });
+      alert("로그인 정보 틀림");
+      location.href = "/login";
+    }
   } catch (e) {
     // loginAPI 실패
     console.error(e);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
       type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOG_IN_FAILURE"]
     });
+    alert("통신 장애");
   }
 }
 
