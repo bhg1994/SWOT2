@@ -19,6 +19,7 @@ import {
     SIGN_UP_FAILURE,
     SIGN_UP_REQUEST,
     SIGN_UP_SUCCESS,
+    RESERVATION_REQUEST,
 } from '../reducers/user';
 
 function logInAPI(loginData) {
@@ -87,25 +88,42 @@ function signUpAPI(signUpData) {
     return axios.post(`http://swot.devdogs.kr:8080/api/auth/signup`, form)
         .then(response => {
             console.log('response : ', JSON.stringify(response, null, 2))
+            var result = response.data;
+            return result;
         })
         .catch(error => {
             console.log('failed', error)
+            return error;
         })
 }
 
 function* signUp(action) {
     try {
-        // yield call(signUpAPI);
-        yield call(signUpAPI, action.data);
-        yield put({ // put은 dispatch 동일
-            type: SIGN_UP_SUCCESS,
-        });
+        const result = yield call(signUpAPI, action.data);
+
+        if(result.statusMsg==="success"){
+            yield put({ // put은 dispatch 동일
+                type: SIGN_UP_SUCCESS,
+            });
+            alert("이메일인증 진행 후 다시 로그인 해 주세요");
+            location.href = "/login";
+        }
+        else{
+            yield put({
+                type: SIGN_UP_FAILURE,
+            });
+            alert("오류. 다시 진행해");
+            location.href = "/signup";
+        }
+        
     } catch (e) { // loginAPI 실패
         console.error(e);
         yield put({
             type: SIGN_UP_FAILURE,
             error: e,
         });
+        alert("오류. 다시 진행해");
+        location.href = "/signup";
     }
 }
 
@@ -175,4 +193,62 @@ export default function* userSaga() {
         fork(watchLoadUser),
         fork(watchSignUp),
     ]);
+}
+
+
+
+
+
+
+
+
+function reservateAPI(reservateData) {
+    // 서버에 요청을 보내는 부분
+    let form = new FormData()
+    // form.append('email', reservateData.id)
+    // form.append('password', reservateData.password)
+
+    return axios.post(`http://swot.devdogs.kr:8080/api/auth/reservation`, form)
+        .then(response => {
+            console.log('response : ', JSON.stringify(response, null, 2));
+            var result = response.data;
+            return result;
+        })
+        .catch(error => {
+            console.log('failed', error)
+            return error;
+        })
+}
+
+function* reservate(action) {
+    try {
+        
+        const result = yield call(reservateAPI, action.data);
+
+        if(result.statusMsg==="success"){
+            yield put({ // put은 dispatch 동일
+                type: RESERVATION_SUCCESS,
+            });
+            alert("예약 성공");
+            location.href = "/"
+        }
+        else{
+            yield put({
+                type: RESERVATION_FAILURE,
+            });
+            alert("예약 실패");
+            location.href = "/Reservation"
+        }
+
+    } catch (e) { // loginAPI 실패
+        console.error(e);
+        yield put({
+            type: RESERVATION_FAILURE,
+        });
+        alert("통신 장애");
+    }
+}
+
+function* watchReservation() {
+    yield takeEvery(RESERVATION_REQUEST, reservate);
 }
