@@ -17,7 +17,6 @@ import reducer from "../reducers";
 import rootSaga from "../sagas";
 
 const SWOT = ({ Component, store }) => {
-   
   return (
     <>
       <Provider store={store}>

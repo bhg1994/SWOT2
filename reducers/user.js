@@ -11,11 +11,7 @@ export const initialState = {
     followerList: [], // 팔로워 리스트
     userInfo: null, // 남의 정보
     tokens: null,
-    reservationErrorReason: '',
 };
-export const RESERVATION_REQUEST = 'RESERVATION_REQUEST';
-export const RESERVATION_SUCCESS = 'RESERVATION_SUCCESS';
-export const RESERVATION_FAILURE = 'RESERVATION_FAILURE';
 
 export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
@@ -64,6 +60,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isLoggingIn: false,
+                me: action.data,
                 isLoggedIn: true,
                 isLoading: false,
                 
@@ -105,27 +102,6 @@ export default (state = initialState, action) => {
                 ...state,
                 isSigningUp: false,
                 signUpErrorReason: action.error,
-            };
-        }
-        case RESERVATION_REQUEST: {
-            return {
-                ...state,
-                isLoading: true,
-                reservationErrorReason: '',
-            };
-        }
-        case RESERVATION_SUCCESS: {
-            return {
-                ...state,
-                isLoading: false,
-                
-            };
-        }
-        case RESERVATION_FAILURE: {
-            return {
-                ...state,
-                isLoading: false,
-                reservationErrorReason: action.error,
             };
         }
         default: {
