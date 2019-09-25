@@ -6,6 +6,7 @@ import {
 } from "../components";
 
 const master = () => {
+  console.log("asdASDDASDASDASDASD");
   return (
     <>
       <div>
