@@ -116,6 +116,47 @@ const Profile = () => {
             </List.Item>
           )}
         />
+        <List
+          style={{ marginBottom: "40px" }}
+          grid={{ gutter: 16, xs: 1, sm: 2, md: 4, lg: 4, xl: 6, xxl: 3 }}
+          size="small"
+          header={
+            <div style={{ textAlign: "center", fontSize: "20px" }}>
+              스터디 신청 현황
+            </div>
+          }
+          loadMore={
+            <div style={{ textAlign: "center" }}>
+              <Link href="/studyboard">
+                <a>
+                  <Button style={{ width: "50%", marginBottom: "30px" }}>
+                    스터디 더 보기
+                  </Button>
+                </a>
+              </Link>
+            </div>
+          }
+          bordered
+          dataSource={studydata}
+          renderItem={item => (
+            <List.Item>
+              <Card
+                style={{ margin: "40px" }}
+                title={item.title}
+                extra={<a href="Notification">More</a>}
+              >
+                <Text type="warning">스터디 주제 :{item.studytitle}</Text>
+                <Divider />
+                <Text mark>날짜 : {item.studydate}</Text>
+                <br />
+                <br />
+                스터디 목적 : {item.studypurpose} <br />
+                <Divider />
+                최대 인원 수 : {item.studymaximum}명
+              </Card>
+            </List.Item>
+          )}
+        />
       </div>
     </>
   );

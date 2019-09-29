@@ -42,19 +42,18 @@ function logInAPI(loginData) {
 
 function* logIn(action) {
     try {
-        
+
         const result = yield call(logInAPI, action.data);
 
-        if(result.statusMsg==="success"){
+        if (result.statusMsg === "success") {
             yield put({ // put은 dispatch 동일
                 type: LOG_IN_SUCCESS,
             });
-            localStorage.setItem("accessToken",result.accessToken);
-            localStorage.setItem("refreshToken",result.refreshToken);
+            localStorage.setItem("accessToken", result.accessToken);
+            localStorage.setItem("refreshToken", result.refreshToken);
             alert("로그인 성공");
             location.href = "/"
-        }
-        else{
+        } else {
             yield put({
                 type: LOG_IN_FAILURE,
             });
@@ -100,21 +99,20 @@ function* signUp(action) {
     try {
         const result = yield call(signUpAPI, action.data);
 
-        if(result.statusMsg==="success"){
+        if (result.statusMsg === "success") {
             yield put({ // put은 dispatch 동일
                 type: SIGN_UP_SUCCESS,
             });
             alert("이메일인증 진행 후 다시 로그인 해 주세요");
             location.href = "/login";
-        }
-        else{
+        } else {
             yield put({
                 type: SIGN_UP_FAILURE,
             });
             alert("오류. 다시 진행해");
             location.href = "/signup";
         }
-        
+
     } catch (e) { // loginAPI 실패
         console.error(e);
         yield put({
@@ -193,5 +191,3 @@ export default function* userSaga() {
         fork(watchSignUp),
     ]);
 }
-
-

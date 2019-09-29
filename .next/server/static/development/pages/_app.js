@@ -106,7 +106,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
-var _jsxFileName = "C:\\Users\\6201-20\\SWOT2\\components\\MainFooter.jsx";
+var _jsxFileName = "/Users/jaykim/SWOT2/components/MainFooter.jsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -184,7 +184,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_Link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_Link__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! antd */ "antd");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_2__);
-var _jsxFileName = "C:\\Users\\6201-20\\SWOT2\\containers\\Slider.jsx";
+var _jsxFileName = "/Users/jaykim/SWOT2/containers/Slider.jsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -722,7 +722,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_redux_wrapper__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(next_redux_wrapper__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var _reducers__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../reducers */ "./reducers/index.js");
 /* harmony import */ var _sagas__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../sagas */ "./sagas/index.js");
-var _jsxFileName = "C:\\Users\\6201-20\\SWOT2\\pages\\_app.jsx";
+var _jsxFileName = "/Users/jaykim/SWOT2/pages/_app.jsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -753,13 +753,13 @@ const SWOT = ({
     store: store,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 22
+      lineNumber: 23
     },
     __self: undefined
   }, __jsx(next_head__WEBPACK_IMPORTED_MODULE_1___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 23
+      lineNumber: 24
     },
     __self: undefined
   }, __jsx("link", {
@@ -767,26 +767,26 @@ const SWOT = ({
     href: "https://cdnjs.cloudflare.com/ajax/libs/antd/3.16.2/antd.css",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 24
+      lineNumber: 25
     },
     __self: undefined
   }), __jsx("script", {
     src: "https://cdnjs.cloudflare.com/ajax/libs/antd/3.16.2/antd.js",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 28
+      lineNumber: 29
     },
     __self: undefined
   })), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Layout"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 30
+      lineNumber: 31
     },
     __self: undefined
   }, __jsx(_containers_Slider__WEBPACK_IMPORTED_MODULE_6__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 31
+      lineNumber: 32
     },
     __self: undefined
   }), __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Layout"], {
@@ -795,7 +795,7 @@ const SWOT = ({
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 32
+      lineNumber: 33
     },
     __self: undefined
   }, __jsx(Header, {
@@ -805,20 +805,20 @@ const SWOT = ({
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 33
+      lineNumber: 34
     },
     __self: undefined
   }, __jsx(next_Link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 34
+      lineNumber: 35
     },
     __self: undefined
   }, __jsx("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 35
+      lineNumber: 36
     },
     __self: undefined
   }, __jsx("img", {
@@ -831,20 +831,20 @@ const SWOT = ({
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 36
+      lineNumber: 37
     },
     __self: undefined
   }))), __jsx(next_Link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/profile",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 47
+      lineNumber: 48
     },
     __self: undefined
   }, __jsx("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 48
+      lineNumber: 49
     },
     __self: undefined
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_3__["Avatar"], {
@@ -856,7 +856,7 @@ const SWOT = ({
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 49
+      lineNumber: 50
     },
     __self: undefined
   })))), __jsx(Content, {
@@ -868,19 +868,19 @@ const SWOT = ({
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 60
+      lineNumber: 61
     },
     __self: undefined
   }, __jsx(Component, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 68
+      lineNumber: 69
     },
     __self: undefined
   })), __jsx(_components_MainFooter__WEBPACK_IMPORTED_MODULE_7__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 70
+      lineNumber: 71
     },
     __self: undefined
   })))));
@@ -917,12 +917,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _user__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./user */ "./reducers/user.js");
 /* harmony import */ var _post__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./post */ "./reducers/post.js");
+/* harmony import */ var _room__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./room */ "./reducers/room.js");
+
 
 
 
 const rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   user: _user__WEBPACK_IMPORTED_MODULE_1__["default"],
-  post: _post__WEBPACK_IMPORTED_MODULE_2__["default"]
+  post: _post__WEBPACK_IMPORTED_MODULE_2__["default"],
+  room: _room__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);
 
@@ -1108,6 +1111,92 @@ const REMOVE_POST_FAILURE = 'REMOVE_POST_FAILURE';
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
           isAddingComment: false,
           addCommentErrorReason: action.error
+        });
+      }
+
+    default:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state);
+      }
+  }
+});
+
+/***/ }),
+
+/***/ "./reducers/room.js":
+/*!**************************!*\
+  !*** ./reducers/room.js ***!
+  \**************************/
+/*! exports provided: initialState, RESERVATION_REQUEST, RESERVATION_SUCCESS, RESERVATION_FAILURE, ROOMLIST_REQUEST, ROOMLIST_SUCCESS, ROOMLIST_FAILURE, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialState", function() { return initialState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RESERVATION_REQUEST", function() { return RESERVATION_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RESERVATION_SUCCESS", function() { return RESERVATION_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RESERVATION_FAILURE", function() { return RESERVATION_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ROOMLIST_REQUEST", function() { return ROOMLIST_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ROOMLIST_SUCCESS", function() { return ROOMLIST_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ROOMLIST_FAILURE", function() { return ROOMLIST_FAILURE; });
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+
+const initialState = {
+  reservationErrorReason: '',
+  roomListErrorReason: '',
+  isLoading: false
+};
+const RESERVATION_REQUEST = 'RESERVATION_REQUEST';
+const RESERVATION_SUCCESS = 'RESERVATION_SUCCESS';
+const RESERVATION_FAILURE = 'RESERVATION_FAILURE';
+const ROOMLIST_REQUEST = 'ROOMLIST_REQUEST';
+const ROOMLIST_SUCCESS = 'ROOMLIST_SUCCESS';
+const ROOMLIST_FAILURE = 'ROOMLIST_FAILURE';
+/* harmony default export */ __webpack_exports__["default"] = ((state = initialState, action) => {
+  switch (action.type) {
+    case RESERVATION_REQUEST:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+          isLoading: true,
+          reservationErrorReason: ''
+        });
+      }
+
+    case RESERVATION_SUCCESS:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+          isLoading: false
+        });
+      }
+
+    case RESERVATION_FAILURE:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+          isLoading: false,
+          reservationErrorReason: action.error
+        });
+      }
+
+    case ROOMLIST_REQUEST:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+          isLoading: true,
+          roomListErrorReason: ''
+        });
+      }
+
+    case ROOMLIST_SUCCESS:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+          isLoading: false
+        });
+      }
+
+    case ROOMLIST_FAILURE:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+          isLoading: false,
+          roomListErrorReason: action.error
         });
       }
 
@@ -1325,11 +1414,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _user__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./user */ "./sagas/user.js");
 /* harmony import */ var _post__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./post */ "./sagas/post.js");
+/* harmony import */ var _room__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./room */ "./sagas/room.js");
+
 
 
 
 function* rootSaga() {
-  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(_user__WEBPACK_IMPORTED_MODULE_1__["default"]), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(_post__WEBPACK_IMPORTED_MODULE_2__["default"])]);
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(_user__WEBPACK_IMPORTED_MODULE_1__["default"]), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(_post__WEBPACK_IMPORTED_MODULE_2__["default"]), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(_room__WEBPACK_IMPORTED_MODULE_3__["default"])]);
 }
 
 /***/ }),
@@ -1395,6 +1486,125 @@ function* watchAddComment() {
 
 function* postSaga() {
   yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchAddPost), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchAddComment)]);
+}
+
+/***/ }),
+
+/***/ "./sagas/room.js":
+/*!***********************!*\
+  !*** ./sagas/room.js ***!
+  \***********************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return roomSaga; });
+/* harmony import */ var _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/json/stringify */ "./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-saga/effects */ "redux-saga/effects");
+/* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _reducers_room__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../reducers/room */ "./reducers/room.js");
+
+
+
+
+
+function reservateAPI(reservateData) {
+  // 서버에 요청을 보내는 부분
+  let form = new FormData(); // form.append('email', reservateData.id)
+  // form.append('password', reservateData.password)
+
+  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(`http://swot.devdogs.kr:8080/api/auth/reservation`, form).then(response => {
+    console.log('response : ', _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()(response, null, 2));
+    var result = response.data;
+    return result;
+  }).catch(error => {
+    console.log('failed', error);
+    return error;
+  });
+}
+
+function* reservate(action) {
+  try {
+    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(reservateAPI, action.data);
+
+    if (result.statusMsg === "success") {
+      yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
+        // put은 dispatch 동일
+        type: _reducers_room__WEBPACK_IMPORTED_MODULE_3__["RESERVATION_SUCCESS"]
+      });
+      alert("예약 성공");
+      location.href = "/";
+    } else {
+      yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
+        type: _reducers_room__WEBPACK_IMPORTED_MODULE_3__["RESERVATION_FAILURE"]
+      });
+      alert("예약 실패");
+      location.href = "/Reservation";
+    }
+  } catch (e) {
+    // loginAPI 실패
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
+      type: _reducers_room__WEBPACK_IMPORTED_MODULE_3__["RESERVATION_FAILURE"]
+    });
+    alert("통신 장애");
+  }
+}
+
+function* watchReservation() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeEvery"])(_reducers_room__WEBPACK_IMPORTED_MODULE_3__["RESERVATION_REQUEST"], reservate);
+}
+
+function roomListAPI(roomListData) {
+  // 서버에 요청을 보내는 부분
+  let form = new FormData(); // form.append('email', roomListData.id)
+  // form.append('password', roomListData.password)
+
+  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(`http://swot.devdogs.kr:8080/api/auth/roomlist`, form).then(response => {
+    console.log('response : ', _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()(response, null, 2));
+    var result = response.data;
+    return result;
+  }).catch(error => {
+    console.log('failed', error);
+    return error;
+  });
+}
+
+function* roomList(action) {
+  try {
+    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(roomListAPI, action.data);
+
+    if (result.statusMsg === "success") {
+      yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
+        // put은 dispatch 동일
+        type: _reducers_room__WEBPACK_IMPORTED_MODULE_3__["ROOMLIST_SUCCESS"]
+      });
+    } else {
+      yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
+        type: _reducers_room__WEBPACK_IMPORTED_MODULE_3__["ROOMLIST_FAILURE"]
+      });
+      alert("룸리스트 불러오기 실패");
+    }
+  } catch (e) {
+    // loginAPI 실패
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
+      type: _reducers_room__WEBPACK_IMPORTED_MODULE_3__["ROOMLIST_FAILURE"]
+    });
+    alert("통신 장애");
+  }
+}
+
+function* watchRoomList() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeEvery"])(_reducers_room__WEBPACK_IMPORTED_MODULE_3__["ROOMLIST_REQUEST"], roomList);
+}
+
+function* roomSaga() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchReservation), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchRoomList)]);
 }
 
 /***/ }),
@@ -1584,53 +1794,6 @@ function* watchLoadUser() {
 
 function* userSaga() {
   yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchLogIn), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchLogOut), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchLoadUser), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchSignUp)]);
-}
-
-function reservateAPI(reservateData) {
-  // 서버에 요청을 보내는 부분
-  let form = new FormData(); // form.append('email', reservateData.id)
-  // form.append('password', reservateData.password)
-
-  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(`http://swot.devdogs.kr:8080/api/auth/reservation`, form).then(response => {
-    console.log('response : ', _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()(response, null, 2));
-    var result = response.data;
-    return result;
-  }).catch(error => {
-    console.log('failed', error);
-    return error;
-  });
-}
-
-function* reservate(action) {
-  try {
-    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(reservateAPI, action.data);
-
-    if (result.statusMsg === "success") {
-      yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-        // put은 dispatch 동일
-        type: RESERVATION_SUCCESS
-      });
-      alert("예약 성공");
-      location.href = "/";
-    } else {
-      yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-        type: RESERVATION_FAILURE
-      });
-      alert("예약 실패");
-      location.href = "/Reservation";
-    }
-  } catch (e) {
-    // loginAPI 실패
-    console.error(e);
-    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-      type: RESERVATION_FAILURE
-    });
-    alert("통신 장애");
-  }
-}
-
-function* watchReservation() {
-  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeEvery"])(_reducers_user__WEBPACK_IMPORTED_MODULE_3__["RESERVATION_REQUEST"], reservate);
 }
 
 /***/ }),
