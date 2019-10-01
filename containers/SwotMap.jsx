@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import ImageMapper from "react-image-mapper";
 import { Modal, Typography } from "antd";
 import LectureRoomList from "../components/LectureRoomList";
+import { LectureroomWrapper } from "../containers/css/SwotMap";
 
 const { Text } = Typography;
 
@@ -98,11 +99,11 @@ const SWOTMap = () => {
           onOk={handleOk}
           onCancel={handleCancel}
         >
-          <div style={{ marginBottom: "30px", textAlign: "center" }}>
+          <LectureroomWrapper>
             <Text style={{ fontSize: "17px" }} type="secondary">
               {Lectureroom}
             </Text>
-          </div>
+          </LectureroomWrapper>
           <LectureRoomList />
         </Modal>
       </div>

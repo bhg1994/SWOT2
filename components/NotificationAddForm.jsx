@@ -1,5 +1,9 @@
-import { Modal, Button, Input, Form } from "antd";
-
+import { Modal, Input, Form } from "antd";
+import {
+  InputNotificationTitle,
+  AddBtn,
+  CancelBtn
+} from "../components/css/NotifiactionAddForm";
 const NotificationAddForm = () => {
   const [visible, setVisible] = useState(false);
   const [notificationtitle, setNotificationtitle] = useState("");
@@ -12,11 +16,10 @@ const NotificationAddForm = () => {
       <Modal title="공지사항 추가" visible={visible} footer={null}>
         <Form onSubmit={handleSubmit}>
           <Form.Item>
-            <Input
+            <InputNotificationTitle
               id="notificationtitle"
               value={notificationtitle}
               addonBefore="스터디 주제"
-              style={{ width: "50%" }}
               onChange={onChangeValue}
             />
           </Form.Item>
@@ -31,16 +34,12 @@ const NotificationAddForm = () => {
             />
           </Form.Item>
           <Form.Item>
-            <Button
-              type="primary"
-              style={{ marginRight: "20px" }}
-              htmlType="submit"
-            >
+            <AddBtn type="primary" htmlType="submit">
               추가
-            </Button>
-            <Button type="danger" onClick={handleCancel}>
+            </AddBtn>
+            <CancelBtn type="danger" onClick={handleCancel}>
               취소
-            </Button>
+            </CancelBtn>
           </Form.Item>
         </Form>
       </Modal>

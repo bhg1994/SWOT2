@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Slider from "react-slick";
+import { CarouselWrapper } from "../components/css/MainCarousel";
 
 let settings = {
   centerMode: true,
@@ -54,7 +55,7 @@ const MainCarousel = () => {
         type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
       />
-      <div style={{ margin: "40px" }}>
+      <CarouselWrapper>
         <Slider {...settings}>
           <div>
             <img src="static/images/lectureroom.jpg"></img>
@@ -81,7 +82,7 @@ const MainCarousel = () => {
             <img src="static/images/lectureroom4.jpg"></img>
           </div>
         </Slider>
-      </div>
+      </CarouselWrapper>
     </>
   );
 };

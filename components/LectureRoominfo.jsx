@@ -1,4 +1,5 @@
-import { Table, Tag, Card, Button } from "antd";
+import { Table, Tag } from "antd";
+import { LectureRoominfoCard } from "../components/css/LectureRoominfo";
 
 const columns = [
   {
@@ -82,13 +83,9 @@ const data = [
 const LectureRoominfo = () => {
   return (
     <>
-      <Card
-        style={{ marginRight: "30px", textAlign: "center" }}
-        title="미가엘관"
-        hoverable
-      >
+      <LectureRoominfoCard title="미가엘관" hoverable>
         <Table columns={columns} dataSource={data} pagination={false} />
-      </Card>
+      </LectureRoominfoCard>
     </>
   );
 };

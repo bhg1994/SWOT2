@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { Button, DatePicker, List, Typography } from "antd";
-import {
-  ReservationTable,
-  Facilityrental,
-  ReservationTime
-} from "../components";
+import { Facilityrental, ReservationTime } from "../components";
 
 const { Text } = Typography;
 

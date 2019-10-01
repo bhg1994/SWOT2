@@ -1,6 +1,5 @@
 import StudyBoard from './StudyBoard';
 import ReservationRoominfo from './ReservationRoominfo';
-import Studyinfo from './Studyinfo';
 import StudyBoardPagination from './StudyBoardPagination';
 import LectureRoominfo from './LectureRoominfo';
 import MainCarousel from './MainCarousel';
@@ -13,13 +12,12 @@ import LectureRoomApplication from './LectureRoomApplication';
 import BuildingList from './BuildingList';
 import MainFooter from './MainFooter';
 import ReservationTime from './ReservationTime';
-import NotificationBoard from './NotificationBoard';
+
 
 export {
     MainCarousel,
     ReservationRoominfo,
     StudyBoard,
-    Studyinfo,
     StudyBoardPagination,
     LectureRoominfo,
     LectureRoomModal,
@@ -31,5 +29,5 @@ export {
     BuildingList,
     MainFooter,
     ReservationTime,
-    NotificationBoard
+
 };

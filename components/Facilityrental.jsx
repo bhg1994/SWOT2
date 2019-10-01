@@ -11,6 +11,7 @@ import {
   Modal,
   InputNumber
 } from "antd";
+import { FormWrapper, Section } from "../components/css/Facilityrental";
 
 const { Text } = Typography;
 const { TextArea } = Input;
@@ -52,14 +53,8 @@ const Facilityrental = () => {
 
   return (
     <>
-      <div style={{ margin: "auto", width: "50%" }}>
-        <section
-          style={{
-            marginTop: "50px",
-            border: "1px solid gray",
-            textAlign: "center"
-          }}
-        >
+      <FormWrapper>
+        <Section>
           <div style={{ marginTop: "20px" }}>
             <Text strong style={{ marginLeft: "10px", fontSize: "18px" }}>
               시설 대여 신청 : 대여 하고자 하는 양식을 입력해 주세요
@@ -138,8 +133,8 @@ const Facilityrental = () => {
               </Modal>
             </Form.Item>
           </Form>
-        </section>
-      </div>
+        </Section>
+      </FormWrapper>
     </>
   );
 };

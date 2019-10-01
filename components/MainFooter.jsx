@@ -1,9 +1,9 @@
-import { Layout, Row, Col } from "antd";
-const { Footer } = Layout;
+import { Row, Col } from "antd";
+import { FooterWrapper } from "../components/css/MainFooter";
 
 const MainFooter = () => {
   return (
-    <Footer style={{ textAlign: "center" }}>
+    <FooterWrapper>
       <Row>
         <Col span={12}>
           전화번호 02-2610-4114 <br /> SWOT, 서울특별시 구로구 오류2동 연동로
@@ -14,7 +14,7 @@ const MainFooter = () => {
           저작권 보호 © SWOT Companies Inc. 모든 권리 유보
         </Col>
       </Row>
-    </Footer>
+    </FooterWrapper>
   );
 };
 

@@ -1,4 +1,5 @@
 import { Table, Divider, Tag, Card } from "antd";
+import { RoominfoWrapper } from "../components/css/ReservationRoominfo";
 
 const columns = [
   {
@@ -87,14 +88,13 @@ const data = [
 const ReservationRoominfo = () => {
   return (
     <>
-      <Card
-        style={{ margin: "30px 30px 0 0", width: "600px" }}
+      <RoominfoWrapper
         title="강의실 예약현황"
         hoverable
         extra={<a href="reservation">More</a>}
       >
         <Table columns={columns} dataSource={data} pagination={false} />
-      </Card>
+      </RoominfoWrapper>
     </>
   );
 };

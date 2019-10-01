@@ -4,14 +4,21 @@ import {
   Button,
   Modal,
   Form,
-  Input,
-  InputNumber,
   Typography,
   Upload,
   Icon,
   message
 } from "antd";
 import LectureRoomList from "./LectureRoomList";
+import {
+  InputClassroom,
+  InputClassroomCode,
+  InputMaximum,
+  AddBtn,
+  CancelBtn,
+  BuildingTabs,
+  BuildingAddBtn
+} from "../components/css/BuildingList";
 
 const { TabPane } = Tabs;
 const { Text } = Typography;
@@ -65,40 +72,24 @@ const BuildingList = () => {
             </Upload>
           </Form.Item>
           <Form.Item>
-            <Input addonBefore="강의실 코드" style={{ width: "50%" }} />
+            <InputClassroomCode addonBefore="강의실 코드" />
           </Form.Item>
           <Form.Item>
-            <Input addonBefore="강의실명" style={{ width: "50%" }} />
+            <InputClassroom addonBefore="강의실명" />
           </Form.Item>
           <Form.Item>
-            <div>
-              <Text type="secondary">최대 인원수 : </Text>
-              <InputNumber
-                min={3}
-                max={30}
-                defaultVAlue={3}
-                style={{ width: "50%" }}
-              />
-            </div>
+            <Text type="secondary">최대 인원수 : </Text>
+            <InputMaximum min={3} max={30} defaultVAlue={3} />
           </Form.Item>
           <Form.Item>
-            <Button
-              type="primary"
-              style={{ marginRight: "20px" }}
-              htmlType="submit"
-            >
-              추가
-            </Button>
-            <Button type="danger" onClick={handleCancel}>
+            <AddBtn htmlType="submit">추가</AddBtn>
+            <CancelBtn type="danger" onClick={handleCancel}>
               취소
-            </Button>
+            </CancelBtn>
           </Form.Item>
         </Form>
       </Modal>
-      <Tabs
-        defaultActiveKey="11"
-        style={{ marginTop: "70px", textAlign: "center" }}
-      >
+      <BuildingTabs defaultActiveKey="11">
         <TabPane tab="승연관" key="1"></TabPane>
         <TabPane tab="일만관" key="2"></TabPane>
         <TabPane tab="월당관" key="3"></TabPane>
@@ -107,16 +98,12 @@ const BuildingList = () => {
         <TabPane tab="새천년관" key="7"></TabPane>
         <TabPane tab="성미가엘성당" key="9"></TabPane>
         <TabPane tab="미가엘관" key="11">
-          <Button
-            style={{ marginBottom: "20px", textAlign: "right" }}
-            type="primary"
-            onClick={showModal}
-          >
+          <BuildingAddBtn type="primary" onClick={showModal}>
             강의실 추가
-          </Button>
+          </BuildingAddBtn>
           <LectureRoomList />
         </TabPane>
-      </Tabs>
+      </BuildingTabs>
     </>
   );
 };

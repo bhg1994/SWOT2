@@ -1,21 +1,11 @@
 import Link from "next/Link";
-import { Layout, Menu, Icon } from "antd";
-const { Sider } = Layout;
+import { Menu, Icon } from "antd";
+import { SiderWrapper } from "../containers/css/Slider";
 
 const Slider = () => {
   return (
     <>
-      <Sider
-        style={{
-          overflow: "auto",
-          height: "100vh",
-          position: "fixed",
-          left: 0
-        }}
-        trigger={null}
-        // collapsible
-        // collapsed={collapsed}
-      >
+      <SiderWrapper>
         <div className="logo" />
         <Menu theme="dark" mode="inline">
           <Menu.Item key="1">
@@ -99,7 +89,7 @@ const Slider = () => {
             </Link>
           </Menu.Item>
         </Menu>
-      </Sider>
+      </SiderWrapper>
     </>
   );
 };

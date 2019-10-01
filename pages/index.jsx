@@ -4,14 +4,11 @@ import {
   ReservationRoominfo,
   StudyBoardPagination,
   LectureRoominfo,
-  MainCarousel,
-  NotificationBoard
+  MainCarousel
 } from "../components";
 import { makeStyles } from "@material-ui/core/styles";
 import { SwotMap } from "../containers";
 import { Row, Col, Card, Typography, Divider } from "antd";
-
-import Map from "../containers/Map";
 
 const useStyles = makeStyles({
   // ["@media (max-width:780px)"]: {

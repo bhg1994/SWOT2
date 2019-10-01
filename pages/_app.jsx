@@ -17,7 +17,6 @@ import reducer from "../reducers";
 import rootSaga from "../sagas";
 
 const SWOT = ({ Component, store }) => {
-   
   return (
     <>
       <Provider store={store}>
@@ -85,12 +84,12 @@ const configureStore = (initialState, options) => {
   const sagaMiddleware = createSagaMiddleware();
   const middlewares = [sagaMiddleware];
   const enhancer = compose(
-          applyMiddleware(...middlewares),
-          !options.isServer &&
-            typeof window.__REDUX_DEVTOOLS_EXTENSION__ !== "undefined"
-            ? window.__REDUX_DEVTOOLS_EXTENSION__()
-            : f => f
-        );
+    applyMiddleware(...middlewares),
+    !options.isServer &&
+      typeof window.__REDUX_DEVTOOLS_EXTENSION__ !== "undefined"
+      ? window.__REDUX_DEVTOOLS_EXTENSION__()
+      : f => f
+  );
   const store = createStore(reducer, initialState, enhancer);
   sagaMiddleware.run(rootSaga);
   return store;

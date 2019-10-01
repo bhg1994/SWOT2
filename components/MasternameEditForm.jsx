@@ -1,25 +1,21 @@
-import { Button, Form, Input, Card, Avatar } from "antd";
+import { Card, Avatar } from "antd";
+import {
+  MasterEditForm,
+  LogoutBtn
+} from "../components/css/MasternameEditForm";
 
 const MasternameEditForm = () => {
   return (
-    <Form
-      style={{
-        margin: "20px 0 20px 0",
-        border: "1px solid #d9d9d9",
-        padding: "20px"
-      }}
-    >
+    <MasterEditForm>
       <div>
-        <div style={{ display: "flex" }}>
-          <Card.Meta
-            style={{ marginTop: "2px" }}
-            avatar={<Avatar>M</Avatar>}
-            title="Master"
-          />
-          <Button style={{ marginLeft: "30px" }}>로그아웃</Button>
-        </div>
+        <Card.Meta
+          style={{ marginTop: "2px" }}
+          avatar={<Avatar>M</Avatar>}
+          title="Master"
+        />
+        <LogoutBtn>로그아웃</LogoutBtn>
       </div>
-    </Form>
+    </MasterEditForm>
   );
 };
 

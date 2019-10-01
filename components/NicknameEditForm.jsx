@@ -1,31 +1,25 @@
-import { Button, Form, Input, Card, Avatar } from "antd";
+import { Button, Input, Card, Avatar } from "antd";
+import {
+  NickEditForm,
+  LogoutBtn,
+  InputNickname,
+  UpdateBtn
+} from "../components/css/NicknameEditForm";
 
 const NicknameEditForm = () => {
   return (
-    <Form
-      style={{
-        margin: "40px 0 40px 0",
-        border: "1px solid #d9d9d9",
-        padding: "30px"
-      }}
-    >
+    <NickEditForm>
       <div>
-        <div style={{ display: "flex" }}>
-          <Card.Meta
-            style={{ marginTop: "2px" }}
-            avatar={<Avatar>S</Avatar>}
-            title="Seong_Jin"
-          />
-          <Button style={{ marginLeft: "30px" }}>로그아웃</Button>
-        </div>
-        <Input addonBefore="닉네임" style={{ marginTop: "50px" }} />
-        <div style={{ textAlign: "right" }}>
-          <Button style={{ marginTop: "20px", width: "100px" }} type="primary">
-            수정
-          </Button>
-        </div>
+        <Card.Meta
+          style={{ marginTop: "2px" }}
+          avatar={<Avatar>S </Avatar>}
+          title="Seong_Jin"
+        />
+        <LogoutBtn>로그아웃</LogoutBtn>
       </div>
-    </Form>
+      <InputNickname addonBefore="닉네임" />
+      <UpdateBtn type="primary">수정</UpdateBtn>
+    </NickEditForm>
   );
 };
 
