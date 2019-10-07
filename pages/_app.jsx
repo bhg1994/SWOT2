@@ -12,11 +12,12 @@ import { Provider } from "react-redux";
 import createSagaMiddleware from "redux-saga";
 import { createStore, compose, applyMiddleware } from "redux";
 import withRedux from "next-redux-wrapper";
+import withReduxSaga from "next-redux-saga";
 
 import reducer from "../reducers";
 import rootSaga from "../sagas";
 
-const SWOT = ({ Component, store }) => {
+const SWOT = ({ Component, store, pageProps }) => {
   return (
     <>
       <Provider store={store}>
@@ -65,7 +66,7 @@ const SWOT = ({ Component, store }) => {
                 minHeight: 1000
               }}
             >
-              <Component />
+              <Component {...pageProps}/>
             </Content>
             <MainFooter />
           </Layout>
@@ -77,8 +78,20 @@ const SWOT = ({ Component, store }) => {
 
 SWOT.propTypes = {
   Component: propTypes.elementType.isRequired,
-  store: propTypes.object.isRequired
+  store: propTypes.object.isRequired,
+  pageProps: propTypes.object.isRequired
 };
+
+SWOT.getInitialProps = async (context) => {
+  
+  const {ctx, Component} = context;
+  console.log('main'+Object.keys(context));
+  let pageProps = {};
+  if(Component.getInitialProps) {
+    pageProps = await Component.getInitialProps(ctx);
+  }
+  return pageProps;
+}
 
 const configureStore = (initialState, options) => {
   const sagaMiddleware = createSagaMiddleware();
@@ -91,8 +104,8 @@ const configureStore = (initialState, options) => {
       : f => f
   );
   const store = createStore(reducer, initialState, enhancer);
-  sagaMiddleware.run(rootSaga);
+  store.sagaTask = sagaMiddleware.run(rootSaga);
   return store;
 };
 
-export default withRedux(configureStore)(SWOT);
+export default withRedux(configureStore)(withReduxSaga(SWOT));

@@ -10,4 +10,8 @@ const Signup = () => {
   );
 };
 
+Signup.getInitialProps = async (context) => {
+  console.log("sign" + Object.keys(context));
+}
+
 export default Signup;
