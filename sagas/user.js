@@ -27,11 +27,14 @@ function logInAPI(loginData) {
     form.append('email', loginData.id)
     form.append('password', loginData.password)
 
-    return axios.post(`http://swot.devdogs.kr:8080/api/auth/signin`, form)
+    return axios.post(`http://swot.devdogs.kr:8080/api/auth/user/signin`, form)
         .then(response => {
             console.log("id,password : " + loginData.id, loginData.password);
             console.log('response : ', JSON.stringify(response, null, 2));
-            var result = response.data;
+            var result = {
+                data : response.data,
+                me : loginData.id
+            };
             return result;
         })
         .catch(error => {
@@ -45,12 +48,12 @@ function* logIn(action) {
 
         const result = yield call(logInAPI, action.data);
 
-        if (result.statusMsg === "success") {
+        if (result.data.result === "success") {
             yield put({ // put은 dispatch 동일
                 type: LOG_IN_SUCCESS,
+                data: result.me
             });
-            localStorage.setItem("accessToken", result.accessToken);
-            localStorage.setItem("refreshToken", result.refreshToken);
+            localStorage.setItem("accessToken", result.data.accessToken);
             alert("로그인 성공");
             location.href = "/"
         } else {
@@ -58,7 +61,7 @@ function* logIn(action) {
                 type: LOG_IN_FAILURE,
             });
             alert("로그인 정보 틀림");
-            location.href = "/login"
+            //location.href = "/login"
         }
 
     } catch (e) { // loginAPI 실패
@@ -83,7 +86,7 @@ function signUpAPI(signUpData) {
     form.append('name', signUpData.name)
     form.append('phone', signUpData.telephone)
 
-    return axios.post(`http://swot.devdogs.kr:8080/api/auth/signup`, form)
+    return axios.post(`http://swot.devdogs.kr:8080/api/auth/user/signup`, form)
         .then(response => {
             console.log('response : ', JSON.stringify(response, null, 2))
             var result = response.data;

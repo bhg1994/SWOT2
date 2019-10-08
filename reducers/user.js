@@ -7,8 +7,6 @@ export const initialState = {
     isSigningUp: false, // 회원가입 시도중
     signUpErrorReason: '', // 회원가입 실패 사유
     me: null, // 내 정보
-    followingList: [], // 팔로잉 리스트
-    followerList: [], // 팔로워 리스트
     userInfo: null, // 남의 정보
     tokens: null,
     reservationErrorReason: '',
@@ -66,6 +64,7 @@ export default (state = initialState, action) => {
                 isLoggingIn: false,
                 isLoggedIn: true,
                 isLoading: false,
+                me: action.data.me
                 
             };
         }

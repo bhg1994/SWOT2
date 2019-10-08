@@ -17,6 +17,8 @@ import withReduxSaga from "next-redux-saga";
 import reducer from "../reducers";
 import rootSaga from "../sagas";
 
+import { LOAD_NOTIFYCATIONS_REQUEST } from "../reducers/post";
+
 const SWOT = ({ Component, store, pageProps }) => {
   return (
     <>
@@ -90,6 +92,9 @@ SWOT.getInitialProps = async (context) => {
   if(Component.getInitialProps) {
     pageProps = await Component.getInitialProps(ctx);
   }
+  // ctx.store.dispatch({
+  //   type: LOAD_NOTIFYCATIONS_REQUEST,
+  // });
   return pageProps;
 }
 
