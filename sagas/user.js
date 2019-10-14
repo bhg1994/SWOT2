@@ -84,7 +84,7 @@ function signUpAPI(signUpData) {
     form.append('email', signUpData.id)
     form.append('password', signUpData.password)
     form.append('name', signUpData.name)
-    form.append('phone', signUpData.telephone)
+    form.append('major_no', signUpData.telephone)
 
     return axios.post(`http://swot.devdogs.kr:8080/api/auth/user/signup`, form)
         .then(response => {
@@ -102,7 +102,7 @@ function* signUp(action) {
     try {
         const result = yield call(signUpAPI, action.data);
 
-        if (result.statusMsg === "success") {
+        if (result.result === "success") {
             yield put({ // put은 dispatch 동일
                 type: SIGN_UP_SUCCESS,
             });

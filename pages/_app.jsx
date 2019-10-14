@@ -92,9 +92,9 @@ SWOT.getInitialProps = async (context) => {
   if(Component.getInitialProps) {
     pageProps = await Component.getInitialProps(ctx);
   }
-  // ctx.store.dispatch({
-  //   type: LOAD_NOTIFYCATIONS_REQUEST,
-  // });
+  ctx.store.dispatch({
+    type: LOAD_NOTIFYCATIONS_REQUEST,
+  });
   return pageProps;
 }
 
