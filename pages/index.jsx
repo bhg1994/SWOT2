@@ -9,6 +9,9 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import { SwotMap } from "../containers";
 import { Row, Col, Card, Typography, Divider } from "antd";
+import {useSelector} from "react-redux";
+import { LOAD_NOTIFYCATIONS_REQUEST } from "../reducers/post";
+
 
 const useStyles = makeStyles({
   // ["@media (max-width:780px)"]: {
@@ -23,6 +26,9 @@ const { Text } = Typography;
 
 const Home = () => {
   const classes = useStyles();
+
+  const {notifycations} = useSelector(state => state.post);
+
   const NotificationTitle = (
     <div style={{ textAlign: "center" }}>
       <Text type="danger" style={{ fontSize: "20px" }}>
@@ -50,12 +56,12 @@ const Home = () => {
               extra={<a href="Notification">Notification ></a>}
             >
               <Text>
-                SWOT[안내] 홈페이지 점검 안내 공지 2018.09.21(토) 09:00 ~ 10:00
+                {notifycations[0].title}
               </Text>
               <Divider />
-              <Text>SWOT[안내] SWOT 멤버십 앱 다운로드 정상화 완료</Text>
+              <Text>{notifycations[1].title}</Text>
               <Divider />
-              <Text>SWOT[안내] 앱 다운로드 오류 안내</Text>
+              <Text>{notifycations[2].title}</Text>
             </Card>
             <Col xs={24} md={12}>
               <StudyBoard />
@@ -87,5 +93,11 @@ const Home = () => {
       </div>
     </>
   );
+};
+
+Home.getInitialProps = async (context) => {
+  context.store.dispatch({
+    type: LOAD_NOTIFYCATIONS_REQUEST,
+  });
 };
 export default Home;

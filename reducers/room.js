@@ -2,6 +2,8 @@ export const initialState = {
     reservationErrorReason: '',
     roomListErrorReason: '',
     isLoading: false,
+    totalRoomList: [],
+    
 };
 
 export const RESERVATION_REQUEST = 'RESERVATION_REQUEST';
