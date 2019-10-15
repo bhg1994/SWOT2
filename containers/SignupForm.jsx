@@ -1,65 +1,26 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { Form, Input, Button, Checkbox, Typography } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { makeStyles } from "@material-ui/core/styles";
 import { SIGN_UP_REQUEST } from "../reducers/user";
 import {
   SignupWrapper,
   SignupContainer,
-  SignupTitle
+  SignupTitle,
+  FirstSection,
+  StudentId,
+  SecondSection,
+  Email,
+  Duplicate,
+  ThirdSection,
+  Password,
+  Repassword,
+  FourthSection,
+  Telephone,
+  Name,
+  FifthSection,
+  Check
 } from "../containers/css/SignupForm";
 
-const useStyles = makeStyles({
-  secondSection: {
-    display: "flex",
-    flexDirection: "row"
-  },
-  email: {
-    marginTop: 20,
-    display: "flex",
-    flexDirection: "column"
-  },
-  duplicate: {
-    margin: "70px 0 0 20px",
-    display: "flex",
-    flexDirection: "column"
-  },
-  thirdSection: {
-    display: "flex",
-    flexDirection: "row"
-  },
-  password: {
-    margin: "20px 0 0 0",
-    display: "flex",
-    flexDirection: "column"
-  },
-  repassword: {
-    margin: "20px 0 0 20px",
-    display: "flex",
-    flexDirection: "column"
-  },
-  fourthSection: {
-    display: "flex",
-    flexDirection: "row"
-  },
-  telephone: {
-    margin: "20px 0 0 0",
-    display: "flex",
-    flexDirection: "column"
-  },
-  name: {
-    margin: "20px 0 0 20px",
-    display: "flex",
-    flexDirection: "column"
-  },
-  fifthSection: {
-    display: "flex",
-    flexDirection: "row"
-  },
-  check: {
-    margin: "auto"
-  }
-});
 
 /* custom Hooks */
 
@@ -73,6 +34,7 @@ export const useInput = (initValue = null) => {
 
 const SignupForm = () => {
   const [id, setId] = useState("");
+  const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
@@ -81,7 +43,6 @@ const SignupForm = () => {
   const [termError, setTermError] = useState(false);
   const [telephone, setTelephone] = useState("");
 
-  const classes = useStyles();
   const dispatch = useDispatch();
   const { isSigningUp, me } = useSelector(state => state.user);
 
@@ -96,11 +57,12 @@ const SignupForm = () => {
       if (!term) {
         return setTermError(true);
       }
-      console.log(id, name, password, telephone);
+      console.log(email, id, name, password, telephone);
 
       dispatch({
         type: SIGN_UP_REQUEST,
         data: {
+          email,
           id,
           name,
           password,
@@ -108,8 +70,12 @@ const SignupForm = () => {
         }
       });
     },
-    [id, name, password, passwordCheck, telephone, term]
+    [email, id, name, password, passwordCheck, telephone, term]
   );
+
+  const onChangeEmail = e => {
+    setEmail(e.target.value);
+  }
 
   const onChangeId = e => {
     setId(e.target.value);
@@ -148,27 +114,44 @@ const SignupForm = () => {
           <SignupContainer>
             <SignupTitle strong>CREATE AN ACCOUNT</SignupTitle>
             <Form onSubmit={onSubmit} style={{ padding: 10 }}>
-              <div className={classes.secondSection}>
-                <div className={classes.email}>
-                  <label className={classes.emailLabel} htmlFor="emailLabel">
+              <FirstSection>
+                <Email>
+                  <label htmlFor="emailLabel">
                     EMAIL ADDRESS
                   </label>
                   <br />
                   <Input
                     name="register_email"
-                    value={id}
+                    value={email}
                     required
-                    onChange={onChangeId}
+                    onChange={onChangeEmail}
                     placeholder="YOUR EMAIL ADDRESS"
                     style={{ width: 225, height: 50 }}
                   />
-                </div>
-                <div className={classes.duplicate}>
+                </Email>
+                <Duplicate>
                   <Button>중복 확인</Button>
-                </div>
-              </div>
-              <div className={classes.thirdSection}>
-                <div className={classes.password}>
+                </Duplicate>
+              </FirstSection>
+              <SecondSection>
+                <StudentId>
+                  <label htmlFor="studentIdLabel">
+                    STUDENTID
+                  </label>
+                  <br />
+                  <Input
+                    name="studentId"
+                    value={id}
+                    required
+                    onChange={onChangeId}
+                    placeholder="YOUR STUDENT ID"
+                    style={{ width: 470, height: 50 }}
+                  />
+                </StudentId>
+              </SecondSection>
+
+              <ThirdSection>
+                <Password>
                   <label htmlFor="passwordLabel">PASSWORD</label>
                   <br />
                   <Input
@@ -180,8 +163,8 @@ const SignupForm = () => {
                     placeholder="ENTER VALID PASSWORD"
                     style={{ width: 225, height: 50 }}
                   />
-                </div>
-                <div className={classes.repassword}>
+                </Password>
+                <Repassword>
                   <label htmlFor="rePasswordLabel">RE-ENTER PASSWORD</label>
                   <br />
                   <Input
@@ -193,15 +176,15 @@ const SignupForm = () => {
                     placeholder="ENTER VALID PASSWORD"
                     style={{ width: 225, height: 50 }}
                   />
-                </div>
-              </div>
+                </Repassword>
+              </ThirdSection>
               {passwordError && (
                 <div style={{ color: "red" }}>
                   비밀번호가 일치하지 않습니다.
                 </div>
               )}
-              <div className={classes.fourthSection}>
-                <div className={classes.telephone}>
+              <FourthSection>
+                <Telephone>
                   <label htmlFor="TELEPHONE">TELEPHONE</label>
                   <br />
                   <Input
@@ -213,8 +196,8 @@ const SignupForm = () => {
                     placeholder="ENTER VALID TELEPHONE"
                     style={{ width: 225, height: 50 }}
                   />
-                </div>
-                <div className={classes.name}>
+                </Telephone>
+                <Name>
                   <label htmlFor="nameLabel">NAME</label>
                   <br />
                   <Input
@@ -225,10 +208,10 @@ const SignupForm = () => {
                     placeholder="YOUR NAME"
                     style={{ width: 225, height: 50 }}
                   />
-                </div>
-              </div>
-              <div className={classes.fifthSection}>
-                <div className={classes.check}>
+                </Name>
+              </FourthSection>
+              <FifthSection>
+                <Check>
                   <div>
                     <Checkbox
                       name="user-term"
@@ -249,8 +232,8 @@ const SignupForm = () => {
                       가입하기
                     </Button>
                   </div>
-                </div>
-              </div>
+                </Check>
+              </FifthSection>
             </Form>
           </SignupContainer>
         </div>

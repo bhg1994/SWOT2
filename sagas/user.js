@@ -32,8 +32,8 @@ function logInAPI(loginData) {
             console.log("id,password : " + loginData.id, loginData.password);
             console.log('response : ', JSON.stringify(response, null, 2));
             var result = {
-                data : response.data,
-                me : loginData.id
+                data: response.data,
+                me: loginData.id
             };
             return result;
         })
@@ -81,10 +81,11 @@ function signUpAPI(signUpData) {
     console.log(signUpData);
     // 서버에 요청을 보내는 부분
     let form = new FormData()
-    form.append('email', signUpData.id)
+    form.append('email', signUpData.email)
+    form.append('studentid', signUpData.id)
     form.append('password', signUpData.password)
     form.append('name', signUpData.name)
-    form.append('major_no', signUpData.telephone)
+    form.append('telephone', signUpData.telephone)
 
     return axios.post(`http://swot.devdogs.kr:8080/api/auth/user/signup`, form)
         .then(response => {

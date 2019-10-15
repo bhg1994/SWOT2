@@ -6,7 +6,7 @@ import {
 } from "antd";
 
 export const NickEditForm = styled(Form)
-`
+    `
     margin: 40px 0 40px 0;
     border: 1px solid #d9d9d9;
     padding: 30px;
@@ -16,17 +16,19 @@ export const NickEditForm = styled(Form)
     }
 `
 export const LogoutBtn = styled(Button)
-`
-    margin-left:30px;
-`
-
-export const InputNickname = styled(Input)
-`
-    margin-top:50px;
+    `
+    margin-left:20px;
 `
 
 export const UpdateBtn = styled(Button)
+    `
+    margin-top: 30px;
+    width:120px;
 `
-    margin-top:20px;
-    width:100px;
+
+export const ChangePWBtn = styled(Button)
+    `
+ text-align:center;
+ margin: 30px 0 0 30px;
+ width:120px;
 `
