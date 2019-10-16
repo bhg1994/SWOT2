@@ -96,6 +96,7 @@ export default (state = initialState, action) => {
                 isLoading: false,
                 me:action.data,
                 
+
             };
         }
         case LOAD_USER_FAILURE: {

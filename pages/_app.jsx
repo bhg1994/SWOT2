@@ -68,7 +68,7 @@ const SWOT = ({ Component, store, pageProps }) => {
                 minHeight: 1000
               }}
             >
-              <Component {...pageProps}/>
+              <Component {...pageProps} />
             </Content>
             <MainFooter />
           </Layout>
@@ -85,11 +85,11 @@ SWOT.propTypes = {
 };
 
 SWOT.getInitialProps = async (context) => {
-  
-  const {ctx, Component} = context;
-  console.log('main'+Object.keys(context));
+
+  const { ctx, Component } = context;
+  console.log('main' + Object.keys(context));
   let pageProps = {};
-  if(Component.getInitialProps) {
+  if (Component.getInitialProps) {
     pageProps = await Component.getInitialProps(ctx);
   }
   ctx.store.dispatch({
