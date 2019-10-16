@@ -2,6 +2,7 @@ import React from "react";
 import { Button, List, Tag, Card, Typography, Divider } from "antd";
 import NicknameEditForm from "../components/NicknameEditForm.jsx";
 import Link from "next/link";
+import { LOAD_USER_REQUEST } from "../reducers/user";
 
 const { Text } = Typography;
 
@@ -28,10 +29,11 @@ const studydata = [
 ];
 
 const Profile = () => {
+
   return (
     <>
       <div>
-        <NicknameEditForm />
+        <NicknameEditForm/>
         <List
           itemLayout="horizontal"
           style={{ marginBottom: "40px" }}
@@ -160,5 +162,12 @@ const Profile = () => {
       </div>
     </>
   );
+};
+
+Profile.getInitialProps = async (context) => {
+  console.log("profile");
+  context.store.dispatch({
+    type: LOAD_USER_REQUEST,
+  });
 };
 export default Profile;

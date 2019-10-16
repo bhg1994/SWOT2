@@ -31,10 +31,8 @@ function logInAPI(loginData) {
         .then(response => {
             console.log("id,password : " + loginData.id, loginData.password);
             console.log('response : ', JSON.stringify(response, null, 2));
-            var result = {
-                data: response.data,
-                me: loginData.id
-            };
+            var result =  response.data;
+
             return result;
         })
         .catch(error => {
@@ -47,13 +45,13 @@ function* logIn(action) {
     try {
 
         const result = yield call(logInAPI, action.data);
+        console.log(result.result);
 
-        if (result.data.result === "success") {
+        if (result.result === "success") {
             yield put({ // put은 dispatch 동일
                 type: LOG_IN_SUCCESS,
-                data: result.me
             });
-            localStorage.setItem("accessToken", result.data.accessToken);
+            localStorage.setItem("accessToken", result.accessToken);
             alert("로그인 성공");
             location.href = "/"
         } else {
@@ -161,20 +159,78 @@ function* watchLogOut() {
 
 function loadUserAPI() {
     // 서버에 요청을 보내는 부분
-    return axios.get('/user/', {
-        withCredentials: true,
+
+    //let token = localStorage.getItem("accessToken");
+    let token = "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzIzMjgzMzYsInN1YiI6IjEyIn0.sXEBhblOJfaoIU6seaZnJQE49Uw9x-Rx7CI4w5HhCAo"
+    console.log(token);
+    return axios.get('http://swot.devdogs.kr:8080/api/user/myinfo', 
+        {
+            headers: { // 요청 헤더
+              Authorization: token,
+            },
+        }
+    ).then(response => {
+        console.log('response : ', JSON.stringify(response, null, 2))
+        var result = response.data;
+        return result;
+    })
+    .catch(error => {
+        console.log('failed', error)
+        return error;
     });
+}
+
+function loadUserAPI2(){
+    let token = localStorage.getItem("accessToken");
+    var req = new XMLHttpRequest();
+    req.open('GET', 'http://10.0.102.235/api/user/myinfo', true);
+    req.setRequestHeader("Authorization", token);
+    req.withCredentials=true;
+    req.onreadystatechange = function (aEvt) {
+    if (req.readyState == 4) {
+        console.log(req);
+        console.log("Status: ", req.status);
+        console.log("Response message: ", req.responseText);
+        }
+    };
+    return req.send();
+}
+
+function loadUserAPI3(){
+    var me = {
+        name:"name",
+        email:"email",
+    }
+    return me
 }
 
 function* loadUser() {
     try {
-        // yield call(loadUserAPI);
         const result = yield call(loadUserAPI);
-        yield put({ // put은 dispatch 동일
+        if (result.result === "success") {
+        yield put({ 
             type: LOAD_USER_SUCCESS,
             data: result.data,
         });
-    } catch (e) { // loginAPI 실패
+    }
+    } catch (e) { 
+        console.error(e);
+        yield put({
+            type: LOAD_USER_FAILURE,
+            error: e,
+        });
+    }
+}
+
+function* loadUser2() {
+    try {
+        const result = yield call(loadUserAPI3);
+        
+        yield put({ 
+            type: LOAD_USER_SUCCESS,
+            data: result,
+        });
+    } catch (e) { 
         console.error(e);
         yield put({
             type: LOAD_USER_FAILURE,
@@ -184,7 +240,7 @@ function* loadUser() {
 }
 
 function* watchLoadUser() {
-    yield takeEvery(LOAD_USER_REQUEST, loadUser);
+    yield takeEvery(LOAD_USER_REQUEST, loadUser2);
 }
 
 export default function* userSaga() {

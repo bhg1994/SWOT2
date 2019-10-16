@@ -47,6 +47,7 @@
     "build": "next build",
     "start": "next start"
   },
+  "proxy": "http://swot.devdogs.kr:8080/",
   "author": "Seong_Jin",
   "license": "ISC"
 }

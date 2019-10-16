@@ -6,10 +6,16 @@ import {
   UpdateBtn,
   ChangePWBtn
 } from "../components/css/NicknameEditForm";
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
+import { LOAD_USER_REQUEST } from "../reducers/user";
+
+
 
 const NicknameEditForm = () => {
-
+    
+    
+  const dispatch = useDispatch();
+  const {me} = useSelector(state => state.user);
   const [visible, setVisible] = useState(false);
   const [pwvisible, setPwvisible] = useState(false);
 
@@ -26,16 +32,16 @@ const NicknameEditForm = () => {
     setVisible(false);
     console.log("취소 버튼");
   };
-
+  
   return (
     <NickEditForm>
       <div>
         <Card.Meta
           style={{ marginTop: "2px" }}
           avatar={<Avatar>S </Avatar>}
-          title="Seong_Jin"
+          title={me.name}
         />
-        <LogoutBtn>로그아웃</LogoutBtn>
+        <LogoutBtn onClick={onClicked}>로그아웃</LogoutBtn>
       </div>
       <UpdateBtn type="primary" onClick={showModal}>내 정보 수정</UpdateBtn>
       <ChangePWBtn type="danger" onClick={showChangePWModal}>비밀번호 변경</ChangePWBtn>
@@ -112,5 +118,6 @@ const NicknameEditForm = () => {
     </NickEditForm>
   );
 };
+
 
 export default NicknameEditForm;
