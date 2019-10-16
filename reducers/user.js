@@ -65,7 +65,7 @@ export default (state = initialState, action) => {
                 isLoggedIn: true,
                 isLoading: false,
                 me: action.data.me
-                
+
             };
         }
         case LOG_IN_FAILURE: {
@@ -117,7 +117,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: false,
-                
+
             };
         }
         case RESERVATION_FAILURE: {

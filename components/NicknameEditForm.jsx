@@ -6,6 +6,7 @@ import {
   UpdateBtn,
   ChangePWBtn
 } from "../components/css/NicknameEditForm";
+import { useDispatch } from 'react-redux'
 
 const NicknameEditForm = () => {
 
