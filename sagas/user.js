@@ -25,9 +25,9 @@ function logInAPI(loginData) {
     // 서버에 요청을 보내는 부분
     let form = new FormData()
     form.append('email', loginData.id)
-    form.append('password', loginData.password)
+    form.append('pw', loginData.password)
 
-    return axios.post(`http://swot.devdogs.kr:8080/api/auth/user/signin`, form)
+    return axios.post(`http://swot.devdogs.kr:8080/api/auth/user/signIn`, form)
         .then(response => {
             console.log("id,password : " + loginData.id, loginData.password);
             console.log('response : ', JSON.stringify(response, null, 2));
@@ -51,13 +51,14 @@ function* logIn(action) {
             yield put({ // put은 dispatch 동일
                 type: LOG_IN_SUCCESS,
             });
-            localStorage.setItem("accessToken", result.accessToken);
+            localStorage.setItem("accessToken", result.token);
             alert("로그인 성공");
             location.href = "/"
         } else {
             yield put({
                 type: LOG_IN_FAILURE,
             });
+            console.log(result.error);
             alert("로그인 정보 틀림");
             //location.href = "/login"
         }
@@ -80,12 +81,12 @@ function signUpAPI(signUpData) {
     // 서버에 요청을 보내는 부분
     let form = new FormData()
     form.append('email', signUpData.email)
-    form.append('studentid', signUpData.id)
-    form.append('password', signUpData.password)
+    form.append('studentId', signUpData.id)
+    form.append('pw', signUpData.password)
     form.append('name', signUpData.name)
-    form.append('telephone', signUpData.telephone)
+    form.append('phone', signUpData.telephone)
 
-    return axios.post(`http://swot.devdogs.kr:8080/api/auth/user/signup`, form)
+    return axios.post(`http://swot.devdogs.kr:8080/api/auth/user/signUp`, form)
         .then(response => {
             console.log('response : ', JSON.stringify(response, null, 2))
             var result = response.data;
@@ -157,13 +158,13 @@ function* watchLogOut() {
     yield takeEvery(LOG_OUT_REQUEST, logOut);
 }
 
-function loadUserAPI() {
+function loadUserAPI(acctoken) {
     // 서버에 요청을 보내는 부분
 
-    //let token = localStorage.getItem("accessToken");
-    let token = "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzIzMjgzMzYsInN1YiI6IjEyIn0.sXEBhblOJfaoIU6seaZnJQE49Uw9x-Rx7CI4w5HhCAo"
+    let token =acctoken
+    //let token = "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzI5NTc2NTUsInN1YiI6IjYifQ.1bInMeSS9rcr-PR6KlodPhTtHsuizqtkqc0ENWVVV8o"
     console.log(token);
-    return axios.get('http://swot.devdogs.kr:8080/api/user/myinfo', 
+    return axios.get('http://swot.devdogs.kr:8080/api/user/myInfo', 
         {
             headers: { // 요청 헤더
               Authorization: token,
@@ -180,56 +181,15 @@ function loadUserAPI() {
     });
 }
 
-function loadUserAPI2(){
-    let token = localStorage.getItem("accessToken");
-    var req = new XMLHttpRequest();
-    req.open('GET', 'http://10.0.102.235/api/user/myinfo', true);
-    req.setRequestHeader("Authorization", token);
-    req.withCredentials=true;
-    req.onreadystatechange = function (aEvt) {
-    if (req.readyState == 4) {
-        console.log(req);
-        console.log("Status: ", req.status);
-        console.log("Response message: ", req.responseText);
-        }
-    };
-    return req.send();
-}
-
-function loadUserAPI3(){
-    var me = {
-        name:"name",
-        email:"email",
-    }
-    return me
-}
-
-function* loadUser() {
+function* loadUser(action) {
     try {
-        const result = yield call(loadUserAPI);
+        const result = yield call(loadUserAPI,action.data);
         if (result.result === "success") {
         yield put({ 
             type: LOAD_USER_SUCCESS,
-            data: result.data,
+            data: result.info,
         });
     }
-    } catch (e) { 
-        console.error(e);
-        yield put({
-            type: LOAD_USER_FAILURE,
-            error: e,
-        });
-    }
-}
-
-function* loadUser2() {
-    try {
-        const result = yield call(loadUserAPI3);
-        
-        yield put({ 
-            type: LOAD_USER_SUCCESS,
-            data: result,
-        });
     } catch (e) { 
         console.error(e);
         yield put({
@@ -240,7 +200,7 @@ function* loadUser2() {
 }
 
 function* watchLoadUser() {
-    yield takeEvery(LOAD_USER_REQUEST, loadUser2);
+    yield takeEvery(LOAD_USER_REQUEST, loadUser);
 }
 
 export default function* userSaga() {

@@ -32,6 +32,12 @@ const NicknameEditForm = () => {
     setVisible(false);
     console.log("취소 버튼");
   };
+
+  const onClicked = () => {
+    dispatch({
+      type:LOAD_USER_REQUEST,
+    });
+  };
   
   return (
     <NickEditForm>
@@ -119,5 +125,13 @@ const NicknameEditForm = () => {
   );
 };
 
+// NicknameEditForm.getInitialProps = async (context) => {
+//   console.log("profile");
+//   let token = localStorage.getItem("accessToken");
+//   context.store.dispatch({
+//     type: LOAD_USER_REQUEST,
+//     data: token,
+//   });
+// };
 
 export default NicknameEditForm;
