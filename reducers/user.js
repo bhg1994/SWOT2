@@ -53,7 +53,7 @@ export default (state = initialState, action) => {
                 ...state,
                 isLoggingIn: false,
                 isLoggedIn: true,
-                isLoading: false,                
+                isLoading: false,
             };
         }
         case LOG_IN_FAILURE: {
@@ -105,7 +105,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: false,
-                
+
 
             };
         }

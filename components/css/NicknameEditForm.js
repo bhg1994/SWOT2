@@ -2,8 +2,12 @@ import styled from 'styled-components';
 import {
     Form,
     Button,
-    Input
+    Input,
+    Typography
 } from "antd";
+
+
+const { Text } = Typography;
 
 export const NickEditForm = styled(Form)
     `
@@ -32,3 +36,16 @@ export const ChangePWBtn = styled(Button)
  margin: 30px 0 0 30px;
  width:120px;
 `
+export const Status = styled(Text)
+    `
+    
+    margin-top: 20px;
+    font-size:25px;
+`
+export const WithdrawalBtn = styled(Button)
+    `
+    text-align:center;
+    margin: 30px 0 0 30px;
+    width:120px;
+`
+

@@ -1,13 +1,17 @@
 import { useState, useCallback, useEffect } from 'react';
-import { Button, Input, Card, Avatar, Modal, Form } from "antd";
+import { Modal, Button, Input, Card, Avatar, Form } from "antd";
 import {
   NickEditForm,
   LogoutBtn,
   UpdateBtn,
-  ChangePWBtn
+  ChangePWBtn,
+  WithdrawalBtn,
+  Status
 } from "../components/css/NicknameEditForm";
 import { useDispatch, useSelector } from "react-redux";
-import { USER_MODIFY_REQUEST } from "../reducers/user";
+import { USER_MODIFY_REQUEST, USER_WITHDRAWAL_REQUEST } from "../reducers/user";
+
+const { confirm } = Modal;
 
 export const useInput = (initValue = null) => {
   const [value, setter] = useState(initValue);
@@ -17,21 +21,28 @@ export const useInput = (initValue = null) => {
   return [value, handler];
 };
 
-
-
 const NicknameEditForm = () => {
-
 
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
   const [pwvisible, setPwvisible] = useState(false);
+  // const [wdvisible, setWdvisible] = useState(false);
   const { isLoading } = useSelector(state => state.user);
 
+
+  const showWithdrawalModal = () => {
+    confirm({
+      title: '회원 탈퇴',
+      content: '정말로 탈퇴하시겠습니까?',
+      onOk() {
+        dispatch({
+          type: USER_WITHDRAWAL_REQUEST,
+        });
+      },
+      onCancel() { },
+    });
+  }
   //console.log(isLoading);
-
-
-
-
 
   const showModal = () => {
     setVisible(true);
@@ -78,18 +89,23 @@ const NicknameEditForm = () => {
         <Card.Meta
           style={{ marginTop: "2px" }}
           avatar={<Avatar>S </Avatar>}
-          title={me.name}
+          title={me.name + " (" + me.studentId + ") "}
         />
         <LogoutBtn onClick={logoutRequest}>로그아웃</LogoutBtn>
       </div>
+      <div>
+        <Status code>{me.statusMsg}</Status>
+      </div>
       <UpdateBtn type="primary" onClick={showModal}>내 정보 수정</UpdateBtn>
-      <ChangePWBtn type="danger" onClick={showChangePWModal}>비밀번호 변경</ChangePWBtn>
+      <ChangePWBtn onClick={showChangePWModal}>비밀번호 변경</ChangePWBtn>
+      <WithdrawalBtn type="danger" onClick={showWithdrawalModal}>회원 탈퇴</WithdrawalBtn>
       <Modal title="내 정보 수정" visible={visible} footer={null}>
         <Form >
           <Form.Item>
             <Input
               addonBefore="이메일"
               disabled
+              value={me.email}
               style={{ width: "50%" }}
             />
           </Form.Item>
@@ -139,7 +155,7 @@ const NicknameEditForm = () => {
           </Form.Item>
           <Form.Item>
             <Input
-              addonBefore="현재 비밀번호"
+              addonBefore="변경 비밀번호"
               style={{ width: "50%" }}
             />
           </Form.Item>
@@ -157,6 +173,7 @@ const NicknameEditForm = () => {
           </Form.Item>
         </Form>
       </Modal>
+
     </NickEditForm>
   );
 };

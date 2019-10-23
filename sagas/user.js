@@ -23,6 +23,9 @@ import {
     USER_MODIFY_REQUEST,
     USER_MODIFY_SUCCESS,
     USER_WITHDRAWAL_REQUEST,
+    USER_WITHDRAWAL_SUCCESS,
+    USER_WITHDRAWAL_FAILURE
+
 } from '../reducers/user';
 
 function logInAPI(loginData) {
@@ -49,8 +52,6 @@ function* logIn(action) {
     try {
 
         const result = yield call(logInAPI, action.data);
-
-
         if (result.result === "success") {
             yield put({ // put은 dispatch 동일
                 type: LOG_IN_SUCCESS,
@@ -61,6 +62,7 @@ function* logIn(action) {
                 data: result.token,
             })
             alert("로그인 성공");
+            location.href = "/";
         } else {
             yield put({
                 type: LOG_IN_FAILURE,
@@ -257,7 +259,6 @@ function* watchModify() {
 
 function withdrawAPI() {
     // 서버에 요청을 보내는 부분
-
     let token = localStorage.getItem("accessToken");
     return axios.get('http://swot.devdogs.kr:8080/api/user/withdraw',
         {
@@ -279,12 +280,13 @@ function withdrawAPI() {
 function* withdraw() {
     try {
         const result = yield call(withdrawAPI);
+        console.log("withdraw의 result" + result);
         if (result.result === "success") {
             yield put({
                 type: USER_WITHDRAWAL_SUCCESS,
             });
-            localStorage.removeItem("accessToken");
-            localStorage.removeItem("myInfo");
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('myInfo');
             location.href = "/";
         }
     } catch (e) {
