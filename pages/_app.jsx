@@ -87,7 +87,6 @@ SWOT.propTypes = {
 SWOT.getInitialProps = async (context) => {
 
   const { ctx, Component } = context;
-  console.log('main' + Object.keys(context));
   let pageProps = {};
   if (Component.getInitialProps) {
     pageProps = await Component.getInitialProps(ctx);
