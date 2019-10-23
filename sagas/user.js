@@ -19,6 +19,10 @@ import {
     SIGN_UP_FAILURE,
     SIGN_UP_REQUEST,
     SIGN_UP_SUCCESS,
+    USER_MODIFY_FAILURE,
+    USER_MODIFY_REQUEST,
+    USER_MODIFY_SUCCESS,
+    USER_WITHDRAWAL_REQUEST,
 } from '../reducers/user';
 
 function logInAPI(loginData) {
@@ -183,11 +187,12 @@ function* loadUser(action) {
     try {
         const result = yield call(loadUserAPI,action.data);
         if (result.result === "success") {
-        yield put({ 
-            type: LOAD_USER_SUCCESS,
-            data: result.info,
-        });
+            localStorage.setItem("myInfo",JSON.stringify(result.info));
+            yield put({ 
+                type: LOAD_USER_SUCCESS,
+            });
     }
+    location.href="/";
     } catch (e) { 
         console.error(e);
         yield put({
@@ -202,11 +207,110 @@ function* watchLoadUser() {
     yield takeEvery(LOAD_USER_REQUEST, loadUser);
 }
 
+function modifyAPI(modifyInfo) {
+    // 서버에 요청을 보내는 부분
+    let form = new FormData()
+    form.append('statusMsg', modifyInfo.msg)
+    form.append('studentId', modifyInfo.stId)
+    form.append('name', modifyInfo.name)
+
+    let token =localStorage.getItem("accessToken");
+    return axios.post('http://swot.devdogs.kr:8080/api/user/modifyMyInfo', form,
+        {
+            headers: { // 요청 헤더
+              Authorization: token,
+            },
+        }
+    ).then(response => {
+        console.log('response : ', JSON.stringify(response, null, 2))
+        var result = response.data;
+        return result;
+    })
+    .catch(error => {
+        console.log('failed', error)
+        return error;
+    });
+}
+
+function* userModify(action) {
+    try {
+        const result = yield call(modifyAPI,action.data);
+        if (result.result === "success") {
+            localStorage.setItem("myInfo",JSON.stringify(result.info));
+            yield put({ 
+                type: USER_MODIFY_SUCCESS,
+            });
+    }
+    } catch (e) { 
+        console.error(e);
+        yield put({
+            type: USER_MODIFY_FAILURE,
+            error: e,
+        });
+    }
+
+}
+
+function* watchModify() {
+    yield takeEvery(USER_MODIFY_REQUEST, userModify);
+}
+
+function withdrawAPI() {
+    // 서버에 요청을 보내는 부분
+
+    let token =localStorage.getItem("accessToken");
+    return axios.get('http://swot.devdogs.kr:8080/api/user/withdraw',
+        {
+            headers: { // 요청 헤더
+              Authorization: token,
+            },
+        }
+    ).then(response => {
+        console.log('response : ', JSON.stringify(response, null, 2))
+        var result = response.data;
+        return result;
+    })
+    .catch(error => {
+        console.log('failed', error)
+        return error;
+    });
+}
+
+function* withdraw() {
+    try {
+        const result = yield call(withdrawAPI);
+        if (result.result === "success") {
+            yield put({ 
+                type: USER_WITHDRAWAL_SUCCESS,
+            });
+            localStorage.removeItem("accessToken");
+            localStorage.removeItem("myInfo");
+            location.href="/";
+    }
+    } catch (e) { 
+        console.error(e);
+        yield put({
+            type: USER_WITHDRAWAL_FAILURE,
+            error: e,
+        });
+    }
+
+}
+
+function* watchWithdrawal() {
+    yield takeEvery(USER_WITHDRAWAL_REQUEST, withdraw);
+}
+
+
+
+
 export default function* userSaga() {
     yield all([
         fork(watchLogIn),
         fork(watchLogOut),
         fork(watchLoadUser),
         fork(watchSignUp),
+        fork(watchModify),
+        fork(watchWithdrawal),
     ]);
 }

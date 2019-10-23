@@ -28,6 +28,17 @@ export const LOG_OUT_REQUEST = 'LOG_OUT_REQUEST';
 export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
 export const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE';
 
+export const USER_MODIFY_REQUEST = 'USER_MODIFY_REQUEST';
+export const USER_MODIFY_SUCCESS = 'USER_MODIFY_SUCCESS';
+export const USER_MODIFY_FAILURE = 'USER_MODIFY_FAILURE';
+
+export const USER_WITHDRAWAL_REQUEST = 'USER_WITHDRAWAL_REQUEST';
+export const USER_WITHDRAWAL_SUCCESS = 'USER_WITHDRAWAL_SUCCESS';
+export const USER_WITHDRAWAL_FAILURE = 'USER_WITHDRAWAL_FAILURE';
+
+
+
+
 export default (state = initialState, action) => {
     switch (action.type) {
         case LOG_IN_REQUEST: {
@@ -94,7 +105,6 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: false,
-                me:action.data,
                 
 
             };
@@ -103,7 +113,47 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: false,
-                me: {name:"fail"},
+                reservationErrorReason: action.error,
+            };
+        }
+
+        case USER_MODIFY_REQUEST: {
+            return {
+                ...state,
+                isLoading: true,
+                reservationErrorReason: '',
+            };
+        }
+        case USER_MODIFY_SUCCESS: {
+            return {
+                ...state,
+                isLoading: false,
+            };
+        }
+        case USER_MODIFY_FAILURE: {
+            return {
+                ...state,
+                isLoading: false,
+                reservationErrorReason: action.error,
+            };
+        }
+        case USER_WITHDRAWAL_REQUEST: {
+            return {
+                ...state,
+                isLoading: true,
+                reservationErrorReason: '',
+            };
+        }
+        case USER_WITHDRAWAL_SUCCESS: {
+            return {
+                ...state,
+                isLoading: false,
+            };
+        }
+        case USER_WITHDRAWAL_FAILURE: {
+            return {
+                ...state,
+                isLoading: false,
                 reservationErrorReason: action.error,
             };
         }
