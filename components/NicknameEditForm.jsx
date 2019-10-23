@@ -20,8 +20,8 @@ export const useInput = (initValue = null) => {
 
 
 const NicknameEditForm = () => {
-    
-    
+
+
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
   const [pwvisible, setPwvisible] = useState(false);
@@ -29,9 +29,9 @@ const NicknameEditForm = () => {
 
   //console.log(isLoading);
 
-  
- 
-  
+
+
+
 
   const showModal = () => {
     setVisible(true);
@@ -50,7 +50,7 @@ const NicknameEditForm = () => {
   const logoutRequest = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("myInfo");
-    window.location.href="/";
+    window.location.href = "/";
   };
 
   const me = JSON.parse(localStorage.getItem("myInfo"));
@@ -64,14 +64,14 @@ const NicknameEditForm = () => {
     dispatch({
       type: USER_MODIFY_REQUEST,
       data: {
-        name:name,
-        stId:stId,
-        msg:msg,
+        name: name,
+        stId: stId,
+        msg: msg,
       }
     });
     setVisible(false);
   };
-  
+
   return (
     <NickEditForm>
       <div>

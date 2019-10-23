@@ -35,7 +35,7 @@ function logInAPI(loginData) {
         .then(response => {
             console.log("id,password : " + loginData.id, loginData.password);
             console.log('response : ', JSON.stringify(response, null, 2));
-            var result =  response.data;
+            var result = response.data;
 
             return result;
         })
@@ -165,11 +165,11 @@ function* watchLogOut() {
 function loadUserAPI(acctoken) {
     // 서버에 요청을 보내는 부분
 
-    let token =acctoken;
-    return axios.get('http://swot.devdogs.kr:8080/api/user/myInfo', 
+    let token = acctoken;
+    return axios.get('http://swot.devdogs.kr:8080/api/user/myInfo',
         {
             headers: { // 요청 헤더
-              Authorization: token,
+                Authorization: token,
             },
         }
     ).then(response => {
@@ -177,23 +177,23 @@ function loadUserAPI(acctoken) {
         var result = response.data;
         return result;
     })
-    .catch(error => {
-        console.log('failed', error)
-        return error;
-    });
+        .catch(error => {
+            console.log('failed', error)
+            return error;
+        });
 }
 
 function* loadUser(action) {
     try {
-        const result = yield call(loadUserAPI,action.data);
+        const result = yield call(loadUserAPI, action.data);
         if (result.result === "success") {
-            localStorage.setItem("myInfo",JSON.stringify(result.info));
-            yield put({ 
+            localStorage.setItem("myInfo", JSON.stringify(result.info));
+            yield put({
                 type: LOAD_USER_SUCCESS,
             });
-    }
-    location.href="/";
-    } catch (e) { 
+        }
+        location.href = "/";
+    } catch (e) {
         console.error(e);
         yield put({
             type: LOAD_USER_FAILURE,
@@ -214,11 +214,11 @@ function modifyAPI(modifyInfo) {
     form.append('studentId', modifyInfo.stId)
     form.append('name', modifyInfo.name)
 
-    let token =localStorage.getItem("accessToken");
+    let token = localStorage.getItem("accessToken");
     return axios.post('http://swot.devdogs.kr:8080/api/user/modifyMyInfo', form,
         {
             headers: { // 요청 헤더
-              Authorization: token,
+                Authorization: token,
             },
         }
     ).then(response => {
@@ -226,22 +226,22 @@ function modifyAPI(modifyInfo) {
         var result = response.data;
         return result;
     })
-    .catch(error => {
-        console.log('failed', error)
-        return error;
-    });
+        .catch(error => {
+            console.log('failed', error)
+            return error;
+        });
 }
 
 function* userModify(action) {
     try {
-        const result = yield call(modifyAPI,action.data);
+        const result = yield call(modifyAPI, action.data);
         if (result.result === "success") {
-            localStorage.setItem("myInfo",JSON.stringify(result.info));
-            yield put({ 
+            localStorage.setItem("myInfo", JSON.stringify(result.info));
+            yield put({
                 type: USER_MODIFY_SUCCESS,
             });
-    }
-    } catch (e) { 
+        }
+    } catch (e) {
         console.error(e);
         yield put({
             type: USER_MODIFY_FAILURE,
@@ -258,11 +258,11 @@ function* watchModify() {
 function withdrawAPI() {
     // 서버에 요청을 보내는 부분
 
-    let token =localStorage.getItem("accessToken");
+    let token = localStorage.getItem("accessToken");
     return axios.get('http://swot.devdogs.kr:8080/api/user/withdraw',
         {
             headers: { // 요청 헤더
-              Authorization: token,
+                Authorization: token,
             },
         }
     ).then(response => {
@@ -270,24 +270,24 @@ function withdrawAPI() {
         var result = response.data;
         return result;
     })
-    .catch(error => {
-        console.log('failed', error)
-        return error;
-    });
+        .catch(error => {
+            console.log('failed', error)
+            return error;
+        });
 }
 
 function* withdraw() {
     try {
         const result = yield call(withdrawAPI);
         if (result.result === "success") {
-            yield put({ 
+            yield put({
                 type: USER_WITHDRAWAL_SUCCESS,
             });
             localStorage.removeItem("accessToken");
             localStorage.removeItem("myInfo");
-            location.href="/";
-    }
-    } catch (e) { 
+            location.href = "/";
+        }
+    } catch (e) {
         console.error(e);
         yield put({
             type: USER_WITHDRAWAL_FAILURE,
