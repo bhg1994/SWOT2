@@ -18,6 +18,7 @@ const NicknameEditForm = () => {
   const {me} = useSelector(state => state.user);
   const [visible, setVisible] = useState(false);
   const [pwvisible, setPwvisible] = useState(false);
+  
 
   const showModal = () => {
     setVisible(true);
@@ -45,7 +46,7 @@ const NicknameEditForm = () => {
         <Card.Meta
           style={{ marginTop: "2px" }}
           avatar={<Avatar>S </Avatar>}
-          title={me.name}
+          title={"asd"}
         />
         <LogoutBtn onClick={onClicked}>로그아웃</LogoutBtn>
       </div>
@@ -125,13 +126,13 @@ const NicknameEditForm = () => {
   );
 };
 
-// NicknameEditForm.getInitialProps = async (context) => {
-//   console.log("profile");
-//   let token = localStorage.getItem("accessToken");
-//   context.store.dispatch({
-//     type: LOAD_USER_REQUEST,
-//     data: token,
-//   });
-// };
+NicknameEditForm.getInitialProps = async (context) => {
+  console.log("asd" + context);
+  // let token = localStorage.getItem("accessToken");
+  // context.store.dispatch({
+  //   type: LOAD_USER_REQUEST,
+  //   data: token,
+  // });
+};
 
 export default NicknameEditForm;

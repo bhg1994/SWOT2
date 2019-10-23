@@ -45,22 +45,24 @@ function* logIn(action) {
     try {
 
         const result = yield call(logInAPI, action.data);
-        console.log(result.result);
+
 
         if (result.result === "success") {
             yield put({ // put은 dispatch 동일
                 type: LOG_IN_SUCCESS,
             });
             localStorage.setItem("accessToken", result.token);
+            yield put({
+                type: LOAD_USER_REQUEST,
+                data: result.token,
+            })
             alert("로그인 성공");
-            location.href = "/"
         } else {
             yield put({
                 type: LOG_IN_FAILURE,
             });
             console.log(result.error);
             alert("로그인 정보 틀림");
-            //location.href = "/login"
         }
 
     } catch (e) { // loginAPI 실패
@@ -133,9 +135,7 @@ function* watchSignUp() {
 
 function logOutAPI() {
     // 서버에 요청을 보내는 부분
-    return axios.post('/user/logout', {}, {
-        withCredentials: true,
-    });
+    localStorage.removeItem();
 }
 
 function* logOut() {
@@ -161,9 +161,7 @@ function* watchLogOut() {
 function loadUserAPI(acctoken) {
     // 서버에 요청을 보내는 부분
 
-    let token =acctoken
-    //let token = "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzI5NTc2NTUsInN1YiI6IjYifQ.1bInMeSS9rcr-PR6KlodPhTtHsuizqtkqc0ENWVVV8o"
-    console.log(token);
+    let token =acctoken;
     return axios.get('http://swot.devdogs.kr:8080/api/user/myInfo', 
         {
             headers: { // 요청 헤더
@@ -197,6 +195,7 @@ function* loadUser(action) {
             error: e,
         });
     }
+
 }
 
 function* watchLoadUser() {

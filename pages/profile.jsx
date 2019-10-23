@@ -166,12 +166,12 @@ const Profile = () => {
 
 Profile.getInitialProps = async (context) => {
   console.log(context.isServer);
-  if(!context.isServer){
-    let token = localStorage.getItem("accessToken");
-    context.store.dispatch({
-      type: LOAD_USER_REQUEST,
-      data: token,
-    });
-  }
+  // if(!context.isServer){
+  //   let token = localStorage.getItem("accessToken");
+  //   context.store.dispatch({
+  //     type: LOAD_USER_REQUEST,
+  //     data: token,
+  //   });
+  // }
 };
 export default Profile;
