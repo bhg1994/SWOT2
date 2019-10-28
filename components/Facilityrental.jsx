@@ -12,6 +12,11 @@ import {
   InputNumber
 } from "antd";
 import { FormWrapper, Section } from "../components/css/Facilityrental";
+import { useDispatch, useSelector } from "react-redux";
+import {useInput} from "../pages/login";
+import { RESERVATION_REQUEST } from "../reducers/room";
+
+
 
 const { Text } = Typography;
 const { TextArea } = Input;
@@ -28,6 +33,14 @@ const Facilityrental = () => {
   const [content, setContent] = useState("");
   const [visible, setVisible] = useState(false);
   const [maximum, setMaximum] = useState("");
+
+  const [reason, onChangeReason] = useInput("");
+  const [phone, onChangePhone] = useInput("");
+
+  const dispatch = useDispatch();
+  const {selectedRoom} = useSelector(state => state.room);
+
+
 
   const oncontentChange = e => {
     setContent(e.target.value);
@@ -50,6 +63,21 @@ const Facilityrental = () => {
   const onChangeMaximum = value => {
     setMaximum(value);
   };
+
+  const reservationRequest = () => {
+    const token = localStorage.getItem("accessToken");
+    
+    dispatch({
+      type: RESERVATION_REQUEST,
+      data: {
+        reason,
+        maximum,
+        phone,
+        selectedRoom,
+        token
+      }
+    });
+  }
 
   return (
     <>
@@ -85,8 +113,8 @@ const Facilityrental = () => {
             </Text>
             <Form.Item style={{ marginTop: "20px" }}>
               <TextArea
-                value={content}
-                onChange={oncontentChange}
+                value={reason}
+                onChange={onChangeReason}
                 autosize={{ minRows: 4, maxRows: 8 }}
                 style={{ width: "50%" }}
                 rows={4}
@@ -108,14 +136,14 @@ const Facilityrental = () => {
             </Form.Item>
             <Divider />
             <Form.Item style={{ marginTop: "20px" }}>
-              <Input addonBefore="신청자 전화번호" style={{ width: "50%" }} />
+              <Input addonBefore="신청자 전화번호" onChange={onChangePhone} style={{ width: "50%" }} />
             </Form.Item>
             <Form.Item>
               <Text type="secondary">시설물 대여 규정에 동의합니다 : </Text>
               <Checkbox />
             </Form.Item>
             <Form.Item>
-              <Button htmlType="submit">대여 신청</Button>
+              <Button onClick={reservationRequest}>대여 신청</Button>
             </Form.Item>
 
             <Form.Item>

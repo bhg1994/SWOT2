@@ -6,6 +6,7 @@ import {
     takeEvery
 } from 'redux-saga/effects';
 import axios from 'axios';
+import moment from 'moment';
 
 import {
     RESERVATION_FAILURE,
@@ -20,12 +21,30 @@ import {
 } from '../reducers/room'
 
 function reservateAPI(reservateData) {
-    // 서버에 요청을 보내는 부분
-    let form = new FormData()
-    // form.append('email', reservateData.id)
-    // form.append('password', reservateData.password)
 
-    return axios.post(`http://swot.devdogs.kr:8080/api/auth/reservation`, form)
+    var date = moment("2017-01-01").toDate;
+    var sTime = moment('10:00:00', 'hh:mm:ss').toDate;
+    var eTime = moment('12:00:00', 'hh:mm:ss').toDate;
+    
+
+
+    let form = new FormData()
+    form.append('reason', reservateData.reason)
+    form.append('phone', reservateData.phone)
+    form.append('startTime',sTime)
+    form.append('endTime',eTime)
+    form.append('reservationDate',date)
+    
+    console.log(reservateData);
+    let url = "http://swot.devdogs.kr:8080/api/reservation/create/"+reservateData.selectedRoom;
+    console.log(url);
+
+    return axios.post(url, form,
+        {
+            headers: { // 요청 헤더
+                Authorization: reservateData.token,
+            },
+        })
         .then(response => {
             console.log('response : ', JSON.stringify(response, null, 2));
             var result = response.data;
@@ -42,19 +61,15 @@ function* reservate(action) {
 
         const result = yield call(reservateAPI, action.data);
 
-        if (result.statusMsg === "success") {
+        if (result.result === "success") {
             yield put({ // put은 dispatch 동일
                 type: RESERVATION_SUCCESS,
             });
-            alert("예약 성공");
-            location.href = "/"
         }
         else {
             yield put({
                 type: RESERVATION_FAILURE,
             });
-            alert("예약 실패");
-            location.href = "/Reservation"
         }
 
     } catch (e) { // loginAPI 실패
