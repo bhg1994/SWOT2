@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import {
   Tabs,
   Button,
@@ -13,27 +13,64 @@ import LectureRoomList from "./LectureRoomList";
 import {
   InputClassroom,
   InputClassroomCode,
+  BuildingNumber,
   InputMaximum,
   AddBtn,
   CancelBtn,
   BuildingTabs,
   BuildingAddBtn
 } from "../components/css/BuildingList";
+import { useDispatch, useSelector } from "react-redux";
+import { CREATEROOM_REQUEST } from "../reducers/room";
 
 const { TabPane } = Tabs;
 const { Text } = Typography;
 
+
+export const useInput = (initValue = null) => {
+  const [value, setter] = useState(initValue);
+  const handler = useCallback(e => {
+    setter(e.target.value);
+  }, []);
+  return [value, handler];
+};
+
 const BuildingList = () => {
+
+  const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
   const [image, setImage] = useState("");
+
+  const [groupName, onChangegroupName] = useInput("");
+  const [groupNo, setChangegroupNo] = useState("");
+  const [roomNo, onChangeroomNo] = useInput("");
+  const [total, setChangeTotal] = useState("");
+
+  const onChangegroupNo = (value) => {
+    setChangegroupNo(value);
+  }
+
+  const onChangeTotal = (value) => {
+    setChangeTotal(value);
+  }
+
 
   const showModal = () => {
     setVisible(true);
   };
+
   const handleSubmit = e => {
     e.preventDefault();
+    dispatch({
+      type: CREATEROOM_REQUEST,
+      data: {
+        groupName: groupName,
+        groupNo: groupNo,
+        roomNo: roomNo,
+        total: total
+      }
+    })
     setVisible(false);
-    console.log(image);
   };
 
   const handleCancel = () => {
@@ -50,7 +87,7 @@ const BuildingList = () => {
     onChange(info) {
       setImage(info.file.name);
       if (info.file.status !== "uploading") {
-        console.log(info.file, info.fileList);
+        console.log(info.file, info.fileList); ``
       }
       if (info.file.status === "done") {
         message.success(`${info.file.name} file uploaded successfully`);
@@ -72,14 +109,19 @@ const BuildingList = () => {
             </Upload>
           </Form.Item>
           <Form.Item>
-            <InputClassroomCode addonBefore="강의실 코드" />
+            <Text type="secondary">건물 번호 : </Text>
+            <BuildingNumber min={1} max={13}
+              onChange={onChangegroupNo} />
           </Form.Item>
           <Form.Item>
-            <InputClassroom addonBefore="강의실명" />
+            <InputClassroomCode addonBefore="강의실 코드" onChange={onChangeroomNo} />
           </Form.Item>
           <Form.Item>
-            <Text type="secondary">최대 인원수 : </Text>
-            <InputMaximum min={3} max={30} defaultVAlue={3} />
+            <InputClassroom addonBefore="강의실명" onChange={onChangegroupName} />
+          </Form.Item>
+          <Form.Item>
+            <Text type="secondary" >최대 인원수 : </Text>
+            <InputMaximum onChange={onChangeTotal} min={3} max={30} />
           </Form.Item>
           <Form.Item>
             <AddBtn htmlType="submit">추가</AddBtn>
@@ -90,7 +132,11 @@ const BuildingList = () => {
         </Form>
       </Modal>
       <BuildingTabs defaultActiveKey="11">
-        <TabPane tab="승연관" key="1"></TabPane>
+        <TabPane tab="승연관" key="1">
+          <BuildingAddBtn type="primary" onClick={showModal}>
+            강의실 추가
+          </BuildingAddBtn>
+        </TabPane>
         <TabPane tab="일만관" key="2"></TabPane>
         <TabPane tab="월당관" key="3"></TabPane>
         <TabPane tab="나눔관" key="5"></TabPane>

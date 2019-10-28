@@ -1,8 +1,18 @@
+import { useState, useEffect } from 'react';
 import Link from "next/Link";
 import { Menu, Icon } from "antd";
 import { SiderWrapper } from "../containers/css/Slider";
+import { useSelector } from "react-redux/lib/hooks/useSelector";
 
 const Slider = () => {
+
+  const [myinfo, setMyinfo] = useState(undefined)
+
+  useEffect(() => {
+    setMyinfo(JSON.parse(localStorage.getItem("myInfo")))
+  }, [])
+
+
   return (
     <>
       <SiderWrapper>
@@ -24,14 +34,17 @@ const Slider = () => {
               </a>
             </Link>
           </Menu.Item>
-          <Menu.Item key="3">
-            <Link href="/login">
-              <a>
-                <Icon type="login" />
-                <span>Login</span>
-              </a>
-            </Link>
-          </Menu.Item>
+
+          {!myinfo ?
+            <Menu.Item key="3">
+              <Link href="/login">
+                <a>
+                  <Icon type="login" />
+                  <span>Login</span>
+                </a>
+              </Link>
+            </Menu.Item>
+            : ""}
           <Menu.Item key="4">
             <Link href="/notification">
               <a>
