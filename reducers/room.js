@@ -54,7 +54,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: false,
-
+                totalRoomList: action.data,
             };
         }
         case ROOMLIST_FAILURE: {
