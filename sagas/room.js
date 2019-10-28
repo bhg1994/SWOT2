@@ -69,14 +69,20 @@ function* watchReservation() {
 
 
 
-function roomListAPI(roomListData) {
+function roomListAPI(token) {
     // 서버에 요청을 보내는 부분
-    let form = new FormData()
+    // let form = new FormData()
     // form.append('email', roomListData.id)
     // form.append('password', roomListData.password)
+    
 
-    return axios.post(`http://swot.devdogs.kr:8080/api/auth/roomlist`, form)
-        .then(response => {
+    return axios.get(`http://swot.devdogs.kr:8080/api/classroom/classrooms`, 
+    {
+        headers: { // 요청 헤더
+            Authorization: token.token,
+        },
+    }
+    ).then(response => {
             console.log('response : ', JSON.stringify(response, null, 2));
             var result = response.data;
             return result;
@@ -85,6 +91,7 @@ function roomListAPI(roomListData) {
             console.log('failed', error)
             return error;
         })
+    
 }
 
 function* roomList(action) {
@@ -92,16 +99,16 @@ function* roomList(action) {
         
         const result = yield call(roomListAPI, action.data);
 
-        if(result.statusMsg==="success"){
+        if(result.result==="success"){
             yield put({ // put은 dispatch 동일
                 type: ROOMLIST_SUCCESS,
+                data: result.info,
             });
         }
         else{
             yield put({
                 type: ROOMLIST_FAILURE,
             });
-            alert("룸리스트 불러오기 실패");
         }
 
     } catch (e) { // loginAPI 실패
