@@ -1,21 +1,19 @@
 import React from "react";
 import { Table } from "antd";
 import Link from "next/link";
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
+import { ROOM_SELECT_REQUEST } from "../reducers/room";
 
 
 const columns = [
-  { title: "강의실코드", dataIndex: "roomNo", key: "roomNo" },
-  {
-    title: "강의실명",
-    dataIndex: "groupName",
-    key: "groupName",
-    render: text => (
-      <Link href="/reservationForm" code={"123"}>
-        <a>{text}</a>
-      </Link>
-    )
-  },
+  { title: "강의실코드", dataIndex: "roomNo", key: "roomNo" ,  
+  render: text => (
+    <Link href="/reservationForm">
+      <a>{text}</a>
+    </Link>
+  )
+},
+  { title: "강의실명", dataIndex: "groupName", key: "groupName" },
   { title: "수용인원", dataIndex: "total", key: "total" }
 ];
 
@@ -108,9 +106,22 @@ const columns = [
 
 const LectureRoomList = () => {
   const {totalRoomList} = useSelector(state => state.room);
+  const dispatch = useDispatch();
+
+  const onRowClick = (record) => {
+    return {
+      onClick: () => {
+        console.log(record.roomNo);
+        dispatch({
+          type: ROOM_SELECT_REQUEST,
+          data: record.roomNo,
+        });
+      }
+    };
+  };
   return (
     <>
-      <Table columns={columns} dataSource={totalRoomList} />
+      <Table columns={columns} dataSource={totalRoomList} onRow={onRowClick}/>
     </>
   );
 };

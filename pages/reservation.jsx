@@ -19,15 +19,14 @@ const studyboard = () => {
 
   const dispatch = useDispatch();
 
-  const [token, setToken] = useState(undefined)
+  // const [token, setToken] = useState(undefined)
 
   useEffect(() => {
-    setToken(localStorage.getItem("accessToken"));
-    console.log("토큰 : "+token);
+    const token = localStorage.getItem("accessToken");
     dispatch({
       type: ROOMLIST_REQUEST,
       data: {
-        token: "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzM0NjE4MTMsInN1YiI6IjEzIn0.IbRFP2PL65CtA5spEI-A6AXtBB5FZRAA280tC86dON0",
+        token: token,
       }
     });
   }, [])

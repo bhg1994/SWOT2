@@ -4,6 +4,7 @@ export const initialState = {
     createRoomReason: "",
     isLoading: false,
     totalRoomList: [],
+    selectedRoom: null,
 };
 
 export const RESERVATION_REQUEST = 'RESERVATION_REQUEST';
@@ -19,6 +20,8 @@ export const CREATEROOM_REQUEST = 'CREATEROOM_REQUEST';
 export const CREATEROOM_SUCCESS = 'CREATEROOM_SUCCESS';
 
 export const CREATEROOM_FAILURE = 'CREATEROOM_FAILURE';
+
+export const ROOM_SELECT_REQUEST = 'ROOM_SELECT_REQUEST';
 
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -82,6 +85,12 @@ export default (state = initialState, action) => {
                 ...state,
                 isLoading: false,
                 createRoomReason: action.error
+            }
+        }
+        case ROOM_SELECT_REQUEST: {
+            return {
+                ...state,
+                selectedRoom : action.data,
             }
         }
         default: {

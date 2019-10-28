@@ -4,7 +4,7 @@ import { Facilityrental, ReservationTime } from "../components";
 
 const { Text } = Typography;
 
-const reservationForm = ({code}) => {
+const reservationForm = () => {
   const [reservationDate, setReseravtionDate] = useState("");
   const [lookup, setLookup] = useState("");
   const onButton = () => {
@@ -15,7 +15,6 @@ const reservationForm = ({code}) => {
     console.log(date, dateString);
     setReseravtionDate(dateString);
   }
-  console.log(code);
   return (
     <>
       <div style={{ textAlign: "center" }}>
