@@ -1,87 +1,46 @@
 import { Table } from "antd";
-
+import { ReservationTimeWrapper, Hoursofuse, Availabletime, SelecttimeWrapper, SelecttimeBtn } from '../components/css/ReservationTime';
 const { Column } = Table;
 
 const ReservationTime = ({ value }) => {
-  const morning = [
-    "00-01시",
-    "01-02시",
-    "02-03시",
-    "03-04시",
-    "04-05시",
-    "05-06시",
-    "06-07시",
-    "07-08시",
-    "08-09시",
-    "09-10시",
-    "10-11시",
-    "11-12시"
-  ];
-  const afternoon = [
-    "12시",
-    "13시",
-    "14시",
-    "15시",
-    "16시",
-    "17시",
-    "18시",
-    "19시",
-    "20시",
-    "21시",
-    "22시",
-    "23시"
+  const times = [
+    "00:00",
+    "01:00",
+    "02:00",
+    "03:00",
+    "04:00",
+    "05:00",
+    "06:00",
+    "07:00",
+    "08:00",
+    "09:00",
+    "10:00",
+    "11:00",
+    "12:00",
+    "13:00",
+    "14:00",
+    "15:00",
+    "16:00",
+    "17:00",
+    "18:00",
+    "19:00",
+    "20:00",
+    "21:00",
+    "22:00",
+    "23:00",
   ];
 
-  const moringData = [
-    {
-      key: "moringData",
-      0: "예약불가",
-      1: "예약불가",
-      2: "예약불가",
-      3: "예약불가",
-      4: "dPrkasd",
-      5: "예약불가",
-      6: "예약불가",
-      7: "예약불가",
-      8: "예약불가",
-      9: "예약가능",
-      10: "예약가능",
-      11: "예약가능",
-    }
-  ];
-  const AfternoonData = [
-    {
-      key: "moringData",
-      0: "예약불가",
-      1: "예약 중",
-      2: "예약가능",
-      3: "예약가능",
-      4: "예약가능",
-      5: "예약 중",
-      6: "예약 중",
-      7: "예약 중",
-      8: "예약 중",
-      9: "예약가능",
-      10: "예약불가",
-      11: "예약가능",
-    }
-  ];
   return (
     <>
-      <Table dataSource={moringData} pagination={false} bordered={true} useFixedHeader={true}>
-        {value
-          ? morning.map((time, i) => (
-              <Column title={time} dataIndex={i} key={i} align="center"/>
-            ))
-          : ""}
-      </Table>
-      <Table dataSource={AfternoonData} pagination={false} bordered={true} useFixedHeader={true}>
-        {value
-          ? afternoon.map((time, i) => (
-              <Column title={time} dataIndex={i} key={i} align="center" />
-            ))
-          : ""}
-      </Table>
+      {value ?
+        <ReservationTimeWrapper>
+          <Hoursofuse>이용시간</Hoursofuse>
+          <Availabletime>최대 5시간 이용가능</Availabletime>
+          <SelecttimeWrapper>
+            {times.map((time, i) => (i < 8 || i > 21) ? (<SelecttimeBtn type="danger" disabled>{time}</SelecttimeBtn>) : (<SelecttimeBtn type="danger">{time}</SelecttimeBtn>))}
+          </SelecttimeWrapper>
+        </ReservationTimeWrapper>
+        : ""}
     </>
   );
 };

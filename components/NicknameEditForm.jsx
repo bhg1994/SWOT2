@@ -61,7 +61,7 @@ const NicknameEditForm = () => {
   const logoutRequest = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("myInfo");
-    window.location.href = "/";
+    location.href = "/";
   };
 
   const me = JSON.parse(localStorage.getItem("myInfo"));
