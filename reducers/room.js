@@ -2,6 +2,7 @@ export const initialState = {
     reservationErrorReason: "",
     roomListErrorReason: "",
     createRoomReason: "",
+    deleteRoomReason: "",
     isLoading: false,
     totalRoomList: [],
     selectedRoom: null,
@@ -20,6 +21,16 @@ export const CREATEROOM_REQUEST = 'CREATEROOM_REQUEST';
 export const CREATEROOM_SUCCESS = 'CREATEROOM_SUCCESS';
 
 export const CREATEROOM_FAILURE = 'CREATEROOM_FAILURE';
+
+export const DELETEROOM_REQUEST =
+    'DELETEROOM_REQUEST';
+
+export const DELETEROOM_SUCCESS =
+    'DELETEROOM_SUCCESS';
+
+export const DELETEROOM_FAILURE =
+    'DELETEROOM_FAILURE';
+
 
 export const ROOM_SELECT_REQUEST = 'ROOM_SELECT_REQUEST';
 
@@ -78,6 +89,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: false,
+                totalRoomList: action.data,
             }
         }
         case CREATEROOM_FAILURE: {
@@ -87,10 +99,30 @@ export default (state = initialState, action) => {
                 createRoomReason: action.error
             }
         }
+        case DELETEROOM_REQUEST: {
+            return {
+                ...state,
+                isLoading: true,
+                deleteRoomReason: ""
+            }
+        }
+        case DELETEROOM_SUCCESS: {
+            return {
+                ...state,
+                isLoading: true,
+            }
+        }
+        case DELETEROOM_FAILURE: {
+            return {
+                ...state,
+                isLoading: false,
+                createRoomReason: action.error
+            }
+        }
         case ROOM_SELECT_REQUEST: {
             return {
                 ...state,
-                selectedRoom : action.data,
+                selectedRoom: action.data,
             }
         }
         default: {

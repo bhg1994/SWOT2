@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
   Layout,
-  Select,
-  Divider,
-  Button,
-  Pagination,
-  Row,
-  Col,
-  Card
 } from "antd";
 import { ReservationRoominfo, LectureRoominfo } from "../components";
 import SwotMap from "../containers/SwotMap";
@@ -34,7 +27,7 @@ const studyboard = () => {
 
 
 
-  
+
   return (
     <>
       <Layout style={{ backgroundColor: "white" }}>

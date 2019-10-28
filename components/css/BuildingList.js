@@ -39,7 +39,9 @@ export const AddBtn = styled(Button)
   `
 
 export const CancelBtn = styled(Button)
-  ``
+  `
+  width: 55px;
+  `
 
 export const BuildingTabs = styled(Tabs)
   `
@@ -48,6 +50,8 @@ export const BuildingTabs = styled(Tabs)
   `
 
 export const BuildingAddBtn = styled(Button)
-  `margin-bottom:20px;
+  `
+  width: 100px;
+  margin-bottom:20px;
    text-align:right;
   `
