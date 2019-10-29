@@ -22,6 +22,9 @@ import {
     USER_MODIFY_FAILURE,
     USER_MODIFY_REQUEST,
     USER_MODIFY_SUCCESS,
+    USERPW_MODIFY_REQUEST,
+    USERPW_MODIFY_SUCCESS,
+    USERPW_MODIFY_FAILURE,
     USER_WITHDRAWAL_REQUEST,
     USER_WITHDRAWAL_SUCCESS,
     USER_WITHDRAWAL_FAILURE
@@ -257,6 +260,48 @@ function* watchModify() {
     yield takeEvery(USER_MODIFY_REQUEST, userModify);
 }
 
+// 유저 비밀번호 변경
+
+function PwmodifyAPI(PwmodifyInfo) {
+    // 서버에 요청을 보내는 부분
+    let form = new FormData()
+    form.append('email', PwmodifyInfo.email)
+    form.append('modifyPw', PwmodifyInfo.modifyPw)
+
+    return axios.post('http://swot.devdogs.kr:8080/api/auth/user/modifyPw', form)
+        .then(response => {
+            console.log('response : ', JSON.stringify(response, null, 2))
+            var result = response.data;
+            return result;
+        })
+        .catch(error => {
+            console.log('failed', error)
+            return error;
+        });
+}
+
+function* userPwModify(action) {
+    try {
+        const result = yield call(PwmodifyAPI, action.data);
+        if (result.result === "success") {
+            yield put({
+                type: USERPW_MODIFY_SUCCESS,
+            });
+        }
+    } catch (e) {
+        console.error(e);
+        yield put({
+            type: USERPW_MODIFY_FAILURE,
+            error: e,
+        });
+    }
+
+}
+
+function* watchPwModify() {
+    yield takeEvery(USERPW_MODIFY_REQUEST, userPwModify);
+}
+
 function withdrawAPI() {
     // 서버에 요청을 보내는 부분
     let token = localStorage.getItem("accessToken");
@@ -313,6 +358,7 @@ export default function* userSaga() {
         fork(watchLoadUser),
         fork(watchSignUp),
         fork(watchModify),
+        fork(watchPwModify),
         fork(watchWithdrawal),
     ]);
 }

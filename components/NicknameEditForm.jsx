@@ -9,7 +9,7 @@ import {
   Status
 } from "../components/css/NicknameEditForm";
 import { useDispatch, useSelector } from "react-redux";
-import { USER_MODIFY_REQUEST, USER_WITHDRAWAL_REQUEST } from "../reducers/user";
+import { USER_MODIFY_REQUEST, USER_WITHDRAWAL_REQUEST, USERPW_MODIFY_REQUEST } from "../reducers/user";
 
 const { confirm } = Modal;
 
@@ -26,6 +26,10 @@ const NicknameEditForm = () => {
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
   const [pwvisible, setPwvisible] = useState(false);
+  const [name, onChangeName] = useInput("");
+  const [stId, onChangeStId] = useInput("");
+  const [msg, onChangeMsg] = useInput("");
+  const [modifyPw, onChangeModifyPw] = useInput("");
   // const [wdvisible, setWdvisible] = useState(false);
   const { isLoading } = useSelector(state => state.user);
 
@@ -66,11 +70,6 @@ const NicknameEditForm = () => {
 
   const me = JSON.parse(localStorage.getItem("myInfo"));
 
-
-  const [name, onChangeName] = useInput("");
-  const [stId, onChangeStId] = useInput("");
-  const [msg, onChangeMsg] = useInput("");
-
   const userInfoModify = () => {
     dispatch({
       type: USER_MODIFY_REQUEST,
@@ -82,6 +81,17 @@ const NicknameEditForm = () => {
     });
     setVisible(false);
   };
+
+  const userPwModify = () => {
+    dispatch({
+      type: USERPW_MODIFY_REQUEST,
+      data: {
+        email: me.email,
+        modifyPw: modifyPw
+      }
+    });
+    setPwvisible(false);
+  }
 
   return (
     <NickEditForm>
@@ -149,13 +159,16 @@ const NicknameEditForm = () => {
         <Form >
           <Form.Item>
             <Input
-              addonBefore="현재 비밀번호"
+              addonBefore="이메일"
+              disabled
+              value={me.email}
               style={{ width: "50%" }}
             />
           </Form.Item>
           <Form.Item>
             <Input
               addonBefore="변경 비밀번호"
+              onChange={onChangeModifyPw}
               style={{ width: "50%" }}
             />
           </Form.Item>
@@ -163,7 +176,7 @@ const NicknameEditForm = () => {
             <Button
               type="primary"
               style={{ marginRight: "20px" }}
-              htmlType="submit"
+              onClick={userPwModify}
             >
               변경
                 </Button>

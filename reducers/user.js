@@ -10,6 +10,7 @@ export const initialState = {
     userInfo: null, // 남의 정보
     tokens: null,
     reservationErrorReason: '',
+    userpwErrorReason: ''
 };
 
 export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
@@ -31,6 +32,10 @@ export const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE';
 export const USER_MODIFY_REQUEST = 'USER_MODIFY_REQUEST';
 export const USER_MODIFY_SUCCESS = 'USER_MODIFY_SUCCESS';
 export const USER_MODIFY_FAILURE = 'USER_MODIFY_FAILURE';
+
+export const USERPW_MODIFY_REQUEST = 'USERPW_MODIFY_REQUEST';
+export const USERPW_MODIFY_SUCCESS = 'USERPW_MODIFY_SUCCESS';
+export const USERPW_MODIFY_FAILURE = 'USERPW_MODIFY_FAILURE';
 
 export const USER_WITHDRAWAL_REQUEST = 'USER_WITHDRAWAL_REQUEST';
 export const USER_WITHDRAWAL_SUCCESS = 'USER_WITHDRAWAL_SUCCESS';
@@ -105,8 +110,6 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: false,
-
-
             };
         }
         case LOAD_USER_FAILURE: {
@@ -136,6 +139,26 @@ export default (state = initialState, action) => {
                 isLoading: false,
                 reservationErrorReason: action.error,
             };
+        }
+        case USERPW_MODIFY_REQUEST: {
+            return {
+                ...state,
+                isLoading: true,
+                userpwErrorReason: ''
+            }
+        }
+        case USERPW_MODIFY_SUCCESS: {
+            return {
+                ...state,
+                isLoading: false,
+            }
+        }
+        case USERPW_MODIFY_FAILURE: {
+            return {
+                ...state,
+                isLoading: false,
+                userpwErrorReason: '',
+            }
         }
         case USER_WITHDRAWAL_REQUEST: {
             return {

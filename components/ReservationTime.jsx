@@ -30,14 +30,26 @@ const ReservationTime = ({ value }) => {
     "23:00",
   ];
 
+
+
+  const onClickBtn = (e) => {
+    let element = document.getElementById(e.target.id);
+    console.log(element);
+    let prevelement = document.getElementById(e.target.id - 1);
+
+    prevelement.style.backgroundColor = "black";
+
+    // console.log(element);
+  }
+
   return (
     <>
       {value ?
         <ReservationTimeWrapper>
           <Hoursofuse>이용시간</Hoursofuse>
           <Availabletime>최대 5시간 이용가능</Availabletime>
-          <SelecttimeWrapper>
-            {times.map((time, i) => (i < 8 || i > 21) ? (<SelecttimeBtn type="danger" disabled>{time}</SelecttimeBtn>) : (<SelecttimeBtn type="danger">{time}</SelecttimeBtn>))}
+          <SelecttimeWrapper >
+            {times.map((time, i) => (i < 8 || i > 21) ? (<SelecttimeBtn type="danger" disabled>{time}</SelecttimeBtn>) : (<SelecttimeBtn id={i} type="danger" onClick={onClickBtn}>{time}</SelecttimeBtn>))}
           </SelecttimeWrapper>
         </ReservationTimeWrapper>
         : ""}

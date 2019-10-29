@@ -6,12 +6,12 @@ import { useSelector } from "react-redux/lib/hooks/useSelector";
 
 const Slider = () => {
 
-  const [myinfo, setMyinfo] = useState(undefined)
+  const [myinfo, setMyinfo] = useState("")
 
   useEffect(() => {
     setMyinfo(JSON.parse(localStorage.getItem("myInfo")))
+    console.log("useEffect 이후 :" + myinfo);
   }, [])
-
 
   return (
     <>
@@ -53,14 +53,16 @@ const Slider = () => {
               </a>
             </Link>
           </Menu.Item>
-          <Menu.Item key="5">
-            <Link href="/profile">
-              <a>
-                <Icon type="user" />
-                <span>MyPage</span>
-              </a>
-            </Link>
-          </Menu.Item>
+          {myinfo ?
+            <Menu.Item key="5">
+              <Link href="/profile">
+                <a>
+                  <Icon type="user" />
+                  <span>MyPage</span>
+                </a>
+              </Link>
+            </Menu.Item>
+            : ""}
           <Menu.Item key="6">
             <Link href="/Reservation">
               <a>
