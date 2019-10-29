@@ -93,8 +93,6 @@ function roomListAPI(token) {
     // let form = new FormData()
     // form.append('email', roomListData.id)
     // form.append('password', roomListData.password)
-
-
     return axios.get(`http://swot.devdogs.kr:8080/api/classroom/classrooms`,
         {
             headers: { // 요청 헤더
@@ -120,7 +118,6 @@ function* roomList(action) {
         const result = yield call(roomListAPI, action.data);
 
         if (result.result === "success") {
-
             yield put({ // put은 dispatch 동일
                 type: ROOMLIST_SUCCESS,
                 data: result.info,
@@ -148,14 +145,14 @@ function* watchRoomList() {
 function createRoomAPI(createRoomData) {
     // 서버에 요청을 보내는 부분
     let form = new FormData()
-    form.append('groupName', createRoomData.groupName) // 차후에 roomName으로 변경해야함
+    form.append('roomName', createRoomData.roomName) // 차후에 roomName으로 변경해야함
     form.append('groupNo', createRoomData.groupNo)
     // 이거 왜있는 거?
     form.append('roomNo', createRoomData.roomNo)
     form.append('total', createRoomData.total)
 
     let token = localStorage.getItem("accessToken");
-    console.log("생성전 토큰 : " + createRoomData.groupName, createRoomData.groupNo, createRoomData.roomNo, createRoomData.total);
+    console.log("생성전 토큰 : " + createRoomData.roomName, createRoomData.groupNo, createRoomData.roomNo, createRoomData.total);
 
 
     return axios.post(`http://swot.devdogs.kr:8080/api/classroom/create`, form,
@@ -208,18 +205,17 @@ function* createRoom(action) {
 function* watchCreateRoom() {
     yield takeEvery(CREATEROOM_REQUEST, createRoom);
 }
-
-
 // 강의실 삭제 - 관리자 권한
-
 
 function deleteRoomAPI(deleteRoomData) {
     // 서버에 요청을 보내는 부분
-    console.log(deleteRoomData);
+    let id = deleteRoomData.id
+    let url = "http://swot.devdogs.kr:8080/api/classroom/delete/" + id;
+    console.log(id);
 
     let token = localStorage.getItem("accessToken");
 
-    return axios.get(`http://swot.devdogs.kr:8080/api/classroom/delete/?`,
+    return axios.get(url,
         {
             headers: {
                 Authorization: token,
@@ -244,6 +240,9 @@ function* deleteRoom(action) {
         if (result.result === "success") {
             yield put({ // put은 dispatch 동일
                 type: DELETEROOM_SUCCESS,
+            });
+            yield put({ // put은 dispatch 동일
+                type: ROOMLIST_REQUEST,
             });
             alert("강의실 삭제 성공");
         }

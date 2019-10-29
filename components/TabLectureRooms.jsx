@@ -3,22 +3,62 @@ import { Table, Button, Divider, Modal } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { DELETEROOM_REQUEST } from "../reducers/room";
 
-const { Column } = Table;
 const { confirm } = Modal;
 
 const LectureRoomList = ({ buildingList }) => {
+
     const dispatch = useDispatch();
 
-    const [id, setId] = useState("");
+    const [id, setId] = useState(0);
 
     const { isLoading } = useSelector(state => state.room);
 
+    const columns = [
+        {
+            title: '강의실 코드',
+            dataIndex: 'roomNo',
+            key: 'roomNo',
+        },
+        {
+            title: '강의실명',
+            dataIndex: 'roomName',
+            key: 'roomName',
+        },
+        {
+            title: '수용인원',
+            dataIndex: 'total',
+            key: 'total',
+        },
+        {
+            title: '수정란',
+            dataIndex: 'action',
+            key: 'action',
+            render: (text, record) => (
+                <span>
+                    <Button type="primary">수정</Button>
+                    <Divider type="vertical" />
+                    <Button type="danger" onClick={showDeleteRoomModal}
+                    >삭제</Button>
+                </span>
+            )
+        },
+    ]
 
-    const showDeleteRoomModal = (roomNo) => {
+    const onRowClick = (record) => {
+        setId(record.id);
+    }
+
+
+    let deleteId = 0;
+
+    const showDeleteRoomModal = () => {
+
+        deleteId = 0;
         // setId(buildingList.id)
-        console.log(roomNo);
         buildingList.map((room) => {
-            console.log(room.id);
+            if (room.id === id) {
+                deleteId = id;
+            }
         });
 
         confirm({
@@ -28,16 +68,18 @@ const LectureRoomList = ({ buildingList }) => {
                 dispatch({
                     type: DELETEROOM_REQUEST,
                     data: {
-                        id: id
+                        id: deleteId
                     }
                 });
             },
             onCancel() { },
         });
     }
+
+
     return (
         <>
-            <Table dataSource={buildingList}>
+            {/* <Table dataSource={buildingList}>
                 <Column title="강의실 코드" dataIndex="roomNo" key="roomNo" />
                 <Column title="강의실명" dataIndex="groupName" key="groupName" />
                 <Column title="수용인원" dataIndex="total" key="total" />
@@ -53,7 +95,8 @@ const LectureRoomList = ({ buildingList }) => {
                         </span>
                     )}
                 />
-            </Table>
+            </Table> */}
+            <Table columns={columns} dataSource={buildingList} onRow={onRowClick} />
         </>
     );
 };

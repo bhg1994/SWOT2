@@ -41,7 +41,7 @@ const BuildingList = () => {
   const [image, setImage] = useState("");
   const [buildingList, setBuildingList] = useState([]);
 
-  const [groupName, onChangegroupName] = useInput("");
+  const [roomName, onChangeroomName] = useInput("");
   const [groupNo, setChangegroupNo] = useState("");
   const [roomNo, onChangeroomNo] = useInput("");
   const [total, setChangeTotal] = useState("");
@@ -52,10 +52,18 @@ const BuildingList = () => {
   let lists = [];
 
   useEffect(() => {
-    console.log("UseEffect..... BuildingList" + buildingList);
-  }, [buildingList]);
+    console.log("UseEffect.....totalRoomList" + totalRoomList);
+    lists = [];
+    totalRoomList.map((room) => {
+      if (String(room.groupNo) === buildingKey) {
+        lists.push(room);
+      }
+    })
+    setBuildingList(lists);
+  }, [totalRoomList]);
 
   const onTabClick = (key) => {
+    var buildingKey = key;
     lists = [];
     totalRoomList.map((room) => {
       console.log(String(room.groupNo), key);
@@ -66,10 +74,6 @@ const BuildingList = () => {
     setBuildingList(lists);
     console.log("onTabClick 이후" + buildingList);
   };
-
-  useEffect(() => {
-    console.log("UseEffect..... BuildingList" + buildingList);
-  }, [onTabClick]);
 
 
   const onChangegroupNo = (value) => {
@@ -90,7 +94,7 @@ const BuildingList = () => {
     dispatch({
       type: CREATEROOM_REQUEST,
       data: {
-        groupName: groupName,
+        roomName: roomName,
         groupNo: groupNo,
         roomNo: roomNo,
         total: total
@@ -143,7 +147,7 @@ const BuildingList = () => {
             <InputClassroomCode addonBefore="강의실 코드" onChange={onChangeroomNo} />
           </Form.Item>
           <Form.Item>
-            <InputClassroom addonBefore="강의실명" onChange={onChangegroupName} />
+            <InputClassroom addonBefore="강의실명" onChange={onChangeroomName} />
           </Form.Item>
           <Form.Item>
             <Text type="secondary" >최대 인원수 : </Text>
