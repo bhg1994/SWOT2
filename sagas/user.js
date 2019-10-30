@@ -245,6 +245,7 @@ function* userModify(action) {
             yield put({
                 type: USER_MODIFY_SUCCESS,
             });
+            alert("정보가 수정되었습니다.");
         }
     } catch (e) {
         console.error(e);
@@ -287,13 +288,22 @@ function* userPwModify(action) {
             yield put({
                 type: USERPW_MODIFY_SUCCESS,
             });
+            alert("이메일인증 진행 후 로그인 해 주세요");
         }
-    } catch (e) {
+        else {
+            yield put({
+                type: USERPW_MODIFY_FAILURE,
+            });
+            alert("해당 이메일이 없습니다. 다시 확인해주세요")
+        }
+    }
+    catch (e) {
         console.error(e);
         yield put({
             type: USERPW_MODIFY_FAILURE,
             error: e,
         });
+        alert("해당 이메일이 없습니다. 다시 확인해주세요")
     }
 
 }

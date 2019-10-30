@@ -17,7 +17,7 @@ const Slider = () => {
     <>
       <SiderWrapper>
         <div className="logo" />
-        <Menu theme="dark" mode="inline">
+        <Menu defaultSelectedKeys={['1']} theme="dark" mode="inline">
           <Menu.Item key="1">
             <Link href="/">
               <a>

@@ -15,7 +15,7 @@ height: 550;
 left: 50%;
 top: 50%;
 margin-left: -200px;
-margin-top: -250px;
+margin-top: -300px;
 
 & > div{
     background-color:white;

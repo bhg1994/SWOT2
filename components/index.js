@@ -29,5 +29,4 @@ export {
     BuildingList,
     MainFooter,
     ReservationTime,
-
 };

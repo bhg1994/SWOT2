@@ -30,12 +30,6 @@ export const UpdateBtn = styled(Button)
     width:120px;
 `
 
-export const ChangePWBtn = styled(Button)
-    `
- text-align:center;
- margin: 30px 0 0 30px;
- width:120px;
-`
 export const Status = styled(Text)
     `
     

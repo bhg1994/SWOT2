@@ -4,12 +4,11 @@ import {
   NickEditForm,
   LogoutBtn,
   UpdateBtn,
-  ChangePWBtn,
   WithdrawalBtn,
   Status
 } from "../components/css/NicknameEditForm";
 import { useDispatch, useSelector } from "react-redux";
-import { USER_MODIFY_REQUEST, USER_WITHDRAWAL_REQUEST, USERPW_MODIFY_REQUEST } from "../reducers/user";
+import { USER_MODIFY_REQUEST, USER_WITHDRAWAL_REQUEST, } from "../reducers/user";
 
 const { confirm } = Modal;
 
@@ -25,11 +24,9 @@ const NicknameEditForm = () => {
 
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
-  const [pwvisible, setPwvisible] = useState(false);
   const [name, onChangeName] = useInput("");
   const [stId, onChangeStId] = useInput("");
   const [msg, onChangeMsg] = useInput("");
-  const [modifyPw, onChangeModifyPw] = useInput("");
   // const [wdvisible, setWdvisible] = useState(false);
   const { isLoading } = useSelector(state => state.user);
 
@@ -50,13 +47,8 @@ const NicknameEditForm = () => {
 
   const showModal = () => {
     setVisible(true);
-  };
-  const showChangePWModal = () => {
-    setPwvisible(true);
-  };
-  const handlePWCancel = () => {
-    setPwvisible(false);
   }
+
   const handleCancel = () => {
     setVisible(false);
     console.log("취소 버튼");
@@ -82,16 +74,7 @@ const NicknameEditForm = () => {
     setVisible(false);
   };
 
-  const userPwModify = () => {
-    dispatch({
-      type: USERPW_MODIFY_REQUEST,
-      data: {
-        email: me.email,
-        modifyPw: modifyPw
-      }
-    });
-    setPwvisible(false);
-  }
+
 
   return (
     <NickEditForm>
@@ -107,7 +90,6 @@ const NicknameEditForm = () => {
         <Status code>{me.statusMsg}</Status>
       </div>
       <UpdateBtn type="primary" onClick={showModal}>내 정보 수정</UpdateBtn>
-      <ChangePWBtn onClick={showChangePWModal}>비밀번호 변경</ChangePWBtn>
       <WithdrawalBtn type="danger" onClick={showWithdrawalModal}>회원 탈퇴</WithdrawalBtn>
       <Modal title="내 정보 수정" visible={visible} footer={null}>
         <Form >
@@ -149,38 +131,6 @@ const NicknameEditForm = () => {
               변경
                 </Button>
             <Button type="danger" onClick={handleCancel}>
-              취소
-                </Button>
-          </Form.Item>
-        </Form>
-      </Modal>
-      {/* 비밀번호 변경 */}
-      <Modal title="비밀번호 변경" visible={pwvisible} footer={null}>
-        <Form >
-          <Form.Item>
-            <Input
-              addonBefore="이메일"
-              disabled
-              value={me.email}
-              style={{ width: "50%" }}
-            />
-          </Form.Item>
-          <Form.Item>
-            <Input
-              addonBefore="변경 비밀번호"
-              onChange={onChangeModifyPw}
-              style={{ width: "50%" }}
-            />
-          </Form.Item>
-          <Form.Item>
-            <Button
-              type="primary"
-              style={{ marginRight: "20px" }}
-              onClick={userPwModify}
-            >
-              변경
-                </Button>
-            <Button type="danger" onClick={handlePWCancel}>
               취소
                 </Button>
           </Form.Item>
