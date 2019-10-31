@@ -6,6 +6,9 @@ export const initialState = {
     isLoading: false,
     totalRoomList: [],
     selectedRoom: null,
+    startTime:"",
+    endTime:"",
+    date:"",
 };
 
 export const RESERVATION_REQUEST = 'RESERVATION_REQUEST';
@@ -33,6 +36,9 @@ export const DELETEROOM_FAILURE =
 
 
 export const ROOM_SELECT_REQUEST = 'ROOM_SELECT_REQUEST';
+export const START_TIME_SELECT = 'START_TIME_SELECT';
+export const END_TIME_SELECT = 'END_TIME_SELECT';
+export const DATE_SELECT = 'DATE_SELECT';
 
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -123,6 +129,24 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 selectedRoom: action.data,
+            }
+        }
+        case START_TIME_SELECT: {
+            return {
+                ...state,
+                startTime: action.data
+            }
+        }
+        case END_TIME_SELECT: {
+            return {
+                ...state,
+                endTime: action.data
+            }
+        }
+        case DATE_SELECT: {
+            return {
+                ...state,
+                date: action.data
             }
         }
         default: {

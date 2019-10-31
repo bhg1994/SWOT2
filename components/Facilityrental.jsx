@@ -39,6 +39,24 @@ const Facilityrental = () => {
 
   const dispatch = useDispatch();
   const {selectedRoom} = useSelector(state => state.room);
+  const {startTime} = useSelector(state => state.room);
+  const {endTime} = useSelector(state => state.room);
+  const {date} = useSelector(state => state.room);
+
+  var start;
+  var end; 
+  if(!startTime)
+    start = "시간을 선택하시오";
+  else
+    start = startTime+" 시";
+    
+  if(!endTime)
+    end = "시간을 선택하시오";
+  else
+    end = endTime+" 시";
+
+  
+
 
 
 
@@ -74,10 +92,14 @@ const Facilityrental = () => {
         maximum,
         phone,
         selectedRoom,
-        token
+        token,
+        startTime,
+        endTime,
+        date,
       }
     });
   }
+  
 
   return (
     <>
@@ -101,10 +123,10 @@ const Facilityrental = () => {
               }}
             >
               <Form.Item style={{ display: "flex" }} label="Start">
-                <TimePicker style={{ marginRight: "20px" }} />
+                <Text style={{ marginRight: "100px" }}>{start}</Text>
               </Form.Item>
               <Form.Item style={{ display: "flex" }} label="End">
-                <TimePicker />
+                <Text>{end}</Text>
               </Form.Item>
             </div>
 

@@ -25,36 +25,33 @@ import {
 
 function reservateAPI(reservateData) {
 
-    var date = moment("2017-01-01").toDate;
-    var sTime = moment('10:00:00', 'hh:mm:ss').toDate;
-    var eTime = moment('12:00:00', 'hh:mm:ss').toDate;
-
-    let form = new FormData()
-    form.append('reason', reservateData.reason)
-    form.append('phone', reservateData.phone)
-    form.append('startTime', sTime)
-    form.append('endTime', eTime)
-    form.append('reservationDate', date)
-
     console.log(reservateData);
-    let url = "http://swot.devdogs.kr:8080/api/reservation/create/" + reservateData.selectedRoom;
-    console.log(url);
+    // let form = new FormData()
+    // form.append('reason', reservateData.reason)
+    // form.append('phone', reservateData.phone)
+    // form.append('startTime', reservateData.startTime)
+    // form.append('endTime', reservateData.endTime)
+    // form.append('reservationDate', reservateData.date)
 
-    return axios.post(url, form,
-        {
-            headers: { // 요청 헤더
-                Authorization: reservateData.token,
-            },
-        })
-        .then(response => {
-            console.log('response : ', JSON.stringify(response, null, 2));
-            var result = response.data;
-            return result;
-        })
-        .catch(error => {
-            console.log('failed', error)
-            return error;
-        })
+    // console.log(reservateData);
+    // let url = "http://swot.devdogs.kr:8080/api/reservation/create/" + reservateData.selectedRoom;
+    // console.log(url);
+
+    // return axios.post(url, form,
+    //     {
+    //         headers: { // 요청 헤더
+    //             Authorization: reservateData.token,
+    //         },
+    //     })
+    //     .then(response => {
+    //         console.log('response : ', JSON.stringify(response, null, 2));
+    //         var result = response.data;
+    //         return result;
+    //     })
+    //     .catch(error => {
+    //         console.log('failed', error)
+    //         return error;
+    //     })
 }
 
 function* reservate(action) {
