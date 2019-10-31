@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { Button, DatePicker, List, Typography } from "antd";
 import { Facilityrental, ReservationTime } from "../components";
+import {useDispatch} from "react-redux";
+import { DATE_SELECT } from "../reducers/room";
 
 const { Text } = Typography;
 
 const reservationForm = () => {
   const [reservationDate, setReseravtionDate] = useState("");
   const [lookup, setLookup] = useState("");
+  const dispatch = useDispatch();
+
   const onButton = () => {
     setLookup("lookup");
   };
@@ -14,6 +18,10 @@ const reservationForm = () => {
   function onChange(date, dateString) {
     console.log(date, dateString);
     setReseravtionDate(dateString);
+    dispatch({
+      type:DATE_SELECT,
+      data:dateString,
+    })
   }
   return (
     <>

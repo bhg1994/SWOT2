@@ -1,8 +1,13 @@
 import { Table } from "antd";
 import { ReservationTimeWrapper, Hoursofuse, Availabletime, SelecttimeWrapper, SelecttimeBtn } from '../components/css/ReservationTime';
+import { useDispatch, useSelector } from "react-redux";
+import { START_TIME_SELECT, END_TIME_SELECT } from "../reducers/room";
 const { Column } = Table;
 
-const data = [
+
+
+const data =[
+
   {
     "roomId": 1,
     "userId": 1,
@@ -59,7 +64,13 @@ const ReservationTime = ({ value }) => {
     "23:00",
   ];
 
-  var justClickedId = "";
+
+  const dispatch = useDispatch();
+
+  
+  var justClickedId ="";
+
+
   var startId = "";
   var beforeId = "";
 
@@ -72,6 +83,14 @@ const ReservationTime = ({ value }) => {
       startId = e.target.id;
       element.style.backgroundColor = "black";
       beforeId = e.target.id;
+      dispatch({
+        type: START_TIME_SELECT,
+        data: startId,
+      });
+      dispatch({
+        type: END_TIME_SELECT,
+        data: String(parseInt(startId)+1),
+      });
       return;
     }
     justClickedId = e.target.id;
@@ -85,11 +104,19 @@ const ReservationTime = ({ value }) => {
       if (element.style.backgroundColor != "black") {
         element.style.backgroundColor = "black";
         beforeId = e.target.id;
+        dispatch({
+          type: END_TIME_SELECT,
+          data: String(parseInt(beforeId)+1),
+        });
       }
       else {
         element.style.backgroundColor = "white";
         beforeId = String(parseInt(justClickedId) - 1);
         console.log(beforeId);
+        dispatch({
+          type: END_TIME_SELECT,
+          data: String(parseInt(beforeId)+1),
+        });
       }
     }
 
@@ -101,6 +128,14 @@ const ReservationTime = ({ value }) => {
     }
     justClickedId = "";
     startId = "";
+    dispatch({
+      type: START_TIME_SELECT,
+      data: "",
+    });
+    dispatch({
+      type: END_TIME_SELECT,
+      data: "",
+    });
     disable();
   };
 
@@ -141,7 +176,11 @@ const ReservationTime = ({ value }) => {
 
           <button onClick={oninit}>init</button>
           <SelecttimeWrapper>
-            {times.map((time, i) => (i < 8 || i > 21) ? (<SelecttimeBtn type="danger" disabled>{time}</SelecttimeBtn>) : (<SelecttimeBtn type="danger" onClick={onClick} id={i}>{time}</SelecttimeBtn>))}
+            {times.map((time, i) => (i < 8 || i > 21) ? (<SelecttimeBtn type="danger" disabled>{time}</SelecttimeBtn>) : (<SelecttimeBtn type="danger" onClick={onClick}  id={i}>{time}</SelecttimeBtn>))}
+
+
+          <button onClick={oninit}>init</button>
+   
           </SelecttimeWrapper>
         </ReservationTimeWrapper>
         : ""}
