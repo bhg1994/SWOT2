@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 
 import {
   Form,
@@ -13,10 +13,15 @@ import {
 } from "antd";
 import { FormWrapper, Section } from "../components/css/Facilityrental";
 import { useDispatch, useSelector } from "react-redux";
-import {useInput} from "../pages/login";
 import { RESERVATION_REQUEST } from "../reducers/room";
 
-
+export const useInput = (initValue = null) => {
+  const [value, setter] = useState(initValue);
+  const handler = useCallback(e => {
+    setter(e.target.value);
+  }, []);
+  return [value, handler];
+};
 
 const { Text } = Typography;
 const { TextArea } = Input;
@@ -38,6 +43,7 @@ const Facilityrental = () => {
   const [phone, onChangePhone] = useInput("");
 
   const dispatch = useDispatch();
+
   const {selectedRoom} = useSelector(state => state.room);
   const {startTime} = useSelector(state => state.room);
   const {endTime} = useSelector(state => state.room);
@@ -55,7 +61,6 @@ const Facilityrental = () => {
   else
     end = endTime+" 시";
 
-  
 
 
 
@@ -84,7 +89,7 @@ const Facilityrental = () => {
 
   const reservationRequest = () => {
     const token = localStorage.getItem("accessToken");
-    
+
     dispatch({
       type: RESERVATION_REQUEST,
       data: {

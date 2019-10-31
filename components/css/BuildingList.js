@@ -10,7 +10,6 @@ const {
   TabPane
 } = Tabs;
 
-
 export const BuildingNumber = styled(InputNumber)
   `
 width:37%;
