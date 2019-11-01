@@ -55,9 +55,9 @@ const BuildingList = () => {
     console.log("UseEffect.....totalRoomList" + totalRoomList);
     lists = [];
     totalRoomList.map((room) => {
-      if (String(room.groupNo) === buildingKey) {
-        lists.push(room);
-      }
+      // if (String(room.groupNo) === buildingKey) {
+      //   lists.push(room);
+      // }
     })
     setBuildingList(lists);
   }, [totalRoomList]);
@@ -176,7 +176,12 @@ const BuildingList = () => {
           <TabLectureRooms buildingList={buildingList} />
         </TabPane>
         <TabPane tab="나눔관" key="5"></TabPane>
-        <TabPane tab="이천환기념관" key="6"></TabPane>
+        <TabPane tab="이천환기념관" key="6">
+          <BuildingAddBtn type="primary" onClick={showModal}>
+            강의실 추가
+          </BuildingAddBtn>
+          <TabLectureRooms buildingList={buildingList} />
+        </TabPane>
         <TabPane tab="새천년관" key="7"></TabPane>
         <TabPane tab="성미가엘성당" key="9"></TabPane>
         <TabPane tab="미가엘관" key="12"  >

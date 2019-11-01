@@ -23,6 +23,7 @@
     "next-redux-saga": "^4.0.2",
     "next-redux-wrapper": "^3.0.0",
     "npm": "^6.11.3",
+    "pm2": "^4.1.2",
     "radium": "^0.26.0",
     "react": "^16.9.0",
     "react-carousel": "^4.3.0",
@@ -36,6 +37,7 @@
     "sunflower-antd": "^0.5.0"
   },
   "devDependencies": {
+    "cross-env": "^6.0.3",
     "eslint": "^6.3.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-react": "^7.14.3",
@@ -45,8 +47,8 @@
   },
   "scripts": {
     "dev": "nodemon",
-    "build": "next build",
-    "start": "next start"
+    "build": "cross-env next build",
+    "start": "cross-env NODE_ENV=production PORT=80 pm2 start server"
   },
   "proxy": "http://swot.devdogs.kr:8080/",
   "author": "Seong_Jin",

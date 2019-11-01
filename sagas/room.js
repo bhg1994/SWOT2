@@ -90,7 +90,7 @@ function roomListAPI(token) {
     // let form = new FormData()
     // form.append('email', roomListData.id)
     // form.append('password', roomListData.password)
-    return axios.get(`http://swot.devdogs.kr:8080/api/classroom/classrooms`,
+    return axios.get(`http://swot.devdogs.kr:8080/api/auth/classroom/list`,
         {
             headers: { // 요청 헤더
                 Authorization: token.token,
