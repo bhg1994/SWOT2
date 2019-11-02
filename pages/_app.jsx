@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import Link from "next/Link";
+import Link from "next/link";
 import { Layout, Menu, Icon, Avatar, Row, Col } from "antd";
 const { Header, Sider, Content, Footer } = Layout;
 import propTypes, { elementType } from "prop-types";

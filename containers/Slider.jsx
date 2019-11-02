@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Link from "next/Link";
+import Link from "next/link";
 import { Menu, Icon } from "antd";
 import { SiderWrapper } from "../containers/css/Slider";
 import { useSelector } from "react-redux/lib/hooks/useSelector";

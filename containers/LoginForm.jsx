@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect } from "react";
 import { Modal, Button, Input, Form } from "antd";
-import Link from "next/Link";
+import Link from "next/link";
 
 import { SectionWrapper, LoginWrap, Logintext, LoginContainer, Email, Label, Password, RegisterWrapper, RegisterContainer, TextRegister, Article, InputAddress, InputPassword, LoginButton, RegisterButton, ChangePwButton } from './css/LoginForm';
 
