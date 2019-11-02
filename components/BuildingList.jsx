@@ -54,11 +54,11 @@ const BuildingList = () => {
   useEffect(() => {
     console.log("UseEffect.....totalRoomList" + totalRoomList);
     lists = [];
-    totalRoomList.map((room) => {
-      // if (String(room.groupNo) === buildingKey) {
-      //   lists.push(room);
-      // }
-    })
+    // totalRoomList.map((room) => {
+    //   if (String(room.groupNo) === buildingKey) {
+    //     lists.push(room);
+    //   }
+    // }) 
     setBuildingList(lists);
   }, [totalRoomList]);
 
