@@ -8,7 +8,7 @@ import { ROOMLIST_REQUEST } from "../reducers/room";
 import { useDispatch, useSelector } from "react-redux";
 
 
-const studyboard = () => {
+const reservation = () => {
 
   const dispatch = useDispatch();
 
@@ -49,4 +49,4 @@ const studyboard = () => {
   );
 };
 
-export default studyboard;
+export default reservation;
