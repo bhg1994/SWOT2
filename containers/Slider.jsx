@@ -64,7 +64,7 @@ const Slider = () => {
             </Menu.Item>
             : ""}
           <Menu.Item key="6">
-            <Link href="/Reservation">
+            <Link href="/reservation">
               <a>
                 <Icon type="schedule" />
                 <span>Reservation</span>
