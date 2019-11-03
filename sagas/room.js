@@ -93,7 +93,7 @@ function roomListAPI(token) {
     return axios.get(`http://swot.devdogs.kr:8080/api/auth/classroom/list`,
         {
             headers: { // 요청 헤더
-                Authorization: token.token,
+                Authorization: token,
             },
         }
     ).then(response => {
@@ -142,7 +142,7 @@ function* watchRoomList() {
 function createRoomAPI(createRoomData) {
     // 서버에 요청을 보내는 부분
     let form = new FormData()
-    form.append('roomName', createRoomData.roomName) // 차후에 roomName으로 변경해야함
+    form.append('roomName', createRoomData.roomName)
     form.append('groupNo', createRoomData.groupNo)
     // 이거 왜있는 거?
     form.append('roomNo', createRoomData.roomNo)
@@ -174,13 +174,16 @@ function* createRoom(action) {
     try {
         const result = yield call(createRoomAPI, action.data);
 
-        console.log("응답 후 result : " + result);
+        console.log(result.info);
 
         if (result.result === "success") {
             yield put({ // put은 dispatch 동일
                 type: CREATEROOM_SUCCESS,
                 data: result.info
             });
+            yield put({
+                type: ROOMLIST_REQUEST,
+            })
             alert("강의실 생성 성공");
         }
         else {
@@ -190,7 +193,7 @@ function* createRoom(action) {
             alert("강의실 생성 실패");
         }
 
-    } catch (e) { // loginAPI 실패
+    } catch (e) { // createRoomAPI 실패
         console.error(e);
         yield put({
             type: ROOMLIST_FAILURE,

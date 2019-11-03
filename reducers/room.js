@@ -6,9 +6,9 @@ export const initialState = {
     isLoading: false,
     totalRoomList: [],
     selectedRoom: null,
-    startTime:"",
-    endTime:"",
-    date:"",
+    startTime: "",
+    endTime: "",
+    date: "",
 };
 
 export const RESERVATION_REQUEST = 'RESERVATION_REQUEST';
@@ -95,7 +95,8 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: false,
-                totalRoomList: action.data,
+                totalRoomList: [...state.totalRoomList, action.data]
+                // totalRoomList: action.data
             }
         }
         case CREATEROOM_FAILURE: {

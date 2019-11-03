@@ -1,21 +1,33 @@
 export const initialState = {
-    
+
     imagePaths: [], // 미리보기 이미지 경로
     addPostErrorReason: '', // 포스트 업로드 실패 사유
     isAddingPost: false, // 포스트 업로드 중
     postAdded: false, // 포스트 업로드 성공
+    isLoading: false,
     isAddingComment: false,
     addCommentErrorReason: '',
     commentAdded: false,
     notifycations: [],
     studyboards: [],
-    errorReason:'',
+    loadNotifycationsErrorReason: '',
+    createNotificationErrorReason: '',
+    deleteNotificationErrorReason: '',
+    errorReason: '',
 };
 
 
 export const LOAD_NOTIFYCATIONS_REQUEST = 'LOAD_NOTIFYCATIONS_REQUEST';
 export const LOAD_NOTIFYCATIONS_SUCCESS = 'LOAD_NOTIFYCATIONS_SUCCESS';
 export const LOAD_NOTIFYCATIONS_FAILURE = 'LOAD_NOTIFYCATIONS_FAILURE';
+
+export const CREATE_NOTIFYCATIONS_REQUEST = 'CREATE_NOTIFYCATIONS_REQUEST';
+export const CREATE_NOTIFYCATIONS_SUCCESS = 'CREATE_NOTIFYCATIONS_SUCCESS';
+export const CREATE_NOTIFYCATIONS_FAILURE = 'CREATE_NOTIFYCATIONS_FAILURE';
+
+export const DELETE_NOTIFYCATIONS_REQUEST = 'DELETE_NOTIFYCATIONS_REQUEST';
+export const DELETE_NOTIFYCATIONS_SUCCESS = 'DELETE_NOTIFYCATIONS_SUCCESS';
+export const DELETE_NOTIFYCATIONS_FAILURE = 'DELETE_NOTIFYCATIONS_FAILURE';
 
 export const LOAD_STUDYBOARDS_REQUEST = 'LOAD_STUDYBOARDS_REQUEST';
 export const LOAD_STUDYBOARDS_SUCCESS = 'LOAD_STUDYBOARDS_SUCCESS';
@@ -52,18 +64,69 @@ export default (state = initialState, action) => {
         case LOAD_NOTIFYCATIONS_REQUEST: {
             return {
                 ...state,
+                isLoading: true,
+                loadNotifycationsErrorReason: '',
             };
         }
         case LOAD_NOTIFYCATIONS_SUCCESS: {
             return {
                 ...state,
+                isLoading: false,
                 notifycations: action.data
             };
         }
         case LOAD_NOTIFYCATIONS_FAILURE: {
             return {
                 ...state,
-                errorReason: action.error,
+                isLoading: false,
+                loadNotifycationsErrorReason: action.error,
+            };
+        }
+
+        // 공지사항 글 작성
+        case CREATE_NOTIFYCATIONS_REQUEST: {
+            return {
+                ...state,
+                isLoading: true,
+                createNotificationErrorReason: '',
+            };
+        }
+        case CREATE_NOTIFYCATIONS_SUCCESS: {
+            return {
+                ...state,
+                isLoading: false,
+                notifycations: [...state.notifycations, action.data],
+                createNotificationErrorReason: ''
+            };
+        }
+        case CREATE_NOTIFYCATIONS_FAILURE: {
+            return {
+                ...state,
+                isLoading: true,
+                createNotificationErrorReason: action.error,
+            };
+        }
+
+        // 공지사항 글 삭제
+        case DELETE_NOTIFYCATIONS_REQUEST: {
+            return {
+                ...state,
+                isLoading: true,
+                deleteNotificationErrorReason: '',
+            };
+        }
+        case DELETE_NOTIFYCATIONS_SUCCESS: {
+            return {
+                ...state,
+                isLoading: false,
+                // notifycations: state.notifycations.filter(notify => notify.id !== action.data.id)
+            };
+        }
+        case DELETE_NOTIFYCATIONS_FAILURE: {
+            return {
+                ...state,
+                isLoading: true,
+                deleteNotificationErrorReason: action.error,
             };
         }
 

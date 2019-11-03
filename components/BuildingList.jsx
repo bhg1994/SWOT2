@@ -46,33 +46,40 @@ const BuildingList = () => {
   const [roomNo, onChangeroomNo] = useInput("");
   const [total, setChangeTotal] = useState("");
 
+  // const [tabActive, setTabActive] = useState(false);
+  const [tabkey, setTabkey] = useState("");
+
 
   const { totalRoomList, isLoading } = useSelector(state => state.room);
+
 
   let lists = [];
 
   useEffect(() => {
-    console.log("UseEffect.....totalRoomList" + totalRoomList);
-    lists = [];
-    // totalRoomList.map((room) => {
-    //   if (String(room.groupNo) === buildingKey) {
-    //     lists.push(room);
-    //   }
-    // }) 
-    setBuildingList(lists);
-  }, [totalRoomList]);
-
-  const onTabClick = (key) => {
-    var buildingKey = key;
+    console.log(tabkey, totalRoomList);
     lists = [];
     totalRoomList.map((room) => {
-      console.log(String(room.groupNo), key);
-      if (String(room.groupNo) === key) {
+      if (String(room.groupNo) === tabkey) {
         lists.push(room);
       }
     })
     setBuildingList(lists);
-    console.log("onTabClick 이후" + buildingList);
+    console.log(buildingList);
+  }, [totalRoomList])
+
+
+  const onTabClick = (key) => {
+    console.log(totalRoomList, buildingList);
+    lists = [];
+    totalRoomList.map((room) => {
+      // console.log(String(room.groupNo), key);
+      if (String(room.groupNo) === key) {
+        lists.push(room);
+      }
+    });
+    setBuildingList(lists);
+    console.log("onTabClick 이후");
+    setTabkey(key);
   };
 
 
@@ -99,13 +106,28 @@ const BuildingList = () => {
         roomNo: roomNo,
         total: total
       }
-    })
+    });
+    // lists = [];
+    // totalRoomList.map((room) => {
+    //   // console.log(String(room.groupNo), key);
+    //   if (String(room.groupNo) === buildingKey) {
+    //     lists.push(room);
+    //   }
+    // })
+    // setBuildingList(lists);
+
     setVisible(false);
   };
 
   const handleCancel = () => {
     setVisible(false);
   };
+
+  const onTabPaneClick = () => {
+    setTabActive(true);
+  }
+
+
 
   const props = {
     name: "file",
@@ -161,7 +183,8 @@ const BuildingList = () => {
           </Form.Item>
         </Form>
       </Modal>
-      <BuildingTabs defaultActiveKey="11" onTabClick={onTabClick}>
+      <BuildingTabs defaultActiveKey='0' onTabClick={onTabClick} >
+        <TabPane tab="건물 선택" key="0" />
         <TabPane tab="승연관" key="1">
           <BuildingAddBtn type="primary" onClick={showModal}>
             강의실 추가
@@ -184,7 +207,7 @@ const BuildingList = () => {
         </TabPane>
         <TabPane tab="새천년관" key="7"></TabPane>
         <TabPane tab="성미가엘성당" key="9"></TabPane>
-        <TabPane tab="미가엘관" key="12"  >
+        <TabPane tab="미가엘관" key="12" >
           <BuildingAddBtn type="primary" onClick={showModal}>
             강의실 추가
           </BuildingAddBtn>
@@ -194,5 +217,6 @@ const BuildingList = () => {
     </>
   );
 };
+
 export default BuildingList;
 

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import {
   Layout,
 } from "antd";
-import { ReservationRoominfo, LectureRoominfo } from "../components";
 import SwotMap from "../containers/SwotMap";
 import { ROOMLIST_REQUEST } from "../reducers/room";
 import { useDispatch, useSelector } from "react-redux";

@@ -19,6 +19,9 @@ import {
     SIGN_UP_FAILURE,
     SIGN_UP_REQUEST,
     SIGN_UP_SUCCESS,
+    EMAIL_DUPLICATE_REQUEST,
+    EMAIL_DUPLICATE_SUCCESS,
+    EMAIL_DUPLICATE_FAILURE,
     USER_MODIFY_FAILURE,
     USER_MODIFY_REQUEST,
     USER_MODIFY_SUCCESS,
@@ -37,6 +40,7 @@ function logInAPI(loginData) {
     form.append('email', loginData.id)
     form.append('pw', loginData.password)
 
+
     return axios.post(`http://swot.devdogs.kr:8080/api/auth/user/signIn`, form)
         .then(response => {
             console.log("id,password : " + loginData.id, loginData.password);
@@ -53,7 +57,6 @@ function logInAPI(loginData) {
 
 function* logIn(action) {
     try {
-
         const result = yield call(logInAPI, action.data);
         if (result.result === "success") {
             yield put({ // put은 dispatch 동일
@@ -140,6 +143,56 @@ function* signUp(action) {
 
 function* watchSignUp() {
     yield takeEvery(SIGN_UP_REQUEST, signUp);
+}
+
+// Email Duplicate Saga
+
+function emailDuplicateAPI(emailDuplicateData) {
+    console.log(emailDuplicateData);
+    // 서버에 요청을 보내는 부분
+    let form = new FormData()
+    form.append('email', emailDuplicateData.email)
+
+    return axios.post(`http://swot.devdogs.kr:8080/api/auth/user/emailDuplicate`, form)
+        .then(response => {
+            console.log('response : ', JSON.stringify(response, null, 2))
+            var result = response.data;
+            return result;
+        })
+        .catch(error => {
+            console.log('failed', error)
+            return error;
+        })
+}
+
+function* emailDuplicate(action) {
+    try {
+        const result = yield call(emailDuplicateAPI, action.data);
+        // 이메일 중복 시 result : fail , 사용 가능 시  result : success 로 변경
+        if (result.result === "success") {
+            yield put({ // put은 dispatch 동일
+                type: EMAIL_DUPLICATE_SUCCESS,
+            });
+            alert("사용 가능한 이메일 입니다.");
+        } else {
+            yield put({
+                type: EMAIL_DUPLICATE_FAILURE,
+            });
+            alert("이메일 중복입니다.");
+        }
+
+    } catch (e) { // loginAPI 실패
+        console.error(e);
+        yield put({
+            type: EMAIL_DUPLICATE_FAILURE,
+            error: e,
+        });
+        alert("오류. 다시 진행해");
+    }
+}
+
+function* watchDuplicate() {
+    yield takeEvery(EMAIL_DUPLICATE_REQUEST, emailDuplicate);
 }
 
 function logOutAPI() {
@@ -284,6 +337,7 @@ function PwmodifyAPI(PwmodifyInfo) {
 function* userPwModify(action) {
     try {
         const result = yield call(PwmodifyAPI, action.data);
+
         if (result.result === "success") {
             yield put({
                 type: USERPW_MODIFY_SUCCESS,
@@ -370,5 +424,6 @@ export default function* userSaga() {
         fork(watchModify),
         fork(watchPwModify),
         fork(watchWithdrawal),
+        fork(watchDuplicate)
     ]);
 }

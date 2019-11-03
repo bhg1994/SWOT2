@@ -7,6 +7,7 @@ const { Text } = Typography;
 const { confirm } = Modal;
 
 const LectureRoomList = ({ buildingList }) => {
+
     const [visible, setVisible] = useState(false);
     const [roomNo, setRoomNo] = useState("");
     const [roomName, setRoomName] = useState("");
@@ -18,7 +19,7 @@ const LectureRoomList = ({ buildingList }) => {
 
     const [id, setId] = useState(0);
 
-    const { isLoading } = useSelector(state => state.room);
+    const { totalRoomList, isLoading } = useSelector(state => state.room);
 
     const columns = [
         {

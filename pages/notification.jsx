@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Layout,
   Icon,
@@ -12,44 +12,17 @@ import {
   Modal,
   Form
 } from "antd";
-import { LOAD_NOTIFYCATIONS_REQUEST } from "../reducers/post";
-import {useSelector} from "react-redux";
+import {
+  LOAD_NOTIFYCATIONS_REQUEST, CREATE_NOTIFYCATIONS_REQUEST,
+  DELETE_NOTIFYCATIONS_REQUEST
+} from "../reducers/post";
+import { useDispatch, useSelector } from "react-redux";
 
 const { Text } = Typography;
+const { confirm } = Modal;
 const { Search } = Input;
 const { Option } = Select;
 const { TextArea } = Input;
-
-const columns = [
-  {
-    title: "글번호",
-    dataIndex: "number"
-  },
-  {
-    title: "제목",
-    dataIndex: "title",
-    render: text => <a>{text}</a>
-  },
-
-  {
-    title: "이름",
-    dataIndex: "name"
-  },
-  {
-    title: "조회수",
-    dataIndex: "views"
-  },
-  {
-    title: "날짜",
-    dataIndex: "date"
-  },
-  {
-    title: "삭제",
-    dataIndex: "button",
-    render: text => <a>{text}</a>
-  }
-];
-
 
 
 function handleChange(value) {
@@ -58,11 +31,54 @@ function handleChange(value) {
 
 const notifycation = () => {
 
-  const {notifycations} = useSelector(state => state.post);
-  console.log(notifycations);
+  const columns = [
+    {
+      title: "글번호",
+      dataIndex: "id"
+    },
+    {
+      title: "제목",
+      dataIndex: "title",
+      render: text => <a>{text}</a>
+    },
 
+    {
+      title: "내용",
+      dataIndex: "body"
+    },
+    {
+      title: "조회수",
+      dataIndex: "views"
+    },
+    {
+      title: "날짜",
+      dataIndex: "createdDate"
+    },
+    {
+      title: "수정란",
+      dataIndex: "action",
+      key: 'action',
+      render: () =>
+        <span>
+          <Button type="primary" onClick={showModifyNotifyModal}>수정</Button>
+          <Divider type="vertical" />
+          <Button type="danger" onClick={showDeleteNotifyModal}
+          >삭제</Button>
+        </span>
+    }
+  ];
+
+
+  const { notifycations, isLoading } = useSelector(state => state.post);
+
+  useEffect(() => {
+    console.log(notifycations);
+  }, [notifycations]);
+
+  const dispatch = useDispatch();
 
   const [visible, setVisible] = useState(false);
+  const [id, setId] = useState(0);
   const [notificationtitle, setNotificationtitle] = useState("");
   const [notificationcontent, setNotificationcontent] = useState("");
 
@@ -77,16 +93,59 @@ const notifycation = () => {
 
   const onChangeValue = e => {
     if (e.target.id === "notificationtitle") {
-      setStudytitle(e.target.value);
+      setNotificationtitle(e.target.value);
     } else if (e.target.id === "notificationcontent") {
-      setStudycontent(e.target.value);
+      setNotificationcontent(e.target.value);
     }
   };
 
   const handleSubmit = e => {
+    // 공지사항 추가 dispatch 작성
     e.preventDefault();
+    dispatch({
+      type: CREATE_NOTIFYCATIONS_REQUEST,
+      data: {
+        code: "1",
+        title: notificationtitle,
+        body: notificationcontent
+      }
+    })
     setVisible(false);
   };
+
+  const onRowClick = (record) => {
+    setId(record.id);
+  }
+
+  let deleteId = 0;
+
+  const showDeleteNotifyModal = () => {
+
+    deleteId = 0;
+    // setId(buildingList.id)
+    notifycations.map((notify) => {
+      if (notify.id === id) {
+        deleteId = id;
+      }
+    });
+    confirm({
+      title: '해당 공지사항 삭제',
+      content: '정말로 삭제하시겠습니까?',
+      onOk() {
+        dispatch({
+          type: DELETE_NOTIFYCATIONS_REQUEST,
+          data: {
+            id: deleteId
+          }
+        });
+      },
+      onCancel() { },
+    });
+  }
+
+  const showModifyNotifyModal = () => {
+    setVisible(true);
+  }
 
   return (
     <>
@@ -120,7 +179,7 @@ const notifycation = () => {
           </div>
         </header>
         <Divider />
-        <Table columns={columns} dataSource={notifycations} pagination={false}></Table>
+        <Table columns={columns} dataSource={notifycations} onRow={onRowClick}></Table>
         <div
           style={{
             display: "flex",
@@ -133,7 +192,6 @@ const notifycation = () => {
               textAlign: "right"
             }}
           >
-            <Pagination defaultCurrent={6} total={50} />
           </div>
           <div style={{ width: "40%", textAlign: "right" }}>
             <Button type="danger" size="large" onClick={showModal}>
@@ -141,50 +199,51 @@ const notifycation = () => {
             </Button>
           </div>
         </div>
-        <Modal title="공지사항 추가" visible={visible} footer={null}>
-          <Form onSubmit={handleSubmit}>
-            <Form.Item>
-              <Input
-                id="notificationtitle"
-                value={notificationtitle}
-                addonBefore="공지사항 제목"
-                style={{ width: "50%" }}
-                onChange={onChangeValue}
-              />
-            </Form.Item>
-            <Form.Item>
-              <TextArea
-                id="notificationcontent"
-                value={notificationcontent}
-                autosize={{ minRows: 3, maxRows: 6 }}
-                rows={4}
-                onChange={onChangeValue}
-                placeholder="공지사항 내용 입력"
-              />
-            </Form.Item>
-            <Form.Item>
-              <Button
-                type="primary"
-                style={{ marginRight: "20px" }}
-                htmlType="submit"
-              >
-                추가
-              </Button>
-              <Button type="danger" onClick={handleCancel}>
-                취소
-              </Button>
-            </Form.Item>
-          </Form>
-        </Modal>
       </Layout>
+      <Modal title="공지사항 추가" visible={visible} footer={null}>
+        <Form onSubmit={handleSubmit}>
+          <Form.Item>
+            <Input
+              id="notificationtitle"
+              value={notificationtitle}
+              addonBefore="공지사항 제목"
+              style={{ width: "50%" }}
+              onChange={onChangeValue}
+            />
+          </Form.Item>
+          <Form.Item>
+            <TextArea
+              id="notificationcontent"
+              value={notificationcontent}
+              autosize={{ minRows: 3, maxRows: 6 }}
+              rows={4}
+              onChange={onChangeValue}
+              placeholder="공지사항 내용 입력"
+            />
+          </Form.Item>
+          <Form.Item>
+            <Button
+              type="primary"
+              style={{ marginRight: "20px" }}
+              htmlType="submit"
+            >
+              추가
+              </Button>
+            <Button type="danger" onClick={handleCancel}>
+              취소
+              </Button>
+          </Form.Item>
+        </Form>
+      </Modal>
     </>
   );
 };
 
+
 notifycation.getInitialProps = async (context) => {
-context.store.dispatch({
-  type: LOAD_NOTIFYCATIONS_REQUEST,
-});
+  context.store.dispatch({
+    type: LOAD_NOTIFYCATIONS_REQUEST,
+  });
 };
 
 export default notifycation;

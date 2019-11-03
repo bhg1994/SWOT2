@@ -11,15 +11,15 @@ const master = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const token = localStorage.getItem("accessToken");
-    dispatch({
-      type: ROOMLIST_REQUEST,
-      data: {
-        token: token,
-      }
-    });
-  }, [])
+  // useEffect(() => {
+  //   const token = localStorage.getItem("accessToken");
+  //   dispatch({
+  //     type: ROOMLIST_REQUEST,
+  //     data: {
+  //       token: token,
+  //     }
+  //   });
+  // }, [])
 
   const { isLoggingIn } = useSelector(state => state.user);
 
@@ -32,6 +32,12 @@ const master = () => {
       </div>
     </>
   );
+};
+
+master.getInitialProps = async (context) => {
+  context.store.dispatch({
+    type: ROOMLIST_REQUEST
+  });
 };
 
 export default master;

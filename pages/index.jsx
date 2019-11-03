@@ -9,7 +9,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import { SwotMap } from "../containers";
 import { Row, Col, Card, Typography, Divider } from "antd";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import { LOAD_NOTIFYCATIONS_REQUEST } from "../reducers/post";
 
 
@@ -27,7 +27,7 @@ const { Text } = Typography;
 const Home = () => {
   const classes = useStyles();
 
-  const {notifycations} = useSelector(state => state.post);
+  const { notifycations } = useSelector(state => state.post);
 
   const NotificationTitle = (
     <div style={{ textAlign: "center" }}>
@@ -50,7 +50,7 @@ const Home = () => {
       <div>
         <Row gutter={24} type="flex">
           <Card bordered={false} style={{ marginTop: "50px" }}>
-            <Card
+            {/* <Card
               title={NotificationTitle}
               style={{ marginBottom: "50px" }}
               extra={<a href="Notification">Notification ></a>}
@@ -62,7 +62,7 @@ const Home = () => {
               <Text>{notifycations[1].title}</Text>
               <Divider />
               <Text>{notifycations[2].title}</Text>
-            </Card>
+            </Card> */}
             <Col xs={24} md={12}>
               <StudyBoard />
             </Col>

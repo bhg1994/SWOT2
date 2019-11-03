@@ -1,5 +1,7 @@
 export const initialState = {
     isLoggedIn: false, // 로그인 여부
+    isEmailedUp: false, // 이메일 중복 성공
+    isEmailingUp: false, // 이메일 중복 시도중
     isLoggingOut: false, // 로그아웃 시도중
     isLoggingIn: false, // 로그인 시도중
     logInErrorReason: '', // 로그인 실패 사유
@@ -10,12 +12,18 @@ export const initialState = {
     userInfo: null, // 남의 정보
     tokens: null,
     reservationErrorReason: '',
-    userpwErrorReason: ''
+    userpwErrorReason: '',
+    emailErrorReason: ''
+
 };
 
 export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
 export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
+
+export const EMAIL_DUPLICATE_REQUEST = 'EMAIL_DUPLICATE_REQUEST';
+export const EMAIL_DUPLICATE_SUCCESS = 'EMAIL_DUPLICATE_SUCCESS';
+export const EMAIL_DUPLICATE_FAILURE = 'EMAIL_DUPLICATE_FAILURE';
 
 export const LOG_IN_REQUEST = 'LOG_IN_REQUEST'; // 액션의 이름
 export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS'; // 액션의 이름
@@ -70,6 +78,7 @@ export default (state = initialState, action) => {
                 me: null,
             };
         }
+
         case LOG_OUT_REQUEST: {
             return {
                 ...state,
@@ -97,6 +106,30 @@ export default (state = initialState, action) => {
                 ...state,
                 isSigningUp: false,
                 signUpErrorReason: action.error,
+            };
+        }
+        // email duplicate
+        case EMAIL_DUPLICATE_REQUEST: {
+            return {
+                ...state,
+                isEmailingUp: true,
+                isEmailedUp: false,
+                emailErrorReason: '',
+            };
+        }
+        case EMAIL_DUPLICATE_SUCCESS: {
+            return {
+                ...state,
+                isEmailingUp: false,
+                isEmailedUp: true,
+                emailErrorReason: '',
+            };
+        }
+        case EMAIL_DUPLICATE_FAILURE: {
+            return {
+                ...state,
+                isEmailingUp: false,
+                emailErrorReason: '',
             };
         }
         case LOAD_USER_REQUEST: {

@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { Form, Input, Button, Checkbox, Typography } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { SIGN_UP_REQUEST } from "../reducers/user";
+import { SIGN_UP_REQUEST, EMAIL_DUPLICATE_REQUEST } from "../reducers/user";
 import {
   SignupWrapper,
   SignupContainer,
@@ -21,17 +21,6 @@ import {
   Check
 } from "../containers/css/SignupForm";
 
-
-/* custom Hooks */
-
-export const useInput = (initValue = null) => {
-  const [value, setter] = useState(initValue);
-  const handler = useCallback(e => {
-    setter(e.target.value);
-  }, []);
-  return [value, handler];
-};
-
 const SignupForm = () => {
   const [id, setId] = useState("");
   const [email, setEmail] = useState("");
@@ -45,6 +34,18 @@ const SignupForm = () => {
 
   const dispatch = useDispatch();
   const { isSigningUp, me } = useSelector(state => state.user);
+
+  const onDuplicateBtn = useCallback(
+    e => {
+      e.preventDefault();
+      dispatch({
+        type: EMAIL_DUPLICATE_REQUEST,
+        data: {
+          email
+        }
+      });
+    }, [email]
+  );
 
   // useCallback으로 감쌀때 함수 내부에서 쓰는 state를 deps배열로 넣는다.
   const onSubmit = useCallback(
@@ -107,6 +108,7 @@ const SignupForm = () => {
     setTerm(e.target.checked);
   }, []);
 
+
   return (
     <>
       <SignupWrapper>
@@ -130,7 +132,7 @@ const SignupForm = () => {
                   />
                 </Email>
                 <Duplicate>
-                  <Button>중복 확인</Button>
+                  <Button onClick={onDuplicateBtn}>중복 확인</Button>
                 </Duplicate>
               </FirstSection>
               <SecondSection>
