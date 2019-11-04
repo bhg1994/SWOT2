@@ -340,6 +340,7 @@ const notifycation = () => {
 };
 
 notifycation.getInitialProps = async (context) => {
+  console.log("notify");
   context.store.dispatch({
     type: LOAD_NOTIFYCATIONS_REQUEST,
   });

@@ -9,6 +9,8 @@ export const initialState = {
     startTime: "",
     endTime: "",
     date: "",
+    errorReason:"",
+    roomReservations:[],
 };
 
 export const RESERVATION_REQUEST = 'RESERVATION_REQUEST';
@@ -19,21 +21,9 @@ export const ROOMLIST_REQUEST = 'ROOMLIST_REQUEST';
 export const ROOMLIST_SUCCESS = 'ROOMLIST_SUCCESS';
 export const ROOMLIST_FAILURE = 'ROOMLIST_FAILURE';
 
-export const CREATEROOM_REQUEST = 'CREATEROOM_REQUEST';
-
-export const CREATEROOM_SUCCESS = 'CREATEROOM_SUCCESS';
-
-export const CREATEROOM_FAILURE = 'CREATEROOM_FAILURE';
-
-export const DELETEROOM_REQUEST =
-    'DELETEROOM_REQUEST';
-
-export const DELETEROOM_SUCCESS =
-    'DELETEROOM_SUCCESS';
-
-export const DELETEROOM_FAILURE =
-    'DELETEROOM_FAILURE';
-
+export const ROOM_RESERVATIONS_REQUEST = 'ROOM_RESERVATIONS_REQUEST'
+export const ROOM_RESERVATIONS_SUCCESS = 'ROOM_RESERVATIONS_SUCCESS'
+export const ROOM_RESERVATIONS_FAILURE = 'ROOM_RESERVATIONS_FAILURE'
 
 export const ROOM_SELECT_REQUEST = 'ROOM_SELECT_REQUEST';
 export const START_TIME_SELECT = 'START_TIME_SELECT';
@@ -84,47 +74,26 @@ export default (state = initialState, action) => {
                 roomListErrorReason: action.error,
             };
         }
-        case CREATEROOM_REQUEST: {
+        case ROOM_RESERVATIONS_REQUEST: {
             return {
                 ...state,
                 isLoading: true,
-                createRoomReason: ""
-            }
+                errorReason: ""
+            };
         }
-        case CREATEROOM_SUCCESS: {
+        case ROOM_RESERVATIONS_SUCCESS: {
             return {
                 ...state,
                 isLoading: false,
-                totalRoomList: [...state.totalRoomList, action.data]
-                // totalRoomList: action.data
-            }
+                roomReservations: action.data,
+            };
         }
-        case CREATEROOM_FAILURE: {
+        case ROOM_RESERVATIONS_FAILURE: {
             return {
                 ...state,
                 isLoading: false,
-                createRoomReason: action.error
-            }
-        }
-        case DELETEROOM_REQUEST: {
-            return {
-                ...state,
-                isLoading: true,
-                deleteRoomReason: ""
-            }
-        }
-        case DELETEROOM_SUCCESS: {
-            return {
-                ...state,
-                isLoading: true,
-            }
-        }
-        case DELETEROOM_FAILURE: {
-            return {
-                ...state,
-                isLoading: false,
-                createRoomReason: action.error
-            }
+                errorReason: action.error,
+            };
         }
         case ROOM_SELECT_REQUEST: {
             return {

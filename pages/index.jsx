@@ -96,8 +96,8 @@ const Home = () => {
 };
 
 Home.getInitialProps = async (context) => {
-  context.store.dispatch({
-    type: LOAD_NOTIFYCATIONS_REQUEST,
-  });
+  // context.store.dispatch({
+  //   type: LOAD_NOTIFYCATIONS_REQUEST,
+  // });
 };
 export default Home;
