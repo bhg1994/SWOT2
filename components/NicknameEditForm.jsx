@@ -28,7 +28,7 @@ const NicknameEditForm = () => {
     phone: "loading",
     statusMsg: "loading",
     studentId: "loading",
-    }
+  }
 
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
@@ -39,9 +39,6 @@ const NicknameEditForm = () => {
   const { isLoading } = useSelector(state => state.user);
   const [me, setMe] = useState(loading);
 
-
-
-  
 
   useEffect(() => {
     let myInfo = JSON.parse(localStorage.getItem("myInfo"));
