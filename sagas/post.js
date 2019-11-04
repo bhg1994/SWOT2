@@ -7,12 +7,6 @@ import {
     call
 } from 'redux-saga/effects';
 import {
-    ADD_COMMENT_FAILURE,
-    ADD_COMMENT_REQUEST,
-    ADD_COMMENT_SUCCESS,
-    ADD_POST_FAILURE,
-    ADD_POST_REQUEST,
-    ADD_POST_SUCCESS,
     LOAD_NOTIFYCATIONS_REQUEST,
     LOAD_NOTIFYCATIONS_SUCCESS,
     LOAD_NOTIFYCATIONS_FAILURE,
@@ -31,53 +25,6 @@ import {
     LOAD_STUDYBOARDS_FAILURE,
 } from '../reducers/post';
 import axios from 'axios';
-
-function addPostAPI() {
-
-}
-
-function* addPost() {
-    try {
-        yield delay(2000);
-        yield put({
-            type: ADD_POST_SUCCESS,
-        });
-    } catch (e) {
-        yield put({
-            type: ADD_POST_FAILURE,
-            error: e,
-        });
-    }
-}
-
-function* watchAddPost() {
-    yield takeEvery(ADD_POST_REQUEST, addPost);
-}
-
-function addCommentAPI() {
-
-}
-
-function* addComment(action) {
-    try {
-        yield delay(2000);
-        yield put({
-            type: ADD_COMMENT_SUCCESS,
-            data: {
-                postId: action.data.postId,
-            },
-        });
-    } catch (e) {
-        yield put({
-            type: ADD_COMMENT_FAILURE,
-            error: e,
-        });
-    }
-}
-
-function* watchAddComment() {
-    yield takeEvery(ADD_COMMENT_REQUEST, addComment);
-}
 
 // 공지사항 글 불러오기 
 
@@ -245,13 +192,15 @@ function* watchDeleteNotifycations() {
 function modifyNotifycationsAPI(notificationInfo) {
 
     let id = notificationInfo.id
-    let form = new FormData();
+
+    let form = new FormData()
     form.append('title', notificationInfo.title)
     form.append('body', notificationInfo.body)
 
     let token = localStorage.getItem("accessToken");
 
-    return axios.get('http://swot.devdogs.kr:8080/api/board/modify/' + id,
+
+    return axios.post('http://swot.devdogs.kr:8080/api/board/modify/' + id, form,
         {
             headers: { // 요청 헤더
                 Authorization: token,
@@ -271,6 +220,8 @@ function modifyNotifycationsAPI(notificationInfo) {
 function* modifyNotifycations(action) {
     try {
         const result = yield call(modifyNotifycationsAPI, action.data);
+
+        console.log(result.result);
 
         if (result.result === "success") {
             yield put({
@@ -367,8 +318,6 @@ function* watchLoadStudyboards() {
 
 export default function* postSaga() {
     yield all([
-        fork(watchAddPost),
-        fork(watchAddComment),
         fork(watchLoadNotifycations),
         fork(watchLoadStudyboards),
         fork(watchCreateNotifycations),

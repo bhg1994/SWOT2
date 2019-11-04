@@ -49,11 +49,14 @@ const notifycation = () => {
     }
   }, []);
 
+  let articlenum = 1;
+
   const columns = [
     {
       title: "글번호",
-      dataIndex: "id",
-      key: "id"
+      dataIndex: "number",
+      key: "number",
+      render: () => <div>{articlenum++}</div>
     },
     {
       title: "제목",
@@ -88,8 +91,6 @@ const notifycation = () => {
     }
   ];
 
-
-
   const { notifycations } = useSelector(state => state.post);
 
 
@@ -97,6 +98,7 @@ const notifycation = () => {
 
   const [visible, setVisible] = useState(false);
   const [modifyvisible, setModifyvisible] = useState(false);
+  const [deletevisible, setDeletevisible] = useState(false);
   const [id, setId] = useState(0);
   const [notificationtitle, setNotificationtitle] = useState("");
   const [notificationcontent, setNotificationcontent] = useState("");
@@ -104,9 +106,17 @@ const notifycation = () => {
   const [modifybody, onChangebody] = useInput("");
 
   const handleCancel = () => {
-    setModifyvisible(false);
+    setVisible(false);
     console.log("취소 버튼");
   };
+
+  const deletehandleCancel = () => {
+    setDeletevisible(false);
+  }
+
+  const modifyhandleCancel = () => {
+    setModifyvisible(false);
+  }
 
   const showModal = () => {
     setVisible(true);
@@ -139,49 +149,40 @@ const notifycation = () => {
   const onRowClick = (record) => {
     return {
       onClick: () => {
-        console.log(record.id);
+        console.log("RowClick" + record.id);
+        setId(record.id);
       }
     }
-  }
-
-  let deleteId = 0;
-
-  const showDeleteNotifyModal = () => {
-
-    deleteId = 0;
-    // setId(buildingList.id)
-    notifycations.map((notify) => {
-      if (notify.id === id) {
-        deleteId = id;
-      }
-    });
-    confirm({
-      title: '해당 공지사항 삭제',
-      content: '정말로 삭제하시겠습니까?',
-      onOk() {
-        dispatch({
-          type: DELETE_NOTIFYCATIONS_REQUEST,
-          data: {
-            id: deleteId
-          }
-        });
-      },
-      onCancel() { },
-    });
   }
 
   const showModifyNotifyModal = () => {
     setModifyvisible(true);
   }
 
+  const showDeleteNotifyModal = () => {
+    setDeletevisible(true);
+  }
+
   const notifyModify = () => {
     dispatch({
       type: MODIFY_NOTIFYCATIONS_REQUEST,
       data: {
-
+        id: id,
+        title: modifytitle,
+        body: modifybody
       }
     })
     setModifyvisible(false);
+  }
+
+  const notifyDelete = () => {
+    dispatch({
+      type: DELETE_NOTIFYCATIONS_REQUEST,
+      data: {
+        id: id
+      }
+    })
+    setDeletevisible(false);
   }
 
   return (
@@ -216,7 +217,7 @@ const notifycation = () => {
           </div>
         </header>
         <Divider />
-        <Table columns={columns} dataSource={notifycations} onRow={onRowClick}></Table>
+        <Table columns={columns} dataSource={notifycations} onRow={onRowClick} ></Table>
         <div
           style={{
             display: "flex",
@@ -308,7 +309,27 @@ const notifycation = () => {
             >
               변경
                 </Button>
-            <Button type="danger" onClick={handleCancel}>
+            <Button type="danger" onClick={modifyhandleCancel}>
+              취소
+                </Button>
+          </Form.Item>
+        </Form>
+      </Modal>
+
+      {/* 공지사항 삭제 버튼 모달 */}
+
+      <Modal title="공지사항 삭제" visible={deletevisible} footer={null}>
+        <Form >
+          <Form.Item>
+            <p style={{ fontSize: "20px" }}>해당 글을 삭제 하시겠습니까?</p>
+            <Button
+              type="primary"
+              style={{ marginRight: "20px" }}
+              onClick={notifyDelete}
+            >
+              삭제
+                </Button>
+            <Button type="danger" onClick={deletehandleCancel}>
               취소
                 </Button>
           </Form.Item>
