@@ -70,7 +70,7 @@ const questionAnswer = () => {
       key: "createdDate"
     },
     {
-      title: "란",
+      title: "수정란",
       dataIndex: "action",
       key: "action",
       render: () =>
@@ -83,7 +83,7 @@ const questionAnswer = () => {
     }
   ];
 
-  const { questions } = useSelector(state => state.question);
+  const { questions, isLoading } = useSelector(state => state.question);
 
 
   const dispatch = useDispatch();

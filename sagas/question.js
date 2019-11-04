@@ -192,6 +192,9 @@ function* watchDeleteQuestion() {
 
 function modifyQuestionAPI(modifyQuestionInfo) {
 
+
+    let id = modifyQuestionInfo.id;
+
     let form = new FormData();
     form.append('title', modifyQuestionInfo.title)
     form.append('body', modifyQuestionInfo.body)
@@ -221,18 +224,17 @@ function* modifyQuestion(action) {
 
         if (result.result === "success") {
             yield put({
-                type: MODIFY_QUESTION_SUCCESS,
-                data: result.info,
+                type: MODIFY_QUESTION_SUCCESS
             });
             yield put({
-                type: MODIFY_QUESTION_REQUEST,
-            })
-            alert('Q&A 글이 삭제되었습니다.')
+                type: LOAD_QUESTION_REQUEST
+            });
+            alert('Q&A 글이 수정되었습니다.')
         } else {
             yield put({
                 type: MODIFY_QUESTION_FAILURE,
             });
-            alert('Q&A 글 삭제 실패.')
+            alert('Q&A 글 수정 실패.')
         }
     }
     catch (e) {
