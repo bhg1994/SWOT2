@@ -9,8 +9,9 @@ export const initialState = {
     startTime: "",
     endTime: "",
     date: "",
-    errorReason:"",
-    roomReservations:[],
+    errorReason: "",
+    roomReservations: [],
+    reservationsList: [],
 };
 
 export const RESERVATION_REQUEST = 'RESERVATION_REQUEST';
@@ -24,6 +25,7 @@ export const ROOMLIST_FAILURE = 'ROOMLIST_FAILURE';
 export const ROOM_RESERVATIONS_REQUEST = 'ROOM_RESERVATIONS_REQUEST'
 export const ROOM_RESERVATIONS_SUCCESS = 'ROOM_RESERVATIONS_SUCCESS'
 export const ROOM_RESERVATIONS_FAILURE = 'ROOM_RESERVATIONS_FAILURE'
+
 
 export const ROOM_SELECT_REQUEST = 'ROOM_SELECT_REQUEST';
 export const START_TIME_SELECT = 'START_TIME_SELECT';

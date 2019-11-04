@@ -14,6 +14,9 @@ import {
     DELETEROOM_REQUEST,
     DELETEROOM_SUCCESS,
     DELETEROOM_FAILURE,
+    LOAD_RESERVATIONS_REQUEST,
+    LOAD_RESERVATIONS_SUCCESS,
+    LOAD_RESERVATIONS_FAILURE,
 } from '../reducers/master'
 
 function createRoomAPI(createRoomData) {
@@ -140,9 +143,59 @@ function* watchDeleteRoom() {
     yield takeEvery(DELETEROOM_REQUEST, deleteRoom);
 }
 
+//  예약 로드
+
+function loadReservationsAPI() {
+    // 서버에 요청을 보내는 부분
+    let url = "http://swot.devdogs.kr:8080/api/auth/reservation/list";
+
+
+
+    return axios.get(url)
+        .then(response => {
+            console.log('response : ', JSON.stringify(response, null, 2));
+            let result = response.data;
+            return result;
+        })
+        .catch(error => {
+            console.log('failed', error)
+            return error;
+        })
+}
+
+function* loadReservations(action) {
+    try {
+        const result = yield call(loadReservationsAPI);
+
+        if (result.result === "success") {
+            yield put({ // put은 dispatch 동일
+                type: LOAD_RESERVATIONS_SUCCESS,
+                data: result.info,
+            });
+        }
+        else {
+            yield put({
+                type: LOAD_RESERVATIONS_FAILURE,
+            });
+        }
+
+    } catch (e) { // loginAPI 실패
+        console.error(e);
+        yield put({
+            type: LOAD_RESERVATIONS_FAILURE,
+        });
+        alert("통신 장애");
+    }
+}
+
+function* watchLoadReservations() {
+    yield takeEvery(LOAD_RESERVATIONS_REQUEST, loadReservations);
+}
+
 export default function* roomSaga() {
     yield all([
         fork(watchCreateRoom),
         fork(watchDeleteRoom),
+        fork(watchLoadReservations),
     ]);
 }
