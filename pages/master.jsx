@@ -10,24 +10,6 @@ import { LOAD_RESERVATIONS_REQUEST } from "../reducers/master";
 
 const master = () => {
 
-  const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   const token = localStorage.getItem("accessToken");
-  //   dispatch({
-  //     type: ROOMLIST_REQUEST,
-  //     data: {
-  //       token: token,
-  //     }
-  //   });
-  // }, [])
-
-  const { reservationsList } = useSelector(state => state.master);
-  useEffect(() => {
-    console.log("master1" + reservationsList);
-  }, [reservationsList]);
-  console.log("master2" + reservationsList);
-
   const { isLoggingIn } = useSelector(state => state.user);
 
   return (
