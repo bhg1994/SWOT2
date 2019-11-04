@@ -49,7 +49,6 @@ const BuildingList = () => {
   // const [tabActive, setTabActive] = useState(false);
   const [tabkey, setTabkey] = useState("");
 
-
   const { totalRoomList, isLoading } = useSelector(state => state.room);
 
 

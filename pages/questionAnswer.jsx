@@ -70,18 +70,16 @@ const questionAnswer = () => {
       key: "createdDate"
     },
     {
-      title: "수정란",
+      title: "란",
       dataIndex: "action",
       key: "action",
       render: () =>
-        myinfoid === 1 ?
-          <span>
-            <Button type="primary" onClick={showModifyNotifyModal}>수정</Button>
-            <Divider type="vertical" />
-            <Button type="danger" onClick={showDeleteNotifyModal}
-            >삭제</Button>
-          </span>
-          : ""
+        <span>
+          <Button type="primary" onClick={showModifyNotifyModal}>수정</Button>
+          <Divider type="vertical" />
+          <Button type="danger" onClick={showDeleteNotifyModal}
+          >삭제</Button>
+        </span>
     }
   ];
 
