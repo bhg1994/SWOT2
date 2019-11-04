@@ -6,6 +6,15 @@ import { useEffect, useState } from "react";
 const { Column } = Table;
 
 
+
+
+var justClickedId ="";
+
+
+  var startId = "";
+  var beforeId = "";
+
+
 const ReservationTime = ({ value }) => {
   const times = [
     "00:00",
@@ -43,11 +52,7 @@ const ReservationTime = ({ value }) => {
 
   
   
-  var justClickedId ="";
-
-
-  var startId = "";
-  var beforeId = "";
+  
 
   useEffect(() => {
     if(value){
@@ -64,7 +69,7 @@ const ReservationTime = ({ value }) => {
     console.log(reservations);
 
     if(value){
-      oninit();
+      //oninit();
       console.log("after list")
     }
   }, [roomReservations])
@@ -96,23 +101,26 @@ const ReservationTime = ({ value }) => {
     }
 
     if (parseInt(beforeId) - parseInt(justClickedId) === -1 || parseInt(beforeId) - parseInt(justClickedId) === 0) {
-      if (element.style.backgroundColor != "black") {
-        element.style.backgroundColor = "black";
-        beforeId = e.target.id;
-        dispatch({
-          type: END_TIME_SELECT,
-          data: String(parseInt(beforeId)+1),
-        });
+      if(parseInt(justClickedId) - parseInt(startId) < 5 ){
+        if (element.style.backgroundColor != "black") {
+          element.style.backgroundColor = "black";
+          beforeId = e.target.id;
+          dispatch({
+            type: END_TIME_SELECT,
+            data: String(parseInt(beforeId)+1),
+          });
+        }
+        else {
+          element.style.backgroundColor = "white";
+          beforeId = String(parseInt(justClickedId) - 1);
+          console.log(beforeId);
+          dispatch({
+            type: END_TIME_SELECT,
+            data: String(parseInt(beforeId)+1),
+          });
+        }
       }
-      else {
-        element.style.backgroundColor = "white";
-        beforeId = String(parseInt(justClickedId) - 1);
-        console.log(beforeId);
-        dispatch({
-          type: END_TIME_SELECT,
-          data: String(parseInt(beforeId)+1),
-        });
-      }
+      
     }
 
 
