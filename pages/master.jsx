@@ -21,6 +21,7 @@ const master = () => {
   //     }
   //   });
   // }, [])
+
   const { reservationsList } = useSelector(state => state.master);
   useEffect(() => {
     console.log("master1" + reservationsList);
