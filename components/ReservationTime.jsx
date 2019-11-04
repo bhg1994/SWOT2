@@ -6,37 +6,6 @@ import { useEffect, useState } from "react";
 const { Column } = Table;
 
 
-
-// const data =[
-
-//   {
-//     "roomId": 1,
-//     "userId": 1,
-//     "reson": "study",
-//     "phone": "010",
-//     "startTime": "12",
-//     "endTime": "15",
-//     "reservationDate": 2019 - 12 - 11,
-//     "state": 'C',
-//     "createdDate": "2019-10-05T08:08:49.000+0000",
-//     "updatedDate": "2019-10-05T08:08:49.000+0000"
-//   },
-//   {
-//     "roomId": 1,
-//     "userId": 1,
-//     "reson": "study",
-//     "phone": "010",
-//     "startTime": "16",
-//     "endTime": "17",
-//     "reservationDate": 2019 - 12 - 11,
-//     "state": 'C',
-//     "createdDate": "2019-10-05T08:08:49.000+0000",
-//     "updatedDate": "2019-10-05T08:08:49.000+0000"
-//   }
-
-// ]
-
-
 const ReservationTime = ({ value }) => {
   const times = [
     "00:00",
