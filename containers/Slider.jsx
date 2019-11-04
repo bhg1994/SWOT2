@@ -101,14 +101,14 @@ const Slider = () => {
             </Menu.Item>
             : ""
           }
-          <Menu.Item key="10">
+          {/* <Menu.Item key="10">
             <Link href="/reservationForm">
               <a>
                 <Icon type="github" />
                 <span>reservationForm</span>
               </a>
             </Link>
-          </Menu.Item>
+          </Menu.Item> */}
         </Menu>
       </SiderWrapper>
     </>

@@ -4,7 +4,15 @@ import {
   LogoutBtn
 } from "../components/css/MasternameEditForm";
 
+
 const MasternameEditForm = () => {
+
+  const logoutRequest = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("myInfo");
+    location.href = "/";
+  };
+
   return (
     <MasterEditForm>
       <div>
@@ -13,7 +21,7 @@ const MasternameEditForm = () => {
           avatar={<Avatar>M</Avatar>}
           title="Master"
         />
-        <LogoutBtn>로그아웃</LogoutBtn>
+        <LogoutBtn onClick={logoutRequest}>로그아웃</LogoutBtn>
       </div>
     </MasterEditForm>
   );
