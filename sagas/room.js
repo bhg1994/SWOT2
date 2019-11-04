@@ -181,9 +181,6 @@ function* createRoom(action) {
                 type: CREATEROOM_SUCCESS,
                 data: result.info
             });
-            yield put({
-                type: ROOMLIST_REQUEST,
-            })
             alert("강의실 생성 성공");
         }
         else {

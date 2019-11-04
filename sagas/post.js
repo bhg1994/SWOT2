@@ -22,6 +22,9 @@ import {
     DELETE_NOTIFYCATIONS_REQUEST,
     DELETE_NOTIFYCATIONS_SUCCESS,
     DELETE_NOTIFYCATIONS_FAILURE,
+    MODIFY_NOTIFYCATIONS_REQUEST,
+    MODIFY_NOTIFYCATIONS_SUCCESS,
+    MODIFY_NOTIFYCATIONS_FAILURE,
 
     LOAD_STUDYBOARDS_REQUEST,
     LOAD_STUDYBOARDS_SUCCESS,
@@ -238,6 +241,66 @@ function* watchDeleteNotifycations() {
 }
 
 
+// 공지사항 글 수정
+function modifyNotifycationsAPI(notificationInfo) {
+
+    let id = notificationInfo.id
+    let form = new FormData();
+    form.append('title', notificationInfo.title)
+    form.append('body', notificationInfo.body)
+
+    let token = localStorage.getItem("accessToken");
+
+    return axios.get('http://swot.devdogs.kr:8080/api/board/modify/' + id,
+        {
+            headers: { // 요청 헤더
+                Authorization: token,
+            },
+        }
+    ).then(response => {
+        console.log('response : ', JSON.stringify(response, null, 2))
+        var result = response.data;
+        return result;
+    })
+        .catch(error => {
+            console.log('failed', error)
+            return error;
+        });
+}
+
+function* modifyNotifycations(action) {
+    try {
+        const result = yield call(modifyNotifycationsAPI, action.data);
+
+        if (result.result === "success") {
+            yield put({
+                type: MODIFY_NOTIFYCATIONS_SUCCESS,
+            });
+            // yield put({
+            //     type: LOAD_NOTIFYCATIONS_REQUEST,
+            // })
+            alert('글이 수정되었습니다.');
+        } else {
+            yield put({
+                type: MODIFY_NOTIFYCATIONS_FAILURE,
+            });
+            alert("글 수정 X");
+        }
+    }
+    catch (e) {
+        yield put({
+            type: MODIFY_NOTIFYCATIONS_FAILURE,
+            error: e,
+        });
+        alert('통신 오류 실패.');
+    }
+}
+
+function* watchModifyNotifycations() {
+    yield takeEvery(MODIFY_NOTIFYCATIONS_REQUEST, modifyNotifycations);
+}
+
+
 function loadStudyboardsAPI(requestData) {
     const data = [
         {
@@ -309,6 +372,7 @@ export default function* postSaga() {
         fork(watchLoadNotifycations),
         fork(watchLoadStudyboards),
         fork(watchCreateNotifycations),
-        fork(watchDeleteNotifycations)
+        fork(watchDeleteNotifycations),
+        fork(watchModifyNotifycations)
     ]);
 }

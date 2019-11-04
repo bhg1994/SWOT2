@@ -6,11 +6,14 @@ import { useSelector } from "react-redux/lib/hooks/useSelector";
 
 const Slider = () => {
 
-  const [myinfo, setMyinfo] = useState("")
+  const [myinfoid, setMyinfoid] = useState(0);
+
 
   useEffect(() => {
-    setMyinfo(JSON.parse(localStorage.getItem("myInfo")))
-    console.log("useEffect 이후 :" + myinfo);
+    if (JSON.parse(localStorage.getItem("myInfo"))) {
+      const me = JSON.parse(localStorage.getItem("myInfo"));
+      setMyinfoid(me.id);
+    }
   }, [])
 
   return (
@@ -35,7 +38,7 @@ const Slider = () => {
             </Link>
           </Menu.Item>
 
-          {!myinfo ?
+          {!myinfoid ?
             <Menu.Item key="3">
               <Link href="/login">
                 <a>
@@ -53,7 +56,7 @@ const Slider = () => {
               </a>
             </Link>
           </Menu.Item>
-          {myinfo ?
+          {(myinfoid && myinfoid !== 1) ?
             <Menu.Item key="5">
               <Link href="/profile">
                 <a>
@@ -87,14 +90,17 @@ const Slider = () => {
               </a>
             </Link>
           </Menu.Item>
-          <Menu.Item key="9">
-            <Link href="/master">
-              <a>
-                <Icon type="github" />
-                <span>Master</span>
-              </a>
-            </Link>
-          </Menu.Item>
+          {myinfoid === 1 ?
+            <Menu.Item key="9">
+              <Link href="/master">
+                <a>
+                  <Icon type="github" />
+                  <span>Master</span>
+                </a>
+              </Link>
+            </Menu.Item>
+            : ""
+          }
           <Menu.Item key="10">
             <Link href="/reservationForm">
               <a>

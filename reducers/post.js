@@ -13,6 +13,7 @@ export const initialState = {
     loadNotifycationsErrorReason: '',
     createNotificationErrorReason: '',
     deleteNotificationErrorReason: '',
+    modifyNotificationErrorReason: '',
     errorReason: '',
 };
 
@@ -28,6 +29,10 @@ export const CREATE_NOTIFYCATIONS_FAILURE = 'CREATE_NOTIFYCATIONS_FAILURE';
 export const DELETE_NOTIFYCATIONS_REQUEST = 'DELETE_NOTIFYCATIONS_REQUEST';
 export const DELETE_NOTIFYCATIONS_SUCCESS = 'DELETE_NOTIFYCATIONS_SUCCESS';
 export const DELETE_NOTIFYCATIONS_FAILURE = 'DELETE_NOTIFYCATIONS_FAILURE';
+
+export const MODIFY_NOTIFYCATIONS_REQUEST = 'MODIFY_NOTIFYCATIONS_REQUEST';
+export const MODIFY_NOTIFYCATIONS_SUCCESS = 'MODIFY_NOTIFYCATIONS_SUCCESS';
+export const MODIFY_NOTIFYCATIONS_FAILURE = 'MODIFY_NOTIFYCATIONS_FAILURE';
 
 export const LOAD_STUDYBOARDS_REQUEST = 'LOAD_STUDYBOARDS_REQUEST';
 export const LOAD_STUDYBOARDS_SUCCESS = 'LOAD_STUDYBOARDS_SUCCESS';
@@ -128,6 +133,30 @@ export default (state = initialState, action) => {
                 isLoading: true,
                 deleteNotificationErrorReason: action.error,
             };
+        }
+
+        // 공지사항 글 수정
+        case MODIFY_NOTIFYCATIONS_REQUEST: {
+            return {
+                ...state,
+                isLoading: true,
+                modifyNotificationErrorReason: '',
+            }
+        }
+
+        case MODIFY_NOTIFYCATIONS_SUCCESS: {
+            return {
+                ...state,
+                isLoading: false
+            }
+        }
+
+        case MODIFY_NOTIFYCATIONS_FAILURE: {
+            return {
+                ...state,
+                isLoading: false,
+                modifyNotificationErrorReason: action.error,
+            }
         }
 
         case LOAD_STUDYBOARDS_REQUEST: {

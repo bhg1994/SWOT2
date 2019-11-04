@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   Layout,
   Icon,
@@ -8,13 +8,13 @@ import {
   Divider,
   Button,
   Table,
-  Pagination,
   Modal,
   Form
 } from "antd";
 import {
   LOAD_NOTIFYCATIONS_REQUEST, CREATE_NOTIFYCATIONS_REQUEST,
-  DELETE_NOTIFYCATIONS_REQUEST
+  DELETE_NOTIFYCATIONS_REQUEST,
+  MODIFY_NOTIFYCATIONS_REQUEST
 } from "../reducers/post";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -29,61 +29,82 @@ function handleChange(value) {
   console.log(`selected ${value}`);
 }
 
+export const useInput = (initValue = null) => {
+  const [value, setter] = useState(initValue);
+  const handler = useCallback(e => {
+    setter(e.target.value);
+  }, []);
+  return [value, handler];
+};
+
 const notifycation = () => {
+
+  const [myinfoid, setMyinfoid] = useState(0);
+
+
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem("myInfo"))) {
+      const me = JSON.parse(localStorage.getItem("myInfo"));
+      setMyinfoid(me.id);
+    }
+  }, []);
 
   const columns = [
     {
       title: "글번호",
-      dataIndex: "id"
+      dataIndex: "id",
+      key: "id"
     },
     {
       title: "제목",
       dataIndex: "title",
+      key: "title",
       render: text => <a>{text}</a>
     },
 
     {
       title: "내용",
-      dataIndex: "body"
-    },
-    {
-      title: "조회수",
-      dataIndex: "views"
+      dataIndex: "body",
+      key: "body"
     },
     {
       title: "날짜",
-      dataIndex: "createdDate"
+      dataIndex: "createdDate",
+      key: "createdDate"
     },
     {
       title: "수정란",
       dataIndex: "action",
       key: 'action',
       render: () =>
-        <span>
-          <Button type="primary" onClick={showModifyNotifyModal}>수정</Button>
-          <Divider type="vertical" />
-          <Button type="danger" onClick={showDeleteNotifyModal}
-          >삭제</Button>
-        </span>
+        myinfoid === 1 ?
+          <span>
+            <Button type="primary" onClick={showModifyNotifyModal}>수정</Button>
+            <Divider type="vertical" />
+            <Button type="danger" onClick={showDeleteNotifyModal}
+            >삭제</Button>
+          </span>
+          : ""
     }
   ];
 
 
-  const { notifycations, isLoading } = useSelector(state => state.post);
 
-  useEffect(() => {
-    console.log(notifycations);
-  }, [notifycations]);
+  const { notifycations } = useSelector(state => state.post);
+
 
   const dispatch = useDispatch();
 
   const [visible, setVisible] = useState(false);
+  const [modifyvisible, setModifyvisible] = useState(false);
   const [id, setId] = useState(0);
   const [notificationtitle, setNotificationtitle] = useState("");
   const [notificationcontent, setNotificationcontent] = useState("");
+  const [modifytitle, onChangetitle] = useInput("");
+  const [modifybody, onChangebody] = useInput("");
 
   const handleCancel = () => {
-    setVisible(false);
+    setModifyvisible(false);
     console.log("취소 버튼");
   };
 
@@ -110,11 +131,17 @@ const notifycation = () => {
         body: notificationcontent
       }
     })
+    setNotificationtitle("");
+    setNotificationcontent("");
     setVisible(false);
   };
 
   const onRowClick = (record) => {
-    setId(record.id);
+    return {
+      onClick: () => {
+        console.log(record.id);
+      }
+    }
   }
 
   let deleteId = 0;
@@ -144,7 +171,17 @@ const notifycation = () => {
   }
 
   const showModifyNotifyModal = () => {
-    setVisible(true);
+    setModifyvisible(true);
+  }
+
+  const notifyModify = () => {
+    dispatch({
+      type: MODIFY_NOTIFYCATIONS_REQUEST,
+      data: {
+
+      }
+    })
+    setModifyvisible(false);
   }
 
   return (
@@ -193,11 +230,13 @@ const notifycation = () => {
             }}
           >
           </div>
-          <div style={{ width: "40%", textAlign: "right" }}>
-            <Button type="danger" size="large" onClick={showModal}>
-              공지사항 추가
+          {myinfoid === 1 ?
+            <div style={{ width: "40%", textAlign: "right" }}>
+              <Button type="danger" size="large" onClick={showModal}>
+                공지사항 추가
             </Button>
-          </div>
+            </div>
+            : ""}
         </div>
       </Layout>
       <Modal title="공지사항 추가" visible={visible} footer={null}>
@@ -235,10 +274,49 @@ const notifycation = () => {
           </Form.Item>
         </Form>
       </Modal>
+
+      {/* 공지사항 수정 버튼 모달 */}
+      <Modal title="공지사항 수정" visible={modifyvisible} footer={null}>
+        <Form >
+          <Form.Item>
+            <Input
+              addonBefore="글번호"
+              disabled
+              value={id}
+              style={{ width: "50%" }}
+            />
+          </Form.Item>
+          <Form.Item>
+            <Input
+              addonBefore="제목"
+              onChange={onChangetitle}
+              style={{ width: "50%" }}
+            />
+          </Form.Item>
+          <Form.Item>
+            <Input
+              addonBefore="내용"
+              onChange={onChangebody}
+              style={{ width: "50%" }}
+            />
+          </Form.Item>
+          <Form.Item>
+            <Button
+              type="primary"
+              style={{ marginRight: "20px" }}
+              onClick={notifyModify}
+            >
+              변경
+                </Button>
+            <Button type="danger" onClick={handleCancel}>
+              취소
+                </Button>
+          </Form.Item>
+        </Form>
+      </Modal>
     </>
   );
 };
-
 
 notifycation.getInitialProps = async (context) => {
   context.store.dispatch({

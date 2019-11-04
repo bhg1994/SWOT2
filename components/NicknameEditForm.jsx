@@ -45,7 +45,7 @@ const NicknameEditForm = () => {
   }
   //console.log(isLoading);
 
-  const showModal = () => {
+  const showModifyModal = () => {
     setVisible(true);
   }
 
@@ -89,7 +89,7 @@ const NicknameEditForm = () => {
       <div>
         <Status code>{me.statusMsg}</Status>
       </div>
-      <UpdateBtn type="primary" onClick={showModal}>내 정보 수정</UpdateBtn>
+      <UpdateBtn type="primary" onClick={showModifyModal}>내 정보 수정</UpdateBtn>
       <WithdrawalBtn type="danger" onClick={showWithdrawalModal}>회원 탈퇴</WithdrawalBtn>
       <Modal title="내 정보 수정" visible={visible} footer={null}>
         <Form >
