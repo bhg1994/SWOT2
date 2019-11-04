@@ -9,7 +9,6 @@ export const initialState = {
     addCommentErrorReason: '',
     commentAdded: false,
     notifycations: [],
-    studyboards: [],
     loadNotifycationsErrorReason: '',
     createNotificationErrorReason: '',
     deleteNotificationErrorReason: '',
@@ -48,21 +47,6 @@ export const UPLOAD_IMAGES_FAILURE = 'UPLOAD_IMAGES_FAILURE';
 
 export const REMOVE_IMAGE = 'REMOVE_IMAGE';
 
-export const ADD_POST_REQUEST = 'ADD_POST_REQUEST';
-export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS';
-export const ADD_POST_FAILURE = 'ADD_POST_FAILURE';
-
-export const ADD_COMMENT_REQUEST = 'ADD_COMMENT_REQUEST';
-export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS';
-export const ADD_COMMENT_FAILURE = 'ADD_COMMENT_FAILURE';
-
-export const LOAD_COMMENTS_REQUEST = 'LOAD_COMMENTS_REQUEST';
-export const LOAD_COMMENTS_SUCCESS = 'LOAD_COMMENTS_SUCCESS';
-export const LOAD_COMMENTS_FAILURE = 'LOAD_COMMENTS_FAILURE';
-
-export const REMOVE_POST_REQUEST = 'REMOVE_POST_REQUEST';
-export const REMOVE_POST_SUCCESS = 'REMOVE_POST_SUCCESS';
-export const REMOVE_POST_FAILURE = 'REMOVE_POST_FAILURE';
 
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -179,58 +163,58 @@ export default (state = initialState, action) => {
 
 
 
-        case ADD_POST_REQUEST: {
-            return {
-                ...state,
-                isAddingPost: true,
-                addPostErrorReason: '',
-                postAdded: false,
-            };
-        }
-        case ADD_POST_SUCCESS: {
-            return {
-                ...state,
-                isAddingPost: false,
-                postAdded: true,
-            };
-        }
-        case ADD_POST_FAILURE: {
-            return {
-                ...state,
-                isAddingPost: false,
-                addPostErrorReason: action.error,
-            };
-        }
-        case ADD_COMMENT_REQUEST: {
-            return {
-                ...state,
-                isAddingComment: true,
-                addCommentErrorReason: '',
-                commentAdded: false,
-            };
-        }
-        case ADD_COMMENT_SUCCESS: {
-            const postIndex = state.mainPosts.findIndex(v => v.id === action.data.postId);
-            const post = state.mainPosts[postIndex];
-            const mainPosts = [...state.mainPosts];
-            mainPosts[postIndex] = {
-                ...post,
-                Comments
-            };
-            return {
-                ...state,
-                isAddingComment: false,
-                mainPosts,
-                commentAdded: true,
-            };
-        }
-        case ADD_COMMENT_FAILURE: {
-            return {
-                ...state,
-                isAddingComment: false,
-                addCommentErrorReason: action.error,
-            };
-        }
+        // case ADD_POST_REQUEST: {
+        //     return {
+        //         ...state,
+        //         isAddingPost: true,
+        //         addPostErrorReason: '',
+        //         postAdded: false,
+        //     };
+        // }
+        // case ADD_POST_SUCCESS: {
+        //     return {
+        //         ...state,
+        //         isAddingPost: false,
+        //         postAdded: true,
+        //     };
+        // }
+        // case ADD_POST_FAILURE: {
+        //     return {
+        //         ...state,
+        //         isAddingPost: false,
+        //         addPostErrorReason: action.error,
+        //     };
+        // }
+        // case ADD_COMMENT_REQUEST: {
+        //     return {
+        //         ...state,
+        //         isAddingComment: true,
+        //         addCommentErrorReason: '',
+        //         commentAdded: false,
+        //     };
+        // }
+        // case ADD_COMMENT_SUCCESS: {
+        //     const postIndex = state.mainPosts.findIndex(v => v.id === action.data.postId);
+        //     const post = state.mainPosts[postIndex];
+        //     const mainPosts = [...state.mainPosts];
+        //     mainPosts[postIndex] = {
+        //         ...post,
+        //         Comments
+        //     };
+        //     return {
+        //         ...state,
+        //         isAddingComment: false,
+        //         mainPosts,
+        //         commentAdded: true,
+        //     };
+        // }
+        // case ADD_COMMENT_FAILURE: {
+        //     return {
+        //         ...state,
+        //         isAddingComment: false,
+        //         addCommentErrorReason: action.error,
+        //     };
+        // }
         default: {
             return {
                 ...state,

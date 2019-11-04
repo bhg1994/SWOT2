@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   Layout,
   Icon,
@@ -8,126 +8,113 @@ import {
   Divider,
   Button,
   Table,
-  Row,
-  Col,
-  Card,
-  Pagination,
-  Tag,
   Modal,
   Form
 } from "antd";
+
+import {
+  LOAD_QUESTION_REQUEST,
+  CREATE_QUESTION_REQUEST,
+  DELETE_QUESTION_REQUEST,
+  MODIFY_QUESTION_REQUEST
+} from '../reducers/question';
+import { useDispatch, useSelector } from "react-redux";
 
 const { Text } = Typography;
 const { Search } = Input;
 const { Option } = Select;
 const { TextArea } = Input;
 
-const columns = [
-  {
-    title: "글번호",
-    dataIndex: "number"
-  },
-  {
-    title: "제목",
-    dataIndex: "title",
-    render: text => <a>{text}</a>
-  },
-  {
-    title: "작성자",
-    dataIndex: "name"
-  },
-  {
-    title: "등록일",
-    dataIndex: "date"
-  },
-  {
-    title: "조회수",
-    dataIndex: "views"
-  },
-  {
-    title: "상태",
-    key: "status",
-    dataIndex: "status",
-    render: status => (
-      <span>
-        {status.map(status => {
-          let color = status === "답변완료" ? "geekblue" : "green";
-          if (status === "답변대기") {
-            color = "volcano";
-          }
-          return (
-            <Tag color={color} key={status}>
-              {status}
-            </Tag>
-          );
-        })}
-      </span>
-    )
-  },
-  {
-    title: "삭제",
-    dataIndex: "button",
-    render: text => <a>{text}</a>
-  }
-];
-
-const data = [
-  {
-    key: "1",
-    number: "1",
-    title: "SWOT 계정과 비밀번호를 잊어버렸어요. 어떻게 찾나요?",
-    name: "김성진",
-    date: "2019년 9월 20일",
-    views: "20",
-    status: ["답변대기"],
-    button: "삭제"
-  },
-  {
-    key: "2",
-    number: "2",
-    title: "강의실 예약을 주 단위로도 예약하여 이용 할 수 있나요?",
-    name: "방효근",
-    date: "2019년 9월 24일",
-    views: "24",
-    status: ["답변완료"],
-    button: "삭제"
-  },
-  {
-    key: "3",
-    number: "3",
-    title:
-      "2명에서 강의실을 빌리려 하는데 최소 인원 제한이 3명인데 빌릴 수 없는건가요?",
-    name: "박혜린",
-    date: "2019년 9월 26일",
-    views: "14",
-    status: ["답변완료"],
-    button: "삭제"
-  },
-  {
-    key: "4",
-    number: "4",
-    title:
-      "예약내역을 확인하려고 하는데 제 마이페이지에서 자꾸 오류가 나는데 해결 좀 해주세요",
-    name: "서주은",
-    date: "2019년 9월 29일",
-    views: "29",
-    status: ["답변대기"],
-    button: "삭제"
-  }
-];
+export const useInput = (initValue = null) => {
+  const [value, setter] = useState(initValue);
+  const handler = useCallback(e => {
+    setter(e.target.value);
+  }, []);
+  return [value, handler];
+};
 
 const questionAnswer = () => {
-  const [visible, setVisible] = useState(false);
+
+  const [myinfoid, setMyinfoid] = useState(0);
+
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem("myInfo"))) {
+      const me = JSON.parse(localStorage.getItem("myInfo"));
+      setMyinfoid(me.id);
+    }
+  }, []);
+
+  let articlenum = 1;
+
+  const columns = [
+    {
+      title: "글번호",
+      dataIndex: "number",
+      key: "number",
+      render: () => <div>{articlenum++}</div>
+    },
+    {
+      title: "제목",
+      dataIndex: "title",
+      key: "title",
+      render: text => <a>{text}</a>
+    },
+    {
+      title: "내용",
+      dataIndex: "body",
+      key: "body"
+    },
+    {
+      title: "등록일",
+      dataIndex: "createdDate",
+      key: "createdDate"
+    },
+    {
+      title: "수정란",
+      dataIndex: "action",
+      key: "action",
+      render: () =>
+        myinfoid === 1 ?
+          <span>
+            <Button type="primary" onClick={showModifyNotifyModal}>수정</Button>
+            <Divider type="vertical" />
+            <Button type="danger" onClick={showDeleteNotifyModal}
+            >삭제</Button>
+          </span>
+          : ""
+    }
+  ];
+
+  const { questions } = useSelector(state => state.question);
+
+
+  const dispatch = useDispatch();
+
+  const [id, setId] = useState(0);
+  const [createvisible, setcreateVisible] = useState(false);
   const [questiontitle, setQuestiontitle] = useState("");
   const [questioncontent, setQuestioncontent] = useState("");
+  const [modifyvisible, setModifyvisible] = useState(false);
+  const [deletevisible, setDeletevisible] = useState(false);
+  const [modifytitle, onChangetitle] = useInput("");
+  const [modifybody, onChangebody] = useInput("");
 
   const handleCancel = () => {
-    setVisible(false);
+    setcreateVisible(false);
     console.log("취소 버튼");
   };
 
-  const showModal = () => {
-    setVisible(true);
+
+  const deletehandleCancel = () => {
+    setDeletevisible(false);
+  }
+
+  const modifyhandleCancel = () => {
+    setModifyvisible(false);
+  }
+
+  const showCreateModal = () => {
+    setcreateVisible(true);
   };
 
   const onChangeValue = e => {
@@ -138,10 +125,60 @@ const questionAnswer = () => {
     }
   };
 
+  const onRowClick = (record) => {
+    return {
+      onClick: () => {
+        setId(record.id);
+      }
+    }
+  }
+
+  const showModifyNotifyModal = () => {
+    setModifyvisible(true);
+  }
+
+  const showDeleteNotifyModal = () => {
+    setDeletevisible(true);
+  }
+
+
   const handleSubmit = e => {
     e.preventDefault();
-    setVisible(false);
+    dispatch({
+      type: CREATE_QUESTION_REQUEST,
+      data: {
+        code: "3",
+        title: questiontitle,
+        body: questioncontent
+      }
+    })
+    setQuestiontitle("");
+    setQuestioncontent("");
+    setcreateVisible(false);
   };
+
+
+  const questionDelete = () => {
+    dispatch({
+      type: DELETE_QUESTION_REQUEST,
+      data: {
+        id: id
+      }
+    })
+    setDeletevisible(false);
+  }
+
+  const questionModify = () => {
+    dispatch({
+      type: MODIFY_QUESTION_REQUEST,
+      data: {
+        id: id,
+        title: modifytitle,
+        body: modifybody
+      }
+    })
+    setModifyvisible(false);
+  }
 
   return (
     <>
@@ -152,7 +189,7 @@ const questionAnswer = () => {
         <header style={{ display: "flex" }}>
           <div style={{ width: "150px" }}>
             <Icon type="bell" />
-            <Text strong> 전체20건</Text>
+            <Text strong> {questions.length}건</Text>
             <Text>(1/4)페이지</Text>
           </div>
           <div
@@ -164,7 +201,7 @@ const questionAnswer = () => {
             <Select
               defaultValue="검색조건"
               style={{ width: 120 }}
-              //   onChange={handleChange}
+            //   onChange={handleChange}
             >
               <Option value="name">제목</Option>
               <Option value="lectureroom">작성자</Option>
@@ -173,7 +210,7 @@ const questionAnswer = () => {
           </div>
         </header>
         <Divider />
-        <Table columns={columns} dataSource={data} pagination={false}></Table>
+        <Table columns={columns} dataSource={questions} onRow={onRowClick}></Table>
         <div
           style={{
             display: "flex",
@@ -186,20 +223,19 @@ const questionAnswer = () => {
               textAlign: "right"
             }}
           >
-            <Pagination defaultCurrent={6} total={50} />
           </div>
           <div style={{ width: "40%", textAlign: "right" }}>
             <Button
               type="primary"
               size="large"
               style={{ marginLeft: "20px" }}
-              onClick={showModal}
+              onClick={showCreateModal}
             >
               글쓰기
             </Button>
           </div>
         </div>
-        <Modal title="Q & A" visible={visible} footer={null}>
+        <Modal title="Q & A" visible={createvisible} footer={null}>
           <Form onSubmit={handleSubmit}>
             <Form.Item>
               <Input
@@ -235,8 +271,75 @@ const questionAnswer = () => {
           </Form>
         </Modal>
       </Layout>
+
+      {/* 공지사항 수정 버튼 모달 */}
+      <Modal title="Q&A 글 수정" visible={modifyvisible} footer={null}>
+        <Form >
+          <Form.Item>
+            <Input
+              addonBefore="글번호"
+              disabled
+              value={id}
+              style={{ width: "50%" }}
+            />
+          </Form.Item>
+          <Form.Item>
+            <Input
+              addonBefore="제목"
+              onChange={onChangetitle}
+              style={{ width: "50%" }}
+            />
+          </Form.Item>
+          <Form.Item>
+            <Input
+              addonBefore="내용"
+              onChange={onChangebody}
+              style={{ width: "50%" }}
+            />
+          </Form.Item>
+          <Form.Item>
+            <Button
+              type="primary"
+              style={{ marginRight: "20px" }}
+              onClick={questionModify}
+            >
+              변경
+                </Button>
+            <Button type="danger" onClick={modifyhandleCancel}>
+              취소
+                </Button>
+          </Form.Item>
+        </Form>
+      </Modal>
+
+      {/* Q&A 삭제 버튼 모달 */}
+
+      <Modal title="Q&A 글 삭제" visible={deletevisible} footer={null}>
+        <Form >
+          <Form.Item>
+            <p style={{ fontSize: "20px" }}>해당 글을 삭제 하시겠습니까?</p>
+            <Button
+              type="primary"
+              style={{ marginRight: "20px" }}
+              onClick={questionDelete}
+            >
+              삭제
+                </Button>
+            <Button type="danger" onClick={deletehandleCancel}>
+              취소
+                </Button>
+          </Form.Item>
+        </Form>
+      </Modal>
+
     </>
   );
+};
+
+questionAnswer.getInitialProps = async (context) => {
+  context.store.dispatch({
+    type: LOAD_QUESTION_REQUEST,
+  });
 };
 
 export default questionAnswer;

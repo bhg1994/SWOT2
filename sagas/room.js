@@ -263,8 +263,6 @@ function* watchDeleteRoom() {
     yield takeEvery(DELETEROOM_REQUEST, deleteRoom);
 }
 
-
-
 export default function* roomSaga() {
     yield all([
         fork(watchReservation),
