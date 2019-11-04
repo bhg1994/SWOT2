@@ -86,14 +86,19 @@ SWOT.propTypes = {
 
 SWOT.getInitialProps = async (context) => {
 
+  
+
   const { ctx, Component } = context;
+
   let pageProps = {};
   if (Component.getInitialProps) {
     pageProps = await Component.getInitialProps(ctx);
   }
-  ctx.store.dispatch({
-    type: LOAD_NOTIFYCATIONS_REQUEST,
-  });
+  if(ctx.store.getState().post.notifycations===[]){
+    ctx.store.dispatch({
+      type: LOAD_NOTIFYCATIONS_REQUEST,
+    });
+  }
   return pageProps;
 }
 

@@ -22,6 +22,14 @@ export const useInput = (initValue = null) => {
 
 const NicknameEditForm = () => {
 
+  var loading = {
+    email: "loading",
+    name: "loading",
+    phone: "loading",
+    statusMsg: "loading",
+    studentId: "loading",
+    }
+
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
   const [name, onChangeName] = useInput("");
@@ -29,6 +37,16 @@ const NicknameEditForm = () => {
   const [msg, onChangeMsg] = useInput("");
   // const [wdvisible, setWdvisible] = useState(false);
   const { isLoading } = useSelector(state => state.user);
+  const [me, setMe] = useState(loading);
+
+
+
+  
+
+  useEffect(() => {
+    let myInfo = JSON.parse(localStorage.getItem("myInfo"));
+    setMe(myInfo);
+  }, [])
 
 
   const showWithdrawalModal = () => {
@@ -60,7 +78,6 @@ const NicknameEditForm = () => {
     location.href = "/";
   };
 
-  const me = JSON.parse(localStorage.getItem("myInfo"));
 
   const userInfoModify = () => {
     dispatch({

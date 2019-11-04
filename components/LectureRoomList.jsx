@@ -13,7 +13,7 @@ const columns = [
       </Link>
     )
   },
-  { title: "강의실명", dataIndex: "groupName", key: "groupName" },
+  { title: "강의실명", dataIndex: "roomName", key: "groupName" },
   { title: "수용인원", dataIndex: "total", key: "total" }
 ];
 
@@ -27,7 +27,7 @@ const LectureRoomList = () => {
         console.log(record.roomNo);
         dispatch({
           type: ROOM_SELECT_REQUEST,
-          data: record.roomNo,
+          data: record.id,
         });
       }
     };

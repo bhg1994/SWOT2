@@ -2,38 +2,39 @@ import { Table } from "antd";
 import { ReservationTimeWrapper, Hoursofuse, Availabletime, SelecttimeWrapper, SelecttimeBtn } from '../components/css/ReservationTime';
 import { useDispatch, useSelector } from "react-redux";
 import { START_TIME_SELECT, END_TIME_SELECT } from "../reducers/room";
+import { useEffect, useState } from "react";
 const { Column } = Table;
 
 
 
-const data =[
+// const data =[
 
-  {
-    "roomId": 1,
-    "userId": 1,
-    "reson": "study",
-    "phone": "010",
-    "startTime": "12",
-    "endTime": "15",
-    "reservationDate": 2019 - 12 - 11,
-    "state": 'C',
-    "createdDate": "2019-10-05T08:08:49.000+0000",
-    "updatedDate": "2019-10-05T08:08:49.000+0000"
-  },
-  {
-    "roomId": 1,
-    "userId": 1,
-    "reson": "study",
-    "phone": "010",
-    "startTime": "16",
-    "endTime": "17",
-    "reservationDate": 2019 - 12 - 11,
-    "state": 'C',
-    "createdDate": "2019-10-05T08:08:49.000+0000",
-    "updatedDate": "2019-10-05T08:08:49.000+0000"
-  }
+//   {
+//     "roomId": 1,
+//     "userId": 1,
+//     "reson": "study",
+//     "phone": "010",
+//     "startTime": "12",
+//     "endTime": "15",
+//     "reservationDate": 2019 - 12 - 11,
+//     "state": 'C',
+//     "createdDate": "2019-10-05T08:08:49.000+0000",
+//     "updatedDate": "2019-10-05T08:08:49.000+0000"
+//   },
+//   {
+//     "roomId": 1,
+//     "userId": 1,
+//     "reson": "study",
+//     "phone": "010",
+//     "startTime": "16",
+//     "endTime": "17",
+//     "reservationDate": 2019 - 12 - 11,
+//     "state": 'C',
+//     "createdDate": "2019-10-05T08:08:49.000+0000",
+//     "updatedDate": "2019-10-05T08:08:49.000+0000"
+//   }
 
-]
+// ]
 
 
 const ReservationTime = ({ value }) => {
@@ -66,13 +67,38 @@ const ReservationTime = ({ value }) => {
 
 
   const dispatch = useDispatch();
+  const { roomReservations } = useSelector(state => state.room);
+  const { date } = useSelector(state => state.room);
+  var reservations = [];
 
+
+  
   
   var justClickedId ="";
 
 
   var startId = "";
   var beforeId = "";
+
+  useEffect(() => {
+    if(value){
+      oninit();
+    }
+  }, [value])
+  useEffect(() => {
+    
+    roomReservations.forEach(reservation => {
+      if(reservation.reservationDate===date){
+        reservations.push(reservation);
+      }
+    });
+    console.log(reservations);
+
+    if(value){
+      oninit();
+      console.log("after list")
+    }
+  }, [roomReservations])
 
 
   const onClick = (e) => {
@@ -125,6 +151,7 @@ const ReservationTime = ({ value }) => {
   const oninit = () => {
     for (let i = 8; i < 22; i++) {
       document.getElementById(i).style.backgroundColor = "white";
+      document.getElementById(i).disabled = false;
     }
     justClickedId = "";
     startId = "";
@@ -140,11 +167,11 @@ const ReservationTime = ({ value }) => {
   };
 
   const disable = () => {
-    for (let i = 0; i < data.length; i++) {
+    for (let i = 0; i < reservations.length; i++) {
 
-      let length = parseInt(data[i].endTime) - parseInt(data[i].startTime)
+      let length = parseInt(reservations[i].endTime) - parseInt(reservations[i].startTime)
       for (let j = 0; j < length; j++) {
-        let index = parseInt(data[i].startTime) + j;
+        let index = parseInt(reservations[i].startTime) + j;
         document.getElementById(index).disabled = true;
         console.log(index);
       }
@@ -152,20 +179,8 @@ const ReservationTime = ({ value }) => {
     }
 
   }
+  
 
-
-
-
-
-  const onClickBtn = (e) => {
-    let element = document.getElementById(e.target.id);
-    console.log(element);
-    let prevelement = document.getElementById(e.target.id - 1);
-
-    prevelement.style.backgroundColor = "black";
-
-    // console.log(element);
-  }
 
   return (
     <>
@@ -176,11 +191,7 @@ const ReservationTime = ({ value }) => {
 
           <button onClick={oninit}>init</button>
           <SelecttimeWrapper>
-            {times.map((time, i) => (i < 8 || i > 21) ? (<SelecttimeBtn type="danger" disabled>{time}</SelecttimeBtn>) : (<SelecttimeBtn type="danger" onClick={onClick}  id={i}>{time}</SelecttimeBtn>))}
-
-
-          <button onClick={oninit}>init</button>
-   
+            {times.map((time, i) => (i < 8 || i > 21) ? (<SelecttimeBtn type="danger" disabled>{time}</SelecttimeBtn>) : (<SelecttimeBtn type="danger" onClick={onClick}  id={i}>{time}</SelecttimeBtn>))}   
           </SelecttimeWrapper>
         </ReservationTimeWrapper>
         : ""}

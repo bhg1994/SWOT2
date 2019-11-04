@@ -21,7 +21,7 @@ import {
   BuildingAddBtn
 } from "../components/css/BuildingList";
 import { useDispatch, useSelector } from "react-redux";
-import { CREATEROOM_REQUEST } from "../reducers/room";
+import { CREATEROOM_REQUEST } from "../reducers/master";
 
 const { TabPane } = Tabs;
 const { Text } = Typography;

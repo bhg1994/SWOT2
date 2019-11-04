@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Table, Button, Divider, Modal, Input, Form, Typography, InputNumber } from "antd";
 import { useSelector, useDispatch } from "react-redux";
-import { DELETEROOM_REQUEST } from "../reducers/room";
+import { DELETEROOM_REQUEST } from "../reducers/master";
 
 const { Text } = Typography;
 const { confirm } = Modal;
