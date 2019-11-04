@@ -218,5 +218,6 @@ const BuildingList = () => {
   );
 };
 
+
 export default BuildingList;
 
