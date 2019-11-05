@@ -4,6 +4,9 @@ export const initialState = {
     totalRoomList: [],
     errorReason: "",
     reservationsList: [],
+    deleteRoomReason: "",
+    createRoomReason:"",
+    roomListErrorReason: ""
 };
 
 
