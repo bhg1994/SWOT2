@@ -53,6 +53,7 @@ const BuildingList = () => {
   const { totalRoomList, isLoading } = useSelector(state => state.master);
 
 
+
   let lists = [];
 
   useEffect(() => {
