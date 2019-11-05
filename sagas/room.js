@@ -19,15 +19,15 @@ import {
 
 function reservateAPI(reservateData) {
 
-    let startTime = reservateData.startTime+":00"
-    let endTime = reservateData.endTime+":00"
+    let startTime = reservateData.startTime + ":00"
+    let endTime = reservateData.endTime + ":00"
     let form = new FormData()
     form.append('reason', reservateData.reason)
     form.append('phone', reservateData.phone)
     form.append('startTime', startTime)
     form.append('endTime', endTime)
     form.append('reservationDate', reservateData.date)
-    form.append('total',reservateData.maximum);
+    form.append('total', reservateData.maximum);
 
     console.log(form);
     let url = "http://swot.devdogs.kr:8080/api/reservation/create/" + reservateData.selectedRoom;
@@ -89,7 +89,7 @@ function* watchReservation() {
 function roomReservationsAPI(data) {
     // 서버에 요청을 보내는 부분
 
-    let url = "http://swot.devdogs.kr:8080/api/auth/reservation/roomReserved/"+data.roomId;
+    let url = "http://swot.devdogs.kr:8080/api/auth/reservation/roomReserved/" + data.roomId;
     return axios.get(url).then(response => {
         console.log('response : ', JSON.stringify(response, null, 2));
         var result = response.data;

@@ -14,7 +14,6 @@ export const initialState = {
     reservationErrorReason: '',
     userpwErrorReason: '',
     emailErrorReason: ''
-
 };
 
 export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
