@@ -227,9 +227,9 @@ function* modifyNotifycations(action) {
             yield put({
                 type: MODIFY_NOTIFYCATIONS_SUCCESS,
             });
-            // yield put({
-            //     type: LOAD_NOTIFYCATIONS_REQUEST,
-            // })
+            yield put({
+                type: LOAD_NOTIFYCATIONS_REQUEST,
+            })
             alert('글이 수정되었습니다.');
         } else {
             yield put({

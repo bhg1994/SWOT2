@@ -8,11 +8,11 @@ const { Column } = Table;
 
 
 
-var justClickedId ="";
+var justClickedId = "";
 
 
-  var startId = "";
-  var beforeId = "";
+var startId = "";
+var beforeId = "";
 
 
 const ReservationTime = ({ value }) => {
@@ -50,25 +50,25 @@ const ReservationTime = ({ value }) => {
   var reservations = [];
 
 
-  
-  
-  
+
+
+
 
   useEffect(() => {
-    if(value){
+    if (value) {
       oninit();
     }
   }, [value])
   useEffect(() => {
-    
+
     roomReservations.forEach(reservation => {
-      if(reservation.reservationDate===date){
+      if (reservation.reservationDate === date) {
         reservations.push(reservation);
       }
     });
     console.log(reservations);
 
-    if(value){
+    if (value) {
       //oninit();
       console.log("after list")
     }
@@ -89,7 +89,7 @@ const ReservationTime = ({ value }) => {
       });
       dispatch({
         type: END_TIME_SELECT,
-        data: String(parseInt(startId)+1),
+        data: String(parseInt(startId) + 1),
       });
       return;
     }
@@ -101,13 +101,13 @@ const ReservationTime = ({ value }) => {
     }
 
     if (parseInt(beforeId) - parseInt(justClickedId) === -1 || parseInt(beforeId) - parseInt(justClickedId) === 0) {
-      if(parseInt(justClickedId) - parseInt(startId) < 5 ){
+      if (parseInt(justClickedId) - parseInt(startId) < 5) {
         if (element.style.backgroundColor != "black") {
           element.style.backgroundColor = "black";
           beforeId = e.target.id;
           dispatch({
             type: END_TIME_SELECT,
-            data: String(parseInt(beforeId)+1),
+            data: String(parseInt(beforeId) + 1),
           });
         }
         else {
@@ -116,11 +116,11 @@ const ReservationTime = ({ value }) => {
           console.log(beforeId);
           dispatch({
             type: END_TIME_SELECT,
-            data: String(parseInt(beforeId)+1),
+            data: String(parseInt(beforeId) + 1),
           });
         }
       }
-      
+
     }
 
 
@@ -156,7 +156,7 @@ const ReservationTime = ({ value }) => {
     }
 
   }
-  
+
 
 
   return (
@@ -168,7 +168,7 @@ const ReservationTime = ({ value }) => {
 
           <button onClick={oninit}>init</button>
           <SelecttimeWrapper>
-            {times.map((time, i) => (i < 8 || i > 21) ? (<SelecttimeBtn type="danger" disabled>{time}</SelecttimeBtn>) : (<SelecttimeBtn type="danger" onClick={onClick}  id={i}>{time}</SelecttimeBtn>))}   
+            {times.map((time, i) => (i < 8 || i > 21) ? (<SelecttimeBtn type="danger" disabled>{time}</SelecttimeBtn>) : (<SelecttimeBtn type="danger" onClick={onClick} id={i}>{time}</SelecttimeBtn>))}
           </SelecttimeWrapper>
         </ReservationTimeWrapper>
         : ""}

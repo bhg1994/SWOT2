@@ -36,9 +36,10 @@ const NicknameEditForm = () => {
   const [stId, onChangeStId] = useInput("");
   const [msg, onChangeMsg] = useInput("");
   // const [wdvisible, setWdvisible] = useState(false);
-  const { isLoading } = useSelector(state => state.user);
   const [me, setMe] = useState(loading);
 
+
+  const { isLoading } = useSelector(state => state.user);
 
   useEffect(() => {
     let myInfo = JSON.parse(localStorage.getItem("myInfo"));

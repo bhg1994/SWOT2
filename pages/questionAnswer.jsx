@@ -74,18 +74,16 @@ const questionAnswer = () => {
       dataIndex: "action",
       key: "action",
       render: () =>
-        myinfoid === 1 ?
-          <span>
-            <Button type="primary" onClick={showModifyNotifyModal}>수정</Button>
-            <Divider type="vertical" />
-            <Button type="danger" onClick={showDeleteNotifyModal}
-            >삭제</Button>
-          </span>
-          : ""
+        <span>
+          <Button type="primary" onClick={showModifyNotifyModal}>수정</Button>
+          <Divider type="vertical" />
+          <Button type="danger" onClick={showDeleteNotifyModal}
+          >삭제</Button>
+        </span>
     }
   ];
 
-  const { questions } = useSelector(state => state.question);
+  const { questions, isLoading } = useSelector(state => state.question);
 
 
   const dispatch = useDispatch();

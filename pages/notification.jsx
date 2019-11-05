@@ -91,7 +91,7 @@ const notifycation = () => {
     }
   ];
 
-  const { notifycations } = useSelector(state => state.post);
+  const { notifycations, isLoading } = useSelector(state => state.post);
 
 
   const dispatch = useDispatch();
