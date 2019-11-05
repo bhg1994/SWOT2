@@ -26,6 +26,9 @@ import {
     RESERVATION_DECLINE_REQUEST,
     RESERVATION_DECLINE_SUCCESS,
     RESERVATION_DECLINE_FAILURE,
+    MODIFY_ROOM_REQUEST,
+    MODIFY_ROOM_SUCCESS,
+    MODIFY_ROOM_FAILURE,
 } from '../reducers/master'
 
 function createRoomAPI(createRoomData) {
@@ -362,6 +365,73 @@ function* watchDecline() {
     yield takeEvery(RESERVATION_DECLINE_REQUEST, decline);
 }
 
+function modifyRoomApi(requestData) {
+    //서버에 요청을 보내는 부분
+    let form = new FormData()
+    form.append('roomName', requestData.roomName)
+    form.append('groupNo', requestData.groupNo)
+    form.append('roomNo', requestData.roomNo)
+    form.append('total', requestData.total)
+    form.append('state', "T")
+    
+    console.log(requestData);
+    console.log(form);
+
+    let token = localStorage.getItem("accessToken");
+
+    let url = `http://swot.devdogs.kr:8080/api/classroom/modify/`+requestData.id;
+
+
+    return axios.post(url, form,
+        {
+            headers: {
+                Authorization: token,
+            },
+        }
+    )
+        .then(response => {
+            console.log('response : ', JSON.stringify(response, null, 2));
+            let result = response.data;
+            return result;
+        })
+        .catch(error => {
+            console.log('failed', error)
+            return error;
+        })
+
+}
+
+
+
+function* modifyRoom(action) {
+    try {
+        const result = yield call(modifyRoomApi, action.data);
+
+        if (result.result === "success") {
+            yield put({ // put은 dispatch 동일
+                type: MODIFY_ROOM_SUCCESS,
+                data: result.info,
+            });
+        }
+        else {
+            yield put({
+                type: MODIFY_ROOM_FAILURE,
+            });
+        }
+
+    } catch (e) { // loginAPI 실패
+        console.error(e);
+        yield put({
+            type: MODIFY_ROOM_FAILURE,
+        });
+        alert("통신 장애");
+    }
+}
+
+function* watchModifyRoom() {
+    yield takeEvery(MODIFY_ROOM_REQUEST, modifyRoom);
+}
+
 export default function* roomSaga() {
     yield all([
         fork(watchCreateRoom),
@@ -370,5 +440,6 @@ export default function* roomSaga() {
         fork(watchLoadRoomList),
         fork(watchSubmit),
         fork(watchDecline),
+        fork(watchModifyRoom)
     ]);
 }

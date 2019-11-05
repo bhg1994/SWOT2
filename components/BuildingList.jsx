@@ -57,7 +57,6 @@ const BuildingList = () => {
   let lists = [];
 
   useEffect(() => {
-    console.log(tabkey, totalRoomList);
     lists = [];
     totalRoomList.map((room) => {
       if (String(room.groupNo) === tabkey) {
@@ -65,12 +64,10 @@ const BuildingList = () => {
       }
     })
     setBuildingList(lists);
-    console.log(buildingList);
   }, [totalRoomList])
 
 
   const onTabClick = (key) => {
-    console.log(totalRoomList, buildingList);
     lists = [];
     totalRoomList.map((room) => {
       // console.log(String(room.groupNo), key);
@@ -79,7 +76,6 @@ const BuildingList = () => {
       }
     });
     setBuildingList(lists);
-    console.log("onTabClick 이후");
     setTabkey(key);
   };
 
@@ -99,23 +95,16 @@ const BuildingList = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    let gn = parseInt(groupNo);
     dispatch({
       type: CREATEROOM_REQUEST,
       data: {
         roomName: roomName,
-        groupNo: groupNo,
+        groupNo: gn,
         roomNo: roomNo,
         total: total
       }
     });
-    // lists = [];
-    // totalRoomList.map((room) => {
-    //   // console.log(String(room.groupNo), key);
-    //   if (String(room.groupNo) === buildingKey) {
-    //     lists.push(room);
-    //   }
-    // })
-    // setBuildingList(lists);
 
     setVisible(false);
   };

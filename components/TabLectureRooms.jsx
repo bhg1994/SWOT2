@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Table, Button, Divider, Modal, Input, Form, Typography, InputNumber } from "antd";
 import { useSelector, useDispatch } from "react-redux";
-import { DELETEROOM_REQUEST } from "../reducers/master";
+import { DELETEROOM_REQUEST, MODIFY_ROOM_REQUEST } from "../reducers/master";
 
 const { Text } = Typography;
 const { confirm } = Modal;
@@ -12,7 +12,7 @@ const LectureRoomList = ({ buildingList }) => {
     const [roomNo, setRoomNo] = useState("");
     const [roomName, setRoomName] = useState("");
     const [groupNo, setGroupNo] = useState(0);
-    const [total, setTotal] = useState(0);
+    const [total, setTotal] = useState(3);
 
 
     const dispatch = useDispatch();
@@ -55,7 +55,15 @@ const LectureRoomList = ({ buildingList }) => {
     ]
 
     const onRowClick = (record) => {
-        setId(record.id);
+        return {
+          onMouseEnter: () => {
+            setRoomName(record.roomName);
+            setRoomNo(record.roomNo);
+            setTotal(parseInt(record.total));
+            setGroupNo(record.groupNo);
+            setId(record.id)
+          }
+        }
     }
 
 
@@ -111,6 +119,16 @@ const LectureRoomList = ({ buildingList }) => {
 
     const handleSubmit = e => {
         e.preventDefault();
+        dispatch({
+            type: MODIFY_ROOM_REQUEST,
+            data:{
+                groupNo:groupNo,
+                roomNo:roomNo,
+                roomName:roomName,
+                total:total,
+                id:id,
+            }
+        })
         setVisible(false);
 
     };
@@ -129,6 +147,7 @@ const LectureRoomList = ({ buildingList }) => {
                             addonBefore="강의실 코드"
                             style={{ width: "50%" }}
                             onChange={onChangeValue}
+                        
                         />
                     </Form.Item>
                     <Form.Item>
@@ -148,7 +167,7 @@ const LectureRoomList = ({ buildingList }) => {
                                 onChange={onChangetotal}
                                 min={3}
                                 max={30}
-                                defaultVAlue={3}
+                                defaultValue={total}
                                 style={{ width: "50%" }}
                             />
                         </div>

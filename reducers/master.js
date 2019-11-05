@@ -12,19 +12,16 @@ export const initialState = {
 
 
 export const CREATEROOM_REQUEST = 'CREATEROOM_REQUEST';
-
 export const CREATEROOM_SUCCESS = 'CREATEROOM_SUCCESS';
-
 export const CREATEROOM_FAILURE = 'CREATEROOM_FAILURE';
 
-export const DELETEROOM_REQUEST =
-    'DELETEROOM_REQUEST';
+export const DELETEROOM_REQUEST = 'DELETEROOM_REQUEST';
+export const DELETEROOM_SUCCESS = 'DELETEROOM_SUCCESS';
+export const DELETEROOM_FAILURE = 'DELETEROOM_FAILURE';
 
-export const DELETEROOM_SUCCESS =
-    'DELETEROOM_SUCCESS';
-
-export const DELETEROOM_FAILURE =
-    'DELETEROOM_FAILURE';
+export const MODIFY_ROOM_REQUEST = 'MODIFY_ROOM_REQUEST';
+export const MODIFY_ROOM_SUCCESS = 'MODIFY_ROOM_SUCCESS';
+export const MODIFY_ROOM_FAILURE = 'MODIFY_ROOM_FAILURE';
 
 
 export const LOAD_RESERVATIONS_REQUEST = 'LOAD_RESERVATIONS_REQUEST'
@@ -162,6 +159,27 @@ export default (state = initialState, action) => {
             };
         }
         case RESERVATION_DECLINE_FAILURE: {
+            return {
+                ...state,
+                isLoading: false,
+                errorReason: action.error,
+            };
+        }
+        case MODIFY_ROOM_REQUEST: {
+            return {
+                ...state,
+                isLoading: true,
+                errorReason: ""
+            };
+        }
+        case MODIFY_ROOM_SUCCESS: {
+            return {
+                ...state,
+                isLoading: false,
+                totalRoomList: [...state.totalRoomList, action.data],
+            };
+        }
+        case MODIFY_ROOM_FAILURE: {
             return {
                 ...state,
                 isLoading: false,
