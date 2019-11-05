@@ -2,7 +2,7 @@ import React from "react";
 import { Table } from "antd";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
-import { ROOM_SELECT_REQUEST } from "../reducers/room";
+import { _REQUEST } from "../reducers/room";
 
 const columns = [
   {

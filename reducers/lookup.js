@@ -21,10 +21,10 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: false,
-                reservationStatus: action.dataa
+                reservationStatus: action.data
             }
         }
-        case RESERVATION_STTAUS_FAILURE: {
+        case RESERVATION_STATUS_FAILURE: {
             return {
                 ...state,
                 isLoading: true,

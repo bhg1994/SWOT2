@@ -18,10 +18,12 @@ function reservationStatusAPI(reservateStatusData) {
 
     let url = "http://swot.devdogs.kr:8080/api/reservation/MyReserved"
 
+    const token = localStorage.getItem("accessToken");
+
     return axios.get(url,
         {
             headers: { // 요청 헤더
-                Authorization: reservateData.token,
+                Authorization: token,
             },
         })
         .then(response => {
@@ -43,11 +45,12 @@ function* reservationStatus(action) {
         if (result.result === "success") {
             yield put({ // put은 dispatch 동일
                 type: RESERVATION_STATUS_SUCCESS,
+                data: result.info
             });
         }
         else {
             yield put({
-                type: RESERVATION_STATAUS_FAILURE,
+                type: RESERVATION_STATUS_FAILURE,
             });
         }
 
@@ -56,7 +59,7 @@ function* reservationStatus(action) {
         yield put({
             type: RESERVATION_STATUS_FAILURE,
         });
-        alert("통신 장애");
+        // alert("통신 장애");
     }
 }
 

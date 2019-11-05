@@ -46,7 +46,7 @@ export default (state = initialState, action) => {
                 reservationErrorReason: action.error,
             };
         }
-        
+
         case ROOM_RESERVATIONS_REQUEST: {
             return {
                 ...state,

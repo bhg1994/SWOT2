@@ -3,19 +3,10 @@ import { Button, List, Tag, Card, Typography, Divider } from "antd";
 import NicknameEditForm from "../components/NicknameEditForm.jsx";
 import Link from "next/link";
 import { LOAD_USER_REQUEST } from "../reducers/user";
+import { useSelector } from "react-redux";
+import { RESERVATION_STATUS_REQUEST } from '../reducers/lookup';
 
 const { Text } = Typography;
-
-const data = [
-  {
-    title: "신청 날짜 : September 20, 2019",
-    lectureroomimage: <img src="static/images/lectureroom2.jpg"></img>,
-    reservationdate: "2019년 9월 23일 오후 1시 ~ 오후 4시",
-    purposeAndpersonnel:
-      "교내 프로젝트 회의 , 201331009 컴퓨터공학과 김성진 외 3명",
-    applicatnTel: "010-3574-6706"
-  }
-];
 
 const studydata = [
   {
@@ -30,10 +21,16 @@ const studydata = [
 
 const Profile = () => {
 
+  const { reservationStatus } = useSelector(state => state.lookup);
+
+
+
+  console.log(reservationStatus.length);
+
   return (
     <>
       <div>
-        <NicknameEditForm/>
+        <NicknameEditForm />
         <List
           itemLayout="horizontal"
           style={{ marginBottom: "40px" }}
@@ -44,35 +41,37 @@ const Profile = () => {
               강의실 예약 현황
             </div>
           }
-          loadMore={
-            <div style={{ textAlign: "center" }}>
-              <Button style={{ width: "50%", marginBottom: "40px" }}>
-                강의실 더 보기
-              </Button>
-            </div>
-          }
+          // loadMore={
+          //   <div style={{ textAlign: "center" }}>
+          //     <Button style={{ width: "50%", marginBottom: "40px" }}>
+          //       강의실 더 보기
+          //     </Button>
+          //   </div>
+          // }
           bordered
-          dataSource={data}
-          renderItem={item => (
+          dataSource={reservationStatus}
+          renderItem={(item, i) => (
             <List.Item style={{ maraginTop: "20px" }}>
               <Card
                 style={{ margin: "40px" }}
-                title={item.title}
+                title={"예약날짜 : " + item.reservationDate}
                 extra={<a href="/reservation">More</a>}
               >
                 <div style={{ marginBottom: "20px", textAlign: "end" }}>
-                  <Tag color="geekblue">승인 완료</Tag>
+                  {item.state === 'T' ?
+                    <Tag color="blue">승인 완료</Tag>
+                    : <Tag color="red">승인 대기</Tag>}
                   <Divider orientation="left">강의실 이미지</Divider>
                 </div>
                 <div style={{ textAlign: "center" }}>
-                  {item.lectureroomimage}
+                  {item.userId}
                 </div>
                 <Divider />
-                <Text mark>예약 날짜 : {item.reservationdate}</Text>
+                <Text mark>대여 시간 : {item.startTime}~ {item.endTime}</Text>
                 <Divider />
-                예약목적 / 인원수 : {item.purposeAndpersonnel}
+                예약목적 / 인원수 : {item.reason} / {item.total}명
                 <Divider />
-                휴대폰 번호 :{item.applicatnTel}
+                휴대폰 번호 :{" " + item.phone}
               </Card>
             </List.Item>
           )}
@@ -84,17 +83,6 @@ const Profile = () => {
           header={
             <div style={{ textAlign: "center", fontSize: "20px" }}>
               스터디 예약 현황
-            </div>
-          }
-          loadMore={
-            <div style={{ textAlign: "center" }}>
-              <Link href="/studyboard">
-                <a>
-                  <Button style={{ width: "50%", marginBottom: "30px" }}>
-                    스터디 더 보기
-                  </Button>
-                </a>
-              </Link>
             </div>
           }
           bordered
@@ -125,17 +113,6 @@ const Profile = () => {
           header={
             <div style={{ textAlign: "center", fontSize: "20px" }}>
               스터디 신청 현황
-            </div>
-          }
-          loadMore={
-            <div style={{ textAlign: "center" }}>
-              <Link href="/studyboard">
-                <a>
-                  <Button style={{ width: "50%", marginBottom: "30px" }}>
-                    스터디 더 보기
-                  </Button>
-                </a>
-              </Link>
             </div>
           }
           bordered
@@ -173,5 +150,8 @@ Profile.getInitialProps = async (context) => {
   //     data: token,
   //   });
   // }
+  context.store.dispatch({
+    type: RESERVATION_STATUS_REQUEST
+  });
 };
 export default Profile;

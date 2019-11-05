@@ -1,5 +1,6 @@
 export const initialState = {
     isLoading: false,
+    selectedQuestion: null,
     questions: [],
     loadQuestionErrorReason: '',
     createQuestionErrorReason: '',
@@ -24,6 +25,8 @@ export const DELETE_QUESTION_FAILURE = 'DELETE_QUESTION_FAILURE';
 export const MODIFY_QUESTION_REQUEST = 'MODIFY_QUESTION_REQUEST';
 export const MODIFY_QUESTION_SUCCESS = 'MODIFY_QUESTION_SUCCESS';
 export const MODIFY_QUESTION_FAILURE = 'MODIFY_QUESTION_FAILURE';
+
+export const QUESTION_SELECT_REQUEST = 'QUESTION_SELECT_REQUEST';
 
 
 export default (state = initialState, action) => {
@@ -117,6 +120,12 @@ export default (state = initialState, action) => {
                 isLoading: true,
                 modifyQuestionErrorReason: action.error,
             };
+        }
+        case QUESTION_SELECT_REQUEST: {
+            return {
+                ...state,
+                selectedQuestion: action.data,
+            }
         }
         default: {
             return {

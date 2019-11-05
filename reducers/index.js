@@ -8,6 +8,7 @@ import room from './room';
 import master from './master';
 
 import question from './question';
+import lookup from './lookup';
 
 
 const rootReducer = combineReducers({
@@ -15,8 +16,8 @@ const rootReducer = combineReducers({
     post,
     room,
     master,
-    question
-
+    question,
+    lookup
 });
 
 export default rootReducer;

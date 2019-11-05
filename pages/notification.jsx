@@ -4,7 +4,6 @@ import {
   Icon,
   Typography,
   Input,
-  Select,
   Divider,
   Button,
   Table,
@@ -19,15 +18,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 const { Text } = Typography;
-const { confirm } = Modal;
-const { Search } = Input;
-const { Option } = Select;
 const { TextArea } = Input;
-
-
-function handleChange(value) {
-  console.log(`selected ${value}`);
-}
 
 export const useInput = (initValue = null) => {
   const [value, setter] = useState(initValue);
@@ -40,7 +31,6 @@ export const useInput = (initValue = null) => {
 const notifycation = () => {
 
   const [myinfoid, setMyinfoid] = useState(0);
-
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("myInfo"))) {
@@ -56,7 +46,7 @@ const notifycation = () => {
       title: "글번호",
       dataIndex: "number",
       key: "number",
-      render: () => <div>{articlenum++}</div>
+      render: () => <div style={{ marginLeft: "10px" }}>{articlenum++}</div>
     },
     {
       title: "제목",
@@ -75,20 +65,21 @@ const notifycation = () => {
       dataIndex: "createdDate",
       key: "createdDate"
     },
-    {
-      title: "수정란",
-      dataIndex: "action",
-      key: 'action',
-      render: () =>
-        myinfoid === 1 ?
+    myinfoid === 1 ?
+      {
+        title: "수정란",
+        dataIndex: "action",
+        key: 'action',
+        render: () =>
           <span>
             <Button type="primary" onClick={showModifyNotifyModal}>수정</Button>
             <Divider type="vertical" />
             <Button type="danger" onClick={showDeleteNotifyModal}
             >삭제</Button>
           </span>
-          : ""
-    }
+      }
+      :
+      {}
   ];
 
   const { notifycations, isLoading } = useSelector(state => state.post);
@@ -191,30 +182,22 @@ const notifycation = () => {
         <div style={{ marginRight: "110px", textAlign: "center" }}>
           <img src="static/images/notification_logo.png" />
         </div>
-        <header style={{ display: "flex" }}>
-          <div style={{ width: "200px" }}>
+        <header style={{ display: "flex", marginTop: "20px" }}>
+          <div style={{ width: "150px", marginTop: "6px" }}>
             <Icon type="bell" />
-            <Text strong> 전체 30건</Text>
-            <Text>(1/5)페이지</Text>
+            <Text strong> 전체 {notifycations.length}건</Text>
+            <Text> (1/5)페이지</Text>
           </div>
-
-          <div
-            style={{
+          {myinfoid === 1 ?
+            <div style={{
               width: 1200,
               textAlign: "right"
-            }}
-          >
-            <Select
-              defaultValue="검색조건"
-              style={{ width: 120 }}
-              onChange={handleChange}
-            >
-              <Option value="name">이름</Option>
-              <Option value="lectureroom">강의실</Option>
-              <Option value="date">날짜</Option>
-            </Select>
-            <Search style={{ width: 200, marginLeft: "10px" }} enterButton />
-          </div>
+            }}>
+              <Button type="danger" size="large" onClick={showModal}>
+                공지사항 추가
+            </Button>
+            </div>
+            : ""}
         </header>
         <Divider />
         <Table columns={columns} dataSource={notifycations} onRow={onRowClick} ></Table>
@@ -231,13 +214,6 @@ const notifycation = () => {
             }}
           >
           </div>
-          {myinfoid === 1 ?
-            <div style={{ width: "40%", textAlign: "right" }}>
-              <Button type="danger" size="large" onClick={showModal}>
-                공지사항 추가
-            </Button>
-            </div>
-            : ""}
         </div>
       </Layout>
       <Modal title="공지사항 추가" visible={visible} footer={null}>

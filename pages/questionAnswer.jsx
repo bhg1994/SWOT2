@@ -11,12 +11,13 @@ import {
   Modal,
   Form
 } from "antd";
-
+import Link from "next/link";
 import {
   LOAD_QUESTION_REQUEST,
   CREATE_QUESTION_REQUEST,
   DELETE_QUESTION_REQUEST,
-  MODIFY_QUESTION_REQUEST
+  MODIFY_QUESTION_REQUEST,
+  QUESTION_SELECT_REQUEST
 } from '../reducers/question';
 import { useDispatch, useSelector } from "react-redux";
 
@@ -51,13 +52,17 @@ const questionAnswer = () => {
       title: "글번호",
       dataIndex: "number",
       key: "number",
-      render: () => <div>{articlenum++}</div>
+      render: () => <div style={{ marginLeft: "10px" }}>{articlenum++}</div>
     },
     {
       title: "제목",
       dataIndex: "title",
       key: "title",
-      render: text => <a>{text}</a>
+      render: text => (
+        <Link href="/questionComment">
+          <a>{text}</a>
+        </Link>
+      )
     },
     {
       title: "내용",
@@ -127,6 +132,10 @@ const questionAnswer = () => {
     return {
       onClick: () => {
         setId(record.id);
+        dispatch({
+          type: QUESTION_SELECT_REQUEST,
+          data: record
+        })
       }
     }
   }
@@ -184,27 +193,27 @@ const questionAnswer = () => {
         <div style={{ marginRight: "110px", textAlign: "center" }}>
           <img src="static/images/Q&A_logo.png" />
         </div>
-        <header style={{ display: "flex" }}>
-          <div style={{ width: "150px" }}>
+        <header style={{ display: "flex", marginTop: "20px" }}>
+
+          <div style={{ width: "150px", marginTop: "6px" }}>
             <Icon type="bell" />
-            <Text strong> {questions.length}건</Text>
-            <Text>(1/4)페이지</Text>
+            <Text strong> 전체 {questions.length} 건</Text>
+            <Text> (1/5)페이지</Text>
           </div>
+
           <div
             style={{
               width: 1200,
               textAlign: "right"
             }}
           >
-            <Select
-              defaultValue="검색조건"
-              style={{ width: 120 }}
-            //   onChange={handleChange}
+            <Button
+              type="primary"
+              size="large"
+              onClick={showCreateModal}
             >
-              <Option value="name">제목</Option>
-              <Option value="lectureroom">작성자</Option>
-            </Select>
-            <Search style={{ width: 200, marginLeft: "10px" }} enterButton />
+              글쓰기
+            </Button>
           </div>
         </header>
         <Divider />
@@ -222,17 +231,9 @@ const questionAnswer = () => {
             }}
           >
           </div>
-          <div style={{ width: "40%", textAlign: "right" }}>
-            <Button
-              type="primary"
-              size="large"
-              style={{ marginLeft: "20px" }}
-              onClick={showCreateModal}
-            >
-              글쓰기
-            </Button>
-          </div>
         </div>
+
+        {/* Q&A 생성 버튼 모달 */}
         <Modal title="Q & A" visible={createvisible} footer={null}>
           <Form onSubmit={handleSubmit}>
             <Form.Item>
@@ -270,7 +271,7 @@ const questionAnswer = () => {
         </Modal>
       </Layout>
 
-      {/* 공지사항 수정 버튼 모달 */}
+      {/* Q&A 수정 버튼 모달 */}
       <Modal title="Q&A 글 수정" visible={modifyvisible} footer={null}>
         <Form >
           <Form.Item>

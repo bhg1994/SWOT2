@@ -23,10 +23,6 @@ const { Search } = Input;
 const { Option } = Select;
 const { TextArea } = Input;
 
-function handleChange(value) {
-  console.log(`selected ${value}`);
-}
-
 const studyboard = () => {
   const [visible, setVisible] = useState(false);
   const [studytitle, setStudytitle] = useState("");
@@ -92,16 +88,23 @@ const studyboard = () => {
         <header style={{ display: "flex" }}>
           <div style={{ width: "150px" }}>
             <Icon type="bell" />
-            <Text strong> 전체25건</Text>
-            <Text>(1/5)페이지</Text>
+            <Text strong> 전체 25건 </Text>
+            <Text> (1/5)페이지</Text>
           </div>
-          <Button
-            type="primary"
-            style={{ marginLeft: "20px" }}
-            onClick={showModal}
+          <div
+            style={{
+              width: 1200,
+              textAlign: "right"
+            }}
           >
-            스터디 추가
+            <Button
+              type="primary"
+              onClick={showModal}
+              size="large"
+            >
+              스터디 추가
           </Button>
+          </div>
           <Modal title="스터디 추가" visible={visible} footer={null}>
             <Form onSubmit={handleSubmit}>
               <Form.Item>
@@ -167,23 +170,6 @@ const studyboard = () => {
               </Form.Item>
             </Form>
           </Modal>
-          <div
-            style={{
-              width: 1200,
-              textAlign: "right"
-            }}
-          >
-            <Select
-              defaultValue="검색조건"
-              style={{ width: 120 }}
-              onChange={handleChange}
-            >
-              <Option value="name">이름</Option>
-              <Option value="lectureroom">강의실</Option>
-              <Option value="date">날짜</Option>
-            </Select>
-            <Search style={{ width: 200, marginLeft: "10px" }} enterButton />
-          </div>
         </header>
         <Divider />
         <div style={{ marginLeft: "130px", padding: "30px" }}>
