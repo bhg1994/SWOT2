@@ -35,6 +35,13 @@ export const LOAD_ROOMLIST_REQUEST = 'LOAD_ROOMLIST_REQUEST';
 export const LOAD_ROOMLIST_SUCCESS = 'LOAD_ROOMLIST_SUCCESS';
 export const LOAD_ROOMLIST_FAILURE = 'LOAD_ROOMLIST_FAILURE';
 
+export const RESERVATION_SUBMIT_REQUEST = 'RESERVATION_SUBMIT_REQUEST';
+export const RESERVATION_SUBMIT_SUCCESS = 'RESERVATION_SUBMIT_SUCCESS';
+export const RESERVATION_SUBMIT_FAILURE = 'RESERVATION_SUBMIT_FAILURE';
+
+export const RESERVATION_DECLINE_REQUEST = 'RESERVATION_DECLINE_REQUEST';
+export const RESERVATION_DECLINE_SUCCESS = 'RESERVATION_DECLINE_SUCCESS';
+export const RESERVATION_DECLINE_FAILURE = 'RESERVATION_DECLINE_FAILURE';
 
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -119,6 +126,46 @@ export default (state = initialState, action) => {
                 ...state,
                 isLoading: false,
                 roomListErrorReason: action.error,
+            };
+        }
+        case RESERVATION_SUBMIT_REQUEST: {
+            return {
+                ...state,
+                isLoading: true,
+                errorReason: ""
+            };
+        }
+        case RESERVATION_SUBMIT_SUCCESS: {
+            return {
+                ...state,
+                isLoading: false,
+            };
+        }
+        case RESERVATION_SUBMIT_FAILURE: {
+            return {
+                ...state,
+                isLoading: false,
+                errorReason: action.error,
+            };
+        }
+        case RESERVATION_DECLINE_REQUEST: {
+            return {
+                ...state,
+                isLoading: true,
+                errorReason: ""
+            };
+        }
+        case RESERVATION_DECLINE_SUCCESS: {
+            return {
+                ...state,
+                isLoading: false,
+            };
+        }
+        case RESERVATION_DECLINE_FAILURE: {
+            return {
+                ...state,
+                isLoading: false,
+                errorReason: action.error,
             };
         }
         default: {

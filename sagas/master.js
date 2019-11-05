@@ -20,6 +20,12 @@ import {
     LOAD_ROOMLIST_REQUEST,
     LOAD_ROOMLIST_SUCCESS,
     LOAD_ROOMLIST_FAILURE,
+    RESERVATION_SUBMIT_FAILURE,
+    RESERVATION_SUBMIT_REQUEST,
+    RESERVATION_SUBMIT_SUCCESS,
+    RESERVATION_DECLINE_REQUEST,
+    RESERVATION_DECLINE_SUCCESS,
+    RESERVATION_DECLINE_FAILURE,
 } from '../reducers/master'
 
 function createRoomAPI(createRoomData) {
@@ -32,7 +38,6 @@ function createRoomAPI(createRoomData) {
     form.append('total', createRoomData.total)
 
     let token = localStorage.getItem("accessToken");
-    console.log("생성전 토큰 : " + createRoomData.roomName, createRoomData.groupNo, createRoomData.roomNo, createRoomData.total);
 
 
     return axios.post(`http://swot.devdogs.kr:8080/api/classroom/create`, form,
@@ -56,8 +61,6 @@ function createRoomAPI(createRoomData) {
 function* createRoom(action) {
     try {
         const result = yield call(createRoomAPI, action.data);
-
-        console.log(result.info);
 
         if (result.result === "success") {
             yield put({ // put은 dispatch 동일
@@ -91,7 +94,6 @@ function deleteRoomAPI(deleteRoomData) {
     // 서버에 요청을 보내는 부분
     let id = deleteRoomData.id
     let url = "http://swot.devdogs.kr:8080/api/classroom/delete/" + id;
-    console.log(id);
 
     let token = localStorage.getItem("accessToken");
 
@@ -249,11 +251,124 @@ function* watchLoadRoomList() {
     yield takeEvery(LOAD_ROOMLIST_REQUEST, loadRoomList);
 }
 
+function submitAPI(requestData) {
+    // 서버에 요청을 보내는 부분
+    let url = "http://swot.devdogs.kr:8080/api/reservation/accept/"+requestData.id;
+    return axios.get(url,
+        {
+            headers: { // 요청 헤더
+                Authorization: requestData.token,
+            },
+        }
+    ).then(response => {
+        console.log('response : ', JSON.stringify(response, null, 2));
+        var result = response.data;
+        return result;
+    })
+        .catch(error => {
+            console.log('failed', error)
+            return error;
+        })
+
+}
+
+
+
+function* submit(action) {
+    try {
+        const result = yield call(submitAPI, action.data);
+
+        if (result.result === "success") {
+            yield put({ // put은 dispatch 동일
+                type: RESERVATION_SUBMIT_SUCCESS,
+            });
+            yield put({ // put은 dispatch 동일
+                type: LOAD_RESERVATIONS_REQUEST,
+            });
+        }
+        else {
+            yield put({
+                type: RESERVATION_SUBMIT_FAILURE,
+            });
+        }
+
+    } catch (e) { // loginAPI 실패
+        console.error(e);
+        yield put({
+            type: RESERVATION_SUBMIT_FAILURE,
+        });
+        alert("통신 장애");
+    }
+}
+
+function* watchSubmit() {
+    yield takeEvery(RESERVATION_SUBMIT_REQUEST, submit);
+}
+
+function declineApi(requestData) {
+    //서버에 요청을 보내는 부분
+    console.log(requestData);
+    let form = new FormData();
+    form.append('failReason', requestData.reason);
+    let url = "http://swot.devdogs.kr:8080/api/reservation/decline/"+requestData.id;
+    return axios.post(url,form,
+        {
+            headers: { // 요청 헤더
+                Authorization: requestData.token,
+            },
+        }
+    ).then(response => {
+        console.log('response : ', JSON.stringify(response, null, 2));
+        var result = response.data;
+        return result;
+    })
+        .catch(error => {
+            console.log('failed', error)
+            return error;
+        })
+
+}
+
+
+
+function* decline(action) {
+    try {
+        const result = yield call(declineApi, action.data);
+
+        if (result.result === "success") {
+            yield put({ // put은 dispatch 동일
+                type: RESERVATION_DECLINE_SUCCESS,
+            });
+            yield put({ // put은 dispatch 동일
+                type: LOAD_RESERVATIONS_REQUEST,
+            });
+        }
+        else {
+            yield put({
+                type: RESERVATION_DECLINE_FAILURE,
+            });
+        }
+
+    } catch (e) { // loginAPI 실패
+        console.error(e);
+        yield put({
+            type: RESERVATION_DECLINE_FAILURE,
+        });
+        alert("통신 장애");
+    }
+}
+
+function* watchDecline() {
+    yield takeEvery(RESERVATION_DECLINE_REQUEST, decline);
+}
+
 export default function* roomSaga() {
     yield all([
         fork(watchCreateRoom),
         fork(watchDeleteRoom),
         fork(watchLoadReservations),
         fork(watchLoadRoomList),
+        fork(watchSubmit),
+        fork(watchDecline),
     ]);
 }
