@@ -310,7 +310,6 @@ function* watchSubmit() {
 
 function declineApi(requestData) {
     //서버에 요청을 보내는 부분
-    console.log(requestData);
     let form = new FormData();
     form.append('failReason', requestData.reason);
     let url = "http://swot.devdogs.kr:8080/api/reservation/decline/"+requestData.id;
@@ -329,7 +328,6 @@ function declineApi(requestData) {
             console.log('failed', error)
             return error;
         })
-
 }
 
 
