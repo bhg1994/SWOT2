@@ -4,7 +4,7 @@ import {
   LectureRoomApplication,
   BuildingList
 } from "../components";
-import { ROOMLIST_REQUEST } from "../reducers/room";
+import { LOAD_ROOMLIST_REQUEST } from "../reducers/master";
 import { useDispatch, useSelector } from "react-redux";
 import { LOAD_RESERVATIONS_REQUEST } from "../reducers/master";
 
@@ -25,7 +25,7 @@ const master = () => {
 
 master.getInitialProps = async (context) => {
   context.store.dispatch({
-    type: ROOMLIST_REQUEST
+    type: LOAD_ROOMLIST_REQUEST
   });
   context.store.dispatch({
     type: LOAD_RESERVATIONS_REQUEST

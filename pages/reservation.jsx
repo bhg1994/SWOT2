@@ -3,7 +3,7 @@ import {
   Layout,
 } from "antd";
 import SwotMap from "../containers/SwotMap";
-import { ROOMLIST_REQUEST } from "../reducers/room";
+import { LOAD_ROOMLIST_REQUEST } from "../reducers/master";
 import { useDispatch, useSelector } from "react-redux";
 
 
@@ -16,7 +16,7 @@ const reservation = () => {
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     dispatch({
-      type: ROOMLIST_REQUEST,
+      type: LOAD_ROOMLIST_REQUEST,
       data: {
         token: token,
       }

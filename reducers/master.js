@@ -1,4 +1,10 @@
-import { initialState } from "./room"
+export const initialState = {
+    reservationErrorReason: "",
+    isLoading: false,
+    totalRoomList: [],
+    errorReason: "",
+    reservationsList: [],
+};
 
 
 
@@ -21,6 +27,10 @@ export const DELETEROOM_FAILURE =
 export const LOAD_RESERVATIONS_REQUEST = 'LOAD_RESERVATIONS_REQUEST'
 export const LOAD_RESERVATIONS_SUCCESS = 'LOAD_RESERVATIONS_SUCCESS'
 export const LOAD_RESERVATIONS_FAILURE = 'LOAD_RESERVATIONS_FAILURE'
+
+export const LOAD_ROOMLIST_REQUEST = 'LOAD_ROOMLIST_REQUEST';
+export const LOAD_ROOMLIST_SUCCESS = 'LOAD_ROOMLIST_SUCCESS';
+export const LOAD_ROOMLIST_FAILURE = 'LOAD_ROOMLIST_FAILURE';
 
 
 export default (state = initialState, action) => {
@@ -86,6 +96,27 @@ export default (state = initialState, action) => {
                 isLoading: false,
                 createRoomReason: action.error
             }
+        }
+        case LOAD_ROOMLIST_REQUEST: {
+            return {
+                ...state,
+                isLoading: true,
+                roomListErrorReason: ""
+            };
+        }
+        case LOAD_ROOMLIST_SUCCESS: {
+            return {
+                ...state,
+                isLoading: false,
+                totalRoomList: action.data,
+            };
+        }
+        case LOAD_ROOMLIST_FAILURE: {
+            return {
+                ...state,
+                isLoading: false,
+                roomListErrorReason: action.error,
+            };
         }
         default: {
             return {

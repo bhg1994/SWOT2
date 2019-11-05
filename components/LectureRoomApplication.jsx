@@ -7,7 +7,7 @@ const { Column } = Table;
 
 const LectureRoomApplication = () => {
   const { reservationsList } = useSelector(state => state.master);
-  const { totalRoomList } = useSelector(state => state.room);
+  const { totalRoomList } = useSelector(state => state.master);
   
 
   const idToName = (id) => {

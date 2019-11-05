@@ -18,7 +18,7 @@ const columns = [
 ];
 
 const LectureRoomList = () => {
-  const { totalRoomList } = useSelector(state => state.room);
+  const { totalRoomList } = useSelector(state => state.master);
   const dispatch = useDispatch();
 
   const onRowClick = (record) => {

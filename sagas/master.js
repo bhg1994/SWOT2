@@ -17,6 +17,9 @@ import {
     LOAD_RESERVATIONS_REQUEST,
     LOAD_RESERVATIONS_SUCCESS,
     LOAD_RESERVATIONS_FAILURE,
+    LOAD_ROOMLIST_REQUEST,
+    LOAD_ROOMLIST_SUCCESS,
+    LOAD_ROOMLIST_FAILURE,
 } from '../reducers/master'
 
 function createRoomAPI(createRoomData) {
@@ -192,10 +195,65 @@ function* watchLoadReservations() {
     yield takeEvery(LOAD_RESERVATIONS_REQUEST, loadReservations);
 }
 
+function loadRoomListAPI(token) {
+    // 서버에 요청을 보내는 부분
+    // let form = new FormData()
+    // form.append('email', roomListData.id)
+    // form.append('password', roomListData.password)
+    return axios.get(`http://swot.devdogs.kr:8080/api/auth/classroom/list`,
+        {
+            headers: { // 요청 헤더
+                Authorization: token,
+            },
+        }
+    ).then(response => {
+        console.log('response : ', JSON.stringify(response, null, 2));
+        var result = response.data;
+        return result;
+    })
+        .catch(error => {
+            console.log('failed', error)
+            return error;
+        })
+
+}
+
+
+
+function* loadRoomList(action) {
+    try {
+        const result = yield call(loadRoomListAPI, action.data);
+
+        if (result.result === "success") {
+            yield put({ // put은 dispatch 동일
+                type: LOAD_ROOMLIST_SUCCESS,
+                data: result.info,
+            });
+        }
+        else {
+            yield put({
+                type: LOAD_ROOMLIST_FAILURE,
+            });
+        }
+
+    } catch (e) { // loginAPI 실패
+        console.error(e);
+        yield put({
+            type: LOAD_ROOMLIST_FAILURE,
+        });
+        alert("통신 장애");
+    }
+}
+
+function* watchLoadRoomList() {
+    yield takeEvery(LOAD_ROOMLIST_REQUEST, loadRoomList);
+}
+
 export default function* roomSaga() {
     yield all([
         fork(watchCreateRoom),
         fork(watchDeleteRoom),
         fork(watchLoadReservations),
+        fork(watchLoadRoomList),
     ]);
 }
