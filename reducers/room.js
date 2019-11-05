@@ -1,26 +1,17 @@
 export const initialState = {
     reservationErrorReason: "",
-    roomListErrorReason: "",
-    createRoomReason: "",
-    deleteRoomReason: "",
     isLoading: false,
-    totalRoomList: [],
     selectedRoom: null,
     startTime: "",
     endTime: "",
     date: "",
     errorReason: "",
     roomReservations: [],
-    reservationsList: [],
 };
 
 export const RESERVATION_REQUEST = 'RESERVATION_REQUEST';
 export const RESERVATION_SUCCESS = 'RESERVATION_SUCCESS';
 export const RESERVATION_FAILURE = 'RESERVATION_FAILURE';
-
-export const ROOMLIST_REQUEST = 'ROOMLIST_REQUEST';
-export const ROOMLIST_SUCCESS = 'ROOMLIST_SUCCESS';
-export const ROOMLIST_FAILURE = 'ROOMLIST_FAILURE';
 
 export const ROOM_RESERVATIONS_REQUEST = 'ROOM_RESERVATIONS_REQUEST'
 export const ROOM_RESERVATIONS_SUCCESS = 'ROOM_RESERVATIONS_SUCCESS'
@@ -55,27 +46,7 @@ export default (state = initialState, action) => {
                 reservationErrorReason: action.error,
             };
         }
-        case ROOMLIST_REQUEST: {
-            return {
-                ...state,
-                isLoading: true,
-                roomListErrorReason: ""
-            };
-        }
-        case ROOMLIST_SUCCESS: {
-            return {
-                ...state,
-                isLoading: false,
-                totalRoomList: action.data,
-            };
-        }
-        case ROOMLIST_FAILURE: {
-            return {
-                ...state,
-                isLoading: false,
-                roomListErrorReason: action.error,
-            };
-        }
+        
         case ROOM_RESERVATIONS_REQUEST: {
             return {
                 ...state,

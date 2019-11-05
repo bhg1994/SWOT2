@@ -50,7 +50,7 @@ const BuildingList = () => {
   const [tabkey, setTabkey] = useState("");
 
 
-  const { totalRoomList, isLoading } = useSelector(state => state.room);
+  const { totalRoomList, isLoading } = useSelector(state => state.master);
 
 
   let lists = [];
