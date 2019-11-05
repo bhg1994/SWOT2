@@ -122,7 +122,7 @@ function* deleteRoom(action) {
                 type: DELETEROOM_SUCCESS,
             });
             yield put({ // put은 dispatch 동일
-                type: ROOMLIST_REQUEST,
+                type: LOAD_ROOMLIST_REQUEST,
             });
             alert("강의실 삭제 성공");
         }
