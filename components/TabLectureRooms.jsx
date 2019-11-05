@@ -20,7 +20,6 @@ const LectureRoomList = ({ buildingList }) => {
     const [id, setId] = useState(0);
 
     const { totalRoomList, isLoading } = useSelector(state => state.master);
-    //const { isLoading } = useSelector(state => state.room);
 
 
     const columns = [
