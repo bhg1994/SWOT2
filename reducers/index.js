@@ -9,7 +9,7 @@ import master from './master';
 
 import question from './question';
 import lookup from './lookup';
-
+import comment from './comment';
 
 const rootReducer = combineReducers({
     user,
@@ -17,7 +17,8 @@ const rootReducer = combineReducers({
     room,
     master,
     question,
-    lookup
+    lookup,
+    comment
 });
 
 export default rootReducer;

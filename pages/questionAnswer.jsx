@@ -59,7 +59,7 @@ const questionAnswer = () => {
       dataIndex: "title",
       key: "title",
       render: text => (
-        <Link href="/questionComment">
+        <Link href="/Comments">
           <a>{text}</a>
         </Link>
       )

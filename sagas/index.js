@@ -12,6 +12,7 @@ import master from './master';
 import question from './question';
 
 import lookup from './lookup';
+import comment from './comment';
 
 export default function* rootSaga() {
     yield all([
@@ -20,6 +21,7 @@ export default function* rootSaga() {
         fork(room),
         fork(master),
         fork(question),
-        fork(lookup)
+        fork(lookup),
+        fork(comment)
     ]);
 }
