@@ -47,7 +47,7 @@ const BuildingList = () => {
   const [total, setChangeTotal] = useState("");
 
   // const [tabActive, setTabActive] = useState(false);
-  const [tabkey, setTabkey] = useState("");
+  const [tabkey, setTabkey] = useState("1");
 
 
   const { totalRoomList, isLoading } = useSelector(state => state.master);
@@ -184,36 +184,64 @@ const BuildingList = () => {
           </Form.Item>
         </Form>
       </Modal>
-      <BuildingTabs defaultActiveKey='0' onTabClick={onTabClick} >
-        <TabPane tab="건물 선택" key="0" />
+      <BuildingTabs defaultActiveKey='1' onTabClick={onTabClick} >
+
         <TabPane tab="승연관" key="1">
           <BuildingAddBtn type="primary" onClick={showModal}>
             강의실 추가
           </BuildingAddBtn>
           <TabLectureRooms buildingList={buildingList} />
         </TabPane>
-        <TabPane tab="일만관" key="2"></TabPane>
+
+        <TabPane tab="일만관" key="2">
+          <BuildingAddBtn type="primary" onClick={showModal}>
+            강의실 추가
+          </BuildingAddBtn>
+          <TabLectureRooms buildingList={buildingList} />
+        </TabPane>
+
         <TabPane tab="월당관" key="3">
           <BuildingAddBtn type="primary" onClick={showModal}>
             강의실 추가
           </BuildingAddBtn>
           <TabLectureRooms buildingList={buildingList} />
         </TabPane>
-        <TabPane tab="나눔관" key="5"></TabPane>
+
+        <TabPane tab="나눔관" key="5">
+          <BuildingAddBtn type="primary" onClick={showModal}>
+            강의실 추가
+          </BuildingAddBtn>
+          <TabLectureRooms buildingList={buildingList} />
+        </TabPane>
+
         <TabPane tab="이천환기념관" key="6">
           <BuildingAddBtn type="primary" onClick={showModal}>
             강의실 추가
           </BuildingAddBtn>
           <TabLectureRooms buildingList={buildingList} />
         </TabPane>
-        <TabPane tab="새천년관" key="7"></TabPane>
-        <TabPane tab="성미가엘성당" key="9"></TabPane>
+
+        <TabPane tab="새천년관" key="7">
+          <BuildingAddBtn type="primary" onClick={showModal}>
+            강의실 추가
+          </BuildingAddBtn>
+          <TabLectureRooms buildingList={buildingList} />
+        </TabPane>
+
+        <TabPane tab="성미가엘성당" key="9">
+          <BuildingAddBtn type="primary" onClick={showModal}>
+            강의실 추가
+          </BuildingAddBtn>
+          <TabLectureRooms buildingList={buildingList} />
+        </TabPane>
+
         <TabPane tab="미가엘관" key="12" >
           <BuildingAddBtn type="primary" onClick={showModal}>
             강의실 추가
           </BuildingAddBtn>
           <TabLectureRooms buildingList={buildingList} />
         </TabPane>
+
       </BuildingTabs>
     </>
   );
