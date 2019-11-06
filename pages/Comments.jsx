@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Button, Typography, Divider, Comment, Avatar, Form, List, Input, Skeleton } from "antd";
+import { Button, Typography, Divider, Comment, Avatar, Form, List, Input } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { LOAD_COMMENT_REQUEST, CREATE_COMMENT_REQUEST } from "../reducers/comment";
-const { TextArea } = Input;
 
+const { TextArea } = Input;
 const { Text, Title } = Typography;
 
 const Editor = ({ onChange, onSubmit, value }) => (
@@ -57,7 +57,6 @@ const Comments = () => {
             <div style={{ margin: "50px" }}>
                 <Divider style={{ border: "20px" }} />
                 <Text type="danger" style={{ fontSize: "25px" }}
-
                 >
                     SWOT &nbsp; &nbsp;
             </Text>

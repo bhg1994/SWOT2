@@ -247,7 +247,11 @@ const studyboard = () => {
               <div style={{ marginLeft: "10px" }}>{articlenum++}
               </div>}
           />
-          <Column title="스터디 주제" dataIndex="title" key="title" />
+          <Column title="스터디 주제" dataIndex="title" key="title" render={text => (
+            <Link href="/studyapply">
+              <a>{text}</a>
+            </Link>)
+          } />
           <Column title="스터디 내용" dataIndex="body" key="body" />
           <Column title="시작시간" dataIndex="startTime" key="startTime" />
           <Column title="종료시간" dataIndex="endTime" key="endTime" />
