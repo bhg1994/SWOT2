@@ -3,17 +3,10 @@ import { ReservationTimeWrapper, Hoursofuse, Availabletime, SelecttimeWrapper, S
 import { useDispatch, useSelector } from "react-redux";
 import { START_TIME_SELECT, END_TIME_SELECT } from "../reducers/room";
 import { useEffect, useState } from "react";
-const { Column } = Table;
-
-
-
 
 var justClickedId = "";
-
-
 var startId = "";
 var beforeId = "";
-
 
 const ReservationTime = ({ value }) => {
   const times = [
@@ -43,16 +36,10 @@ const ReservationTime = ({ value }) => {
     "23:00",
   ];
 
-
   const dispatch = useDispatch();
   const { roomReservations } = useSelector(state => state.room);
   const { date } = useSelector(state => state.room);
   var reservations = [];
-
-
-
-
-
 
   useEffect(() => {
     if (value) {
@@ -60,7 +47,6 @@ const ReservationTime = ({ value }) => {
     }
   }, [value])
   useEffect(() => {
-
     roomReservations.forEach(reservation => {
       if (reservation.reservationDate === date) {
         reservations.push(reservation);
@@ -120,9 +106,7 @@ const ReservationTime = ({ value }) => {
           });
         }
       }
-
     }
-
 
   };
   const oninit = () => {
@@ -156,8 +140,6 @@ const ReservationTime = ({ value }) => {
     }
 
   }
-
-
 
   return (
     <>

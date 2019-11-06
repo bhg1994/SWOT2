@@ -56,13 +56,13 @@ const LectureRoomList = ({ buildingList }) => {
 
     const onRowClick = (record) => {
         return {
-          onMouseEnter: () => {
-            setRoomName(record.roomName);
-            setRoomNo(record.roomNo);
-            setTotal(parseInt(record.total));
-            setGroupNo(record.groupNo);
-            setId(record.id)
-          }
+            onMouseEnter: () => {
+                setRoomName(record.roomName);
+                setRoomNo(record.roomNo);
+                setTotal(parseInt(record.total));
+                setGroupNo(record.groupNo);
+                setId(record.id)
+            }
         }
     }
 
@@ -121,12 +121,12 @@ const LectureRoomList = ({ buildingList }) => {
         e.preventDefault();
         dispatch({
             type: MODIFY_ROOM_REQUEST,
-            data:{
-                groupNo:groupNo,
-                roomNo:roomNo,
-                roomName:roomName,
-                total:total,
-                id:id,
+            data: {
+                groupNo: groupNo,
+                roomNo: roomNo,
+                roomName: roomName,
+                total: total,
+                id: id,
             }
         })
         setVisible(false);
@@ -147,7 +147,7 @@ const LectureRoomList = ({ buildingList }) => {
                             addonBefore="강의실 코드"
                             style={{ width: "50%" }}
                             onChange={onChangeValue}
-                        
+
                         />
                     </Form.Item>
                     <Form.Item>

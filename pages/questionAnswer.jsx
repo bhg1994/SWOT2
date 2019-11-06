@@ -13,17 +13,16 @@ import {
 } from "antd";
 import Link from "next/link";
 import {
-  LOAD_QUESTION_REQUEST,
-  CREATE_QUESTION_REQUEST,
-  DELETE_QUESTION_REQUEST,
-  MODIFY_QUESTION_REQUEST,
-  QUESTION_SELECT_REQUEST
-} from '../reducers/question';
+  LOAD_POST_REQUEST,
+  CREATE_POST_REQUEST,
+  DELETE_POST_REQUEST,
+  MODIFY_POST_REQUEST,
+} from "../reducers/post";
+
+import { QUESTION_SELECT_REQUEST } from '../reducers/question';
 import { useDispatch, useSelector } from "react-redux";
 
 const { Text } = Typography;
-const { Search } = Input;
-const { Option } = Select;
 const { TextArea } = Input;
 
 export const useInput = (initValue = null) => {
@@ -88,7 +87,7 @@ const questionAnswer = () => {
     }
   ];
 
-  const { questions, isLoading } = useSelector(state => state.question);
+  const { posts, isLoading } = useSelector(state => state.post);
 
 
   const dispatch = useDispatch();
@@ -152,7 +151,7 @@ const questionAnswer = () => {
   const handleSubmit = e => {
     e.preventDefault();
     dispatch({
-      type: CREATE_QUESTION_REQUEST,
+      type: CREATE_POST_REQUEST,
       data: {
         code: "3",
         title: questiontitle,
@@ -167,7 +166,7 @@ const questionAnswer = () => {
 
   const questionDelete = () => {
     dispatch({
-      type: DELETE_QUESTION_REQUEST,
+      type: DELETE_POST_REQUEST,
       data: {
         id: id
       }
@@ -177,7 +176,7 @@ const questionAnswer = () => {
 
   const questionModify = () => {
     dispatch({
-      type: MODIFY_QUESTION_REQUEST,
+      type: MODIFY_POST_REQUEST,
       data: {
         id: id,
         title: modifytitle,
@@ -197,7 +196,7 @@ const questionAnswer = () => {
 
           <div style={{ width: "150px", marginTop: "6px" }}>
             <Icon type="bell" />
-            <Text strong> 전체 {questions.length} 건</Text>
+            <Text strong> 전체 {posts.length} 건</Text>
             <Text> (1/5)페이지</Text>
           </div>
 
@@ -217,7 +216,7 @@ const questionAnswer = () => {
           </div>
         </header>
         <Divider />
-        <Table columns={columns} dataSource={questions} onRow={onRowClick}></Table>
+        <Table columns={columns} dataSource={posts} onRow={onRowClick}></Table>
         <div
           style={{
             display: "flex",
@@ -337,7 +336,10 @@ const questionAnswer = () => {
 
 questionAnswer.getInitialProps = async (context) => {
   context.store.dispatch({
-    type: LOAD_QUESTION_REQUEST,
+    type: LOAD_POST_REQUEST,
+    data: {
+      code: "3"
+    }
   });
 };
 

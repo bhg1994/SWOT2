@@ -3,31 +3,19 @@ import {
   StudyBoard,
   ReservationRoominfo,
   StudyBoardPagination,
-  LectureRoominfo,
   MainCarousel
 } from "../components";
-import { makeStyles } from "@material-ui/core/styles";
 import { SwotMap } from "../containers";
 import { Row, Col, Card, Typography, Divider } from "antd";
 import { useSelector } from "react-redux";
-import { LOAD_NOTIFYCATIONS_REQUEST } from "../reducers/post";
+import { LOAD_POST_REQUEST } from "../reducers/post";
 
-
-const useStyles = makeStyles({
-  // ["@media (max-width:780px)"]: {
-  //   map: {
-  //     display: "none",
-  //     backgroundColor: "red"
-  //   }
-  // }
-});
 
 const { Text } = Typography;
 
 const Home = () => {
-  const classes = useStyles();
 
-  const { notifycations } = useSelector(state => state.post);
+  const { posts } = useSelector(state => state.post);
 
   const NotificationTitle = (
     <div style={{ textAlign: "center" }}>
@@ -95,9 +83,10 @@ const Home = () => {
   );
 };
 
-Home.getInitialProps = async (context) => {
-  // context.store.dispatch({
-  //   type: LOAD_NOTIFYCATIONS_REQUEST,
-  // });
-};
+// Home.getInitialProps = async (context) => {
+//   context.store.dispatch({
+//     type: LOAD_POST_REQUEST,
+//   });
+// };
+
 export default Home;

@@ -17,9 +17,19 @@ import withReduxSaga from "next-redux-saga";
 import reducer from "../reducers";
 import rootSaga from "../sagas";
 
-import { LOAD_NOTIFYCATIONS_REQUEST } from "../reducers/post";
+import { LOAD_POST_REQUEST } from "../reducers/post";
 
 const SWOT = ({ Component, store, pageProps }) => {
+
+  const [me, setMe] = useState([]);
+
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem("myInfo"))) {
+      let myInfo = JSON.parse(localStorage.getItem("myInfo"));
+      setMe(myInfo)
+    }
+  }, [])
+
   return (
     <>
       <Provider store={store}>
@@ -47,18 +57,30 @@ const SWOT = ({ Component, store, pageProps }) => {
                   ></img>
                 </a>
               </Link>
-              <Link href="/profile">
-                <a>
-                  <Avatar
-                    src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                    style={{
-                      float: "right",
-                      marginTop: "15px",
-                      backgroundColor: "black"
-                    }}
-                  />
-                </a>
-              </Link>
+              {me.name ?
+                <Link href="/profile">
+                  <a>
+                    <Avatar
+                      style={{
+                        float: "right",
+                        marginTop: "15px",
+                        fontSize: "10px",
+                        backgroundColor: "black"
+                      }}>{me.name}</Avatar>
+                  </a>
+                </Link>
+                :
+                <Link href="/login">
+                  <a>
+                    <Avatar
+                      style={{
+                        float: "right",
+                        marginTop: "15px",
+                        fontSize: "10px",
+                        backgroundColor: "black"
+                      }}>LOGIN</Avatar>
+                  </a>
+                </Link>}
             </Header>
             <Content
               style={{
@@ -86,17 +108,14 @@ SWOT.propTypes = {
 
 SWOT.getInitialProps = async (context) => {
 
-  
-
   const { ctx, Component } = context;
-
   let pageProps = {};
   if (Component.getInitialProps) {
     pageProps = await Component.getInitialProps(ctx);
   }
-  if(ctx.store.getState().post.notifycations===[]){
+  if (ctx.store.getState().post.posts === []) {
     ctx.store.dispatch({
-      type: LOAD_NOTIFYCATIONS_REQUEST,
+      type: LOAD_POST_REQUEST,
     });
   }
   return pageProps;

@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Button, Typography, Divider, Comment, Avatar, Form, List, Input } from "antd";
+import { Button, Typography, Divider, Comment, Avatar, Form, List, Input, Skeleton } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { LOAD_COMMENT_REQUEST, CREATE_COMMENT_REQUEST } from "../reducers/comment";
 const { TextArea } = Input;
 
 const { Text, Title } = Typography;
-
-
 
 const Editor = ({ onChange, onSubmit, value }) => (
     <div>
@@ -28,14 +26,6 @@ const Comments = () => {
     const [me, setMe] = useState([]);
     const { selectedQuestion } = useSelector(state => state.question);
 
-    const CommentList = ({ comments }) => (
-        <List
-            dataSource={comments}
-            header={`${comments.length} ${comments.length > 1 ? 'replies' : 'reply'}`}
-            itemLayout="horizontal"
-            renderItem={props => <Comment {...props} />}
-        />
-    );
 
 
     const dispatch = useDispatch();
@@ -77,11 +67,29 @@ const Comments = () => {
                 </div>
                 <Divider />
                 <div style={{ height: "400px" }}>{selectedQuestion.body}</div>
-
+                <div style={{ fontSize: "15px", color: "black" }}>{comments.length} replies</div>
                 <Divider />
 
                 <div>
-
+                    {/* 댓글 조회 */}
+                    <List
+                        className="demo-loadmore-list"
+                        itemLayout="horizontal"
+                        dataSource={comments}
+                        renderItem={comment => (
+                            <List.Item
+                                actions={[<a key="commentDate">{comment.createdDate}</a>]}
+                            >
+                                <List.Item.Meta
+                                    avatar={
+                                        <Avatar>{comment.boardId}</Avatar>
+                                    }
+                                    description={comment.bodyText}
+                                />
+                            </List.Item>
+                        )}
+                    />
+                    {/* 댓글 생성 */}
                     <Comment
                         avatar={
                             <Avatar style={{ backgroundColor: "red" }}>{me.name}</Avatar>
@@ -103,7 +111,6 @@ const Comments = () => {
 Comments.getInitialProps = async (context) => {
     // console.log(context.store.getState().question.selectedQuestion.id);
     let selectedId = context.store.getState().question.selectedQuestion.id;
-
 
     context.store.dispatch({
         type: LOAD_COMMENT_REQUEST,

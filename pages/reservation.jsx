@@ -24,9 +24,6 @@ const reservation = () => {
   }, [])
   const { isLoggingIn } = useSelector(state => state.user);
 
-
-
-
   return (
     <>
       <Layout style={{ backgroundColor: "white" }}>

@@ -7,30 +7,28 @@ import {
     call
 } from 'redux-saga/effects';
 import {
-    LOAD_NOTIFYCATIONS_REQUEST,
-    LOAD_NOTIFYCATIONS_SUCCESS,
-    LOAD_NOTIFYCATIONS_FAILURE,
-    CREATE_NOTIFYCATIONS_REQUEST,
-    CREATE_NOTIFYCATIONS_SUCCESS,
-    CREATE_NOTIFYCATIONS_FAILURE,
-    DELETE_NOTIFYCATIONS_REQUEST,
-    DELETE_NOTIFYCATIONS_SUCCESS,
-    DELETE_NOTIFYCATIONS_FAILURE,
-    MODIFY_NOTIFYCATIONS_REQUEST,
-    MODIFY_NOTIFYCATIONS_SUCCESS,
-    MODIFY_NOTIFYCATIONS_FAILURE,
-
-    LOAD_STUDYBOARDS_REQUEST,
-    LOAD_STUDYBOARDS_SUCCESS,
-    LOAD_STUDYBOARDS_FAILURE,
+    LOAD_POST_REQUEST,
+    LOAD_POST_SUCCESS,
+    LOAD_POST_FAILURE,
+    CREATE_POST_REQUEST,
+    CREATE_POST_SUCCESS,
+    CREATE_POST_FAILURE,
+    DELETE_POST_REQUEST,
+    DELETE_POST_SUCCESS,
+    DELETE_POST_FAILURE,
+    MODIFY_POST_REQUEST,
+    MODIFY_POST_SUCCESS,
+    MODIFY_POST_FAILURE,
 } from '../reducers/post';
 import axios from 'axios';
 
-// 공지사항 글 불러오기 
+// 글 불러오기 
+function loadPostAPI(postCode) {
 
-function loadNotifycationsAPI() {
+    let code = postCode.code;
+    console.log(code);
 
-    return axios.get('http://swot.devdogs.kr:8080/api/auth/board/1/list'
+    return axios.get('http://swot.devdogs.kr:8080/api/auth/board/' + code + '/list'
     ).then(response => {
         console.log('response : ', JSON.stringify(response, null, 2))
         var result = response.data;
@@ -42,44 +40,46 @@ function loadNotifycationsAPI() {
         });
 }
 
-function* loadNotifycations() {
+function* loadPost(action) {
     try {
-        const result = yield call(loadNotifycationsAPI);
+        const result = yield call(loadPostAPI, action.data);
 
         if (result.result === "success") {
             yield put({
-                type: LOAD_NOTIFYCATIONS_SUCCESS,
+                type: LOAD_POST_SUCCESS,
                 data: result.info,
             });
         } else {
             yield put({
-                type: LOAD_NOTIFYCATIONS_FAILURE,
+                type: LOAD_POST_FAILURE,
             });
         }
     }
     catch (e) {
         yield put({
-            type: LOAD_NOTIFYCATIONS_FAILURE,
+            type: LOAD_POST_FAILURE,
             error: e,
         });
     }
 }
 
-function* watchLoadNotifycations() {
-    yield takeEvery(LOAD_NOTIFYCATIONS_REQUEST, loadNotifycations);
+function* watchLoadPost() {
+    yield takeEvery(LOAD_POST_REQUEST, loadPost)
 }
 
 
-// 공지사항 글 작성
+// 글 작성
 
-function createNotifycationsAPI(notificationInfo) {
+function createPostAPI(postInfo) {
 
-    console.log(notificationInfo);
+    console.log(postInfo);
     let form = new FormData()
-    form.append('code', notificationInfo.code)
-    form.append('title', notificationInfo.title)
-    form.append('body', notificationInfo.body)
-
+    form.append('code', postInfo.code)
+    form.append('title', postInfo.title)
+    form.append('body', postInfo.body)
+    form.append('startTime', postInfo.startTime)
+    form.append('endTime', postInfo.endTime)
+    form.append('meetingDate', postInfo.meetingDate)
 
     let token = localStorage.getItem("accessToken");
 
@@ -100,41 +100,41 @@ function createNotifycationsAPI(notificationInfo) {
         });
 }
 
-function* createNotifycations(action) {
+function* createPost(action) {
     try {
-        const result = yield call(createNotifycationsAPI, action.data);
+        const result = yield call(createPostAPI, action.data);
 
         if (result.result === "success") {
             yield put({
-                type: CREATE_NOTIFYCATIONS_SUCCESS,
+                type: CREATE_POST_SUCCESS,
                 data: result.info,
             });
             alert('글이 작성되었습니다.');
         } else {
             yield put({
-                type: CREATE_NOTIFYCATIONS_FAILURE,
+                type: CREATE_POST_FAILURE,
             });
             alert("글 작성 X");
         }
     }
     catch (e) {
         yield put({
-            type: CREATE_NOTIFYCATIONS_FAILURE,
+            type: CREATE_POST_FAILURE,
             error: e,
         });
         alert('통신 오류 실패.');
     }
 }
 
-function* watchCreateNotifycations() {
-    yield takeEvery(CREATE_NOTIFYCATIONS_REQUEST, createNotifycations);
+function* watchCreatePost() {
+    yield takeEvery(CREATE_POST_REQUEST, createPost);
 }
 
-// 공지사항 글 삭제
+// 글 삭제
 
-function deleteNotifycationsAPI(notificationInfo) {
+function deletePostAPI(postInfo) {
 
-    let id = notificationInfo.id
+    let id = postInfo.id
 
     let token = localStorage.getItem("accessToken");
 
@@ -155,47 +155,50 @@ function deleteNotifycationsAPI(notificationInfo) {
         });
 }
 
-function* deleteNotifycations(action) {
+function* deletePost(action) {
     try {
-        const result = yield call(deleteNotifycationsAPI, action.data);
+        const result = yield call(deletePostAPI, action.data);
 
         if (result.result === "success") {
             yield put({
-                type: DELETE_NOTIFYCATIONS_SUCCESS,
+                type: DELETE_POST_SUCCESS,
+                data: {
+                    code: result.info
+                }
             });
             yield put({
-                type: LOAD_NOTIFYCATIONS_REQUEST,
+                type: LOAD_POST_REQUEST,
             })
             alert('글이 삭제되었습니다.');
         } else {
             yield put({
-                type: DELETE_NOTIFYCATIONS_FAILURE,
+                type: DELETE_POST_FAILURE,
             });
             alert("글 삭제 X");
         }
     }
     catch (e) {
         yield put({
-            type: DELETE_NOTIFYCATIONS_FAILURE,
+            type: DELETE_POST_FAILURE,
             error: e,
         });
         alert('통신 오류 실패.');
     }
 }
 
-function* watchDeleteNotifycations() {
-    yield takeEvery(DELETE_NOTIFYCATIONS_REQUEST, deleteNotifycations);
+function* watchDeletePost() {
+    yield takeEvery(DELETE_POST_REQUEST, deletePost);
 }
 
 
-// 공지사항 글 수정
-function modifyNotifycationsAPI(notificationInfo) {
+// 글 수정
+function modifyPostAPI(postInfo) {
 
-    let id = notificationInfo.id
+    let id = postInfo.id
 
     let form = new FormData()
-    form.append('title', notificationInfo.title)
-    form.append('body', notificationInfo.body)
+    form.append('title', postInfo.title)
+    form.append('body', postInfo.body)
 
     let token = localStorage.getItem("accessToken");
 
@@ -217,38 +220,38 @@ function modifyNotifycationsAPI(notificationInfo) {
         });
 }
 
-function* modifyNotifycations(action) {
+function* modifyPost(action) {
     try {
-        const result = yield call(modifyNotifycationsAPI, action.data);
+        const result = yield call(modifyPostAPI, action.data);
 
         console.log(result.result);
 
         if (result.result === "success") {
             yield put({
-                type: MODIFY_NOTIFYCATIONS_SUCCESS,
+                type: MODIFY_POST_SUCCESS,
             });
             yield put({
-                type: LOAD_NOTIFYCATIONS_REQUEST,
+                type: LOAD_POST_REQUEST,
             })
             alert('글이 수정되었습니다.');
         } else {
             yield put({
-                type: MODIFY_NOTIFYCATIONS_FAILURE,
+                type: MODIFY_POST_FAILURE,
             });
             alert("글 수정 X");
         }
     }
     catch (e) {
         yield put({
-            type: MODIFY_NOTIFYCATIONS_FAILURE,
+            type: MODIFY_POST_FAILURE,
             error: e,
         });
         alert('통신 오류 실패.');
     }
 }
 
-function* watchModifyNotifycations() {
-    yield takeEvery(MODIFY_NOTIFYCATIONS_REQUEST, modifyNotifycations);
+function* watchModifyPost() {
+    yield takeEvery(MODIFY_POST_REQUEST, modifyPost);
 }
 
 
@@ -318,10 +321,10 @@ function* watchLoadStudyboards() {
 
 export default function* postSaga() {
     yield all([
-        fork(watchLoadNotifycations),
-        fork(watchLoadStudyboards),
-        fork(watchCreateNotifycations),
-        fork(watchDeleteNotifycations),
-        fork(watchModifyNotifycations)
+        fork(watchLoadPost),
+        // fork(watchLoadStudyboards),
+        fork(watchCreatePost),
+        fork(watchDeletePost),
+        fork(watchModifyPost)
     ]);
-}
+}   

@@ -11,9 +11,9 @@ import {
   Form
 } from "antd";
 import {
-  LOAD_NOTIFYCATIONS_REQUEST, CREATE_NOTIFYCATIONS_REQUEST,
-  DELETE_NOTIFYCATIONS_REQUEST,
-  MODIFY_NOTIFYCATIONS_REQUEST
+  LOAD_POST_REQUEST, CREATE_POST_REQUEST,
+  DELETE_POST_REQUEST,
+  MODIFY_POST_REQUEST
 } from "../reducers/post";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -82,8 +82,7 @@ const notifycation = () => {
       {}
   ];
 
-  const { notifycations, isLoading } = useSelector(state => state.post);
-
+  const { posts, isLoading } = useSelector(state => state.post);
 
   const dispatch = useDispatch();
 
@@ -125,7 +124,7 @@ const notifycation = () => {
     // 공지사항 추가 dispatch 작성
     e.preventDefault();
     dispatch({
-      type: CREATE_NOTIFYCATIONS_REQUEST,
+      type: CREATE_POST_REQUEST,
       data: {
         code: "1",
         title: notificationtitle,
@@ -156,7 +155,7 @@ const notifycation = () => {
 
   const notifyModify = () => {
     dispatch({
-      type: MODIFY_NOTIFYCATIONS_REQUEST,
+      type: MODIFY_POST_REQUEST,
       data: {
         id: id,
         title: modifytitle,
@@ -168,7 +167,7 @@ const notifycation = () => {
 
   const notifyDelete = () => {
     dispatch({
-      type: DELETE_NOTIFYCATIONS_REQUEST,
+      type: DELETE_POST_REQUEST,
       data: {
         id: id
       }
@@ -185,7 +184,7 @@ const notifycation = () => {
         <header style={{ display: "flex", marginTop: "20px" }}>
           <div style={{ width: "150px", marginTop: "6px" }}>
             <Icon type="bell" />
-            <Text strong> 전체 {notifycations.length}건</Text>
+            <Text strong> 전체 {posts.length}건</Text>
             <Text> (1/5)페이지</Text>
           </div>
           {myinfoid === 1 ?
@@ -200,7 +199,7 @@ const notifycation = () => {
             : ""}
         </header>
         <Divider />
-        <Table columns={columns} dataSource={notifycations} onRow={onRowClick} ></Table>
+        <Table columns={columns} dataSource={posts} onRow={onRowClick} ></Table>
         <div
           style={{
             display: "flex",
@@ -318,7 +317,10 @@ const notifycation = () => {
 notifycation.getInitialProps = async (context) => {
   console.log("notify");
   context.store.dispatch({
-    type: LOAD_NOTIFYCATIONS_REQUEST,
+    type: LOAD_POST_REQUEST,
+    data: {
+      code: "1"
+    }
   });
 };
 
