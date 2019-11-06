@@ -46,7 +46,6 @@ const BuildingList = () => {
   const [roomNo, onChangeroomNo] = useInput("");
   const [total, setChangeTotal] = useState("");
 
-  // const [tabActive, setTabActive] = useState(false);
   const [tabkey, setTabkey] = useState("1");
 
 
@@ -70,7 +69,6 @@ const BuildingList = () => {
   const onTabClick = (key) => {
     lists = [];
     totalRoomList.map((room) => {
-      // console.log(String(room.groupNo), key);
       if (String(room.groupNo) === key) {
         lists.push(room);
       }
