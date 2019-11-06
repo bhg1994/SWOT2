@@ -162,12 +162,12 @@ function* deletePost(action) {
         if (result.result === "success") {
             yield put({
                 type: DELETE_POST_SUCCESS,
-                data: {
-                    code: result.info
-                }
             });
             yield put({
                 type: LOAD_POST_REQUEST,
+                data: {
+                    code: result.info
+                }
             })
             alert('글이 삭제되었습니다.');
         } else {
@@ -232,6 +232,9 @@ function* modifyPost(action) {
             });
             yield put({
                 type: LOAD_POST_REQUEST,
+                data: {
+                    code: result.info.code
+                }
             })
             alert('글이 수정되었습니다.');
         } else {
