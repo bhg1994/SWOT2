@@ -68,7 +68,6 @@ function* logIn(action) {
                 data: result.token,
             })
             alert("로그인 성공");
-            location.href = "/";
         } else {
             yield put({
                 type: LOG_IN_FAILURE,

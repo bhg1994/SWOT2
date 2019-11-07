@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Typography, Divider, Comment, Avatar, Form, List, Input, Modal } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { LOAD_COMMENT_REQUEST, CREATE_COMMENT_REQUEST, DELETE_COMMENT_REQUEST, COMMENT_SELECT_REQUEST } from "../reducers/comment";
+import { STUDY_APPLY_REQUEST } from '../reducers/study';
 
 const { confirm } = Modal;
 const { TextArea } = Input;
@@ -78,6 +79,25 @@ const studyapply = () => {
         });
     }
 
+    const onApplyBtn = () => {
+        const token = localStorage.getItem("accessToken");
+        confirm({
+            title: '스터디 신청',
+            content: `${selectedStudy.title}를 신청하시겠습니까?`,
+            onOk() {
+                dispatch({
+                    type: STUDY_APPLY_REQUEST,
+                    data: {
+                        token: token,
+                        boardId: selectedStudy.id,
+                        applicationDate: selectedStudy.meetingDate
+                    }
+                })
+            },
+            onCancel() { },
+        });
+    }
+
     return (
         <>
             <div style={{ margin: "50px" }}>
@@ -89,7 +109,7 @@ const studyapply = () => {
                 <div style={{ marginTop: "20px" }}>
                     <Title level={2}>[제목] : {selectedStudy.title} </Title>
                     <Text style={{ fontSize: "15px" }}>스터디 모집날짜 : {selectedStudy.meetingDate} ({selectedStudy.startTime} ~ {selectedStudy.endTime})</Text>
-                    <Button style={{ marginLeft: "30px" }}>스터디 신청</Button>
+                    <Button style={{ marginLeft: "30px" }} onClick={onApplyBtn}>스터디 신청</Button>
                 </div>
 
                 <Divider />

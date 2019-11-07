@@ -142,7 +142,7 @@ const BuildingList = () => {
       <Modal title="강의실 추가" visible={visible} footer={null}>
         <Form onSubmit={handleSubmit}>
           <Form.Item>
-            <Upload {...props}>
+            <Upload {...props}>댁
               <Button>
                 <Icon type="upload" /> Click to Upload
               </Button>

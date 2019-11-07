@@ -11,6 +11,8 @@ import question from './question';
 import lookup from './lookup';
 import comment from './comment';
 
+import study from './study';
+
 const rootReducer = combineReducers({
     user,
     post,
@@ -18,7 +20,8 @@ const rootReducer = combineReducers({
     master,
     question,
     lookup,
-    comment
+    comment,
+    study
 });
 
 export default rootReducer;

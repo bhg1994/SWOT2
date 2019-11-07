@@ -9,6 +9,7 @@ import { SwotMap } from "../containers";
 import { Row, Col, Card, Typography, Divider } from "antd";
 import { useSelector } from "react-redux";
 import { LOAD_POST_REQUEST } from "../reducers/post";
+import { LOAD_USER_REQUEST } from '../reducers/user';
 
 
 const { Text } = Typography;
@@ -84,9 +85,14 @@ const Home = () => {
 };
 
 // Home.getInitialProps = async (context) => {
-//   context.store.dispatch({
-//     type: LOAD_POST_REQUEST,
-//   });
-// };
+//   if (!context.isServer) {
+//     let token = localStorage.getItem("accessToken");
+
+//     context.store.dispatch({
+//       type: LOAD_USER_REQUEST,
+//       actoken: token
+//     });
+//   };
+// }
 
 export default Home;
