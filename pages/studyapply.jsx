@@ -62,7 +62,6 @@ const studyapply = () => {
                 deleteId = id;
             }
         });
-        console.log(deleteId);
         confirm({
             title: '해당 댓글 삭제',
             content: '정말로 삭제하시겠습니까?',

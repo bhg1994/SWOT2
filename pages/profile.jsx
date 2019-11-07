@@ -1,8 +1,9 @@
 import React from "react";
-import { Button, List, Tag, Card, Typography, Divider } from "antd";
+import { List, Tag, Card, Typography, Divider } from "antd";
 import NicknameEditForm from "../components/NicknameEditForm.jsx";
 import Link from "next/link";
 import { LOAD_USER_REQUEST } from "../reducers/user";
+import { LOAD_MYSTUDYPOST_REQUEST } from '../reducers/post';
 import { useSelector } from "react-redux";
 import { RESERVATION_STATUS_REQUEST } from '../reducers/lookup';
 
@@ -22,10 +23,10 @@ const studydata = [
 const Profile = () => {
 
   const { reservationStatus } = useSelector(state => state.lookup);
+  const { studys } = useSelector(state => state.post);
 
 
-
-  console.log(reservationStatus.length);
+  const Mystudys = studys.filter(study => study.code === 2)
 
   return (
     <>
@@ -86,22 +87,27 @@ const Profile = () => {
             </div>
           }
           bordered
-          dataSource={studydata}
-          renderItem={item => (
+          dataSource={Mystudys}
+          renderItem={study => (
             <List.Item>
               <Card
                 style={{ margin: "40px" }}
-                title={item.title}
+                title={study.title}
                 extra={<a href="Notification">More</a>}
               >
-                <Text type="warning">스터디 주제 :{item.studytitle}</Text>
+                <div style={{ marginBottom: "10px", textAlign: "end" }}>
+                  {study.state === 'T' ?
+                    <Tag color="blue">승인 완료</Tag>
+                    : <Tag color="red">승인 대기</Tag>}
+                </div>
+                <Text type="warning">스터디 주제 : {study.title}</Text>
                 <Divider />
-                <Text mark>날짜 : {item.studydate}</Text>
+                <Text mark>날짜 : {study.meetingDate} ({study.startTime} ~ {study.endTime} )</Text>
                 <br />
                 <br />
-                스터디 목적 : {item.studypurpose} <br />
+                스터디 목적 : {study.body} <br />
                 <Divider />
-                최대 인원 수 : {item.studymaximum}명
+                최대 인원 수 : {study.total} 명
               </Card>
             </List.Item>
           )}
@@ -152,6 +158,9 @@ Profile.getInitialProps = async (context) => {
   // }
   context.store.dispatch({
     type: RESERVATION_STATUS_REQUEST
+  });
+  context.store.dispatch({
+    type: LOAD_MYSTUDYPOST_REQUEST
   });
 };
 export default Profile;

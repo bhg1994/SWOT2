@@ -4,10 +4,12 @@ export const initialState = {
     postAdded: false, // 포스트 업로드 성공
     isLoading: false,
     posts: [],
+    studys: [],
     loadErrorReason: '',
     createErrorReason: '',
     deleteErrorReason: '',
     modifyErrorReason: '',
+    mystudyErrorReason: '',
     errorReason: '',
     selectedStudy: null,
 };
@@ -16,6 +18,10 @@ export const initialState = {
 export const LOAD_POST_REQUEST = 'LOAD_POST_REQUEST';
 export const LOAD_POST_SUCCESS = 'LOAD_POST_SUCCESS';
 export const LOAD_POST_FAILURE = 'LOAD_POST_FAILURE';
+
+export const LOAD_MYSTUDYPOST_REQUEST = 'LOAD_MYSTUDYPOST_REQUEST';
+export const LOAD_MYSTUDYPOST_SUCCESS = 'LOAD_MYSTUDYPOST_SUCCESS';
+export const LOAD_MYSTUDYPOST_FAILURE = 'LOAD_MYSTUDYPOST_FAILURE';
 
 export const CREATE_POST_REQUEST = 'CREATE_POST_REQUEST';
 export const CREATE_POST_SUCCESS = 'CREATE_POST_SUCCESS';
@@ -57,6 +63,30 @@ export default (state = initialState, action) => {
                 ...state,
                 isLoading: false,
                 loadErrorReason: action.error,
+            };
+        }
+
+        // 내가 작성한 스터디 목록 조회
+
+        case LOAD_MYSTUDYPOST_REQUEST: {
+            return {
+                ...state,
+                isLoading: true,
+                mystudyErrorReason: '',
+            };
+        }
+        case LOAD_MYSTUDYPOST_SUCCESS: {
+            return {
+                ...state,
+                isLoading: false,
+                studys: action.data
+            };
+        }
+        case LOAD_MYSTUDYPOST_FAILURE: {
+            return {
+                ...state,
+                isLoading: false,
+                mystudyErrorReason: action.error,
             };
         }
 

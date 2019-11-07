@@ -55,11 +55,12 @@ const Comments = () => {
 
     let deleteId = 0;
 
-    const showDeleteRoomModal = () => {
+    const showDeleteRoomModal = (e) => {
+        let id = e.target.id;
         deleteId = 0;
         // setId(buildingList.id)
         comments.map((comment) => {
-            if (comment.id === id) {
+            if (String(comment.id) === id) {
                 deleteId = id;
             }
         });
@@ -71,6 +72,7 @@ const Comments = () => {
                 dispatch({
                     type: DELETE_COMMENT_REQUEST,
                     data: {
+                        boardId: selectedQuestion.id,
                         id: deleteId
                     }
                 });
@@ -104,7 +106,8 @@ const Comments = () => {
                         dataSource={comments}
                         renderItem={comment => (
                             <List.Item
-                                actions={[<a key="commentDate">{comment.createdDate}</a>, <Button type="danger" key="deleteBtn" onClick={showDeleteRoomModal}>삭제</Button>]}
+                                actions={[<a key="commentDate">{comment.createdDate}</a>, <Button
+                                    id={comment.id} type="danger" key="deleteBtn" onClick={showDeleteRoomModal}>삭제</Button>]}
                             >
                                 <List.Item.Meta
                                     avatar={

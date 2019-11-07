@@ -76,7 +76,6 @@ function createCommentAPI(createCommentData) {
     form.append('boardId', createCommentData.boardId)
     form.append('bodyText', createCommentData.bodyText)
 
-    console.log(form);
     let url = "http://swot.devdogs.kr:8080/api/comment/create/"
 
     let token = localStorage.getItem("accessToken");

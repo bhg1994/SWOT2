@@ -19,6 +19,9 @@ import {
     MODIFY_POST_REQUEST,
     MODIFY_POST_SUCCESS,
     MODIFY_POST_FAILURE,
+    LOAD_MYSTUDYPOST_REQUEST,
+    LOAD_MYSTUDYPOST_SUCCESS,
+    LOAD_MYSTUDYPOST_FAILURE
 } from '../reducers/post';
 import axios from 'axios';
 
@@ -67,9 +70,56 @@ function* watchLoadPost() {
     yield takeEvery(LOAD_POST_REQUEST, loadPost)
 }
 
+// 내가 작성한 스터디 글 불러오기 
+function loadMystudyPostAPI() {
+
+    let token = localStorage.getItem("accessToken");
+
+    return axios.get('http://swot.devdogs.kr:8080/api/board/myBoards', {
+        headers: {
+            Authorization: token,
+        },
+    }
+    ).then(response => {
+        console.log('response : ', JSON.stringify(response, null, 2))
+        var result = response.data;
+        return result;
+    })
+        .catch(error => {
+            console.log('failed', error)
+            return error;
+        });
+}
+
+function* loadMystudyPost() {
+    try {
+        const result = yield call(loadMystudyPostAPI);
+
+        if (result.result === "success") {
+            yield put({
+                type: LOAD_MYSTUDYPOST_SUCCESS,
+                data: result.info,
+            });
+        } else {
+            yield put({
+                type: LOAD_MYSTUDYPOST_FAILURE,
+            });
+        }
+    }
+    catch (e) {
+        yield put({
+            type: LOAD_MYSTUDYPOST_FAILURE,
+            error: e,
+        });
+    }
+}
+
+function* watchLoadMystudyPost() {
+    yield takeEvery(LOAD_MYSTUDYPOST_REQUEST, loadMystudyPost)
+}
+
 
 // 글 작성
-
 function createPostAPI(postInfo) {
 
     console.log(postInfo);
@@ -328,6 +378,7 @@ export default function* postSaga() {
         // fork(watchLoadStudyboards),
         fork(watchCreatePost),
         fork(watchDeletePost),
-        fork(watchModifyPost)
+        fork(watchModifyPost),
+        fork(watchLoadMystudyPost)
     ]);
 }   
