@@ -9,6 +9,7 @@ export const initialState = {
     deleteErrorReason: '',
     modifyErrorReason: '',
     errorReason: '',
+    selectedStudy: null,
 };
 
 
@@ -32,7 +33,7 @@ export const UPLOAD_IMAGES_REQUEST = 'UPLOAD_IMAGES_REQUEST';
 export const UPLOAD_IMAGES_SUCCESS = 'UPLOAD_IMAGES_SUCCESS';
 export const UPLOAD_IMAGES_FAILURE = 'UPLOAD_IMAGES_FAILURE';
 
-export const REMOVE_IMAGE = 'REMOVE_IMAGE';
+export const STUDY_SELECT_REQUEST = 'STUDY_SELECT_REQUEST';
 
 
 export default (state = initialState, action) => {
@@ -127,6 +128,12 @@ export default (state = initialState, action) => {
                 ...state,
                 isLoading: false,
                 modifyErrorReason: action.error,
+            }
+        }
+        case STUDY_SELECT_REQUEST: {
+            return {
+                ...state,
+                selectedStudy: action.data,
             }
         }
 

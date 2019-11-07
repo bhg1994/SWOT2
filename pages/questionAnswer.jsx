@@ -25,14 +25,6 @@ import { useDispatch, useSelector } from "react-redux";
 const { Text } = Typography;
 const { TextArea } = Input;
 
-export const useInput = (initValue = null) => {
-  const [value, setter] = useState(initValue);
-  const handler = useCallback(e => {
-    setter(e.target.value);
-  }, []);
-  return [value, handler];
-};
-
 const questionAnswer = () => {
 
   const [myinfoid, setMyinfoid] = useState(0);
@@ -98,8 +90,7 @@ const questionAnswer = () => {
   const [questioncontent, setQuestioncontent] = useState("");
   const [modifyvisible, setModifyvisible] = useState(false);
   const [deletevisible, setDeletevisible] = useState(false);
-  const [modifytitle, onChangetitle] = useInput("");
-  const [modifybody, onChangebody] = useInput("");
+
 
   const handleCancel = () => {
     setcreateVisible(false);
@@ -179,8 +170,8 @@ const questionAnswer = () => {
       type: MODIFY_POST_REQUEST,
       data: {
         id: id,
-        title: modifytitle,
-        body: modifybody
+        title: questiontitle,
+        body: questioncontent
       }
     })
     setModifyvisible(false);
@@ -283,15 +274,19 @@ const questionAnswer = () => {
           </Form.Item>
           <Form.Item>
             <Input
+              id="questiontitle"
+              value={questiontitle}
               addonBefore="제목"
-              onChange={onChangetitle}
+              onChange={onChangeValue}
               style={{ width: "50%" }}
             />
           </Form.Item>
           <Form.Item>
             <Input
+              id="questioncontent"
+              value={questioncontent}
               addonBefore="내용"
-              onChange={onChangebody}
+              onChange={onChangeValue}
               style={{ width: "50%" }}
             />
           </Form.Item>

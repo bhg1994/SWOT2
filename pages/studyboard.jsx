@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import {
   Layout,
   Icon,
@@ -19,6 +19,7 @@ import {
   CREATE_POST_REQUEST,
   DELETE_POST_REQUEST,
   MODIFY_POST_REQUEST,
+  STUDY_SELECT_REQUEST,
 } from "../reducers/post";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -36,6 +37,7 @@ const studyboard = () => {
   const [studycontent, setStudycontent] = useState("");
   const [maximum, setMaximum] = useState(3);
   const [id, setId] = useState(0);
+  const [modifyvisible, setModifyvisible] = useState(false);
 
   const { posts, isLoading } = useSelector(state => state.post);
 
@@ -80,6 +82,7 @@ const studyboard = () => {
     }
   };
 
+
   function onChangeDate(date, dateString) {
     console.log(dateString);
     setStudyDate(dateString);
@@ -110,7 +113,11 @@ const studyboard = () => {
         setStudyendtime(record.endTime);
         setStudycontent(record.body);
         setStudyDate(record.meetingDate);
-        setId(record.id)
+        setId(record.id);
+        dispatch({
+          type: STUDY_SELECT_REQUEST,
+          data: record
+        })
       }
     }
   }
@@ -141,6 +148,26 @@ const studyboard = () => {
       onCancel() { },
     });
   }
+  const showModifyNotifyModal = () => {
+    setModifyvisible(true);
+  }
+
+  const modifyhandleCancel = () => {
+    setModifyvisible(false);
+  }
+
+  const studyModify = () => {
+    dispatch({
+      type: MODIFY_POST_REQUEST,
+      data: {
+        id: id,
+        title: studytitle,
+        body: studycontent
+      }
+    })
+    setModifyvisible(false)
+  }
+
 
   return (
     <>
@@ -262,7 +289,7 @@ const studyboard = () => {
             key="action"
             render={() => (
               <span>
-                <Button type="primary">수정</Button>
+                <Button type="primary" onClick={showModifyNotifyModal}>수정</Button>
                 <Divider type="vertical" />
                 <Button onClick={showDeleteRoomModal}>삭제</Button>
               </span>
@@ -270,10 +297,46 @@ const studyboard = () => {
           />
         </Table>
       </Layout>
+
+      {/* Study 수정 버튼 모달 */}
+      <Modal title="스터디 글 수정" visible={modifyvisible} footer={null}>
+        <Form >
+          <Form.Item>
+            <Input
+              id="studytitle"
+              addonBefore="제목"
+              value={studytitle}
+              onChange={onChangeValue}
+              style={{ width: "50%" }}
+            />
+          </Form.Item>
+          <Form.Item>
+            <Input
+              id="studycontent"
+              value={studycontent}
+              onChange={onChangeValue}
+              addonBefore="내용"
+              style={{ width: "75%" }}
+            />
+          </Form.Item>
+          <Form.Item>
+            <Button
+              type="primary"
+              style={{ marginRight: "20px" }}
+              onClick={studyModify}
+            >
+              변경
+                </Button>
+            <Button type="danger" onClick={modifyhandleCancel}>
+              취소
+                </Button>
+          </Form.Item>
+        </Form>
+      </Modal>
+
     </>
   );
 };
-
 
 studyboard.getInitialProps = async (context) => {
   context.store.dispatch({

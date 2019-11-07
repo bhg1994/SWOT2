@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Button, Typography, Divider, Comment, Avatar, Form, List, Input } from "antd";
+import { Button, Typography, Divider, Comment, Avatar, Form, List, Input, Modal } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { LOAD_COMMENT_REQUEST, CREATE_COMMENT_REQUEST } from "../reducers/comment";
+import { LOAD_COMMENT_REQUEST, CREATE_COMMENT_REQUEST, DELETE_COMMENT_REQUEST } from "../reducers/comment";
 
+const { confirm } = Modal;
 const { TextArea } = Input;
 const { Text, Title } = Typography;
 
@@ -52,6 +53,32 @@ const Comments = () => {
         })
     }
 
+    let deleteId = 0;
+
+    const showDeleteRoomModal = () => {
+        deleteId = 0;
+        // setId(buildingList.id)
+        comments.map((comment) => {
+            if (comment.id === id) {
+                deleteId = id;
+            }
+        });
+
+        confirm({
+            title: '해당 댓글 삭제',
+            content: '정말로 삭제하시겠습니까?',
+            onOk() {
+                dispatch({
+                    type: DELETE_COMMENT_REQUEST,
+                    data: {
+                        id: deleteId
+                    }
+                });
+            },
+            onCancel() { },
+        });
+    }
+
     return (
         <>
             <div style={{ margin: "50px" }}>
@@ -77,7 +104,7 @@ const Comments = () => {
                         dataSource={comments}
                         renderItem={comment => (
                             <List.Item
-                                actions={[<a key="commentDate">{comment.createdDate}</a>]}
+                                actions={[<a key="commentDate">{comment.createdDate}</a>, <Button type="danger" key="deleteBtn" onClick={showDeleteRoomModal}>삭제</Button>]}
                             >
                                 <List.Item.Meta
                                     avatar={

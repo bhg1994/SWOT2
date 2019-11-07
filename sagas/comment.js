@@ -14,7 +14,10 @@ import {
     CREATE_COMMENT_FAILURE,
     LOAD_COMMENT_REQUEST,
     LOAD_COMMENT_SUCCESS,
-    LOAD_COMMENT_FAILURE
+    LOAD_COMMENT_FAILURE,
+    DELETE_COMMENT_REQUEST,
+    DELETE_COMMENT_SUCCESS,
+    DELETE_COMMENT_FAILURE
 } from '../reducers/comment';
 
 // 댓글 로드
@@ -135,10 +138,76 @@ function* watchCreateComment() {
     yield takeEvery(CREATE_COMMENT_REQUEST, createComment);
 }
 
+// 댓글 삭제
+
+function deleteCommentAPI(deleteCommentData) {
+    console.log(deleteCommentData.id, deleteCommentData.boardId);
+    let id = deleteCommentData.id;
+    let url = "http://swot.devdogs.kr:8080/api/comment/deleteOne/" + id;
+
+    let token = localStorage.getItem("accessToken");
+
+    return axios.get(url, {
+        headers: { // 요청 헤더
+            Authorization: token,
+        },
+    }
+    )
+        .then(response => {
+            console.log('response : ', JSON.stringify(response, null, 2));
+            var result = {
+                data: response.data,
+                id: deleteCommentData.boardId,
+            }
+            return result;
+        })
+        .catch(error => {
+            console.log('failed', error)
+            return error;
+        })
+}
+
+function* deleteComment(action) {
+    try {
+        const result = yield call(deleteCommentAPI, action.data);
+
+        if (result.data.result === "success") {
+            yield put({ // put은 dispatch 동일
+                type: DELETE_COMMENT_SUCCESS
+            });
+            alert('댓글 삭제 성공');
+            yield put({
+                type: LOAD_COMMENT_REQUEST,
+                data: {
+                    boardId: result.id
+                }
+            })
+        }
+        else {
+            yield put({
+                type: DELETE_COMMENT_FAILURE,
+            });
+            alert('댓글 삭제 실패');
+        }
+
+    } catch (e) { // loginAPI 실패
+        console.error(e);
+        yield put({
+            type: DELETE_COMMENT_FAILURE,
+        });
+        alert("통신 장애");
+    }
+}
+
+function* watchDeleteComment() {
+    yield takeEvery(DELETE_COMMENT_REQUEST, deleteComment);
+}
+
 export default function* commentSaga() {
     yield all([
         fork(watchCreateComment),
         fork(watchLoadComments),
+        fork(watchDeleteComment)
     ]);
 }
 
