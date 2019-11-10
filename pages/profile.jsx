@@ -1,32 +1,72 @@
-import React from "react";
-import { List, Tag, Card, Typography, Divider } from "antd";
+import React, { useState } from "react";
+import {
+  List,
+  Tag,
+  Card,
+  Typography,
+  Divider,
+  Button,
+  Modal,
+  Table,
+  Icon
+} from "antd";
 import NicknameEditForm from "../components/NicknameEditForm.jsx";
-import Link from "next/link";
 import { LOAD_USER_REQUEST } from "../reducers/user";
-import { LOAD_MYSTUDYPOST_REQUEST } from '../reducers/post';
-import { useSelector } from "react-redux";
-import { RESERVATION_STATUS_REQUEST } from '../reducers/lookup';
+import { LOAD_MYSTUDYPOST_REQUEST, LOAD_POST_REQUEST } from "../reducers/post";
+import { useSelector, useDispatch } from "react-redux";
+import { RESERVATION_STATUS_REQUEST } from "../reducers/lookup";
+import {
+  STUDY_MYAPPLY_REQUEST,
+  STUDY_RESERVATION_REQUEST,
+  STUDY_ACCEPT_REQUEST
+} from "../reducers/study.js";
 
 const { Text } = Typography;
-
-const studydata = [
-  {
-    title: "신청 날짜 : September 19, 2019",
-    studytitle: "자바스크립트 클로저",
-    studydate: "2019년 9월 20일 오후 2시 ~ 오후 6시",
-    studypurpose:
-      "자바스크립트의 클로저 개념에 대하여 서로 얘기하고 예제 문제를 코딩하여 코드 리뷰",
-    studymaximum: "6"
-  }
-];
+const { Column } = Table;
 
 const Profile = () => {
-
+  const [visible, setVisible] = useState(false);
+  const [boardId, setBoardId] = useState(0);
   const { reservationStatus } = useSelector(state => state.lookup);
-  const { studys } = useSelector(state => state.post);
+  const { studys, posts } = useSelector(state => state.post);
+  const { myApplyStudys, studyReservation } = useSelector(state => state.study);
 
+  const dispatch = useDispatch();
 
-  const Mystudys = studys.filter(study => study.code === 2)
+  const myStudys = studys.filter(study => study.code === 2);
+
+  console.log(studyReservation);
+
+  const showModal = () => {
+    console.log(boardId);
+    const token = localStorage.getItem("accessToken");
+    setVisible(true);
+    dispatch({
+      type: STUDY_RESERVATION_REQUEST,
+      data: {
+        token,
+        boardId
+      }
+    });
+  };
+
+  const onCloseBtn = () => {
+    setVisible(false);
+  };
+
+  const onAcceptBtn = () => {
+    const token = localStorage.getItem("accessToken");
+    let myInfo = JSON.parse(localStorage.getItem("myInfo"));
+
+    dispatch({
+      type: STUDY_ACCEPT_REQUEST,
+      data: {
+        token,
+        leaderId: myInfo.id
+      }
+    });
+  };
+  const onRejectionBtn = () => {};
 
   return (
     <>
@@ -42,13 +82,6 @@ const Profile = () => {
               강의실 예약 현황
             </div>
           }
-          // loadMore={
-          //   <div style={{ textAlign: "center" }}>
-          //     <Button style={{ width: "50%", marginBottom: "40px" }}>
-          //       강의실 더 보기
-          //     </Button>
-          //   </div>
-          // }
           bordered
           dataSource={reservationStatus}
           renderItem={(item, i) => (
@@ -59,16 +92,18 @@ const Profile = () => {
                 extra={<a href="/reservation">More</a>}
               >
                 <div style={{ marginBottom: "20px", textAlign: "end" }}>
-                  {item.state === 'T' ?
+                  {item.state === "T" ? (
                     <Tag color="blue">승인 완료</Tag>
-                    : <Tag color="red">승인 대기</Tag>}
+                  ) : (
+                    <Tag color="red">승인 대기</Tag>
+                  )}
                   <Divider orientation="left">강의실 이미지</Divider>
                 </div>
-                <div style={{ textAlign: "center" }}>
-                  {item.userId}
-                </div>
+                <div style={{ textAlign: "center" }}>{item.userId}</div>
                 <Divider />
-                <Text mark>대여 시간 : {item.startTime}~ {item.endTime}</Text>
+                <Text mark>
+                  대여 시간 : {item.startTime}~ {item.endTime}
+                </Text>
                 <Divider />
                 예약목적 / 인원수 : {item.reason} / {item.total}명
                 <Divider />
@@ -87,28 +122,43 @@ const Profile = () => {
             </div>
           }
           bordered
-          dataSource={Mystudys}
+          dataSource={myStudys}
           renderItem={study => (
             <List.Item>
-              <Card
-                style={{ margin: "40px" }}
-                title={study.title}
-                extra={<a href="Notification">More</a>}
+              <div
+                onMouseOver={() => {
+                  setBoardId(study.id);
+                }}
               >
-                <div style={{ marginBottom: "10px", textAlign: "end" }}>
-                  {study.state === 'T' ?
-                    <Tag color="blue">승인 완료</Tag>
-                    : <Tag color="red">승인 대기</Tag>}
-                </div>
-                <Text type="warning">스터디 주제 : {study.title}</Text>
-                <Divider />
-                <Text mark>날짜 : {study.meetingDate} ({study.startTime} ~ {study.endTime} )</Text>
-                <br />
-                <br />
-                스터디 목적 : {study.body} <br />
-                <Divider />
-                최대 인원 수 : {study.total} 명
-              </Card>
+                <Card
+                  style={{ margin: "40px" }}
+                  title={study.title}
+                  extra={
+                    <Button size="small" onClick={showModal}>
+                      예약 현황
+                    </Button>
+                  }
+                >
+                  <div style={{ marginBottom: "10px", textAlign: "end" }}>
+                    {study.state === "T" ? (
+                      <Tag color="blue">승인 완료</Tag>
+                    ) : (
+                      <Tag color="red">승인 대기</Tag>
+                    )}
+                  </div>
+                  <Text type="warning">스터디 주제 : {study.title}</Text>
+                  <Divider />
+                  <Text mark>
+                    날짜 : {study.meetingDate} ({study.startTime} ~{" "}
+                    {study.endTime} )
+                  </Text>
+                  <br />
+                  <br />
+                  스터디 목적 : {study.body} <br />
+                  <Divider />
+                  최대 인원 수 : {study.total} 명
+                </Card>
+              </div>
             </List.Item>
           )}
         />
@@ -122,42 +172,97 @@ const Profile = () => {
             </div>
           }
           bordered
-          dataSource={studydata}
-          renderItem={item => (
+          dataSource={myApplyStudys}
+          renderItem={mystudy => (
             <List.Item>
               <Card
                 style={{ margin: "40px" }}
-                title={item.title}
-                extra={<a href="Notification">More</a>}
+                title={mystudy.title}
+                extra={
+                  <Button type="danger" size="small">
+                    신청 취소
+                  </Button>
+                }
               >
-                <Text type="warning">스터디 주제 :{item.studytitle}</Text>
+                <div style={{ marginBottom: "10px", textAlign: "end" }}>
+                  {mystudy.state === "T" ? (
+                    <Tag color="blue">승인 완료</Tag>
+                  ) : (
+                    <Tag color="red">승인 대기</Tag>
+                  )}
+                </div>
+                <Text type="warning">스터디 주제 : {mystudy.title}</Text>
                 <Divider />
-                <Text mark>날짜 : {item.studydate}</Text>
+                <Text mark>
+                  날짜 : {mystudy.meetingDate} ({mystudy.startTime} ~{" "}
+                  {mystudy.endTime} )
+                </Text>
                 <br />
                 <br />
-                스터디 목적 : {item.studypurpose} <br />
+                스터디 목적 : {mystudy.body} <br />
                 <Divider />
-                최대 인원 수 : {item.studymaximum}명
+                최대 인원 수 : {mystudy.total} 명
               </Card>
             </List.Item>
           )}
         />
       </div>
+
+      {/* 스터디예약 현황 보기 모달 */}
+      <Modal
+        title="예약 현황"
+        visible={visible}
+        onCancel={onCloseBtn}
+        width="700px"
+        footer={[
+          <Button key="back" onClick={onCloseBtn}>
+            닫기
+          </Button>
+        ]}
+      >
+        <Icon
+          type="team"
+          style={{ fontSize: "20px", margin: "5px 20px 20px 0 " }}
+        />
+        <Table dataSource={studyReservation}>
+          <Column title="유저 이메일" dataIndex="email" key="email" />
+          <Column title="학번" dataIndex="studentId" key="studentId" />
+          <Column title="유저 이름" dataIndex="name" key="name" />
+          <Column title="휴대폰 번호" dataIndex="phone" key="phone" />
+
+          <Column
+            title="확인란"
+            key="action"
+            render={() => (
+              <span>
+                <Button type="primary" onClick={onAcceptBtn}>
+                  수락
+                </Button>
+                <Divider type="vertical" />
+                <Button onClick={onRejectionBtn}>거절</Button>
+              </span>
+            )}
+          />
+        </Table>
+      </Modal>
     </>
   );
 };
 
-Profile.getInitialProps = async (context) => {
+Profile.getInitialProps = async context => {
   console.log(context.isServer);
-  // if(!context.isServer){
-  //   let token = localStorage.getItem("accessToken");
-  //   context.store.dispatch({
-  //     type: LOAD_USER_REQUEST,
-  //     data: token,
-  //   });
-  // }
+
   context.store.dispatch({
     type: RESERVATION_STATUS_REQUEST
+  });
+  // context.store.dispatch({
+  //   type: LOAD_POST_REQUEST,
+  //   data: {
+  //     code: "2"
+  //   }
+  // });
+  context.store.dispatch({
+    type: STUDY_MYAPPLY_REQUEST
   });
   context.store.dispatch({
     type: LOAD_MYSTUDYPOST_REQUEST
