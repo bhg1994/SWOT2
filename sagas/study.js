@@ -50,7 +50,6 @@ function studyapplyAPI(studyapplyData) {
 
 function* studyapply(action) {
     try {
-
         const result = yield call(studyapplyAPI, action.data);
 
         if (result.result === "success") {

@@ -42,7 +42,6 @@ const studyapply = () => {
   const { posts, selectedStudy } = useSelector(state => state.post);
 
   let myInfo = JSON.parse(localStorage.getItem("myInfo"));
-  console.log(selectedStudy.userId, myInfo.id);
 
   const dispatch = useDispatch();
 
