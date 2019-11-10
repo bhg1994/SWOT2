@@ -30,7 +30,7 @@ function loadPostAPI(postCode) {
 
     return axios.get('http://swot.devdogs.kr:8080/api/auth/board/' + code + '/list'
     ).then(response => {
-        console.log('response : ', JSON.stringify(response, null, 2))
+        //console.log('response : ', JSON.stringify(response, null, 2))
         var result = response.data;
         return result;
     })
