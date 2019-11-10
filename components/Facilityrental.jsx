@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 
 import {
   Form,
@@ -35,6 +35,8 @@ function oncontentChange(content) {
 }
 
 const Facilityrental = () => {
+
+  
   const [content, setContent] = useState("");
   const [visible, setVisible] = useState(false);
   const [maximum, setMaximum] = useState("");
@@ -62,9 +64,14 @@ const Facilityrental = () => {
     end = endTime+" 시";
 
 
+  var stId;
+  var stName;
 
-
-
+  useEffect(() => {
+    // stId = JSON.parse(localStorage.getItem("myInfo")).studentId;
+    // stName = JSON.parse(localStorage.getItem("myInfo")).name;
+    // console.log(stId,stName);
+  }, [])
   const oncontentChange = e => {
     setContent(e.target.value);
   };
@@ -89,6 +96,9 @@ const Facilityrental = () => {
 
   const reservationRequest = () => {
     const token = localStorage.getItem("accessToken");
+    stId = JSON.parse(localStorage.getItem("myInfo")).studentId;
+    stName = JSON.parse(localStorage.getItem("myInfo")).name;
+    console.log(stId,stName);
 
     dispatch({
       type: RESERVATION_REQUEST,
@@ -101,6 +111,8 @@ const Facilityrental = () => {
         startTime,
         endTime,
         date,
+        stId,
+        stName,
       }
     });
   }

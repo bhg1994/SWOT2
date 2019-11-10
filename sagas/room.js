@@ -19,6 +19,8 @@ import {
 
 function reservateAPI(reservateData) {
 
+    console.log(reservateData);
+
     let startTime = reservateData.startTime + ":00"
     let endTime = reservateData.endTime + ":00"
     let form = new FormData()
@@ -28,10 +30,10 @@ function reservateAPI(reservateData) {
     form.append('endTime', endTime)
     form.append('reservationDate', reservateData.date)
     form.append('total', reservateData.maximum);
+    form.append('studentId', reservateData.stId)
+    form.append('studentName', reservateData.stName);
 
-    console.log(form);
     let url = "http://swot.devdogs.kr:8080/api/reservation/create/" + reservateData.selectedRoom;
-    console.log(url);
 
     return axios.post(url, form,
         {
@@ -59,13 +61,13 @@ function* reservate(action) {
             yield put({ // put은 dispatch 동일
                 type: RESERVATION_SUCCESS,
             });
-            location.href = "/profile";
+            //location.href = "/profile";
         }
         else {
             yield put({
                 type: RESERVATION_FAILURE,
             });
-            location.href = "/";
+            //location.href = "/";
         }
 
     } catch (e) { // loginAPI 실패

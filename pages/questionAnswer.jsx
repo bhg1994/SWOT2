@@ -330,6 +330,7 @@ const questionAnswer = () => {
 };
 
 questionAnswer.getInitialProps = async (context) => {
+  console.log("qna getinit");
   context.store.dispatch({
     type: LOAD_POST_REQUEST,
     data: {
