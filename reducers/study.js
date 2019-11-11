@@ -3,6 +3,7 @@ export const initialState = {
     applyStudys: [],
     myApplyStudys: [],
     studyReservation: [],
+    applications: [],
     applystudyErrorReason: '',
     myapplystudyErrorReason: '',
     studyReservationErrorReason: '',
@@ -88,7 +89,8 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: false,
-                studyReservation: action.data
+                studyReservation: action.data.users,
+                applications: action.data.applications,
             }
         }
         case STUDY_RESERVATION_FAILURE: {

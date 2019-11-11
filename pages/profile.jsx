@@ -11,8 +11,7 @@ import {
   Icon
 } from "antd";
 import NicknameEditForm from "../components/NicknameEditForm.jsx";
-import { LOAD_USER_REQUEST } from "../reducers/user";
-import { LOAD_MYSTUDYPOST_REQUEST, LOAD_POST_REQUEST } from "../reducers/post";
+import { LOAD_MYSTUDYPOST_REQUEST } from "../reducers/post";
 import { useSelector, useDispatch } from "react-redux";
 import { RESERVATION_STATUS_REQUEST } from "../reducers/lookup";
 import {
@@ -20,26 +19,29 @@ import {
   STUDY_RESERVATION_REQUEST,
   STUDY_ACCEPT_REQUEST
 } from "../reducers/study.js";
+import { RESERVATION_CANCEL_REQUEST } from "../reducers/room.js";
 
 const { Text } = Typography;
 const { Column } = Table;
+var requestUserId;
+var apId;
 
 const Profile = () => {
   const [visible, setVisible] = useState(false);
   const [boardId, setBoardId] = useState(0);
   const { reservationStatus } = useSelector(state => state.lookup);
   const { studys, posts } = useSelector(state => state.post);
-  const { myApplyStudys, studyReservation } = useSelector(state => state.study);
+  const { myApplyStudys, studyReservation, applications } = useSelector(state => state.study);
+
 
   const dispatch = useDispatch();
 
   const myStudys = studys.filter(study => study.code === 2);
 
-  console.log(studyReservation);
 
   const showModal = () => {
     console.log(boardId);
-    const token = localStorage.getItem("accessToken");
+    let token = localStorage.getItem("accessToken");
     setVisible(true);
     dispatch({
       type: STUDY_RESERVATION_REQUEST,
@@ -54,19 +56,42 @@ const Profile = () => {
     setVisible(false);
   };
 
+  const indexSelected = (record) => {
+    return {
+      onMouseEnter: () => {
+        requestUserId=record.id;
+      }
+    }
+  }
+
   const onAcceptBtn = () => {
-    const token = localStorage.getItem("accessToken");
-    let myInfo = JSON.parse(localStorage.getItem("myInfo"));
+    let token = localStorage.getItem("accessToken");
+    applications.forEach(applicaton => {
+      if(applicaton.userId===requestUserId){
+        apId=applicaton.id;
+      }
+    });
 
     dispatch({
       type: STUDY_ACCEPT_REQUEST,
       data: {
         token,
-        leaderId: myInfo.id
+        leaderId: apId,
       }
     });
   };
   const onRejectionBtn = () => {};
+
+  const reservationCancel =(e)=>{
+    let token = localStorage.getItem("accessToken");
+    dispatch({
+      type: RESERVATION_CANCEL_REQUEST,
+      data: {
+        token,
+        id: e.target.id,
+      }
+    });
+  };
 
   return (
     <>
@@ -89,7 +114,9 @@ const Profile = () => {
               <Card
                 style={{ margin: "40px" }}
                 title={"예약날짜 : " + item.reservationDate}
-                extra={<a href="/reservation">More</a>}
+                extra={<Button size="small" id={item.id} onClick={reservationCancel}>
+                예약 취소
+              </Button>}
               >
                 <div style={{ marginBottom: "20px", textAlign: "end" }}>
                   {item.state === "T" ? (
@@ -97,15 +124,12 @@ const Profile = () => {
                   ) : (
                     <Tag color="red">승인 대기</Tag>
                   )}
-                  <Divider orientation="left">강의실 이미지</Divider>
                 </div>
-                <div style={{ textAlign: "center" }}>{item.userId}</div>
-                <Divider />
                 <Text mark>
                   대여 시간 : {item.startTime}~ {item.endTime}
                 </Text>
                 <Divider />
-                예약목적 / 인원수 : {item.reason} / {item.total}명
+                예약목적 : {item.reason} / {item.total}명
                 <Divider />
                 휴대폰 번호 :{" " + item.phone}
               </Card>
@@ -118,7 +142,7 @@ const Profile = () => {
           size="small"
           header={
             <div style={{ textAlign: "center", fontSize: "20px" }}>
-              스터디 예약 현황
+              스터디 모집 현황
             </div>
           }
           bordered
@@ -135,15 +159,15 @@ const Profile = () => {
                   title={study.title}
                   extra={
                     <Button size="small" onClick={showModal}>
-                      예약 현황
+                      신청 현황
                     </Button>
                   }
                 >
                   <div style={{ marginBottom: "10px", textAlign: "end" }}>
                     {study.state === "T" ? (
-                      <Tag color="blue">승인 완료</Tag>
+                      <Tag color="blue">모집중</Tag>
                     ) : (
-                      <Tag color="red">승인 대기</Tag>
+                      <Tag color="red">예약 완료</Tag>
                     )}
                   </div>
                   <Text type="warning">스터디 주제 : {study.title}</Text>
@@ -224,7 +248,7 @@ const Profile = () => {
           type="team"
           style={{ fontSize: "20px", margin: "5px 20px 20px 0 " }}
         />
-        <Table dataSource={studyReservation}>
+        <Table dataSource={studyReservation} onRow={indexSelected}>
           <Column title="유저 이메일" dataIndex="email" key="email" />
           <Column title="학번" dataIndex="studentId" key="studentId" />
           <Column title="유저 이름" dataIndex="name" key="name" />

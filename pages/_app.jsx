@@ -23,12 +23,14 @@ const SWOT = ({ Component, store, pageProps }) => {
 
   const [me, setMe] = useState([]);
 
+
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("myInfo"))) {
       let myInfo = JSON.parse(localStorage.getItem("myInfo"));
       setMe(myInfo)
     }
   }, [])
+  
 
   return (
     <>

@@ -45,6 +45,10 @@ const NicknameEditForm = () => {
     let myInfo = JSON.parse(localStorage.getItem("myInfo"));
     setMe(myInfo);
   }, [])
+  useEffect(() => {
+    let myInfo = JSON.parse(localStorage.getItem("myInfo"));
+    setMe(myInfo);
+  }, [isLoading])
 
 
   const showWithdrawalModal = () => {
@@ -59,7 +63,6 @@ const NicknameEditForm = () => {
       onCancel() { },
     });
   }
-  //console.log(isLoading);
 
   const showModifyModal = () => {
     setVisible(true);

@@ -33,13 +33,15 @@ function onChange(date, dateString) {
 function oncontentChange(content) {
   setContent(e.target.value);
 }
-
+var me;
 const Facilityrental = () => {
 
   
   const [content, setContent] = useState("");
   const [visible, setVisible] = useState(false);
   const [maximum, setMaximum] = useState("");
+  const [phoneNo, setPhoneNo] = useState("");
+  
 
   const [reason, onChangeReason] = useInput("");
   const [phone, onChangePhone] = useInput("");
@@ -68,9 +70,10 @@ const Facilityrental = () => {
   var stName;
 
   useEffect(() => {
-    // stId = JSON.parse(localStorage.getItem("myInfo")).studentId;
+    me = JSON.parse(localStorage.getItem("myInfo"));
     // stName = JSON.parse(localStorage.getItem("myInfo")).name;
     // console.log(stId,stName);
+    setPhoneNo(me.phone);
   }, [])
   const oncontentChange = e => {
     setContent(e.target.value);
@@ -175,7 +178,7 @@ const Facilityrental = () => {
             </Form.Item>
             <Divider />
             <Form.Item style={{ marginTop: "20px" }}>
-              <Input addonBefore="신청자 전화번호" onChange={onChangePhone} style={{ width: "50%" }} />
+              <Input addonBefore="신청자 전화번호" onChange={onChangePhone} style={{ width: "50%" }} value={phoneNo}/>
             </Form.Item>
             <Form.Item>
               <Text type="secondary">시설물 대여 규정에 동의합니다 : </Text>
