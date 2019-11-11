@@ -141,6 +141,7 @@ function studyReservationAPI(studyReservationData) {
     let boardId = studyReservationData.boardId;
 
     let url = "http://swot.devdogs.kr:8080/api/study/application/" + boardId + "/list"
+    console.log(boardId);
 
     return axios.get(url,
         {
@@ -166,7 +167,11 @@ function* studyReservation(action) {
         if (result.result === "success") {
             yield put({ // put은 dispatch 동일
                 type: STUDY_RESERVATION_SUCCESS,
-                data: result.users,
+                data: {
+                    users: result.users,
+                    applications: result.applications,
+                }
+                
             });
         }
         else {

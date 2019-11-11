@@ -13,7 +13,8 @@ export const initialState = {
     tokens: null,
     reservationErrorReason: '',
     userpwErrorReason: '',
-    emailErrorReason: ''
+    emailErrorReason: '',
+    isLoading: false,
 };
 
 export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';

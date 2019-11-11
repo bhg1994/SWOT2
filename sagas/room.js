@@ -6,7 +6,6 @@ import {
     takeEvery
 } from 'redux-saga/effects';
 import axios from 'axios';
-import moment from 'moment';
 
 import {
     RESERVATION_FAILURE,
@@ -15,7 +14,11 @@ import {
     ROOM_RESERVATIONS_REQUEST,
     ROOM_RESERVATIONS_SUCCESS,
     ROOM_RESERVATIONS_FAILURE,
+    RESERVATION_CANCEL_FAILURE,
+    RESERVATION_CANCEL_REQUEST,
+    RESERVATION_CANCEL_SUCCESS,
 } from '../reducers/room'
+import { RESERVATION_STATUS_REQUEST } from '../reducers/lookup'
 
 function reservateAPI(reservateData) {
 
@@ -61,13 +64,13 @@ function* reservate(action) {
             yield put({ // put은 dispatch 동일
                 type: RESERVATION_SUCCESS,
             });
-            //location.href = "/profile";
+            location.href = "/profile";
         }
         else {
             yield put({
                 type: RESERVATION_FAILURE,
             });
-            //location.href = "/";
+            location.href = "/";
         }
 
     } catch (e) { // loginAPI 실패
@@ -81,6 +84,61 @@ function* reservate(action) {
 
 function* watchReservation() {
     yield takeEvery(RESERVATION_REQUEST, reservate);
+}
+
+function cancelApi(cancelData) {
+
+
+    let url = "http://swot.devdogs.kr:8080/api/reservation/delete/"+cancelData.id;
+    console.log(cancelData.token);
+
+    return axios.get(url,
+        {
+            headers: { // 요청 헤더
+                Authorization: cancelData.token,
+            },
+        })
+        .then(response => {
+            console.log('response : ', JSON.stringify(response, null, 2));
+            var result = response.data;
+            return result;
+        })
+        .catch(error => {
+            console.log('failed', error)
+            return error;
+        })
+}
+
+function* cancel(action) {
+    try {
+
+        const result = yield call(cancelApi,action.data);
+
+        if (result.result === "success") {
+            yield put({ 
+                type: RESERVATION_CANCEL_SUCCESS,
+            });
+            yield put({ 
+                type: RESERVATION_STATUS_REQUEST,
+            });
+        }
+        else {
+            yield put({
+                type: RESERVATION_CANCEL_FAILURE,
+            });
+        }
+
+    } catch (e) { //  실패
+        console.error(e);
+        yield put({
+            type: RESERVATION_CANCEL_FAILURE,
+        });
+        alert("통신 장애");
+    }
+}
+
+function* watchReservationCancel() {
+    yield takeEvery(RESERVATION_CANCEL_REQUEST, cancel);
 }
 
 
@@ -139,5 +197,6 @@ export default function* roomSaga() {
     yield all([
         fork(watchReservation),
         fork(watchRoomReservations),
+        fork(watchReservationCancel),
     ]);
 }

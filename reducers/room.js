@@ -13,6 +13,10 @@ export const RESERVATION_REQUEST = 'RESERVATION_REQUEST';
 export const RESERVATION_SUCCESS = 'RESERVATION_SUCCESS';
 export const RESERVATION_FAILURE = 'RESERVATION_FAILURE';
 
+export const RESERVATION_CANCEL_REQUEST = 'RESERVATION_CANCEL_REQUEST';
+export const RESERVATION_CANCEL_SUCCESS = 'RESERVATION_CANCEL_SUCCESS';
+export const RESERVATION_CANCEL_FAILURE = 'RESERVATION_CANCEL_FAILURE';
+
 export const ROOM_RESERVATIONS_REQUEST = 'ROOM_RESERVATIONS_REQUEST'
 export const ROOM_RESERVATIONS_SUCCESS = 'ROOM_RESERVATIONS_SUCCESS'
 export const ROOM_RESERVATIONS_FAILURE = 'ROOM_RESERVATIONS_FAILURE'
@@ -40,6 +44,28 @@ export default (state = initialState, action) => {
             };
         }
         case RESERVATION_FAILURE: {
+            return {
+                ...state,
+                isLoading: false,
+                reservationErrorReason: action.error,
+            };
+        }
+
+        case RESERVATION_CANCEL_REQUEST: {
+            return {
+                ...state,
+                isLoading: true,
+                reservationErrorReason: ""
+            };
+        }
+        case RESERVATION_CANCEL_SUCCESS: {
+            return {
+                ...state,
+                isLoading: false,
+
+            };
+        }
+        case RESERVATION_CANCEL_FAILURE: {
             return {
                 ...state,
                 isLoading: false,
