@@ -14,12 +14,19 @@ import {
     STUDY_MYAPPLY_REQUEST,
     STUDY_MYAPPLY_SUCCESS,
     STUDY_MYAPPLY_FAILURE,
+    STUDY_MYAPPLYCANCEL_REQUEST,
+    STUDY_MYAPPLYCANCEL_SUCCESS,
+    STUDY_MYAPPLYCANCEL_FAILURE,
     STUDY_RESERVATION_REQUEST,
     STUDY_RESERVATION_SUCCESS,
     STUDY_RESERVATION_FAILURE,
     STUDY_ACCEPT_REQUEST,
     STUDY_ACCEPT_SUCCESS,
-    STUDY_ACCEPT_FAILURE
+    STUDY_ACCEPT_FAILURE,
+    STUDY_REJECT_REQUEST,
+    STUDY_REJECT_SUCCESS,
+    STUDY_REJECT_FAILURE
+
 } from '../reducers/study';
 
 
@@ -79,8 +86,6 @@ function* watchStudyapply() {
 
 
 // 내가 신청한 스터디 조회 Saga
-
-
 function myStudyapplyAPI() {
 
     let url = "http://swot.devdogs.kr:8080/api/study/application/myStudy"
@@ -112,7 +117,10 @@ function* myStudyapply() {
         if (result.result === "success") {
             yield put({ // put은 dispatch 동일
                 type: STUDY_MYAPPLY_SUCCESS,
-                data: result.application,
+                data: {
+                    boards: result.boards,
+                    applications: result.applications
+                }
             });
         }
         else {
@@ -133,6 +141,58 @@ function* watchmyStudyapply() {
     yield takeEvery(STUDY_MYAPPLY_REQUEST, myStudyapply);
 }
 
+
+// 내가 신청한 스터디 취소
+function myStudyapplyCancelAPI(studycancelData) {
+
+    console.log(studycancelData.id);
+
+    let url = "http://swot.devdogs.kr:8080/api/study/application/delete/" + studycancelData.id
+
+    return axios.get(url,
+        {
+            headers: { // 요청 헤더
+                Authorization: studycancelData.token,
+            },
+        })
+        .then(response => {
+            console.log('response : ', JSON.stringify(response, null, 2));
+            var result = response.data;
+            return result;
+        })
+        .catch(error => {
+            console.log('failed', error)
+            return error;
+        })
+}
+
+function* myStudyapplyCancel(action) {
+    try {
+
+        const result = yield call(myStudyapplyCancelAPI, action.data);
+
+        if (result.result === "success") {
+            yield put({ // put은 dispatch 동일
+                type: STUDY_MYAPPLYCANCEL_SUCCESS,
+            });
+        }
+        else {
+            yield put({
+                type: STUDY_MYAPPLYCANCEL_FAILURE,
+            });
+        }
+
+    } catch (e) { // loginAPI 실패
+        console.error(e);
+        yield put({
+            type: STUDY_MYAPPLYCANCEL_FAILURE,
+        });
+    }
+}
+
+function* watchmyStudyapplyCancel() {
+    yield takeEvery(STUDY_MYAPPLYCANCEL_REQUEST, myStudyapplyCancel);
+}
 
 // 특정 스터디 조회 Saga
 
@@ -171,7 +231,7 @@ function* studyReservation(action) {
                     users: result.users,
                     applications: result.applications,
                 }
-                
+
             });
         }
         else {
@@ -243,11 +303,63 @@ function* watchStudyaccept() {
     yield takeEvery(STUDY_ACCEPT_REQUEST, studyaccept);
 }
 
+
+// 거절 Saga
+function studyrejectAPI(studyrejectData) {
+
+    let url = "http://swot.devdogs.kr:8080/api/study/application/accept/" + studyrejectData.leaderId
+
+    return axios.get(url,
+        {
+            headers: { // 요청 헤더
+                Authorization: studyrejectData.token,
+            },
+        })
+        .then(response => {
+            console.log('response : ', JSON.stringify(response, null, 2));
+            var result = response.data;
+            return result;
+        })
+        .catch(error => {
+            console.log('failed', error)
+            return error;
+        })
+}
+
+function* studyreject(action) {
+    try {
+        const result = yield call(studyrejectAPI, action.data);
+
+        if (result.result === "success") {
+            yield put({ // put은 dispatch 동일
+                type: STUDY_REJECT_SUCCESS,
+            });
+        }
+        else {
+            yield put({
+                type: STUDY_REJECT_FAILURE,
+            });
+        }
+
+    } catch (e) { // loginAPI 실패
+        console.error(e);
+        yield put({
+            type: STUDY_REJECT_FAILURE,
+        });
+    }
+}
+
+function* watchStudyreject() {
+    yield takeEvery(STUDY_REJECT_REQUEST, studyreject);
+}
+
 export default function* studySaga() {
     yield all([
         fork(watchStudyapply),
         fork(watchmyStudyapply),
+        fork(watchmyStudyapplyCancel),
         fork(watchStudyReservation),
         fork(watchStudyaccept),
+        fork(watchStudyreject)
     ]);
 }

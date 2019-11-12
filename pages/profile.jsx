@@ -17,12 +17,15 @@ import { RESERVATION_STATUS_REQUEST } from "../reducers/lookup";
 import {
   STUDY_MYAPPLY_REQUEST,
   STUDY_RESERVATION_REQUEST,
-  STUDY_ACCEPT_REQUEST
+  STUDY_ACCEPT_REQUEST,
+  STUDY_REJECT_REQUEST,
+  STUDY_MYAPPLYCANCEL_REQUEST
 } from "../reducers/study.js";
 import { RESERVATION_CANCEL_REQUEST } from "../reducers/room.js";
 
 const { Text } = Typography;
 const { Column } = Table;
+const { confirm } = Modal;
 var requestUserId;
 var apId;
 
@@ -31,13 +34,18 @@ const Profile = () => {
   const [boardId, setBoardId] = useState(0);
   const { reservationStatus } = useSelector(state => state.lookup);
   const { studys, posts } = useSelector(state => state.post);
-  const { myApplyStudys, studyReservation, applications } = useSelector(state => state.study);
+  const {
+    myApplyStudys,
+    myApplyStudysApplications,
+    studyReservation,
+    applications
+  } = useSelector(state => state.study);
 
+  console.log(myApplyStudys);
 
   const dispatch = useDispatch();
 
   const myStudys = studys.filter(study => study.code === 2);
-
 
   const showModal = () => {
     console.log(boardId);
@@ -56,19 +64,19 @@ const Profile = () => {
     setVisible(false);
   };
 
-  const indexSelected = (record) => {
+  const indexSelected = record => {
     return {
       onMouseEnter: () => {
-        requestUserId=record.id;
+        requestUserId = record.id;
       }
-    }
-  }
+    };
+  };
 
   const onAcceptBtn = () => {
     let token = localStorage.getItem("accessToken");
     applications.forEach(applicaton => {
-      if(applicaton.userId===requestUserId){
-        apId=applicaton.id;
+      if (applicaton.userId === requestUserId) {
+        apId = applicaton.id;
       }
     });
 
@@ -76,20 +84,60 @@ const Profile = () => {
       type: STUDY_ACCEPT_REQUEST,
       data: {
         token,
-        leaderId: apId,
+        leaderId: apId
       }
     });
   };
-  const onRejectionBtn = () => {};
 
-  const reservationCancel =(e)=>{
+  const onRejectBtn = () => {
+    let token = localStorage.getItem("accessToken");
+
+    applications.forEach(applicaton => {
+      if (applicaton.userId === requestUserId) {
+        apId = applicaton.id;
+      }
+    });
+    dispatch({
+      type: STUDY_REJECT_REQUEST,
+      data: {
+        token,
+        leaderId: apId
+      }
+    });
+  };
+
+  const reservationCancel = e => {
     let token = localStorage.getItem("accessToken");
     dispatch({
       type: RESERVATION_CANCEL_REQUEST,
       data: {
         token,
-        id: e.target.id,
+        id: e.target.id
       }
+    });
+  };
+
+  const applicationCancel = e => {
+    let id = 0;
+    myApplyStudysApplications.forEach(application => {
+      if (String(application.boardId) === e.target.id) {
+        id = application.id;
+      }
+    });
+    let token = localStorage.getItem("accessToken");
+    confirm({
+      title: "스터디 신청 취소",
+      content: "정말로 취소하시겠습니까?",
+      onOk() {
+        dispatch({
+          type: STUDY_MYAPPLYCANCEL_REQUEST,
+          data: {
+            token: token,
+            id: id
+          }
+        });
+      },
+      onCancel() {}
     });
   };
 
@@ -114,9 +162,11 @@ const Profile = () => {
               <Card
                 style={{ margin: "40px" }}
                 title={"예약날짜 : " + item.reservationDate}
-                extra={<Button size="small" id={item.id} onClick={reservationCancel}>
-                예약 취소
-              </Button>}
+                extra={
+                  <Button size="small" id={item.id} onClick={reservationCancel}>
+                    예약 취소
+                  </Button>
+                }
               >
                 <div style={{ marginBottom: "20px", textAlign: "end" }}>
                   {item.state === "T" ? (
@@ -203,7 +253,12 @@ const Profile = () => {
                 style={{ margin: "40px" }}
                 title={mystudy.title}
                 extra={
-                  <Button type="danger" size="small">
+                  <Button
+                    type="danger"
+                    size="small"
+                    id={mystudy.id}
+                    onClick={applicationCancel}
+                  >
                     신청 취소
                   </Button>
                 }
@@ -257,13 +312,15 @@ const Profile = () => {
           <Column
             title="확인란"
             key="action"
-            render={() => (
+            render={reservation => (
               <span>
                 <Button type="primary" onClick={onAcceptBtn}>
                   수락
                 </Button>
                 <Divider type="vertical" />
-                <Button onClick={onRejectionBtn}>거절</Button>
+                <Button onClick={onRejectBtn} id={reservation}>
+                  거절
+                </Button>
               </span>
             )}
           />

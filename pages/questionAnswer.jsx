@@ -4,7 +4,6 @@ import {
   Icon,
   Typography,
   Input,
-  Select,
   Divider,
   Button,
   Table,
@@ -16,17 +15,17 @@ import {
   LOAD_POST_REQUEST,
   CREATE_POST_REQUEST,
   DELETE_POST_REQUEST,
-  MODIFY_POST_REQUEST,
+  MODIFY_POST_REQUEST
 } from "../reducers/post";
 
-import { QUESTION_SELECT_REQUEST } from '../reducers/question';
+import { QUESTION_SELECT_REQUEST } from "../reducers/question";
 import { useDispatch, useSelector } from "react-redux";
 
+const { Column } = Table;
 const { Text } = Typography;
 const { TextArea } = Input;
 
 const questionAnswer = () => {
-
   const [myinfoid, setMyinfoid] = useState(0);
 
   useEffect(() => {
@@ -38,49 +37,9 @@ const questionAnswer = () => {
 
   let articlenum = 1;
 
-  const columns = [
-    {
-      title: "글번호",
-      dataIndex: "number",
-      key: "number",
-      render: () => <div style={{ marginLeft: "10px" }}>{articlenum++}</div>
-    },
-    {
-      title: "제목",
-      dataIndex: "title",
-      key: "title",
-      render: text => (
-        <Link href="/Comments">
-          <a>{text}</a>
-        </Link>
-      )
-    },
-    {
-      title: "내용",
-      dataIndex: "body",
-      key: "body"
-    },
-    {
-      title: "등록일",
-      dataIndex: "createdDate",
-      key: "createdDate"
-    },
-    {
-      title: "수정란",
-      dataIndex: "action",
-      key: "action",
-      render: () =>
-        <span>
-          <Button type="primary" onClick={showModifyNotifyModal}>수정</Button>
-          <Divider type="vertical" />
-          <Button type="danger" onClick={showDeleteNotifyModal}
-          >삭제</Button>
-        </span>
-    }
-  ];
-
   const { posts, isLoading } = useSelector(state => state.post);
 
+  console.log(posts);
 
   const dispatch = useDispatch();
 
@@ -91,20 +50,18 @@ const questionAnswer = () => {
   const [modifyvisible, setModifyvisible] = useState(false);
   const [deletevisible, setDeletevisible] = useState(false);
 
-
   const handleCancel = () => {
     setcreateVisible(false);
     console.log("취소 버튼");
   };
 
-
   const deletehandleCancel = () => {
     setDeletevisible(false);
-  }
+  };
 
   const modifyhandleCancel = () => {
     setModifyvisible(false);
-  }
+  };
 
   const showCreateModal = () => {
     setcreateVisible(true);
@@ -118,26 +75,25 @@ const questionAnswer = () => {
     }
   };
 
-  const onRowClick = (record) => {
+  const onRowClick = record => {
     return {
       onClick: () => {
         setId(record.id);
         dispatch({
           type: QUESTION_SELECT_REQUEST,
           data: record
-        })
+        });
       }
-    }
-  }
+    };
+  };
 
   const showModifyNotifyModal = () => {
     setModifyvisible(true);
-  }
+  };
 
   const showDeleteNotifyModal = () => {
     setDeletevisible(true);
-  }
-
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -148,12 +104,11 @@ const questionAnswer = () => {
         title: questiontitle,
         body: questioncontent
       }
-    })
+    });
     setQuestiontitle("");
     setQuestioncontent("");
     setcreateVisible(false);
   };
-
 
   const questionDelete = () => {
     dispatch({
@@ -161,9 +116,9 @@ const questionAnswer = () => {
       data: {
         id: id
       }
-    })
+    });
     setDeletevisible(false);
-  }
+  };
 
   const questionModify = () => {
     dispatch({
@@ -173,9 +128,9 @@ const questionAnswer = () => {
         title: questiontitle,
         body: questioncontent
       }
-    })
+    });
     setModifyvisible(false);
-  }
+  };
 
   return (
     <>
@@ -184,7 +139,6 @@ const questionAnswer = () => {
           <img src="static/images/Q&A_logo.png" />
         </div>
         <header style={{ display: "flex", marginTop: "20px" }}>
-
           <div style={{ width: "150px", marginTop: "6px" }}>
             <Icon type="bell" />
             <Text strong> 전체 {posts.length} 건</Text>
@@ -197,73 +151,96 @@ const questionAnswer = () => {
               textAlign: "right"
             }}
           >
-            <Button
-              type="primary"
-              size="large"
-              onClick={showCreateModal}
-            >
+            <Button type="primary" size="large" onClick={showCreateModal}>
               글쓰기
             </Button>
           </div>
         </header>
         <Divider />
-        <Table columns={columns} dataSource={posts} onRow={onRowClick}></Table>
-        <div
-          style={{
-            display: "flex",
-            marginTop: "50px"
-          }}
-        >
-          <div
-            style={{
-              width: "60%",
-              textAlign: "right"
-            }}
-          >
-          </div>
-        </div>
-
-        {/* Q&A 생성 버튼 모달 */}
-        <Modal title="Q & A" visible={createvisible} footer={null}>
-          <Form onSubmit={handleSubmit}>
-            <Form.Item>
-              <Input
-                id="questiontitle"
-                value={questiontitle}
-                addonBefore="질문 입력"
-                style={{ width: "50%" }}
-                onChange={onChangeValue}
-              />
-            </Form.Item>
-            <Form.Item>
-              <TextArea
-                id="questioncontent"
-                value={questioncontent}
-                autosize={{ minRows: 3, maxRows: 6 }}
-                rows={4}
-                onChange={onChangeValue}
-                placeholder="내용 입력"
-              />
-            </Form.Item>
-            <Form.Item>
-              <Button
-                type="primary"
-                style={{ marginRight: "20px" }}
-                htmlType="submit"
-              >
-                추가
-              </Button>
-              <Button type="danger" onClick={handleCancel}>
-                취소
-              </Button>
-            </Form.Item>
-          </Form>
-        </Modal>
+        <Table dataSource={posts} onRow={onRowClick}>
+          <Column
+            title="글번호"
+            dataIndex="number"
+            key="number"
+            render={() => (
+              <div style={{ marginLeft: "10px" }}>{articlenum++}</div>
+            )}
+          />
+          <Column
+            title="제목"
+            dataIndex="title"
+            key="title"
+            render={text => (
+              <Link href="/Comments">
+                <a>{text}</a>
+              </Link>
+            )}
+          />
+          <Column title="내용" dataIndex="body" key="body" />
+          <Column title="등록일" dataIndex="createdDate" key="createdDate" />
+          <Column
+            title="수정란"
+            key="action"
+            render={post => (
+              <span>
+                {myinfoid === post.userId ? (
+                  <div>
+                    <Button type="primary" onClick={showModifyNotifyModal}>
+                      수정
+                    </Button>
+                    <Divider type="vertical" />
+                    <Button type="danger" onClick={showDeleteNotifyModal}>
+                      삭제
+                    </Button>
+                  </div>
+                ) : (
+                  ""
+                )}
+              </span>
+            )}
+          />
+        </Table>
       </Layout>
+      {/* Q&A 생성 버튼 모달 */}
+      <Modal title="Q & A" visible={createvisible} footer={null}>
+        <Form onSubmit={handleSubmit}>
+          <Form.Item>
+            <Input
+              id="questiontitle"
+              value={questiontitle}
+              addonBefore="질문 입력"
+              style={{ width: "50%" }}
+              onChange={onChangeValue}
+            />
+          </Form.Item>
+          <Form.Item>
+            <TextArea
+              id="questioncontent"
+              value={questioncontent}
+              autosize={{ minRows: 3, maxRows: 6 }}
+              rows={4}
+              onChange={onChangeValue}
+              placeholder="내용 입력"
+            />
+          </Form.Item>
+          <Form.Item>
+            <Button
+              type="primary"
+              style={{ marginRight: "20px" }}
+              htmlType="submit"
+            >
+              추가
+            </Button>
+            <Button type="danger" onClick={handleCancel}>
+              취소
+            </Button>
+          </Form.Item>
+        </Form>
+      </Modal>
 
       {/* Q&A 수정 버튼 모달 */}
       <Modal title="Q&A 글 수정" visible={modifyvisible} footer={null}>
-        <Form >
+        <Form>
           <Form.Item>
             <Input
               addonBefore="글번호"
@@ -297,10 +274,10 @@ const questionAnswer = () => {
               onClick={questionModify}
             >
               변경
-                </Button>
+            </Button>
             <Button type="danger" onClick={modifyhandleCancel}>
               취소
-                </Button>
+            </Button>
           </Form.Item>
         </Form>
       </Modal>
@@ -308,7 +285,7 @@ const questionAnswer = () => {
       {/* Q&A 삭제 버튼 모달 */}
 
       <Modal title="Q&A 글 삭제" visible={deletevisible} footer={null}>
-        <Form >
+        <Form>
           <Form.Item>
             <p style={{ fontSize: "20px" }}>해당 글을 삭제 하시겠습니까?</p>
             <Button
@@ -317,19 +294,18 @@ const questionAnswer = () => {
               onClick={questionDelete}
             >
               삭제
-                </Button>
+            </Button>
             <Button type="danger" onClick={deletehandleCancel}>
               취소
-                </Button>
+            </Button>
           </Form.Item>
         </Form>
       </Modal>
-
     </>
   );
 };
 
-questionAnswer.getInitialProps = async (context) => {
+questionAnswer.getInitialProps = async context => {
   console.log("qna getinit");
   context.store.dispatch({
     type: LOAD_POST_REQUEST,

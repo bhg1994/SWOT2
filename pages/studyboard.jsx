@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   Layout,
   Icon,
@@ -19,7 +19,7 @@ import {
   CREATE_POST_REQUEST,
   DELETE_POST_REQUEST,
   MODIFY_POST_REQUEST,
-  STUDY_SELECT_REQUEST,
+  STUDY_SELECT_REQUEST
 } from "../reducers/post";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -41,9 +41,18 @@ const studyboard = () => {
 
   const { posts, isLoading } = useSelector(state => state.post);
 
-  let articlenum = 1;
+  const [myinfoid, setMyinfoid] = useState(0);
 
-  console.log(posts);
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem("myInfo"))) {
+      const me = JSON.parse(localStorage.getItem("myInfo"));
+      setMyinfoid(me.id);
+    }
+  }, []);
+
+  console.log(posts, myinfoid);
+
+  let articlenum = 1;
 
   const dispatch = useDispatch();
 
@@ -82,7 +91,6 @@ const studyboard = () => {
     }
   };
 
-
   function onChangeDate(date, dateString) {
     console.log(dateString);
     setStudyDate(dateString);
@@ -101,11 +109,11 @@ const studyboard = () => {
         total: maximum,
         meetingDate: studyDate
       }
-    })
+    });
     setVisible(false);
   };
 
-  const onRowClicked = (record) => {
+  const onRowClicked = record => {
     return {
       onMouseEnter: () => {
         setStudytitle(record.title);
@@ -117,26 +125,25 @@ const studyboard = () => {
         dispatch({
           type: STUDY_SELECT_REQUEST,
           data: record
-        })
+        });
       }
-    }
-  }
-
+    };
+  };
 
   let deleteId = 0;
 
   const showDeleteRoomModal = () => {
     deleteId = 0;
     // setId(buildingList.id)
-    posts.map((post) => {
+    posts.map(post => {
       if (post.id === id) {
         deleteId = id;
       }
     });
 
     confirm({
-      title: '해당 스터디 삭제',
-      content: '정말로 삭제하시겠습니까?',
+      title: "해당 스터디 삭제",
+      content: "정말로 삭제하시겠습니까?",
       onOk() {
         dispatch({
           type: DELETE_POST_REQUEST,
@@ -145,16 +152,16 @@ const studyboard = () => {
           }
         });
       },
-      onCancel() { },
+      onCancel() {}
     });
-  }
+  };
   const showModifyNotifyModal = () => {
     setModifyvisible(true);
-  }
+  };
 
   const modifyhandleCancel = () => {
     setModifyvisible(false);
-  }
+  };
 
   const studyModify = () => {
     dispatch({
@@ -164,10 +171,9 @@ const studyboard = () => {
         title: studytitle,
         body: studycontent
       }
-    })
-    setModifyvisible(false)
-  }
-
+    });
+    setModifyvisible(false);
+  };
 
   return (
     <>
@@ -187,23 +193,18 @@ const studyboard = () => {
               textAlign: "right"
             }}
           >
-            <Button
-              type="primary"
-              onClick={showModal}
-              size="large"
-            >
+            <Button type="primary" onClick={showModal} size="large">
               스터디 추가
-          </Button>
+            </Button>
           </div>
           <Modal title="스터디 추가" visible={visible} footer={null}>
             <Form onSubmit={handleSubmit}>
               <Form.Item>
-                <Text
-                  type="danger"
-                >
-                  대여일자 선택
-              </Text>
-                <DatePicker style={{ margin: "20px" }} onChange={onChangeDate} />
+                <Text type="danger">대여일자 선택</Text>
+                <DatePicker
+                  style={{ margin: "20px" }}
+                  onChange={onChangeDate}
+                />
                 <Input
                   id="studytitle"
                   value={studytitle}
@@ -269,16 +270,24 @@ const studyboard = () => {
         </header>
         <Divider />
         <Table dataSource={posts} onRow={onRowClicked}>
-          <Column title="글 번호" dataIndex="number" key="number"
-            render={() =>
-              <div style={{ marginLeft: "10px" }}>{articlenum++}
-              </div>}
+          <Column
+            title="글 번호"
+            dataIndex="number"
+            key="number"
+            render={() => (
+              <div style={{ marginLeft: "10px" }}>{articlenum++}</div>
+            )}
           />
-          <Column title="스터디 주제" dataIndex="title" key="title" render={text => (
-            <Link href="/studyapply">
-              <a>{text}</a>
-            </Link>)
-          } />
+          <Column
+            title="스터디 주제"
+            dataIndex="title"
+            key="title"
+            render={text => (
+              <Link href="/studyapply">
+                <a>{text}</a>
+              </Link>
+            )}
+          />
           <Column title="스터디 내용" dataIndex="body" key="body" />
           <Column title="시작시간" dataIndex="startTime" key="startTime" />
           <Column title="종료시간" dataIndex="endTime" key="endTime" />
@@ -287,11 +296,19 @@ const studyboard = () => {
           <Column
             title="수정란"
             key="action"
-            render={() => (
+            render={post => (
               <span>
-                <Button type="primary" onClick={showModifyNotifyModal}>수정</Button>
-                <Divider type="vertical" />
-                <Button onClick={showDeleteRoomModal}>삭제</Button>
+                {myinfoid === post.userId ? (
+                  <div>
+                    <Button type="primary" onClick={showModifyNotifyModal}>
+                      수정
+                    </Button>
+                    <Divider type="vertical" />
+                    <Button onClick={showDeleteRoomModal}>삭제</Button>
+                  </div>
+                ) : (
+                  ""
+                )}
               </span>
             )}
           />
@@ -300,7 +317,7 @@ const studyboard = () => {
 
       {/* Study 수정 버튼 모달 */}
       <Modal title="스터디 글 수정" visible={modifyvisible} footer={null}>
-        <Form >
+        <Form>
           <Form.Item>
             <Input
               id="studytitle"
@@ -326,19 +343,18 @@ const studyboard = () => {
               onClick={studyModify}
             >
               변경
-                </Button>
+            </Button>
             <Button type="danger" onClick={modifyhandleCancel}>
               취소
-                </Button>
+            </Button>
           </Form.Item>
         </Form>
       </Modal>
-
     </>
   );
 };
 
-studyboard.getInitialProps = async (context) => {
+studyboard.getInitialProps = async context => {
   context.store.dispatch({
     type: LOAD_POST_REQUEST,
     data: {

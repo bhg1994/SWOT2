@@ -2,12 +2,14 @@ export const initialState = {
     isLoading: false,
     applyStudys: [],
     myApplyStudys: [],
+    myApplyStudysApplications: [],
     studyReservation: [],
-    applications: [],
     applystudyErrorReason: '',
     myapplystudyErrorReason: '',
     studyReservationErrorReason: '',
-    studyAcceptErrorReason: ''
+    studyAcceptErrorReason: '',
+    studyRejectErrorReason: '',
+    applystudycancelErrorReason: ''
 };
 
 
@@ -19,6 +21,13 @@ export const STUDY_MYAPPLY_REQUEST = 'STUDY_MYAPPLY_REQUEST';
 export const STUDY_MYAPPLY_SUCCESS = 'STUDY_MYAPPLY_SUCCESS';
 export const STUDY_MYAPPLY_FAILURE = 'STUDY_APPLY_FAILURE';
 
+export const STUDY_MYAPPLYCANCEL_REQUEST =
+    'STUDY_MYAPPLYCANCEL_REQUEST';
+export const STUDY_MYAPPLYCANCEL_SUCCESS =
+    'STUDY_MYAPPLYCANCEL_SUCCESS';
+export const STUDY_MYAPPLYCANCEL_FAILURE =
+    'STUDY_MYAPPLYCANCEL_FAILURE';
+
 export const STUDY_RESERVATION_REQUEST =
     'STUDY_RESERVATION_REQUEST';
 export const STUDY_RESERVATION_SUCCESS =
@@ -29,6 +38,13 @@ export const STUDY_RESERVATION_FAILURE =
 export const STUDY_ACCEPT_REQUEST = 'STUDY_ACCEPT_REQUEST';
 export const STUDY_ACCEPT_SUCCESS = 'STUDY_ACCEPT_SUCCESS';
 export const STUDY_ACCEPT_FAILURE = 'STUDY_ACCEPT_FAILURE';
+
+export const STUDY_REJECT_REQUEST = 'STUDY_REJECT_REQUEST';
+export const STUDY_REJECT_SUCCESS = 'STUDY_REJECT_SUCCESS';
+export const STUDY_REJECT_FAILURE = 'STUDY_REJECT_FAILURE';
+
+
+
 
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -66,7 +82,8 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: false,
-                myApplyStudys: action.data
+                myApplyStudys: action.data.boards,
+                myApplyStudysApplications: action.data.applications
             }
         }
         case STUDY_MYAPPLY_FAILURE: {
@@ -74,6 +91,28 @@ export default (state = initialState, action) => {
                 ...state,
                 isLoading: false,
                 studyReservationErrorReason: action.error
+            }
+        }
+
+        // 내가 신청한 스터디 신청 취소
+        case STUDY_MYAPPLYCANCEL_REQUEST: {
+            return {
+                ...state,
+                isLoading: true,
+                applystudycancelErrorReason: '',
+            }
+        }
+        case STUDY_MYAPPLYCANCEL_SUCCESS: {
+            return {
+                ...state,
+                isLoading: false,
+            }
+        }
+        case STUDY_MYAPPLYCANCEL_FAILURE: {
+            return {
+                ...state,
+                isLoading: false,
+                applystudycancelErrorReason: action.error
             }
         }
 
@@ -120,6 +159,28 @@ export default (state = initialState, action) => {
                 ...state,
                 isLoading: false,
                 studyAcceptErrorReason: action.error
+            }
+        }
+
+        // 스터디 거절
+        case STUDY_REJECT_REQUEST: {
+            return {
+                ...state,
+                isLoading: true,
+                studyRejectErrorReason: '',
+            }
+        }
+        case STUDY_REJECT_SUCCESS: {
+            return {
+                ...state,
+                isLoading: false,
+            }
+        }
+        case STUDY_REJECT_FAILURE: {
+            return {
+                ...state,
+                isLoading: false,
+                studyRejectErrorReason: action.error
             }
         }
         default: {
