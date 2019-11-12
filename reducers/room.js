@@ -7,6 +7,7 @@ export const initialState = {
     date: "",
     errorReason: "",
     roomReservations: [],
+    buildingNo: "",
 };
 
 export const RESERVATION_REQUEST = 'RESERVATION_REQUEST';
@@ -26,6 +27,7 @@ export const ROOM_SELECT_REQUEST = 'ROOM_SELECT_REQUEST';
 export const START_TIME_SELECT = 'START_TIME_SELECT';
 export const END_TIME_SELECT = 'END_TIME_SELECT';
 export const DATE_SELECT = 'DATE_SELECT';
+export const BUILDING_SELECT = 'BUILDING_SELECT';
 
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -116,6 +118,12 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 date: action.data
+            }
+        }
+        case BUILDING_SELECT: {
+            return {
+                ...state,
+                buildingNo: action.data
             }
         }
         default: {

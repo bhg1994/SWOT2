@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Table } from "antd";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
@@ -16,10 +16,23 @@ const columns = [
   { title: "강의실명", dataIndex: "roomName", key: "groupName" },
   { title: "수용인원", dataIndex: "total", key: "total" }
 ];
-
+var lists;
 const LectureRoomList = () => {
   const { totalRoomList } = useSelector(state => state.master);
+  const { buildingNo } = useSelector(state => state.room);
+  const [buildingList, setBuildingList] = useState([]);
+
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    lists = [];
+    totalRoomList.map((room) => {
+      if (String(room.groupNo) === buildingNo) {
+        lists.push(room);
+      }
+    })
+    setBuildingList(lists);
+  }, [ buildingNo])
 
   const onRowClick = (record) => {
     return {
@@ -34,7 +47,7 @@ const LectureRoomList = () => {
   };
   return (
     <>
-      <Table columns={columns} dataSource={totalRoomList} onRow={onRowClick} />
+      <Table columns={columns} dataSource={buildingList} onRow={onRowClick} />
     </>
   );
 };
