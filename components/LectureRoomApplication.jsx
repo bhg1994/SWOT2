@@ -132,6 +132,10 @@ const LectureRoomApplication = () => {
         <Column title="시작시간" dataIndex="startTime" key="startTime" />
         <Column title="종료시간" dataIndex="endTime" key="endTime" />
         <Column title="날짜" dataIndex="reservationDate" key="reservationDate" />
+        <Column title="학번" dataIndex="studentId" key="studentId" />
+        <Column title="이름" dataIndex="studentName" key="studentName" />
+
+
 
         <Column
           title="확인란"
