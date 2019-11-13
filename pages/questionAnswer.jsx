@@ -183,7 +183,7 @@ const questionAnswer = () => {
             key="action"
             render={post => (
               <span>
-                {myinfoid === post.userId ? (
+                {myinfoid === post.userId || myinfoid === 1 ? (
                   <div>
                     <Button type="primary" onClick={showModifyNotifyModal}>
                       수정

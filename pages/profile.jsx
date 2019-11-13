@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   List,
   Tag,
@@ -22,6 +22,7 @@ import {
   STUDY_MYAPPLYCANCEL_REQUEST
 } from "../reducers/study.js";
 import { RESERVATION_CANCEL_REQUEST } from "../reducers/room.js";
+import { fail } from "assert";
 
 const { Text } = Typography;
 const { Column } = Table;
@@ -41,9 +42,23 @@ const Profile = () => {
     applications
   } = useSelector(state => state.study);
 
-  console.log(myApplyStudys);
-
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({
+      type: RESERVATION_STATUS_REQUEST
+    });
+
+    dispatch({
+      type: STUDY_MYAPPLY_REQUEST
+    });
+
+    dispatch({
+      type: LOAD_MYSTUDYPOST_REQUEST
+    });
+  }, []);
+
+  console.log(myApplyStudys);
 
   const myStudys = studys.filter(study => study.code === 2);
 
@@ -140,6 +155,14 @@ const Profile = () => {
       onCancel() {}
     });
   };
+  const onFailReason = failReason => {
+    confirm({
+      title: "신청이 거절됨",
+      content: "사유 : " + failReason,
+      onOk() {},
+      onCancel() {}
+    });
+  };
 
   return (
     <>
@@ -170,9 +193,13 @@ const Profile = () => {
               >
                 <div style={{ marginBottom: "20px", textAlign: "end" }}>
                   {item.state === "T" ? (
-                    <Tag color="blue">승인 완료</Tag>
+                    <Tag color="green">승인 완료</Tag>
+                  ) : item.state === "C" ? (
+                    <Tag color="blue">승인 대기</Tag>
                   ) : (
-                    <Tag color="red">승인 대기</Tag>
+                    <div onClick={() => onFailReason(item.failReason)}>
+                      <Tag color="red">승인 거절</Tag>
+                    </div>
                   )}
                 </div>
                 <Text mark>
@@ -308,6 +335,7 @@ const Profile = () => {
           <Column title="학번" dataIndex="studentId" key="studentId" />
           <Column title="유저 이름" dataIndex="name" key="name" />
           <Column title="휴대폰 번호" dataIndex="phone" key="phone" />
+          <Column title="상태" dataIndex="state" key="state" />
 
           <Column
             title="확인란"
@@ -330,23 +358,4 @@ const Profile = () => {
   );
 };
 
-Profile.getInitialProps = async context => {
-  console.log(context.isServer);
-
-  context.store.dispatch({
-    type: RESERVATION_STATUS_REQUEST
-  });
-  // context.store.dispatch({
-  //   type: LOAD_POST_REQUEST,
-  //   data: {
-  //     code: "2"
-  //   }
-  // });
-  context.store.dispatch({
-    type: STUDY_MYAPPLY_REQUEST
-  });
-  context.store.dispatch({
-    type: LOAD_MYSTUDYPOST_REQUEST
-  });
-};
 export default Profile;

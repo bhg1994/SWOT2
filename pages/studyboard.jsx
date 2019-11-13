@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import moment from "moment";
 import {
   Layout,
   Icon,
@@ -49,8 +50,6 @@ const studyboard = () => {
       setMyinfoid(me.id);
     }
   }, []);
-
-  console.log(posts, myinfoid);
 
   let articlenum = 1;
 
@@ -197,6 +196,7 @@ const studyboard = () => {
               스터디 추가
             </Button>
           </div>
+          {/* 스터디 추가 모달 */}
           <Modal title="스터디 추가" visible={visible} footer={null}>
             <Form onSubmit={handleSubmit}>
               <Form.Item>
@@ -298,7 +298,7 @@ const studyboard = () => {
             key="action"
             render={post => (
               <span>
-                {myinfoid === post.userId ? (
+                {myinfoid === post.userId || myinfoid === 1 ? (
                   <div>
                     <Button type="primary" onClick={showModifyNotifyModal}>
                       수정
@@ -319,9 +319,15 @@ const studyboard = () => {
       <Modal title="스터디 글 수정" visible={modifyvisible} footer={null}>
         <Form>
           <Form.Item>
+            <Text type="danger">대여일자 선택</Text>
+            <DatePicker
+              style={{ margin: "20px" }}
+              onChange={onChangeDate}
+              value={moment(studyDate, "YYYY-MM-DD")}
+            />
             <Input
               id="studytitle"
-              addonBefore="제목"
+              addonBefore="스터디 주제"
               value={studytitle}
               onChange={onChangeValue}
               style={{ width: "50%" }}
@@ -334,6 +340,23 @@ const studyboard = () => {
               onChange={onChangeValue}
               addonBefore="내용"
               style={{ width: "75%" }}
+            />
+          </Form.Item>
+          <Form.Item>
+            <TimePicker
+              format="HH:mm"
+              id="studystarttime"
+              value={moment(studystarttime, "HH:mm")}
+              onOk={onOk}
+              onChange={onStartime}
+            />
+            <TimePicker
+              format="HH:mm"
+              id="studyendtime"
+              style={{ marginLeft: "20px" }}
+              value={moment(studyendtime, "HH:mm")}
+              onOk={onOk}
+              onChange={onEndtime}
             />
           </Form.Item>
           <Form.Item>
