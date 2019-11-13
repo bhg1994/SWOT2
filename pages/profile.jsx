@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   List,
   Tag,
@@ -42,9 +42,23 @@ const Profile = () => {
     applications
   } = useSelector(state => state.study);
 
-  console.log(myApplyStudys);
-
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({
+      type: RESERVATION_STATUS_REQUEST
+    });
+
+    dispatch({
+      type: STUDY_MYAPPLY_REQUEST
+    });
+
+    dispatch({
+      type: LOAD_MYSTUDYPOST_REQUEST
+    });
+  }, []);
+
+  console.log(myApplyStudys);
 
   const myStudys = studys.filter(study => study.code === 2);
 
@@ -147,6 +161,7 @@ const Profile = () => {
       content: '사유 : '+ failReason,
       onOk() {},
       onCancel() {},
+
     });
   };
 
@@ -183,6 +198,7 @@ const Profile = () => {
                   ) : item.state === "C" ?(
                     <Tag color="blue">승인 대기</Tag>
                   ):<div onClick={()=>onFailReason(item.failReason)}><Tag color="red">승인 거절</Tag></div>}
+
                 </div>
                 <Text mark>
                   대여 시간 : {item.startTime}~ {item.endTime}
@@ -318,7 +334,7 @@ const Profile = () => {
           <Column title="유저 이름" dataIndex="name" key="name" />
           <Column title="휴대폰 번호" dataIndex="phone" key="phone" />
           <Column title="상태" dataIndex="state" key="state" />
-                   
+
 
           <Column
             title="확인란"
@@ -341,23 +357,4 @@ const Profile = () => {
   );
 };
 
-Profile.getInitialProps = async context => {
-  console.log(context.isServer);
-
-  context.store.dispatch({
-    type: RESERVATION_STATUS_REQUEST
-  });
-  // context.store.dispatch({
-  //   type: LOAD_POST_REQUEST,
-  //   data: {
-  //     code: "2"
-  //   }
-  // });
-  context.store.dispatch({
-    type: STUDY_MYAPPLY_REQUEST
-  });
-  context.store.dispatch({
-    type: LOAD_MYSTUDYPOST_REQUEST
-  });
-};
 export default Profile;
