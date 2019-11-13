@@ -94,21 +94,30 @@ const studyboard = () => {
     console.log(dateString);
     setStudyDate(dateString);
   }
-
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch({
-      type: CREATE_POST_REQUEST,
-      data: {
-        code: "2",
-        title: studytitle,
-        startTime: studystarttime,
-        endTime: studyendtime,
-        body: studycontent,
-        total: maximum,
-        meetingDate: studyDate
-      }
-    });
+    if(studytitle!==""&&studystarttime!==""&&studyendtime!==""&&studycontent!==""&&studyDate!==""){
+      dispatch({
+        type: CREATE_POST_REQUEST,
+        data: {
+          code: "2",
+          title: studytitle,
+          startTime: studystarttime,
+          endTime: studyendtime,
+          body: studycontent,
+          total: maximum,
+          meetingDate: studyDate
+        }
+      });
+    }else{
+      confirm({
+        title: '경고!',
+        content: '내용을 전부 채워주세요',
+        onOk() {},
+        onCancel() {},
+      });
+    }
+    
     setVisible(false);
   };
 

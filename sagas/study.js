@@ -307,7 +307,7 @@ function* watchStudyaccept() {
 // 거절 Saga
 function studyrejectAPI(studyrejectData) {
 
-    let url = "http://swot.devdogs.kr:8080/api/study/application/accept/" + studyrejectData.leaderId
+    let url = "http://swot.devdogs.kr:8080/api/study/application/decline/" + studyrejectData.leaderId
 
     return axios.get(url,
         {
