@@ -21,8 +21,9 @@ import {
   STUDY_REJECT_REQUEST,
   STUDY_MYAPPLYCANCEL_REQUEST
 } from "../reducers/study.js";
-import { RESERVATION_CANCEL_REQUEST } from "../reducers/room.js";
+import { RESERVATION_CANCEL_REQUEST, INSERT_STUDY_RESERVATION_DATA } from "../reducers/room.js";
 import { fail } from "assert";
+import Link from "next/link"
 
 const { Text } = Typography;
 const { Column } = Table;
@@ -34,7 +35,9 @@ const Profile = () => {
   const [visible, setVisible] = useState(false);
   const [boardId, setBoardId] = useState(0);
   const { reservationStatus } = useSelector(state => state.lookup);
+
   const { studys, posts } = useSelector(state => state.post);
+  const [selectedStudy, setSelectedStudy] = useState();
   const {
     myApplyStudys,
     myApplyStudysApplications,
@@ -165,6 +168,18 @@ const Profile = () => {
     });
   };
 
+  const onStudyReservation = () =>{
+    console.log(selectedStudy)
+    console.log(applications);
+    dispatch({
+      type:INSERT_STUDY_RESERVATION_DATA,
+      data : {
+        board: selectedStudy,
+        applications : applications
+      }
+    })
+  };
+
   return (
     <>
       <div>
@@ -227,6 +242,7 @@ const Profile = () => {
               <div
                 onMouseOver={() => {
                   setBoardId(study.id);
+                  setSelectedStudy(study);
                 }}
               >
                 <Card
@@ -319,6 +335,9 @@ const Profile = () => {
         onCancel={onCloseBtn}
         width="700px"
         footer={[
+          <Button onClick={onStudyReservation}>
+            <Link href="/studyReservation">강의실 예약</Link>
+          </Button>,
           <Button key="back" onClick={onCloseBtn}>
             닫기
           </Button>

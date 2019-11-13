@@ -31,6 +31,8 @@ const SWOT = ({ Component, store, pageProps }) => {
     }
   }, [])
   
+  
+  
 
   return (
     <>

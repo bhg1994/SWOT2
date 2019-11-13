@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 var justClickedId = "";
 var startId = "";
 var beforeId = "";
+var reservations = [];
+
 
 const ReservationTime = ({ value }) => {
   const times = [
@@ -39,25 +41,32 @@ const ReservationTime = ({ value }) => {
   const dispatch = useDispatch();
   const { roomReservations } = useSelector(state => state.room);
   const { date } = useSelector(state => state.room);
-  var reservations = [];
+  const [isDone, setIsDone] = useState(false);
+
 
   useEffect(() => {
-    if (value) {
-      oninit();
+    console.log("useEffect isDone")
+    if(value){
+      console.log("useEffect value")
+      
+      disable();
     }
-  }, [value])
+      
+  }, [isDone])
   useEffect(() => {
+    reservations = [];
     roomReservations.forEach(reservation => {
       if (reservation.reservationDate === date) {
         reservations.push(reservation);
       }
     });
     console.log(reservations);
-
-    if (value) {
-      //oninit();
-      console.log("after list")
+    if(value){
+      oninit();
+      setIsDone(true);
     }
+    
+    
   }, [roomReservations])
 
 
@@ -124,7 +133,7 @@ const ReservationTime = ({ value }) => {
       type: END_TIME_SELECT,
       data: "",
     });
-    disable();
+    //disable();
   };
 
   const disable = () => {

@@ -3,8 +3,9 @@ import { Table } from "antd";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { ROOM_SELECT_REQUEST } from "../reducers/room";
+import { SwotMap } from "../containers";
 
-const columns = [
+const columns1 = [
   {
     title: "강의실코드", dataIndex: "roomNo", key: "roomNo",
     render: text => (
@@ -16,10 +17,15 @@ const columns = [
   { title: "강의실명", dataIndex: "roomName", key: "groupName" },
   { title: "수용인원", dataIndex: "total", key: "total" }
 ];
+const columns2 = [
+  { title: "강의실코드", dataIndex: "roomNo", key: "roomNo" },
+  { title: "강의실명", dataIndex: "roomName", key: "groupName" },
+  { title: "수용인원", dataIndex: "total", key: "total" }
+];
 var lists;
-const LectureRoomList = () => {
+const LectureRoomList = ({handleOk}) => {
   const { totalRoomList } = useSelector(state => state.master);
-  const { buildingNo } = useSelector(state => state.room);
+  const { buildingNo, isStudyReservation } = useSelector(state => state.room);
   const [buildingList, setBuildingList] = useState([]);
 
   const dispatch = useDispatch();
@@ -40,14 +46,18 @@ const LectureRoomList = () => {
         console.log(record.roomNo);
         dispatch({
           type: ROOM_SELECT_REQUEST,
-          data: record.id,
+          data: {
+            id : record.id,
+            name : record.roomName,
+          }
         });
+        handleOk();
       }
     };
   };
   return (
     <>
-      <Table columns={columns} dataSource={buildingList} onRow={onRowClick} />
+      <Table columns={ isStudyReservation ? columns2 : columns1 } dataSource={buildingList} onRow={onRowClick} />
     </>
   );
 };

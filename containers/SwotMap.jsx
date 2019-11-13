@@ -82,6 +82,7 @@ const SWOTMap = () => {
 
   const handleOk = () => {
     setVisible(false);
+    console.log("afsjafshjafshasf")
   };
 
   const imageClick = (area, event) => {
@@ -193,7 +194,7 @@ const SWOTMap = () => {
               {Lectureroom}
             </Text>
           </LectureroomWrapper>
-          <LectureRoomList />
+          <LectureRoomList handleOk={handleOk}/>
         </Modal>
       </div>
     </>

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, DatePicker, List, Typography } from "antd";
 import { Facilityrental, ReservationTime } from "../components";
 import { useDispatch, useSelector } from "react-redux";
-import { DATE_SELECT, ROOM_RESERVATIONS_REQUEST } from "../reducers/room";
+import { DATE_SELECT, ROOM_RESERVATIONS_REQUEST, STUDY_RESERVATION_ON } from "../reducers/room";
 import SwotMap from "../containers/SwotMap";
+import { LOAD_ROOMLIST_REQUEST } from "../reducers/master";
 
 const { Text } = Typography;
 
@@ -11,8 +12,26 @@ const reservationForm = () => {
   const [reservationDate, setReseravtionDate] = useState("");
 
   const [lookup, setLookup] = useState("");
+
   const dispatch = useDispatch();
-  const { selectedRoom } = useSelector(state => state.room);
+  const { selectedRoom, isStudyReservation, selectedRoomName, studyReservationData } = useSelector(state => state.room);
+
+  if(!isStudyReservation){
+    dispatch({
+      type: STUDY_RESERVATION_ON,
+    })
+  }
+  
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    dispatch({
+      type: LOAD_ROOMLIST_REQUEST,
+      data: {
+        token: token,
+      }
+    });
+  }, [])
 
   const onButton = () => {
     setLookup("lookup");
@@ -48,7 +67,11 @@ const reservationForm = () => {
             }}
           >
             <SwotMap />
+            
             <div>
+            <Text>{selectedRoomName}</Text>
+          </div>
+          <div>
               <Button type="primary" icon="search" onClick={onButton}>
                 조 회
               </Button>

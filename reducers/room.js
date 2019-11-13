@@ -2,12 +2,15 @@ export const initialState = {
     reservationErrorReason: "",
     isLoading: false,
     selectedRoom: null,
+    selectedRoomName: "",
     startTime: "",
     endTime: "",
     date: "",
     errorReason: "",
     roomReservations: [],
     buildingNo: "",
+    isStudyReservation: false,
+    studyReservationData: null,
 };
 
 export const RESERVATION_REQUEST = 'RESERVATION_REQUEST';
@@ -28,6 +31,13 @@ export const START_TIME_SELECT = 'START_TIME_SELECT';
 export const END_TIME_SELECT = 'END_TIME_SELECT';
 export const DATE_SELECT = 'DATE_SELECT';
 export const BUILDING_SELECT = 'BUILDING_SELECT';
+
+export const STUDY_RESERVATION_ON = 'STUDY_RESERVATION_ON';
+export const STUDY_RESERVATION_OFF = 'STUDY_RESERVATION_OFF';
+
+export const INSERT_STUDY_RESERVATION_DATA = 'INSERT_STUDY_RESERVATION_DATA';
+
+
 
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -99,7 +109,8 @@ export default (state = initialState, action) => {
         case ROOM_SELECT_REQUEST: {
             return {
                 ...state,
-                selectedRoom: action.data,
+                selectedRoom: action.data.id,
+                selectedRoomName: action.data.name,
             }
         }
         case START_TIME_SELECT: {
@@ -126,6 +137,25 @@ export default (state = initialState, action) => {
                 buildingNo: action.data
             }
         }
+        case STUDY_RESERVATION_ON: {
+            return {
+                ...state,
+                isStudyReservation : true,
+            }
+        }
+        case STUDY_RESERVATION_OFF: {
+            return {
+                ...state,
+                isStudyReservation : false,
+            }
+        }
+        case INSERT_STUDY_RESERVATION_DATA: {
+            return {
+                ...state,
+                studyReservationData : action.data,
+            }
+        }
+        
         default: {
             return {
                 ...state,

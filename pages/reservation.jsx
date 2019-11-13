@@ -5,6 +5,7 @@ import {
 import SwotMap from "../containers/SwotMap";
 import { LOAD_ROOMLIST_REQUEST } from "../reducers/master";
 import { useDispatch, useSelector } from "react-redux";
+import { STUDY_RESERVATION_OFF } from "../reducers/room";
 
 
 const reservation = () => {
@@ -12,6 +13,12 @@ const reservation = () => {
   const dispatch = useDispatch();
 
   // const [token, setToken] = useState(undefined)
+  const { isStudyReservation } = useSelector(state => state.room);
+  if(isStudyReservation){
+    dispatch({
+      type: STUDY_RESERVATION_OFF,
+    })
+  }
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -22,6 +29,8 @@ const reservation = () => {
       }
     });
   }, [])
+
+  
   const { isLoggingIn } = useSelector(state => state.user);
 
   return (

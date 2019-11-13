@@ -7,16 +7,29 @@ import {
 } from "../components";
 import { SwotMap } from "../containers";
 import { Row, Col, Card, Typography, Divider } from "antd";
-import { useSelector } from "react-redux";
-import { LOAD_POST_REQUEST } from "../reducers/post";
-import { LOAD_USER_REQUEST } from '../reducers/user';
+import { STUDY_RESERVATION_OFF } from "../reducers/room";
+import { useDispatch, useSelector } from "react-redux";
+import { LOAD_ROOMLIST_REQUEST } from "../reducers/master";
+
 
 
 const { Text } = Typography;
 
 const Home = () => {
+  const dispatch = useDispatch();
+
 
   const { posts } = useSelector(state => state.post);
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    dispatch({
+      type: LOAD_ROOMLIST_REQUEST,
+      data: {
+        token: token,
+      }
+    });
+  }, [])
 
   const NotificationTitle = (
     <div style={{ textAlign: "center" }}>
@@ -32,6 +45,12 @@ const Home = () => {
       </Text>
     </div>
   );
+  const { isStudyReservation } = useSelector(state => state.room);
+  if(isStudyReservation){
+    dispatch({
+      type: STUDY_RESERVATION_OFF,
+    })
+  }
 
   return (
     <>
