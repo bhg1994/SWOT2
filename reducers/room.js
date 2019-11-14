@@ -11,6 +11,8 @@ export const initialState = {
     buildingNo: "",
     isStudyReservation: false,
     studyReservationData: null,
+    sTime: "",
+    eTime: "",
 };
 
 export const RESERVATION_REQUEST = 'RESERVATION_REQUEST';
@@ -36,6 +38,10 @@ export const STUDY_RESERVATION_ON = 'STUDY_RESERVATION_ON';
 export const STUDY_RESERVATION_OFF = 'STUDY_RESERVATION_OFF';
 
 export const INSERT_STUDY_RESERVATION_DATA = 'INSERT_STUDY_RESERVATION_DATA';
+
+export const START_TIME_SET = 'START_TIME_SET';
+export const END_TIME_SET = 'END_TIME_SET';
+
 
 
 
@@ -153,6 +159,18 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 studyReservationData : action.data,
+            }
+        }
+        case START_TIME_SET: {
+            return {
+                ...state,
+                sTime: action.data
+            }
+        }
+        case END_TIME_SET: {
+            return {
+                ...state,
+                eTime: action.data
             }
         }
         

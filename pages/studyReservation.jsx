@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Button, DatePicker, List, Typography } from "antd";
-import { Facilityrental, ReservationTime } from "../components";
+import { ReservationTime } from "../components";
 import { useDispatch, useSelector } from "react-redux";
 import { DATE_SELECT, ROOM_RESERVATIONS_REQUEST, STUDY_RESERVATION_ON } from "../reducers/room";
 import SwotMap from "../containers/SwotMap";
 import { LOAD_ROOMLIST_REQUEST } from "../reducers/master";
+import FacilityrentalForStudy from "../components/FacilityrentalForStudy";
 
 const { Text } = Typography;
 
@@ -14,7 +15,7 @@ const reservationForm = () => {
   const [lookup, setLookup] = useState("");
 
   const dispatch = useDispatch();
-  const { selectedRoom, isStudyReservation, selectedRoomName, studyReservationData } = useSelector(state => state.room);
+  const { selectedRoom, isStudyReservation, selectedRoomName  } = useSelector(state => state.room);
 
   if(!isStudyReservation){
     dispatch({
@@ -22,7 +23,9 @@ const reservationForm = () => {
     })
   }
   
-
+  useEffect(() => {
+    setLookup("");
+  }, [selectedRoom])
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     dispatch({
@@ -83,7 +86,7 @@ const reservationForm = () => {
       <div style={{ margin: "auto", width: "80%" }}>
         <ReservationTime value={lookup} />
       </div>
-      <Facilityrental />
+      <FacilityrentalForStudy />
     </>
   );
 };

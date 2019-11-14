@@ -41,18 +41,7 @@ const ReservationTime = ({ value }) => {
   const dispatch = useDispatch();
   const { roomReservations } = useSelector(state => state.room);
   const { date } = useSelector(state => state.room);
-  const [isDone, setIsDone] = useState(false);
 
-
-  useEffect(() => {
-    console.log("useEffect isDone")
-    if(value){
-      console.log("useEffect value")
-      
-      disable();
-    }
-      
-  }, [isDone])
   useEffect(() => {
     reservations = [];
     roomReservations.forEach(reservation => {
@@ -63,10 +52,8 @@ const ReservationTime = ({ value }) => {
     console.log(reservations);
     if(value){
       oninit();
-      setIsDone(true);
+      //disable();
     }
-    
-    
   }, [roomReservations])
 
 
@@ -76,7 +63,7 @@ const ReservationTime = ({ value }) => {
 
     if (startId === "") {
       startId = e.target.id;
-      element.style.backgroundColor = "black";
+      element.style.backgroundColor = "pink";
       beforeId = e.target.id;
       dispatch({
         type: START_TIME_SELECT,
@@ -97,8 +84,8 @@ const ReservationTime = ({ value }) => {
 
     if (parseInt(beforeId) - parseInt(justClickedId) === -1 || parseInt(beforeId) - parseInt(justClickedId) === 0) {
       if (parseInt(justClickedId) - parseInt(startId) < 5) {
-        if (element.style.backgroundColor != "black") {
-          element.style.backgroundColor = "black";
+        if (element.style.backgroundColor != "pink") {
+          element.style.backgroundColor = "pink";
           beforeId = e.target.id;
           dispatch({
             type: END_TIME_SELECT,
@@ -133,7 +120,7 @@ const ReservationTime = ({ value }) => {
       type: END_TIME_SELECT,
       data: "",
     });
-    //disable();
+    disable();
   };
 
   const disable = () => {
