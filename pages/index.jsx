@@ -84,15 +84,13 @@ const Home = () => {
   );
 };
 
-// Home.getInitialProps = async (context) => {
-//   if (!context.isServer) {
-//     let token = localStorage.getItem("accessToken");
-
-//     context.store.dispatch({
-//       type: LOAD_USER_REQUEST,
-//       actoken: token
-//     });
-//   };
-// }
+Home.getInitialProps = async (context) => {
+  context.store.dispatch({
+    type: LOAD_POST_REQUEST,
+    data: {
+      code: "1"
+    }
+  });
+}
 
 export default Home;

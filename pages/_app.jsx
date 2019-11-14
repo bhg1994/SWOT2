@@ -118,6 +118,7 @@ SWOT.getInitialProps = async (context) => {
   if (ctx.store.getState().post.posts === []) {
     ctx.store.dispatch({
       type: LOAD_POST_REQUEST,
+
     });
   }
   return pageProps;

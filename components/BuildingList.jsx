@@ -18,7 +18,8 @@ import {
   AddBtn,
   CancelBtn,
   BuildingTabs,
-  BuildingAddBtn
+  BuildingAddBtn,
+  FileWrapper
 } from "../components/css/BuildingList";
 import { useDispatch, useSelector } from "react-redux";
 import { CREATEROOM_REQUEST } from "../reducers/master";
@@ -104,8 +105,7 @@ const BuildingList = () => {
         "content-type": "multipart/form-data"
       }
     };
-    formData.append("image", image);
-    console.log(image);
+    formData.append("file", image);
     axios.post(url, formData, config);
     setVisible(false);
   };
@@ -119,59 +119,23 @@ const BuildingList = () => {
   };
 
   const handleFileChange = e => {
-    console.log(e);
+    setImage(e.target.files[0]);
   };
-
-  const props = {
-    name: "file",
-    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-    listType: "picture",
-    headers: {
-      authorization: "authorization-text"
-    },
-    onChange(info) {
-      setImage(info.file);
-      if (info.file.status !== "uploading") {
-        console.log(info.file.name, info.fileList);
-        const url = "/imageupload";
-        const formData = new FormData();
-        const config = {
-          headers: {
-            "content-type": "multipart/form-data"
-          }
-        };
-        formData.append("image", image);
-        console.log(image);
-        axios.post(url, formData, config);
-      }
-      if (info.file.status === "done") {
-        message.success(`${info.file.name} file uploaded successfully`);
-      } else if (info.file.status === "error") {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    }
-  };
-
   return (
     <>
       <Modal title="강의실 추가" visible={visible} footer={null}>
         <Form onSubmit={handleSubmit}>
           <Form.Item>
-            {/* <Upload {...props}>
-              <Button>
-                <Icon type="upload" />
-                 Click to Upload               
-              </Button>
-            </Upload> */}
+          <FileWrapper>
+          <label for="label_file">업로드</label>
             <input
-              accept="image/*"
+              id="label_file"
               type="file"
-              id="raised-button-file"
-              file={image}
-              // value={image}
-              // value={this.state.filename}
+              name="file"
               onChange={handleFileChange}
             />
+            </FileWrapper>
+            <div>{image.name}</div>
           </Form.Item>
           <Form.Item>
             <Text type="secondary">건물 번호 : </Text>

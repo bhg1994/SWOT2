@@ -1,28 +1,48 @@
 import React, { useState, useEffect } from "react";
-import { Table } from "antd";
+import { Table,Button,Modal,Typography } from "antd";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { ROOM_SELECT_REQUEST } from "../reducers/room";
 
-const columns = [
-  {
-    title: "강의실코드", dataIndex: "roomNo", key: "roomNo",
-    render: text => (
-      <Link href="/reservationForm">
-        <a>{text}</a>
-      </Link>
-    )
-  },
-  { title: "강의실명", dataIndex: "roomName", key: "groupName" },
-  { title: "수용인원", dataIndex: "total", key: "total" }
-];
+const { Text } = Typography;
+
+
 var lists;
 const LectureRoomList = () => {
+
+  const columns = [
+    {
+      title: "강의실코드", dataIndex: "roomNo", key: "roomNo",
+      render: text => (
+        <Link href="/reservationForm">
+          <a>{text}</a>
+        </Link>
+      )
+    },
+    { title: "강의실명", dataIndex: "roomName", key: "groupName" },
+    { title: "수용인원", dataIndex: "total", key: "total" },
+    {
+      title: '이미지',
+      dataIndex: 'action',
+      key: 'action',
+      render: (text, record) => (
+          <span>
+              <Button type="primary" onClick={showImageModal}>이미지 보기</Button>
+          </span>
+      )
+  },
+  ];
+
+
+  const dispatch = useDispatch();
+
   const { totalRoomList } = useSelector(state => state.master);
   const { buildingNo } = useSelector(state => state.room);
   const [buildingList, setBuildingList] = useState([]);
+  const [visible,setVisible] = useState(false);
+  const [roomurl,setRoomurl] = useState("");
+  const [roomname,setRoomname] = useState("");
 
-  const dispatch = useDispatch();
 
   useEffect(() => {
     lists = [];
@@ -32,12 +52,31 @@ const LectureRoomList = () => {
       }
     })
     setBuildingList(lists);
-  }, [ buildingNo])
+  }, [buildingNo])
 
   const onRowClick = (record) => {
     return {
       onClick: () => {
         console.log(record.roomNo);
+        setRoomname(record.roomName);
+        switch(record.roomNo){
+          case "1101":{
+            setRoomurl("static/images/classrooms/1101.jpg");
+            break;
+          };
+          case "1102":{
+            setRoomurl("static/images/classrooms/1102.png");
+            break;
+          }
+          case "1112":{
+            setRoomurl("static/images/classrooms/1103.jpg");
+            break;
+          }
+          default:{
+            setRoomurl("");
+            break;
+          }
+        }
         dispatch({
           type: ROOM_SELECT_REQUEST,
           data: record.id,
@@ -45,9 +84,36 @@ const LectureRoomList = () => {
       }
     };
   };
+
+  const showImageModal =() =>{
+    setVisible(true);
+    console.log(lists);
+  }
+
+  const handleCancel =() =>{
+    setVisible(false);
+  }
+
   return (
     <>
       <Table columns={columns} dataSource={buildingList} onRow={onRowClick} />
+      <Modal
+          title="Imageroom"
+          visible={visible}
+          onCancel={handleCancel}
+          footer={[
+            <Button key="back" onClick={handleCancel}>
+              닫기
+            </Button>,
+          ]}
+        
+        >
+        <div style={{textAlign:"center" , display:"flex", flexDirection:"column"}}>
+        <img src={roomurl}/>
+        <Text strong type="warning" style={{marginTop:"30px",fontSize:"20px"}}>강의실 : {roomname}</Text>
+        </div>
+          
+        </Modal>
     </>
   );
 };
