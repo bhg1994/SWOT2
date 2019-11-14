@@ -43,12 +43,11 @@ const reservationForm = () => {
         <List.Item>
           <div
             style={{
-              margin: "auto",
-              marginBottom: "30px"
+              margin: "auto"
             }}
           >
             <SwotMap />
-            <div>
+            <div style={{ marginTop: "30px", textAlign: "center" }}>
               <Button type="primary" icon="search" onClick={onButton}>
                 조 회
               </Button>
