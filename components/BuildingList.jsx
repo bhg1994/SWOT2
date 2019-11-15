@@ -18,10 +18,12 @@ import {
   AddBtn,
   CancelBtn,
   BuildingTabs,
-  BuildingAddBtn
+  BuildingAddBtn,
+  FileWrapper
 } from "../components/css/BuildingList";
 import { useDispatch, useSelector } from "react-redux";
 import { CREATEROOM_REQUEST } from "../reducers/master";
+const axios = require("axios");
 
 const { TabPane } = Tabs;
 const { Text } = Typography;
@@ -35,7 +37,6 @@ export const useInput = (initValue = null) => {
 };
 
 const BuildingList = () => {
-
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
   const [image, setImage] = useState("");
@@ -48,27 +49,23 @@ const BuildingList = () => {
 
   const [tabkey, setTabkey] = useState("1");
 
-
   const { totalRoomList, isLoading } = useSelector(state => state.master);
-
-
 
   let lists = [];
 
   useEffect(() => {
     lists = [];
-    totalRoomList.map((room) => {
+    totalRoomList.map(room => {
       if (String(room.groupNo) === tabkey) {
         lists.push(room);
       }
-    })
+    });
     setBuildingList(lists);
-  }, [totalRoomList])
+  }, [totalRoomList]);
 
-
-  const onTabClick = (key) => {
+  const onTabClick = key => {
     lists = [];
-    totalRoomList.map((room) => {
+    totalRoomList.map(room => {
       if (String(room.groupNo) === key) {
         lists.push(room);
       }
@@ -77,15 +74,13 @@ const BuildingList = () => {
     setTabkey(key);
   };
 
-
-  const onChangegroupNo = (value) => {
+  const onChangegroupNo = value => {
     setChangegroupNo(value);
-  }
+  };
 
-  const onChangeTotal = (value) => {
+  const onChangeTotal = value => {
     setChangeTotal(value);
-  }
-
+  };
 
   const showModal = () => {
     setVisible(true);
@@ -94,16 +89,24 @@ const BuildingList = () => {
   const handleSubmit = e => {
     e.preventDefault();
     let gn = parseInt(groupNo);
-    dispatch({
-      type: CREATEROOM_REQUEST,
-      data: {
-        roomName: roomName,
-        groupNo: gn,
-        roomNo: roomNo,
-        total: total
+    // dispatch({
+    //   type: CREATEROOM_REQUEST,
+    //   data: {
+    //     roomName: roomName,
+    //     groupNo: gn,
+    //     roomNo: roomNo,
+    //     total: total
+    //   }
+    // });
+    const url = "/imageupload";
+    const formData = new FormData();
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data"
       }
-    });
-
+    };
+    formData.append("file", image);
+    axios.post(url, formData, config);
     setVisible(false);
   };
 
@@ -113,127 +116,114 @@ const BuildingList = () => {
 
   const onTabPaneClick = () => {
     setTabActive(true);
-  }
-
-
-
-  const props = {
-    name: "file",
-    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-    listType: "picture",
-    headers: {
-      authorization: "authorization-text"
-    },
-    onChange(info) {
-      setImage(info.file.name);
-      if (info.file.status !== "uploading") {
-        console.log(info.file, info.fileList); ``
-      }
-      if (info.file.status === "done") {
-        message.success(`${info.file.name} file uploaded successfully`);
-      } else if (info.file.status === "error") {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    }
   };
 
+  const handleFileChange = e => {
+    setImage(e.target.files[0]);
+  };
   return (
     <>
       <Modal title="강의실 추가" visible={visible} footer={null}>
         <Form onSubmit={handleSubmit}>
           <Form.Item>
-            <Upload {...props}>댁
-              <Button>
-                <Icon type="upload" /> Click to Upload
-              </Button>
-            </Upload>
+          <FileWrapper>
+          <label for="label_file">업로드</label>
+            <input
+              id="label_file"
+              type="file"
+              name="file"
+              onChange={handleFileChange}
+            />
+            </FileWrapper>
+            <div>{image.name}</div>
           </Form.Item>
           <Form.Item>
             <Text type="secondary">건물 번호 : </Text>
-            <BuildingNumber min={1} max={13}
-              onChange={onChangegroupNo} />
+            <BuildingNumber min={1} max={13} onChange={onChangegroupNo} />
           </Form.Item>
           <Form.Item>
-            <InputClassroomCode addonBefore="강의실 코드" onChange={onChangeroomNo} />
+            <InputClassroomCode
+              addonBefore="강의실 코드"
+              onChange={onChangeroomNo}
+            />
           </Form.Item>
           <Form.Item>
-            <InputClassroom addonBefore="강의실명" onChange={onChangeroomName} />
+            <InputClassroom
+              addonBefore="강의실명"
+              onChange={onChangeroomName}
+            />
           </Form.Item>
           <Form.Item>
-            <Text type="secondary" >최대 인원수 : </Text>
+            <Text type="secondary">최대 인원수 : </Text>
             <InputMaximum onChange={onChangeTotal} min={3} max={30} />
           </Form.Item>
           <Form.Item>
             <AddBtn htmlType="submit">추가</AddBtn>
             <CancelBtn type="danger" onClick={handleCancel}>
-              취소
-            </CancelBtn>
+              취소             
+            </CancelBtn>
           </Form.Item>
         </Form>
       </Modal>
-      <BuildingTabs defaultActiveKey='1' onTabClick={onTabClick} >
-
+      <BuildingTabs defaultActiveKey="1" onTabClick={onTabClick}>
         <TabPane tab="승연관" key="1">
           <BuildingAddBtn type="primary" onClick={showModal}>
-            강의실 추가
-          </BuildingAddBtn>
+            강의실 추가           
+          </BuildingAddBtn>
           <TabLectureRooms buildingList={buildingList} />
         </TabPane>
 
         <TabPane tab="일만관" key="2">
           <BuildingAddBtn type="primary" onClick={showModal}>
-            강의실 추가
-          </BuildingAddBtn>
+            강의실 추가           
+          </BuildingAddBtn>
           <TabLectureRooms buildingList={buildingList} />
         </TabPane>
 
         <TabPane tab="월당관" key="3">
           <BuildingAddBtn type="primary" onClick={showModal}>
-            강의실 추가
-          </BuildingAddBtn>
+            강의실 추가           
+          </BuildingAddBtn>
           <TabLectureRooms buildingList={buildingList} />
         </TabPane>
 
         <TabPane tab="나눔관" key="5">
           <BuildingAddBtn type="primary" onClick={showModal}>
-            강의실 추가
-          </BuildingAddBtn>
+            강의실 추가           
+          </BuildingAddBtn>
           <TabLectureRooms buildingList={buildingList} />
         </TabPane>
 
         <TabPane tab="이천환기념관" key="6">
           <BuildingAddBtn type="primary" onClick={showModal}>
-            강의실 추가
-          </BuildingAddBtn>
+            강의실 추가           
+          </BuildingAddBtn>
           <TabLectureRooms buildingList={buildingList} />
         </TabPane>
 
         <TabPane tab="새천년관" key="7">
           <BuildingAddBtn type="primary" onClick={showModal}>
-            강의실 추가
-          </BuildingAddBtn>
+            강의실 추가           
+          </BuildingAddBtn>
           <TabLectureRooms buildingList={buildingList} />
         </TabPane>
 
         <TabPane tab="성미가엘성당" key="9">
           <BuildingAddBtn type="primary" onClick={showModal}>
-            강의실 추가
-          </BuildingAddBtn>
+            강의실 추가           
+          </BuildingAddBtn>
           <TabLectureRooms buildingList={buildingList} />
         </TabPane>
 
-        <TabPane tab="미가엘관" key="12" >
+        <TabPane tab="미가엘관" key="12">
           <BuildingAddBtn type="primary" onClick={showModal}>
-            강의실 추가
-          </BuildingAddBtn>
+            강의실 추가           
+          </BuildingAddBtn>
           <TabLectureRooms buildingList={buildingList} />
         </TabPane>
-
       </BuildingTabs>
     </>
   );
 };
 
-
 export default BuildingList;
-

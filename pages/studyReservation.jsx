@@ -65,12 +65,10 @@ const reservationForm = () => {
         <List.Item>
           <div
             style={{
-              margin: "auto",
-              marginBottom: "30px"
+              margin: "auto"
             }}
           >
-            <SwotMap />
-            
+            <SwotMap />            
             <div>
             <Text>{selectedRoomName}</Text>
           </div>

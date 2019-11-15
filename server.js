@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const expressSession = require('express-session');
 const dotenv = require('dotenv');
 const path = require('path');
+const multer = require("multer");
 
 const dev = process.env.NODE_ENV !== 'production';
 const prod = process.env.NODE_ENV === 'production';
@@ -12,6 +13,9 @@ const prod = process.env.NODE_ENV === 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 dotenv.config();
+
+const imageuploadRouter = require('./routes/imageupload')
+
 
 app.prepare().then(() => {
   const server = express();
@@ -30,7 +34,7 @@ app.prepare().then(() => {
       secure: false,
     },
   }));
-
+  server.use('/imageupload', imageuploadRouter);
 
   server.get('*', (req, res) => {
     return handle(req, res);

@@ -58,28 +58,28 @@ const MainCarousel = () => {
       <CarouselWrapper>
         <Slider {...settings}>
           <div>
-            <img src="static/images/lectureroom.jpg"></img>
+            <img src="static/images/classrooms/1101.jpg"></img>
           </div>
           <div>
-            <img src="static/images/lectureroom2.jpg"></img>
+            <img src="static/images/classrooms/1102.png"></img>
           </div>
           <div>
-            <img src="static/images/lectureroom3.jpg"></img>
+            <img src="static/images/classrooms/1103.jpg"></img>
           </div>
           <div>
-            <img src="static/images/lectureroom4.jpg"></img>
+            <img src="static/images/classrooms/6202.jpg"></img>
           </div>
           <div>
-            <img src="static/images/lectureroom.jpg"></img>
+            <img src="static/images/classrooms/M402.png"></img>
           </div>
           <div>
-            <img src="static/images/lectureroom2.jpg"></img>
+            <img src="static/images/classrooms/M403.jpg"></img>
           </div>
           <div>
-            <img src="static/images/lectureroom3.jpg"></img>
+            <img src="static/images/classrooms/M404.jpg"></img>
           </div>
           <div>
-            <img src="static/images/lectureroom4.jpg"></img>
+            <img src="static/images/classrooms/default.jpg"></img>
           </div>
         </Slider>
       </CarouselWrapper>
