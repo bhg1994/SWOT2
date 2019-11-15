@@ -3,14 +3,32 @@ import { Table,Button,Modal,Typography } from "antd";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { ROOM_SELECT_REQUEST } from "../reducers/room";
+import { SwotMap } from "../containers";
+
 
 const { Text } = Typography;
 
 
 var lists;
-const LectureRoomList = () => {
+const LectureRoomList = ({handleOk}) => {
 
-  const columns = [
+  const columns1 = [
+    { title: "강의실코드", dataIndex: "roomNo", key: "roomNo" },
+    { title: "강의실명", dataIndex: "roomName", key: "groupName" },
+    { title: "수용인원", dataIndex: "total", key: "total" },
+    {
+      title: '이미지',
+      dataIndex: 'action',
+      key: 'action',
+      render: (text, record) => (
+          <span>
+              <Button type="primary" onClick={showImageModal}>이미지 보기</Button>
+          </span>
+      )
+  },
+  ];
+  
+  const columns2 = [
     {
       title: "강의실코드", dataIndex: "roomNo", key: "roomNo",
       render: text => (
@@ -37,7 +55,7 @@ const LectureRoomList = () => {
   const dispatch = useDispatch();
 
   const { totalRoomList } = useSelector(state => state.master);
-  const { buildingNo } = useSelector(state => state.room);
+  const { buildingNo, isStudyReservation } = useSelector(state => state.room);
   const [buildingList, setBuildingList] = useState([]);
   const [visible,setVisible] = useState(false);
   const [roomurl,setRoomurl] = useState("");
@@ -79,8 +97,12 @@ const LectureRoomList = () => {
         }
         dispatch({
           type: ROOM_SELECT_REQUEST,
-          data: record.id,
+          data: {
+            id : record.id,
+            name : record.roomName,
+          }
         });
+        handleOk();
       }
     };
   };
@@ -96,7 +118,7 @@ const LectureRoomList = () => {
 
   return (
     <>
-      <Table columns={columns} dataSource={buildingList} onRow={onRowClick} />
+      <Table columns={isStudyReservation ? columns2 : columns1} dataSource={buildingList} onRow={onRowClick} />
       <Modal
           title="Imageroom"
           visible={visible}

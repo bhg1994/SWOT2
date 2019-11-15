@@ -9,7 +9,8 @@ export const initialState = {
     studyReservationErrorReason: '',
     studyAcceptErrorReason: '',
     studyRejectErrorReason: '',
-    applystudycancelErrorReason: ''
+    applystudycancelErrorReason: '',
+    errorReason: "",
 };
 
 
@@ -43,6 +44,9 @@ export const STUDY_REJECT_REQUEST = 'STUDY_REJECT_REQUEST';
 export const STUDY_REJECT_SUCCESS = 'STUDY_REJECT_SUCCESS';
 export const STUDY_REJECT_FAILURE = 'STUDY_REJECT_FAILURE';
 
+export const STUDY_CONFIRM_REQUEST = 'STUDY_CONFIRM_REQUEST';
+export const STUDY_CONFIRM_SUCCESS = 'STUDY_CONFIRM_SUCCESS';
+export const STUDY_CONFIRM_FAILURE = 'STUDY_CONFIRM_FAILURE';
 
 
 
@@ -181,6 +185,27 @@ export default (state = initialState, action) => {
                 ...state,
                 isLoading: false,
                 studyRejectErrorReason: action.error
+            }
+        }
+
+        case STUDY_CONFIRM_REQUEST: {
+            return {
+                ...state,
+                isLoading: true,
+                errorReason: '',
+            }
+        }
+        case STUDY_CONFIRM_SUCCESS: {
+            return {
+                ...state,
+                isLoading: false,
+            }
+        }
+        case STUDY_CONFIRM_FAILURE: {
+            return {
+                ...state,
+                isLoading: false,
+                errorReason: action.error
             }
         }
         default: {

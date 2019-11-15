@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 var justClickedId = "";
 var startId = "";
 var beforeId = "";
+var reservations = [];
+
 
 const ReservationTime = ({ value }) => {
   const times = [
@@ -39,24 +41,18 @@ const ReservationTime = ({ value }) => {
   const dispatch = useDispatch();
   const { roomReservations } = useSelector(state => state.room);
   const { date } = useSelector(state => state.room);
-  var reservations = [];
 
   useEffect(() => {
-    if (value) {
-      oninit();
-    }
-  }, [value])
-  useEffect(() => {
+    reservations = [];
     roomReservations.forEach(reservation => {
       if (reservation.reservationDate === date) {
         reservations.push(reservation);
       }
     });
     console.log(reservations);
-
-    if (value) {
-      //oninit();
-      console.log("after list")
+    if(value){
+      oninit();
+      //disable();
     }
   }, [roomReservations])
 
@@ -67,7 +63,7 @@ const ReservationTime = ({ value }) => {
 
     if (startId === "") {
       startId = e.target.id;
-      element.style.backgroundColor = "black";
+      element.style.backgroundColor = "pink";
       beforeId = e.target.id;
       dispatch({
         type: START_TIME_SELECT,
@@ -88,8 +84,8 @@ const ReservationTime = ({ value }) => {
 
     if (parseInt(beforeId) - parseInt(justClickedId) === -1 || parseInt(beforeId) - parseInt(justClickedId) === 0) {
       if (parseInt(justClickedId) - parseInt(startId) < 5) {
-        if (element.style.backgroundColor != "black") {
-          element.style.backgroundColor = "black";
+        if (element.style.backgroundColor != "pink") {
+          element.style.backgroundColor = "pink";
           beforeId = e.target.id;
           dispatch({
             type: END_TIME_SELECT,

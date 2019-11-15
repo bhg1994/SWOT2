@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, DatePicker, List, Typography } from "antd";
-import { Facilityrental, ReservationTime } from "../components";
+import { ReservationTime } from "../components";
 import { useDispatch, useSelector } from "react-redux";
-import { DATE_SELECT, ROOM_RESERVATIONS_REQUEST } from "../reducers/room";
+import { DATE_SELECT, ROOM_RESERVATIONS_REQUEST, STUDY_RESERVATION_ON } from "../reducers/room";
 import SwotMap from "../containers/SwotMap";
+import { LOAD_ROOMLIST_REQUEST } from "../reducers/master";
+import FacilityrentalForStudy from "../components/FacilityrentalForStudy";
 
 const { Text } = Typography;
 
@@ -11,8 +13,28 @@ const reservationForm = () => {
   const [reservationDate, setReseravtionDate] = useState("");
 
   const [lookup, setLookup] = useState("");
+
   const dispatch = useDispatch();
-  const { selectedRoom } = useSelector(state => state.room);
+  const { selectedRoom, isStudyReservation, selectedRoomName  } = useSelector(state => state.room);
+
+  if(!isStudyReservation){
+    dispatch({
+      type: STUDY_RESERVATION_ON,
+    })
+  }
+  
+  useEffect(() => {
+    setLookup("");
+  }, [selectedRoom])
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    dispatch({
+      type: LOAD_ROOMLIST_REQUEST,
+      data: {
+        token: token,
+      }
+    });
+  }, [])
 
   const onButton = () => {
     setLookup("lookup");
@@ -46,8 +68,11 @@ const reservationForm = () => {
               margin: "auto"
             }}
           >
-            <SwotMap />
-            <div style={{ marginTop: "30px", textAlign: "center" }}>
+            <SwotMap />            
+            <div>
+            <Text>{selectedRoomName}</Text>
+          </div>
+          <div>
               <Button type="primary" icon="search" onClick={onButton}>
                 조 회
               </Button>
@@ -59,7 +84,7 @@ const reservationForm = () => {
       <div style={{ margin: "auto", width: "80%" }}>
         <ReservationTime value={lookup} />
       </div>
-      <Facilityrental />
+      <FacilityrentalForStudy />
     </>
   );
 };

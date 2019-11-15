@@ -31,8 +31,10 @@ const reservationForm = () => {
       type: DATE_SELECT,
       data: dateString,
     });
+    setLookup("");
+    console.log(lookup);
   }
-
+  
   return (
     <>
       <div style={{ textAlign: "center" }}>

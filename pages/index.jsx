@@ -7,16 +7,21 @@ import {
 } from "../components";
 import { SwotMap } from "../containers";
 import { Row, Col, Card, Typography, Divider } from "antd";
-import { useSelector } from "react-redux";
-import { LOAD_POST_REQUEST } from "../reducers/post";
-import { LOAD_USER_REQUEST } from '../reducers/user';
+import { STUDY_RESERVATION_OFF } from "../reducers/room";
+import { useDispatch, useSelector } from "react-redux";
+import { LOAD_ROOMLIST_REQUEST } from "../reducers/master";
+
 
 
 const { Text } = Typography;
 
 const Home = () => {
+  const dispatch = useDispatch();
+
 
   const { posts } = useSelector(state => state.post);
+
+
 
   const NotificationTitle = (
     <div style={{ textAlign: "center" }}>
@@ -32,6 +37,12 @@ const Home = () => {
       </Text>
     </div>
   );
+  const { isStudyReservation } = useSelector(state => state.room);
+  if(isStudyReservation){
+    dispatch({
+      type: STUDY_RESERVATION_OFF,
+    })
+  }
 
   return (
     <>
@@ -85,11 +96,9 @@ const Home = () => {
 };
 
 Home.getInitialProps = async (context) => {
+  console.log("index")
   context.store.dispatch({
-    type: LOAD_POST_REQUEST,
-    data: {
-      code: "1"
-    }
+    type: LOAD_ROOMLIST_REQUEST,
   });
 }
 

@@ -25,7 +25,10 @@ import {
     STUDY_ACCEPT_FAILURE,
     STUDY_REJECT_REQUEST,
     STUDY_REJECT_SUCCESS,
-    STUDY_REJECT_FAILURE
+    STUDY_REJECT_FAILURE,
+    STUDY_CONFIRM_REQUEST,
+    STUDY_CONFIRM_FAILURE,
+    STUDY_CONFIRM_SUCCESS
 
 } from '../reducers/study';
 
@@ -353,6 +356,56 @@ function* watchStudyreject() {
     yield takeEvery(STUDY_REJECT_REQUEST, studyreject);
 }
 
+//확정
+function studyConfirmAPI(studyConfirmData) {
+
+    let url = "http://swot.devdogs.kr:8080/api/board/complete/" + studyConfirmData.id
+    console.log(url);
+
+    return axios.get(url,
+        {
+            headers: { // 요청 헤더
+                Authorization: studyConfirmData.token,
+            },
+        })
+        .then(response => {
+            console.log('response : ', JSON.stringify(response, null, 2));
+            var result = response.data;
+            return result;
+        })
+        .catch(error => {
+            console.log('failed', error)
+            return error;
+        })
+}
+
+function* studyConfirm(action) {
+    try {
+        const result = yield call(studyConfirmAPI,action.data);
+
+        if (result.result === "success") {
+            yield put({ // put은 dispatch 동일
+                type: STUDY_CONFIRM_SUCCESS,
+            });
+        }
+        else {
+            yield put({
+                type: STUDY_CONFIRM_FAILURE,
+            });
+        }
+
+    } catch (e) { // loginAPI 실패
+        console.error(e);
+        yield put({
+            type: STUDY_CONFIRM_FAILURE,
+        });
+    }
+}
+
+function* watchStudyConfirm() {
+    yield takeEvery(STUDY_CONFIRM_REQUEST, studyConfirm);
+}
+
 export default function* studySaga() {
     yield all([
         fork(watchStudyapply),
@@ -360,6 +413,7 @@ export default function* studySaga() {
         fork(watchmyStudyapplyCancel),
         fork(watchStudyReservation),
         fork(watchStudyaccept),
-        fork(watchStudyreject)
+        fork(watchStudyreject),
+        fork(watchStudyConfirm),
     ]);
 }
