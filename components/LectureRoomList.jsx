@@ -58,7 +58,7 @@ const LectureRoomList = ({handleOk}) => {
   const { buildingNo, isStudyReservation } = useSelector(state => state.room);
   const [buildingList, setBuildingList] = useState([]);
   const [visible,setVisible] = useState(false);
-  const [roomurl,setRoomurl] = useState("");
+  const [roomurl,setRoomurl] = useState("static/images/classrooms/1101.jpg");
   const [roomname,setRoomname] = useState("");
 
 
@@ -76,25 +76,28 @@ const LectureRoomList = ({handleOk}) => {
     return {
       onClick: () => {
         console.log(record.roomNo);
+
         setRoomname(record.roomName);
-        switch(record.roomNo){
-          case "1101":{
-            setRoomurl("static/images/classrooms/1101.jpg");
-            break;
-          };
-          case "1102":{
-            setRoomurl("static/images/classrooms/1102.png");
-            break;
-          }
-          case "1112":{
-            setRoomurl("static/images/classrooms/1103.jpg");
-            break;
-          }
-          default:{
-            setRoomurl("");
-            break;
-          }
-        }
+        let url = "static/images/classrooms/"+record.roomNo+".jpg"
+        setRoomurl(url)
+        // switch(record.roomNo){
+        //   case "1101":{
+        //     setRoomurl("static/images/classrooms/1101.jpg");
+        //     break;
+        //   };
+        //   case "1102":{
+        //     setRoomurl("static/images/classrooms/1102.png");
+        //     break;
+        //   }
+        //   case "1112":{
+        //     setRoomurl("static/images/classrooms/1103.jpg");
+        //     break;
+        //   }
+        //   default:{
+        //     setRoomurl("");
+        //     break;
+        //   }
+        // }
         dispatch({
           type: ROOM_SELECT_REQUEST,
           data: {
@@ -118,7 +121,7 @@ const LectureRoomList = ({handleOk}) => {
 
   return (
     <>
-      <Table columns={isStudyReservation ? columns2 : columns1} dataSource={buildingList} onRow={onRowClick} />
+      <Table columns={isStudyReservation ? columns1 : columns2} dataSource={buildingList} onRow={onRowClick} />
       <Modal
           title="Imageroom"
           visible={visible}

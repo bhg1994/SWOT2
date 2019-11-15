@@ -3,7 +3,7 @@ export const initialState = {
     isAddingPost: false, // 포스트 업로드 중
     postAdded: false, // 포스트 업로드 성공
     isLoading: false,
-    posts: [],
+    posts: null,
     studys: [],
     loadErrorReason: '',
     createErrorReason: '',
