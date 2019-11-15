@@ -114,14 +114,21 @@ SWOT.getInitialProps = async (context) => {
 
   const { ctx, Component } = context;
   let pageProps = {};
+  console.log("home")
   if (Component.getInitialProps) {
     pageProps = await Component.getInitialProps(ctx);
   }
   if (ctx.store.getState().post.posts === []) {
     ctx.store.dispatch({
       type: LOAD_POST_REQUEST,
+      data: {
+        code: "2"
+      }
     });
   }
+
+  
+
   return pageProps;
 }
 

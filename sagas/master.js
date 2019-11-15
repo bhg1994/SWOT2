@@ -202,17 +202,9 @@ function* watchLoadReservations() {
 
 function loadRoomListAPI(token) {
     // 서버에 요청을 보내는 부분
-    // let form = new FormData()
-    // form.append('email', roomListData.id)
-    // form.append('password', roomListData.password)
-    return axios.get(`http://swot.devdogs.kr:8080/api/auth/classroom/list`,
-        {
-            headers: { // 요청 헤더
-                Authorization: token,
-            },
-        }
-    ).then(response => {
-        console.log('response : ', JSON.stringify(response, null, 2));
+   
+    return axios.get(`http://swot.devdogs.kr:8080/api/auth/classroom/list`).then(response => {
+        //console.log('response : ', JSON.stringify(response, null, 2));
         var result = response.data;
         return result;
     })
@@ -225,9 +217,9 @@ function loadRoomListAPI(token) {
 
 
 
-function* loadRoomList(action) {
+function* loadRoomList() {
     try {
-        const result = yield call(loadRoomListAPI, action.data);
+        const result = yield call(loadRoomListAPI);
 
         if (result.result === "success") {
             yield put({ // put은 dispatch 동일

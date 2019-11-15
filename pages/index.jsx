@@ -21,15 +21,7 @@ const Home = () => {
 
   const { posts } = useSelector(state => state.post);
 
-  useEffect(() => {
-    const token = localStorage.getItem("accessToken");
-    dispatch({
-      type: LOAD_ROOMLIST_REQUEST,
-      data: {
-        token: token,
-      }
-    });
-  }, [])
+
 
   const NotificationTitle = (
     <div style={{ textAlign: "center" }}>
@@ -103,15 +95,11 @@ const Home = () => {
   );
 };
 
-// Home.getInitialProps = async (context) => {
-//   if (!context.isServer) {
-//     let token = localStorage.getItem("accessToken");
-
-//     context.store.dispatch({
-//       type: LOAD_USER_REQUEST,
-//       actoken: token
-//     });
-//   };
-// }
+Home.getInitialProps = async (context) => {
+  console.log("index")
+  context.store.dispatch({
+    type: LOAD_ROOMLIST_REQUEST,
+  });
+}
 
 export default Home;
