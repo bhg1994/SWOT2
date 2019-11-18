@@ -61,16 +61,16 @@ const MainCarousel = () => {
             <img src="static/images/classrooms/1101.jpg"></img>
           </div>
           <div>
-            <img src="static/images/classrooms/1102.png"></img>
+            <img src="static/images/classrooms/1102.jpg"></img>
           </div>
           <div>
-            <img src="static/images/classrooms/1103.jpg"></img>
+            <img src="static/images/classrooms/1113.jpg"></img>
           </div>
           <div>
             <img src="static/images/classrooms/6202.jpg"></img>
           </div>
           <div>
-            <img src="static/images/classrooms/M402.png"></img>
+            <img src="static/images/classrooms/M402.jpg"></img>
           </div>
           <div>
             <img src="static/images/classrooms/M403.jpg"></img>

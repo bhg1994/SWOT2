@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect } from "react";
 import { Modal, Button, Input, Card, Avatar, Form } from "antd";
 import {
   NickEditForm,
@@ -8,7 +8,7 @@ import {
   Status
 } from "../components/css/NicknameEditForm";
 import { useDispatch, useSelector } from "react-redux";
-import { USER_MODIFY_REQUEST, USER_WITHDRAWAL_REQUEST, } from "../reducers/user";
+import { USER_MODIFY_REQUEST, USER_WITHDRAWAL_REQUEST } from "../reducers/user";
 
 const { confirm } = Modal;
 
@@ -21,14 +21,13 @@ export const useInput = (initValue = null) => {
 };
 
 const NicknameEditForm = () => {
-
   var loading = {
     email: "loading",
     name: "loading",
     phone: "loading",
     statusMsg: "loading",
-    studentId: "loading",
-  }
+    studentId: "loading"
+  };
 
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
@@ -38,35 +37,33 @@ const NicknameEditForm = () => {
   // const [wdvisible, setWdvisible] = useState(false);
   const [me, setMe] = useState(loading);
 
-
   const { isLoading } = useSelector(state => state.user);
 
   useEffect(() => {
     let myInfo = JSON.parse(localStorage.getItem("myInfo"));
     setMe(myInfo);
-  }, [])
+  }, []);
   useEffect(() => {
     let myInfo = JSON.parse(localStorage.getItem("myInfo"));
     setMe(myInfo);
-  }, [isLoading])
-
+  }, [isLoading]);
 
   const showWithdrawalModal = () => {
     confirm({
-      title: '회원 탈퇴',
-      content: '정말로 탈퇴하시겠습니까?',
+      title: "회원 탈퇴",
+      content: "정말로 탈퇴하시겠습니까?",
       onOk() {
         dispatch({
-          type: USER_WITHDRAWAL_REQUEST,
+          type: USER_WITHDRAWAL_REQUEST
         });
       },
-      onCancel() { },
+      onCancel() {}
     });
-  }
+  };
 
   const showModifyModal = () => {
     setVisible(true);
-  }
+  };
 
   const handleCancel = () => {
     setVisible(false);
@@ -79,20 +76,17 @@ const NicknameEditForm = () => {
     location.href = "/";
   };
 
-
   const userInfoModify = () => {
     dispatch({
       type: USER_MODIFY_REQUEST,
       data: {
         name: name,
         stId: stId,
-        msg: msg,
+        msg: msg
       }
     });
     setVisible(false);
   };
-
-
 
   return (
     <NickEditForm>
@@ -107,10 +101,14 @@ const NicknameEditForm = () => {
       <div>
         <Status code>{me.statusMsg}</Status>
       </div>
-      <UpdateBtn type="primary" onClick={showModifyModal}>내 정보 수정</UpdateBtn>
-      <WithdrawalBtn type="danger" onClick={showWithdrawalModal}>회원 탈퇴</WithdrawalBtn>
+      <UpdateBtn type="primary" onClick={showModifyModal}>
+        내 정보 수정
+      </UpdateBtn>
+      <WithdrawalBtn type="danger" onClick={showWithdrawalModal}>
+        회원 탈퇴
+      </WithdrawalBtn>
       <Modal title="내 정보 수정" visible={visible} footer={null}>
-        <Form >
+        <Form>
           <Form.Item>
             <Input
               addonBefore="이메일"
@@ -147,14 +145,13 @@ const NicknameEditForm = () => {
               onClick={userInfoModify}
             >
               변경
-                </Button>
+            </Button>
             <Button type="danger" onClick={handleCancel}>
               취소
-                </Button>
+            </Button>
           </Form.Item>
         </Form>
       </Modal>
-
     </NickEditForm>
   );
 };

@@ -11,17 +11,17 @@ const reservationForm = () => {
 
   const [lookup, setLookup] = useState("");
   const dispatch = useDispatch();
-  const { selectedRoom } = useSelector(state => state.room);
-
+  const { selectedRoom, selectedRoomCode } = useSelector(state => state.room);
+  console.log(selectedRoomCode);
 
   const onButton = () => {
     setLookup("lookup");
     dispatch({
       type: ROOM_RESERVATIONS_REQUEST,
       data: {
-        roomId: selectedRoom,
+        roomId: selectedRoom
       }
-    })
+    });
   };
 
   function onChange(date, dateString) {
@@ -29,16 +29,16 @@ const reservationForm = () => {
     setReseravtionDate(dateString);
     dispatch({
       type: DATE_SELECT,
-      data: dateString,
+      data: dateString
     });
     setLookup("");
     console.log(lookup);
   }
-  
+
   return (
     <>
       <div style={{ textAlign: "center" }}>
-        <img src="static/images/lectureroom2.jpg"></img>
+        <img src={`static/images/classrooms/${selectedRoomCode}.jpg`}></img>
       </div>
 
       <List
@@ -75,7 +75,7 @@ const reservationForm = () => {
       <div style={{ margin: "auto", width: "80%" }}>
         <ReservationTime value={lookup} />
       </div>
-      <Facilityrental />
+      {lookup ? <Facilityrental /> : ""}
     </>
   );
 };
