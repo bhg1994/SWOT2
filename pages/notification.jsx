@@ -82,7 +82,7 @@ const notifycation = () => {
       {}
   ];
 
-  const { posts, isLoading } = useSelector(state => state.post);
+  const { notifyPosts, isLoading } = useSelector(state => state.post);
 
   const dispatch = useDispatch();
 
@@ -184,7 +184,7 @@ const notifycation = () => {
         <header style={{ display: "flex", marginTop: "20px" }}>
           <div style={{ width: "150px", marginTop: "6px" }}>
             <Icon type="bell" />
-            <Text strong> 전체 {posts.length}건</Text>
+            <Text strong> 전체 {notifyPosts.length}건</Text>
             <Text> (1/5)페이지</Text>
           </div>
           {myinfoid === 1 ?
@@ -199,7 +199,7 @@ const notifycation = () => {
             : ""}
         </header>
         <Divider />
-        <Table columns={columns} dataSource={posts} onRow={onRowClick} ></Table>
+        <Table columns={columns} dataSource={notifyPosts} onRow={onRowClick} ></Table>
         <div
           style={{
             display: "flex",

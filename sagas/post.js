@@ -8,7 +8,9 @@ import {
 } from 'redux-saga/effects';
 import {
     LOAD_POST_REQUEST,
-    LOAD_POST_SUCCESS,
+    LOAD_POST_1_SUCCESS,
+    LOAD_POST_2_SUCCESS,
+    LOAD_POST_3_SUCCESS,
     LOAD_POST_FAILURE,
     CREATE_POST_REQUEST,
     CREATE_POST_SUCCESS,
@@ -34,7 +36,11 @@ function loadPostAPI(postCode) {
     return axios.get('http://swot.devdogs.kr:8080/api/auth/board/' + code + '/list'
     ).then(response => {
         //console.log('response : ', JSON.stringify(response, null, 2))
-        var result = response.data;
+        var info = response.data;
+        var result = {
+            info,
+            code,
+        }
         return result;
     })
         .catch(error => {
@@ -46,12 +52,29 @@ function loadPostAPI(postCode) {
 function* loadPost(action) {
     try {
         const result = yield call(loadPostAPI, action.data);
+        if (result.info.result === "success") {
+            switch(result.code){
+                case "1":
+                    yield put({
+                        type: LOAD_POST_1_SUCCESS,
+                        data: result.info.info,
+                    });
+                    break;
+                case "2":
+                    yield put({
+                        type: LOAD_POST_2_SUCCESS,
+                        data: result.info.info,
+                    });
+                    break;
+                case "3":
+                    yield put({
+                        type: LOAD_POST_3_SUCCESS,
+                        data: result.info.info,
+                    });
+                    break;
+            }
 
-        if (result.result === "success") {
-            yield put({
-                type: LOAD_POST_SUCCESS,
-                data: result.info,
-            });
+
         } else {
             yield put({
                 type: LOAD_POST_FAILURE,
@@ -130,6 +153,8 @@ function createPostAPI(postInfo) {
     form.append('startTime', postInfo.startTime)
     form.append('endTime', postInfo.endTime)
     form.append('meetingDate', postInfo.meetingDate)
+    form.append('total', postInfo.total)
+
 
     let token = localStorage.getItem("accessToken");
 

@@ -89,15 +89,15 @@ const BuildingList = () => {
   const handleSubmit = e => {
     e.preventDefault();
     let gn = parseInt(groupNo);
-    // dispatch({
-    //   type: CREATEROOM_REQUEST,
-    //   data: {
-    //     roomName: roomName,
-    //     groupNo: gn,
-    //     roomNo: roomNo,
-    //     total: total
-    //   }
-    // });
+    dispatch({
+      type: CREATEROOM_REQUEST,
+      data: {
+        roomName: roomName,
+        groupNo: gn,
+        roomNo: roomNo,
+        total: total
+      }
+    });
     const url = "/imageupload";
     const formData = new FormData();
     const config = {

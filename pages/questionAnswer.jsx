@@ -37,9 +37,9 @@ const questionAnswer = () => {
 
   let articlenum = 1;
 
-  const { posts, isLoading } = useSelector(state => state.post);
+  const { qnaPosts, isLoading } = useSelector(state => state.post);
 
-  console.log(posts);
+  console.log(qnaPosts);
 
   const dispatch = useDispatch();
 
@@ -141,7 +141,7 @@ const questionAnswer = () => {
         <header style={{ display: "flex", marginTop: "20px" }}>
           <div style={{ width: "150px", marginTop: "6px" }}>
             <Icon type="bell" />
-            <Text strong> 전체 {posts.length} 건</Text>
+            <Text strong> 전체 {qnaPosts.length} 건</Text>
             <Text> (1/5)페이지</Text>
           </div>
 
@@ -157,7 +157,7 @@ const questionAnswer = () => {
           </div>
         </header>
         <Divider />
-        <Table dataSource={posts} onRow={onRowClick}>
+        <Table dataSource={qnaPosts} onRow={onRowClick}>
           <Column
             title="글번호"
             dataIndex="number"
