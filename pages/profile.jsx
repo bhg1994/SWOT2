@@ -21,10 +21,15 @@ import {
   STUDY_REJECT_REQUEST,
   STUDY_MYAPPLYCANCEL_REQUEST
 } from "../reducers/study.js";
-import { RESERVATION_CANCEL_REQUEST, INSERT_STUDY_RESERVATION_DATA, DATE_SELECT,START_TIME_SET, END_TIME_SET } from "../reducers/room.js";
+import {
+  RESERVATION_CANCEL_REQUEST,
+  INSERT_STUDY_RESERVATION_DATA,
+  DATE_SELECT,
+  START_TIME_SET,
+  END_TIME_SET
+} from "../reducers/room.js";
 import { fail } from "assert";
-import Link from "next/link"
-
+import Link from "next/link";
 
 const { Text } = Typography;
 const { Column } = Table;
@@ -167,32 +172,31 @@ const Profile = () => {
 
   const onStudyReservation = () =>{
 
+
     dispatch({
-      type:INSERT_STUDY_RESERVATION_DATA,
-      data : {
+      type: INSERT_STUDY_RESERVATION_DATA,
+      data: {
         boards: selectedStudy,
-        applications : applications,
+        applications: applications,
         users: studyReservation
       }
-    })
+    });
     dispatch({
-      type:DATE_SELECT,
-      data : selectedStudy.meetingDate
-    })
+      type: DATE_SELECT,
+      data: selectedStudy.meetingDate
+    });
 
-    timeSetter(selectedStudy.startTime,START_TIME_SET);
-    timeSetter(selectedStudy.endTime,END_TIME_SET);
-
-
+    timeSetter(selectedStudy.startTime, START_TIME_SET);
+    timeSetter(selectedStudy.endTime, END_TIME_SET);
   };
 
   const timeSetter = (time, dispatchType) => {
-    let hourOnly = time.split(':')
+    let hourOnly = time.split(":");
     dispatch({
       type: dispatchType,
-      data: hourOnly[0],
-    })
-  }
+      data: hourOnly[0]
+    });
+  };
 
   return (
     <>

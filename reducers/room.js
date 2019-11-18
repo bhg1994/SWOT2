@@ -3,6 +3,7 @@ export const initialState = {
     isLoading: false,
     selectedRoom: null,
     selectedRoomName: "",
+    selectedRoomCode: "",
     startTime: "",
     endTime: "",
     date: "",
@@ -117,6 +118,7 @@ export default (state = initialState, action) => {
                 ...state,
                 selectedRoom: action.data.id,
                 selectedRoomName: action.data.name,
+                selectedRoomCode: action.data.code
             }
         }
         case START_TIME_SELECT: {
@@ -146,19 +148,19 @@ export default (state = initialState, action) => {
         case STUDY_RESERVATION_ON: {
             return {
                 ...state,
-                isStudyReservation : true,
+                isStudyReservation: true,
             }
         }
         case STUDY_RESERVATION_OFF: {
             return {
                 ...state,
-                isStudyReservation : false,
+                isStudyReservation: false,
             }
         }
         case INSERT_STUDY_RESERVATION_DATA: {
             return {
                 ...state,
-                studyReservationData : action.data,
+                studyReservationData: action.data,
             }
         }
         case START_TIME_SET: {
@@ -173,7 +175,7 @@ export default (state = initialState, action) => {
                 eTime: action.data
             }
         }
-        
+
         default: {
             return {
                 ...state,

@@ -126,14 +126,14 @@ const BuildingList = () => {
       <Modal title="강의실 추가" visible={visible} footer={null}>
         <Form onSubmit={handleSubmit}>
           <Form.Item>
-          <FileWrapper>
-          <label for="label_file">업로드</label>
-            <input
-              id="label_file"
-              type="file"
-              name="file"
-              onChange={handleFileChange}
-            />
+            <FileWrapper>
+              <label for="label_file">업로드</label>
+              <input
+                id="label_file"
+                type="file"
+                name="file"
+                onChange={handleFileChange}
+              />
             </FileWrapper>
             <div>{image.name}</div>
           </Form.Item>
