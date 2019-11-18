@@ -3,9 +3,9 @@ export const initialState = {
     isAddingPost: false, // 포스트 업로드 중
     postAdded: false, // 포스트 업로드 성공
     isLoading: false,
-    notifyPosts: null,
-    studyPosts: null,
-    qnaPosts: null,
+    notifyPosts: [],
+    studyPosts: [],
+    qnaPosts: [],
     studys: [],
     loadErrorReason: '',
     createErrorReason: '',
@@ -62,7 +62,7 @@ export default (state = initialState, action) => {
                 notifyPosts: action.data
             };
         }
-        
+
         case LOAD_POST_2_SUCCESS: {
             return {
                 ...state,
@@ -70,7 +70,7 @@ export default (state = initialState, action) => {
                 studyPosts: action.data
             };
         }
-        
+
         case LOAD_POST_3_SUCCESS: {
             return {
                 ...state,
