@@ -64,7 +64,7 @@ const MainCarousel = () => {
             <img src="static/images/classrooms/1102.jpg"></img>
           </div>
           <div>
-            <img src="static/images/classrooms/1113.jpg"></img>
+            <img src="static/images/classrooms/1112.jpg"></img>
           </div>
           <div>
             <img src="static/images/classrooms/6202.jpg"></img>

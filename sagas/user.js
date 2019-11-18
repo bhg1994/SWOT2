@@ -98,6 +98,7 @@ function signUpAPI(signUpData) {
     form.append('pw', signUpData.password)
     form.append('name', signUpData.name)
     form.append('phone', signUpData.telephone)
+    form.append('statusMsg',"상태메세지를 입력하세요")
 
     return axios.post(`http://swot.devdogs.kr:8080/api/auth/user/signUp`, form)
         .then(response => {

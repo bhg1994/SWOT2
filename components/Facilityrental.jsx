@@ -57,6 +57,7 @@ const Facilityrental = () => {
   useEffect(() => {
     me = JSON.parse(localStorage.getItem("myInfo"));
     setCurrentphoneNo(me.phone);
+    setPhone(me.phone);
   }, []);
 
   const handleSubmit = e => {

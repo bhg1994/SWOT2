@@ -40,7 +40,7 @@ const studyboard = () => {
   const [id, setId] = useState(0);
   const [modifyvisible, setModifyvisible] = useState(false);
 
-  const { posts, isLoading } = useSelector(state => state.post);
+  const { studyPosts, isLoading } = useSelector(state => state.post);
 
   const [myinfoid, setMyinfoid] = useState(0);
 
@@ -143,7 +143,7 @@ const studyboard = () => {
   const showDeleteRoomModal = () => {
     deleteId = 0;
     // setId(buildingList.id)
-    posts.map(post => {
+    studyPosts.map(post => {
       if (post.id === id) {
         deleteId = id;
       }
@@ -192,7 +192,7 @@ const studyboard = () => {
         <header style={{ display: "flex" }}>
           <div style={{ width: "150px" }}>
             <Icon type="bell" />
-            <Text strong> 전체 {posts.length}건 </Text>
+            <Text strong> 전체 {studyPosts.length}건 </Text>
             <Text> (1/5)페이지</Text>
           </div>
           <div
@@ -278,7 +278,7 @@ const studyboard = () => {
           </Modal>
         </header>
         <Divider />
-        <Table dataSource={posts} onRow={onRowClicked}>
+        <Table dataSource={studyPosts} onRow={onRowClicked}>
           <Column
             title="글 번호"
             dataIndex="number"

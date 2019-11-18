@@ -67,12 +67,9 @@ const Profile = () => {
     });
   }, []);
 
-  console.log(myApplyStudys);
-
   const myStudys = studys.filter(study => study.code === 2);
 
   const showModal = () => {
-    console.log(boardId);
     let token = localStorage.getItem("accessToken");
     setVisible(true);
     dispatch({
@@ -173,9 +170,9 @@ const Profile = () => {
     });
   };
 
-  const onStudyReservation = () => {
-    console.log(selectedStudy);
-    console.log(applications);
+  const onStudyReservation = () =>{
+
+
     dispatch({
       type: INSERT_STUDY_RESERVATION_DATA,
       data: {

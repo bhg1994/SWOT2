@@ -3,7 +3,9 @@ export const initialState = {
     isAddingPost: false, // 포스트 업로드 중
     postAdded: false, // 포스트 업로드 성공
     isLoading: false,
-    posts: null,
+    notifyPosts: null,
+    studyPosts: null,
+    qnaPosts: null,
     studys: [],
     loadErrorReason: '',
     createErrorReason: '',
@@ -16,7 +18,9 @@ export const initialState = {
 
 
 export const LOAD_POST_REQUEST = 'LOAD_POST_REQUEST';
-export const LOAD_POST_SUCCESS = 'LOAD_POST_SUCCESS';
+export const LOAD_POST_1_SUCCESS = 'LOAD_POST_1_SUCCESS';
+export const LOAD_POST_2_SUCCESS = 'LOAD_POST_2_SUCCESS';
+export const LOAD_POST_3_SUCCESS = 'LOAD_POST_3_SUCCESS';
 export const LOAD_POST_FAILURE = 'LOAD_POST_FAILURE';
 
 export const LOAD_MYSTUDYPOST_REQUEST = 'LOAD_MYSTUDYPOST_REQUEST';
@@ -51,11 +55,27 @@ export default (state = initialState, action) => {
                 loadErrorReason: '',
             };
         }
-        case LOAD_POST_SUCCESS: {
+        case LOAD_POST_1_SUCCESS: {
             return {
                 ...state,
                 isLoading: false,
-                posts: action.data
+                notifyPosts: action.data
+            };
+        }
+        
+        case LOAD_POST_2_SUCCESS: {
+            return {
+                ...state,
+                isLoading: false,
+                studyPosts: action.data
+            };
+        }
+        
+        case LOAD_POST_3_SUCCESS: {
+            return {
+                ...state,
+                isLoading: false,
+                qnaPosts: action.data
             };
         }
         case LOAD_POST_FAILURE: {
