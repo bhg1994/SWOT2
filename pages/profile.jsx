@@ -37,9 +37,18 @@ const { confirm } = Modal;
 var requestUserId;
 var apId;
 
+var dataListForTable=[];
+
 const Profile = () => {
   const [visible, setVisible] = useState(false);
   const [boardId, setBoardId] = useState(0);
+
+  const [ SMVisible, setSMVisible] = useState(false);
+
+  const [userListforMyStudyApplications, setUserListforMyStudyApplications] = useState([]);
+  
+  const [ myApplicationList, setMyApplicationList] = useState([]);
+
   const { reservationStatus } = useSelector(state => state.lookup);
 
   const { studys, posts } = useSelector(state => state.post);
@@ -66,6 +75,70 @@ const Profile = () => {
       type: LOAD_MYSTUDYPOST_REQUEST
     });
   }, []);
+
+  useEffect(() =>{
+    dataListForTable=[];
+    studyReservation.forEach(user => {
+      let state;
+      applications.forEach(application => {
+        if(user.id===application.userId)
+          state=application.state
+      });
+      let stateString="";
+      switch(state){
+        case "S":
+          stateString = "완료됨"
+          break;
+        case "T":
+          stateString = "승인됨"
+          break;
+        case "C":
+          stateString = "대기중"
+          break;
+        case "D":
+          stateString = "거절됨"
+          break;
+        case "R":
+          stateString = "취소됨"
+          break;
+      }
+
+      let dataForTable = {
+        id: user.id,
+        email: user.email,
+        studentId: user.studentId,
+        name: user.name,
+        phone: user.phone,
+        state: stateString
+      }
+      dataListForTable.push(dataForTable);
+    });
+    setUserListforMyStudyApplications(dataListForTable);
+  },[studyReservation]);
+
+  useEffect(() =>{
+    dataListForTable=[];
+    myApplyStudys.forEach(board => {
+      let state;
+      myApplyStudysApplications.forEach(application => {
+        if(board.id===application.boardId)
+          state=application.state
+      });
+      
+      let dataForTable = {
+        id: board.id,
+        title: board.title,
+        body: board.body,
+        meetingDate : board.meetingDate,
+        startTime : board.startTime,
+        endTime : board.endTime,
+        total: board.total,
+        state: state
+      }
+      dataListForTable.push(dataForTable);
+    });
+    setMyApplicationList(dataListForTable);
+  },[myApplyStudys]);
 
   const myStudys = studys.filter(study => study.code === 2);
 
@@ -95,9 +168,11 @@ const Profile = () => {
 
   const onAcceptBtn = () => {
     let token = localStorage.getItem("accessToken");
+    let boardIdForAccept;
     applications.forEach(applicaton => {
       if (applicaton.userId === requestUserId) {
         apId = applicaton.id;
+        boardIdForAccept = applicaton.boardId; 
       }
     });
 
@@ -105,24 +180,27 @@ const Profile = () => {
       type: STUDY_ACCEPT_REQUEST,
       data: {
         token,
-        leaderId: apId
+        leaderId: apId,
+        boardId : boardIdForAccept
       }
     });
   };
 
   const onRejectBtn = () => {
     let token = localStorage.getItem("accessToken");
-
+    let boardIdForReject;
     applications.forEach(applicaton => {
       if (applicaton.userId === requestUserId) {
         apId = applicaton.id;
+        boardIdForReject = applicaton.boardId;
       }
     });
     dispatch({
       type: STUDY_REJECT_REQUEST,
       data: {
         token,
-        leaderId: apId
+        leaderId: apId,
+        boardId: boardIdForReject
       }
     });
   };
@@ -171,23 +249,34 @@ const Profile = () => {
   };
 
   const onStudyReservation = () =>{
-
-
-    dispatch({
-      type: INSERT_STUDY_RESERVATION_DATA,
-      data: {
-        boards: selectedStudy,
-        applications: applications,
-        users: studyReservation
-      }
-    });
-    dispatch({
-      type: DATE_SELECT,
-      data: selectedStudy.meetingDate
+    let acceptedApp = [];
+    applications.forEach(application => {
+      if(application.state==="T")
+        acceptedApp.push(application);
     });
 
-    timeSetter(selectedStudy.startTime, START_TIME_SET);
-    timeSetter(selectedStudy.endTime, END_TIME_SET);
+    if(acceptedApp.length<1){
+      alert("너무적음");
+      
+    }else{
+      dispatch({
+        type: INSERT_STUDY_RESERVATION_DATA,
+        data: {
+          boards: selectedStudy,
+          applications: acceptedApp,
+          users: studyReservation
+        }
+      });
+      dispatch({
+        type: DATE_SELECT,
+        data: selectedStudy.meetingDate
+      });
+  
+      timeSetter(selectedStudy.startTime, START_TIME_SET);
+      timeSetter(selectedStudy.endTime, END_TIME_SET);
+
+      setSMVisible(true);
+    }
   };
 
   const timeSetter = (time, dispatchType) => {
@@ -269,10 +358,10 @@ const Profile = () => {
                 <Card
                   style={{ margin: "40px" }}
                   title={study.title}
-                  extra={
+                  extra={study.state === "T" ? (
                     <Button size="small" onClick={showModal}>
                       신청 현황
-                    </Button>
+                    </Button>) : ""
                   }
                 >
                   <div style={{ marginBottom: "10px", textAlign: "end" }}>
@@ -308,7 +397,7 @@ const Profile = () => {
             </div>
           }
           bordered
-          dataSource={myApplyStudys}
+          dataSource={myApplicationList}
           renderItem={mystudy => (
             <List.Item>
               <Card
@@ -326,13 +415,15 @@ const Profile = () => {
                 }
               >
                 <div style={{ marginBottom: "10px", textAlign: "end" }}>
-                  {mystudy.state === "T" ? (
-                    <Tag color="blue">승인 완료</Tag>
+                {mystudy.state === "T" ? (
+                    <Tag color="green">승인 완료</Tag>
+                  ) : mystudy.state === "C" ? (
+                    <Tag color="blue">승인 대기</Tag>
                   ) : (
-                    <Tag color="red">승인 대기</Tag>
+                      <Tag color="red">승인 거절</Tag>
                   )}
                 </div>
-                <Text type="warning">스터디 주제 : {mystudy.title}</Text>
+                <Text type="warning">스터디 주제 : {mystudy.body}</Text>
                 <Divider />
                 <Text mark>
                   날짜 : {mystudy.meetingDate} ({mystudy.startTime} ~{" "}
@@ -357,7 +448,7 @@ const Profile = () => {
         width="800px"
         footer={[
           <Button onClick={onStudyReservation}>
-            <Link href="/studyReservation">강의실 예약</Link>
+            강의실 예약
           </Button>,
           <Button key="back" onClick={onCloseBtn}>
             닫기
@@ -368,7 +459,7 @@ const Profile = () => {
           type="team"
           style={{ fontSize: "20px", margin: "5px 20px 20px 0 " }}
         />
-        <Table dataSource={studyReservation} onRow={indexSelected}>
+        <Table dataSource={userListforMyStudyApplications} onRow={indexSelected}>
           <Column title="유저 이메일" dataIndex="email" key="email" />
           <Column title="학번" dataIndex="studentId" key="studentId" />
           <Column title="유저 이름" dataIndex="name" key="name" />
@@ -391,6 +482,23 @@ const Profile = () => {
             )}
           />
         </Table>
+      </Modal>
+
+      <Modal
+        title="예약 페이지로 이동"
+        visible={SMVisible}
+        onCancel={()=>setSMVisible(false)}
+        width="800px"
+        footer={[
+          <Button >
+            <Link href="/studyReservation">확인</Link>
+          </Button>,
+          <Button key="back" onClick={()=>setSMVisible(false)}>
+            닫기
+          </Button>
+        ]}
+      >
+        여기에 현제 스터디 정보 들어갈꺼임 성진이 화이팅
       </Modal>
     </>
   );

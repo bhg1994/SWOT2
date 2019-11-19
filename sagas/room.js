@@ -64,13 +64,13 @@ function* reservate(action) {
             yield put({ // put은 dispatch 동일
                 type: RESERVATION_SUCCESS,
             });
-            //location.href = "/profile";
+            location.href = "/profile";
         }
         else {
             yield put({
                 type: RESERVATION_FAILURE,
             });
-            //location.href = "/";
+            location.href = "/";
         }
 
     } catch (e) { // loginAPI 실패

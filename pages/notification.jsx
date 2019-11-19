@@ -128,7 +128,8 @@ const notifycation = () => {
       data: {
         code: "1",
         title: notificationtitle,
-        body: notificationcontent
+        body: notificationcontent,
+        total: "0",
       }
     })
     setNotificationtitle("");

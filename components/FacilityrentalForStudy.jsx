@@ -113,6 +113,13 @@ const FacilityrentalForStudy = () => {
         stId = JSON.parse(localStorage.getItem("myInfo")).studentId;
         stName = JSON.parse(localStorage.getItem("myInfo")).name;
         dispatch({
+            type: STUDY_CONFIRM_REQUEST,
+            data:{
+                id: studyReservationData.boards.id,
+                token: token,
+            }
+        })
+        dispatch({
             type: RESERVATION_REQUEST,
             data: {
                 reason,
@@ -127,14 +134,6 @@ const FacilityrentalForStudy = () => {
                 stName
             }
         });
-        dispatch({
-            type: STUDY_CONFIRM_REQUEST,
-            data:{
-                id: studyReservationData.boards.id,
-                token: token,
-            }
-        })
-
     };
 
     return (

@@ -28,7 +28,9 @@ export const LOAD_MYSTUDYPOST_SUCCESS = 'LOAD_MYSTUDYPOST_SUCCESS';
 export const LOAD_MYSTUDYPOST_FAILURE = 'LOAD_MYSTUDYPOST_FAILURE';
 
 export const CREATE_POST_REQUEST = 'CREATE_POST_REQUEST';
-export const CREATE_POST_SUCCESS = 'CREATE_POST_SUCCESS';
+export const CREATE_POST_1_SUCCESS = 'CREATE_POST_1_SUCCESS';
+export const CREATE_POST_2_SUCCESS = 'CREATE_POST_2_SUCCESS';
+export const CREATE_POST_3_SUCCESS = 'CREATE_POST_3_SUCCESS';
 export const CREATE_POST_FAILURE = 'CREATE_POST_FAILURE';
 
 export const DELETE_POST_REQUEST = 'DELETE_POST_REQUEST';
@@ -118,11 +120,27 @@ export default (state = initialState, action) => {
                 createErrorReason: '',
             };
         }
-        case CREATE_POST_SUCCESS: {
+        case CREATE_POST_1_SUCCESS: {
             return {
                 ...state,
                 isLoading: false,
-                posts: [...state.posts, action.data],
+                notifyPosts: [ action.data, ...state.notifyPosts],
+                createErrorReason: ''
+            };
+        }
+        case CREATE_POST_2_SUCCESS: {
+            return {
+                ...state,
+                isLoading: false,
+                studyPosts: [action.data, ...state.studyPosts],
+                createErrorReason: ''
+            };
+        }
+        case CREATE_POST_3_SUCCESS: {
+            return {
+                ...state,
+                isLoading: false,
+                qnaPosts: [ action.data,...state.qnaPosts],
                 createErrorReason: ''
             };
         }

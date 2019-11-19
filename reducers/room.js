@@ -59,13 +59,18 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: false,
-
+                selectedRoom: null,
+                selectedRoomName: "",
+                selectedRoomCode: "",
             };
         }
         case RESERVATION_FAILURE: {
             return {
                 ...state,
                 isLoading: false,
+                selectedRoom: null,
+                selectedRoomName: "",
+                selectedRoomCode: "",
                 reservationErrorReason: action.error,
             };
         }
