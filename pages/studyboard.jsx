@@ -96,7 +96,13 @@ const studyboard = () => {
   }
   const handleSubmit = e => {
     e.preventDefault();
-    if(studytitle!==""&&studystarttime!==""&&studyendtime!==""&&studycontent!==""&&studyDate!==""){
+    if (
+      studytitle !== "" &&
+      studystarttime !== "" &&
+      studyendtime !== "" &&
+      studycontent !== "" &&
+      studyDate !== ""
+    ) {
       dispatch({
         type: CREATE_POST_REQUEST,
         data: {
@@ -109,15 +115,15 @@ const studyboard = () => {
           meetingDate: studyDate
         }
       });
-    }else{
+    } else {
       confirm({
-        title: '경고!',
-        content: '내용을 전부 채워주세요',
+        title: "경고!",
+        content: "내용을 전부 채워주세요",
         onOk() {},
-        onCancel() {},
+        onCancel() {}
       });
     }
-    
+
     setVisible(false);
   };
 

@@ -6,8 +6,7 @@ const {
     Sider
 } = Layout;
 
-export const SiderWrapper = styled(Sider)
-`
+export const SiderWrapper = styled(Sider)`
     overflow: auto;
     height: 100vh;
     position: fixed;

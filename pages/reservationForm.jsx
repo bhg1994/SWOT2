@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Responsive from "../components/common/Responsive";
 import { Button, DatePicker, List, Typography } from "antd";
 import { Facilityrental, ReservationTime } from "../components";
 import { useDispatch, useSelector } from "react-redux";
@@ -37,45 +38,47 @@ const reservationForm = () => {
 
   return (
     <>
-      <div style={{ textAlign: "center" }}>
-        <img src={`static/images/classrooms/${selectedRoomCode}.jpg`}></img>
-      </div>
+      <Responsive>
+        <div style={{ textAlign: "center" }}>
+          <img src={`static/images/classrooms/${selectedRoomCode}.jpg`}></img>
+        </div>
 
-      <List
-        style={{
-          marginTop: "30px"
-        }}
-      >
-        <List.Item>
-          <div
-            style={{
-              margin: "auto",
-              marginBottom: "30px"
-            }}
-          >
-            <Text
-              type="danger"
-              style={{ marginRight: "30px", fontSize: "15px" }}
+        <List
+          style={{
+            marginTop: "30px"
+          }}
+        >
+          <List.Item>
+            <div
+              style={{
+                margin: "auto",
+                marginBottom: "30px"
+              }}
             >
-              대여일자 선택
-            </Text>
-            <DatePicker onChange={onChange} />
-            <Button
-              style={{ marginLeft: "30px" }}
-              type="primary"
-              icon="search"
-              onClick={onButton}
-            >
-              조 회
-            </Button>
-          </div>
-        </List.Item>
-      </List>
+              <Text
+                type="danger"
+                style={{ marginRight: "30px", fontSize: "15px" }}
+              >
+                대여일자 선택
+              </Text>
+              <DatePicker onChange={onChange} />
+              <Button
+                style={{ marginLeft: "30px" }}
+                type="primary"
+                icon="search"
+                onClick={onButton}
+              >
+                조 회
+              </Button>
+            </div>
+          </List.Item>
+        </List>
 
-      <div style={{ margin: "auto", width: "80%" }}>
-        <ReservationTime value={lookup} />
-      </div>
-      {lookup ? <Facilityrental /> : ""}
+        <div style={{ margin: "auto", width: "80%" }}>
+          <ReservationTime value={lookup} />
+        </div>
+        {lookup ? <Facilityrental /> : ""}
+      </Responsive>
     </>
   );
 };
