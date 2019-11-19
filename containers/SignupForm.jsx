@@ -44,7 +44,8 @@ const SignupForm = () => {
           email
         }
       });
-    }, [email]
+    },
+    [email]
   );
 
   // useCallback으로 감쌀때 함수 내부에서 쓰는 state를 deps배열로 넣는다.
@@ -76,7 +77,7 @@ const SignupForm = () => {
 
   const onChangeEmail = e => {
     setEmail(e.target.value);
-  }
+  };
 
   const onChangeId = e => {
     setId(e.target.value);
@@ -108,7 +109,6 @@ const SignupForm = () => {
     setTerm(e.target.checked);
   }, []);
 
-
   return (
     <>
       <SignupWrapper>
@@ -118,9 +118,7 @@ const SignupForm = () => {
             <Form onSubmit={onSubmit} style={{ padding: 10 }}>
               <FirstSection>
                 <Email>
-                  <label htmlFor="emailLabel">
-                    EMAIL ADDRESS
-                  </label>
+                  <label htmlFor="emailLabel">EMAIL ADDRESS</label>
                   <br />
                   <Input
                     name="register_email"
@@ -137,9 +135,7 @@ const SignupForm = () => {
               </FirstSection>
               <SecondSection>
                 <StudentId>
-                  <label htmlFor="studentIdLabel">
-                    STUDENTID
-                  </label>
+                  <label htmlFor="studentIdLabel">STUDENTID</label>
                   <br />
                   <Input
                     name="studentId"

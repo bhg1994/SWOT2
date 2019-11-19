@@ -8,31 +8,20 @@ const {
     Text
 } = Typography;
 
-export const SignupWrapper = styled.section`
-position: absolute;
-width: 600;
-height: 550;
-left: 50%;
-top: 50%;
-margin-left: -200px;
-margin-top: -300px;
 
-& > div{
-    background-color:white;
-    display:inline-block;
-    height:100%;
-    width:100%;
-}
+export const SignupWrapper = styled.section`
+    margin:auto;
+    width:60%;
 `
 
 export const SignupContainer = styled.section`
-    position: absolute;
-    margin : 40px;
+    padding:40px;
 `
 
-export const SignupTitle = styled(Text)
-    `
+export const SignupTitle = styled(Text)`
+margin:auto;
 font-size:25px;
+
 `
 
 export const FirstSection = styled.section`
@@ -99,7 +88,7 @@ export const Name = styled.div`
 
 export const FifthSection = styled.div`
     display:flex;
-    flex-direction:row;
+    flex-direction:column;
 `
 
 export const Check = styled.div`

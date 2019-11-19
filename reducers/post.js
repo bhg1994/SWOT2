@@ -64,7 +64,7 @@ export default (state = initialState, action) => {
                 notifyPosts: action.data
             };
         }
-        
+
         case LOAD_POST_2_SUCCESS: {
             return {
                 ...state,
@@ -72,7 +72,7 @@ export default (state = initialState, action) => {
                 studyPosts: action.data
             };
         }
-        
+
         case LOAD_POST_3_SUCCESS: {
             return {
                 ...state,

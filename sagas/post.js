@@ -55,7 +55,7 @@ function* loadPost(action) {
     try {
         const result = yield call(loadPostAPI, action.data);
         if (result.info.result === "success") {
-            switch(result.code){
+            switch (result.code) {
                 case "1":
                     yield put({
                         type: LOAD_POST_1_SUCCESS,
@@ -155,7 +155,7 @@ function createPostAPI(postInfo) {
     form.append('startTime', postInfo.startTime)
     form.append('endTime', postInfo.endTime)
     form.append('meetingDate', postInfo.meetingDate)
-    form.append('total', postInfo.total)
+    // form.append('total', postInfo.total)
 
 
     let token = localStorage.getItem("accessToken");
