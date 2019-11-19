@@ -132,7 +132,7 @@ const notifycation = () => {
         code: "1",
         title: notificationtitle,
         body: notificationcontent,
-        total: "0"
+        total: "0",
       }
     });
     setNotificationtitle("");

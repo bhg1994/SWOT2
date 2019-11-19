@@ -178,6 +178,9 @@ function* myStudyapplyCancel(action) {
             yield put({ // put은 dispatch 동일
                 type: STUDY_MYAPPLYCANCEL_SUCCESS,
             });
+            yield put({ // put은 dispatch 동일
+                type: STUDY_MYAPPLY_REQUEST,
+            });
         }
         else {
             yield put({
@@ -270,7 +273,12 @@ function studyacceptAPI(studyacceptData) {
         })
         .then(response => {
             console.log('response : ', JSON.stringify(response, null, 2));
-            var result = response.data;
+            var responseData = response.data;
+            var result = {
+                responseData,
+                id: studyacceptData.boardId,
+                token : studyacceptData.token,
+            }
             return result;
         })
         .catch(error => {
@@ -283,9 +291,16 @@ function* studyaccept(action) {
     try {
         const result = yield call(studyacceptAPI, action.data);
 
-        if (result.result === "success") {
+        if (result.responseData.result === "success") {
             yield put({ // put은 dispatch 동일
                 type: STUDY_ACCEPT_SUCCESS,
+            });
+            yield put({ // put은 dispatch 동일
+                type: STUDY_RESERVATION_REQUEST,
+                data:{
+                    boardId: result.id,
+                    token: result.token,
+                }
             });
         }
         else {
@@ -320,7 +335,12 @@ function studyrejectAPI(studyrejectData) {
         })
         .then(response => {
             console.log('response : ', JSON.stringify(response, null, 2));
-            var result = response.data;
+            var responseData = response.data;
+            var result = {
+                responseData,
+                id: studyrejectData.boardId,
+                token : studyrejectData.token,
+            }
             return result;
         })
         .catch(error => {
@@ -333,9 +353,16 @@ function* studyreject(action) {
     try {
         const result = yield call(studyrejectAPI, action.data);
 
-        if (result.result === "success") {
+        if (result.responseData.result === "success") {
             yield put({ // put은 dispatch 동일
                 type: STUDY_REJECT_SUCCESS,
+            });
+            yield put({ // put은 dispatch 동일
+                type: STUDY_RESERVATION_REQUEST,
+                data:{
+                    boardId: result.id,
+                    token: result.token,
+                }
             });
         }
         else {

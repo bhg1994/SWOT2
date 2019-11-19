@@ -13,7 +13,9 @@ import {
     LOAD_POST_3_SUCCESS,
     LOAD_POST_FAILURE,
     CREATE_POST_REQUEST,
-    CREATE_POST_SUCCESS,
+    CREATE_POST_1_SUCCESS,
+    CREATE_POST_2_SUCCESS,
+    CREATE_POST_3_SUCCESS,
     CREATE_POST_FAILURE,
     DELETE_POST_REQUEST,
     DELETE_POST_SUCCESS,
@@ -32,10 +34,10 @@ function loadPostAPI(postCode) {
 
     let code = postCode.code;
     console.log(code);
-
     return axios.get('http://swot.devdogs.kr:8080/api/auth/board/' + code + '/list'
+    
     ).then(response => {
-        //console.log('response : ', JSON.stringify(response, null, 2))
+        // console.log('response : ', JSON.stringify(response, null, 2));
         var info = response.data;
         var result = {
             info,
@@ -166,7 +168,11 @@ function createPostAPI(postInfo) {
         }
     ).then(response => {
         console.log('response : ', JSON.stringify(response, null, 2))
-        var result = response.data;
+        var responseData = response.data;
+        var result = {
+            responseData,
+            code: postInfo.code,
+        }
         return result;
     })
         .catch(error => {
@@ -179,12 +185,30 @@ function* createPost(action) {
     try {
         const result = yield call(createPostAPI, action.data);
 
-        if (result.result === "success") {
-            yield put({
-                type: CREATE_POST_SUCCESS,
-                data: result.info,
-            });
+        if (result.responseData.result === "success") {
+            switch(result.code){
+                case "1":
+                    yield put({
+                        type: CREATE_POST_1_SUCCESS,
+                        data: result.responseData.info,
+                    });
+                    break;
+                case "2":
+                    yield put({
+                        type: CREATE_POST_2_SUCCESS,
+                        data: result.responseData.info,
+                    });
+                    break;
+                case "3":
+                    yield put({
+                        type: CREATE_POST_3_SUCCESS,
+                        data: result.responseData.info,
+                    });
+                    break;
+            }  
             alert('글이 작성되었습니다.');
+
+        
         } else {
             yield put({
                 type: CREATE_POST_FAILURE,
@@ -241,10 +265,11 @@ function* deletePost(action) {
             yield put({
                 type: LOAD_POST_REQUEST,
                 data: {
-                    code: result.info
+                    code: String(result.info)
                 }
             })
             alert('글이 삭제되었습니다.');
+
         } else {
             yield put({
                 type: DELETE_POST_FAILURE,
@@ -299,18 +324,18 @@ function* modifyPost(action) {
     try {
         const result = yield call(modifyPostAPI, action.data);
 
-        console.log(result.result);
-
         if (result.result === "success") {
             yield put({
                 type: MODIFY_POST_SUCCESS,
-            });
+            });         
+            
             yield put({
                 type: LOAD_POST_REQUEST,
                 data: {
-                    code: result.info.code
+                    code: String(result.info.code)
                 }
             })
+
             alert('글이 수정되었습니다.');
         } else {
             yield put({

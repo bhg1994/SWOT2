@@ -44,7 +44,7 @@ const ReservationTime = ({ value }) => {
   ];
 
   const dispatch = useDispatch();
-  const { roomReservations } = useSelector(state => state.room);
+  const { roomReservations, isStudyReservation } = useSelector(state => state.room);
   const { date } = useSelector(state => state.room);
 
   useEffect(() => {
@@ -62,7 +62,8 @@ const ReservationTime = ({ value }) => {
   }, [roomReservations]);
 
   const onClick = e => {
-    console.log(e.target.id);
+    if(!isStudyReservation){
+      console.log(e.target.id);
     let element = document.getElementById(e.target.id);
 
     if (startId === "") {
@@ -109,6 +110,8 @@ const ReservationTime = ({ value }) => {
         }
       }
     }
+    }
+    
   };
   const oninit = () => {
     for (let i = 8; i < 22; i++) {
@@ -146,8 +149,6 @@ const ReservationTime = ({ value }) => {
         <ReservationTimeWrapper>
           <Hoursofuse>이용시간</Hoursofuse>
           <Availabletime>최대 5시간 이용가능</Availabletime>
-
-          {/* <button onClick={oninit}>init</button> */}
           <SelecttimeWrapper>
             {times.map((time, i) =>
               i < 8 || i > 21 ? (

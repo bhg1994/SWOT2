@@ -83,8 +83,7 @@ const reservationForm = () => {
 
       <div style={{ margin: "auto", width: "80%" }}>
         <ReservationTime value={lookup} />
-      </div>
-      <FacilityrentalForStudy />
+      </div>{lookup==="" ? "":(<FacilityrentalForStudy />)}
     </>
   );
 };

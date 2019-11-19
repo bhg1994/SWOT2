@@ -103,7 +103,7 @@ const questionAnswer = () => {
         code: "3",
         title: questiontitle,
         body: questioncontent,
-        total: "0"
+        total: "0",
       }
     });
     setQuestiontitle("");
