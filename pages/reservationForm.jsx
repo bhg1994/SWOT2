@@ -4,16 +4,18 @@ import { Button, DatePicker, List, Typography } from "antd";
 import { Facilityrental, ReservationTime } from "../components";
 import { useDispatch, useSelector } from "react-redux";
 import { DATE_SELECT, ROOM_RESERVATIONS_REQUEST } from "../reducers/room";
+import {
+  ReservationWrapper,
+  ReservationGuide
+} from "../components/css/Reservation";
 
 const { Text } = Typography;
 
 const reservationForm = () => {
-  const [reservationDate, setReseravtionDate] = useState("");
-
+  const [dateSelected, setDateSelected] = useState(false);
   const [lookup, setLookup] = useState("");
   const dispatch = useDispatch();
   const { selectedRoom, selectedRoomCode } = useSelector(state => state.room);
-  console.log(selectedRoomCode);
 
   const onButton = () => {
     setLookup("lookup");
@@ -26,14 +28,12 @@ const reservationForm = () => {
   };
 
   function onChange(date, dateString) {
-    console.log(date, dateString);
-    setReseravtionDate(dateString);
+    setDateSelected(true);
     dispatch({
       type: DATE_SELECT,
       data: dateString
     });
     setLookup("");
-    console.log(lookup);
   }
 
   return (
@@ -42,7 +42,6 @@ const reservationForm = () => {
         <div style={{ textAlign: "center" }}>
           <img src={`static/images/classrooms/${selectedRoomCode}.jpg`}></img>
         </div>
-
         <List
           style={{
             marginTop: "30px"
@@ -73,11 +72,16 @@ const reservationForm = () => {
             </div>
           </List.Item>
         </List>
-
-        <div style={{ margin: "auto", width: "80%" }}>
-          <ReservationTime value={lookup} />
-        </div>
-        {lookup ? <Facilityrental /> : ""}
+        {lookup && dateSelected ? (
+          <div>
+            <ReservationTime value={lookup} />
+            <Facilityrental />
+          </div>
+        ) : (
+          <ReservationWrapper>
+            <ReservationGuide>대여 일자를 먼저 선택해주세요</ReservationGuide>
+          </ReservationWrapper>
+        )}
       </Responsive>
     </>
   );

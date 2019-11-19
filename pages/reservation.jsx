@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Layout } from "antd";
 import SwotMap from "../containers/SwotMap";
 import { LOAD_ROOMLIST_REQUEST } from "../reducers/master";
@@ -9,6 +9,7 @@ import {
   ReservationGuide,
   MapWrapper
 } from "../components/css/Reservation";
+
 const reservation = () => {
   const dispatch = useDispatch();
 

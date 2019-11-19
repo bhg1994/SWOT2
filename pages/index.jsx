@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   StudyBoard,
   ReservationRoominfo,
@@ -10,18 +10,14 @@ import { Row, Col, Card, Typography, Divider } from "antd";
 import { STUDY_RESERVATION_OFF } from "../reducers/room";
 import { useDispatch, useSelector } from "react-redux";
 import { LOAD_ROOMLIST_REQUEST } from "../reducers/master";
-
-
+import { LOAD_POST_REQUEST } from "../reducers/post";
 
 const { Text } = Typography;
 
 const Home = () => {
   const dispatch = useDispatch();
 
-
   const { posts } = useSelector(state => state.post);
-
-
 
   const NotificationTitle = (
     <div style={{ textAlign: "center" }}>
@@ -30,6 +26,7 @@ const Home = () => {
       </Text>
     </div>
   );
+
   const SWOTMapTitle = (
     <div style={{ textAlign: "center" }}>
       <Text type="danger" style={{ fontSize: "20px" }}>
@@ -37,11 +34,12 @@ const Home = () => {
       </Text>
     </div>
   );
+
   const { isStudyReservation } = useSelector(state => state.room);
-  if(isStudyReservation){
+  if (isStudyReservation) {
     dispatch({
-      type: STUDY_RESERVATION_OFF,
-    })
+      type: STUDY_RESERVATION_OFF
+    });
   }
 
   return (
@@ -50,19 +48,17 @@ const Home = () => {
       <div>
         <Row gutter={24} type="flex">
           <Card bordered={false} style={{ marginTop: "50px" }}>
-            {/* <Card
+            <Card
               title={NotificationTitle}
               style={{ marginBottom: "50px" }}
               extra={<a href="Notification">Notification ></a>}
             >
-              <Text>
-                {notifycations[0].title}
-              </Text>
+              <Text>test</Text>
               <Divider />
-              <Text>{notifycations[1].title}</Text>
+              <Text>test2</Text>
               <Divider />
-              <Text>{notifycations[2].title}</Text>
-            </Card> */}
+              <Text>test3</Text>
+            </Card>
             <Col xs={24} md={12}>
               <StudyBoard />
             </Col>
@@ -95,11 +91,17 @@ const Home = () => {
   );
 };
 
-Home.getInitialProps = async (context) => {
-  console.log("index")
+Home.getInitialProps = async context => {
+  console.log("index");
   context.store.dispatch({
-    type: LOAD_ROOMLIST_REQUEST,
+    type: LOAD_ROOMLIST_REQUEST
   });
-}
+  // context.store.dispatch({
+  //   type: LOAD_POST_REQUEST,
+  //   data: {
+  //     code: "1"
+  //   }
+  // });
+};
 
 export default Home;

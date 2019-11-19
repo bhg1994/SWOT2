@@ -1,5 +1,5 @@
-import React, { useState, useCallback, useEffect } from "react";
-import { Form, Input, Button, Checkbox, Typography } from "antd";
+import React, { useState, useCallback } from "react";
+import { Form, Input, Button, Checkbox } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { SIGN_UP_REQUEST, EMAIL_DUPLICATE_REQUEST } from "../reducers/user";
 import {
@@ -33,20 +33,18 @@ const SignupForm = () => {
   const [telephone, setTelephone] = useState("");
 
   const dispatch = useDispatch();
+
   const { isSigningUp, me } = useSelector(state => state.user);
 
-  const onDuplicateBtn = useCallback(
-    e => {
-      e.preventDefault();
-      dispatch({
-        type: EMAIL_DUPLICATE_REQUEST,
-        data: {
-          email
-        }
-      });
-    },
-    [email]
-  );
+  const onDuplicateBtn = useCallback(e => {
+    e.preventDefault();
+    dispatch({
+      type: EMAIL_DUPLICATE_REQUEST,
+      data: {
+        email
+      }
+    });
+  }, []);
 
   // useCallback으로 감쌀때 함수 내부에서 쓰는 state를 deps배열로 넣는다.
   const onSubmit = useCallback(
@@ -79,9 +77,12 @@ const SignupForm = () => {
     setEmail(e.target.value);
   };
 
-  const onChangeId = e => {
-    setId(e.target.value);
-  };
+  const onChangeId = useCallback(
+    e => {
+      setId(e.target.value);
+    },
+    [id]
+  );
 
   const onChangeName = e => {
     setName(e.target.value);
