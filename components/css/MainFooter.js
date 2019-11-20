@@ -8,6 +8,6 @@ const {
 } = Layout;
 
 export const FooterWrapper = styled(Footer)
-`
+    `
 text-align:center;
 `

@@ -49,10 +49,9 @@ export const ErrorMessage = styled.div`
 export const DesTimeWrapper = styled.div`
     width:20px;
     display:flex;
-    
+
     &:hover div{
         display:inline-block;
-        background-color:red;
     }
 
     .arrow_box {
@@ -62,6 +61,45 @@ export const DesTimeWrapper = styled.div`
     height:170px;
     margin:-120px 0 0 -730px;
 	background-image: url("static/images/gif/dateSelect.gif");
+	border: 4px solid #c2e1f5;
+    }
+`
+
+export const DesReasonWrapper = styled.div`
+    width:20px;
+    margin-top:60px;
+    display:flex;
+
+    &:hover div{
+        display:inline-block;
+    }
+
+    .arrow_box {
+    display: none;
+    position: absolute;
+    width: 300px;
+    height:200px;
+    margin: -50px 0 0 30px;
+	background-image: url("static/images/gif/reasonSelect.png");
+    }
+`
+
+export const TotalWrapper = styled.div`
+     width:20px;
+    margin-top:60px;
+    display:flex;
+
+    &:hover div{
+        display:inline-block;
+    }
+
+    .arrow_box {
+    display: none;
+    position: absolute;
+    width: 250px;
+    height:105px;
+    margin: 10px 0 0 30px;
+	background-image: url("static/images/gif/totalSelect.gif");
 	border: 4px solid #c2e1f5;
     }
 `

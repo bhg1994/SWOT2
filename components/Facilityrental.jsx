@@ -7,8 +7,7 @@ import {
   Divider,
   Modal,
   InputNumber,
-  Typography,
-  Icon
+  Typography
 } from "antd";
 import {
   FormWrapper,
@@ -18,7 +17,9 @@ import {
   SubTitle,
   FormItemWrapper,
   ErrorMessage,
-  DesTimeWrapper
+  DesTimeWrapper,
+  DesReasonWrapper,
+  TotalWrapper
 } from "../components/css/Facilityrental";
 import { useDispatch, useSelector } from "react-redux";
 import { RESERVATION_REQUEST } from "../reducers/room";
@@ -36,7 +37,7 @@ const { TextArea } = Input;
 
 const Facilityrental = () => {
   const [visible, setVisible] = useState(false);
-  const [maximum, setMaximum] = useState("");
+  const [total, setTotal] = useState("");
   const [phone, setPhone] = useState(0);
   const [reason, onChangeReason] = useInput("");
   const [error, setError] = useState(null);
@@ -74,8 +75,8 @@ const Facilityrental = () => {
     setVisible(false);
   };
 
-  const onChangeMaximum = value => {
-    setMaximum(value);
+  const onChangeTotal = value => {
+    setTotal(value);
   };
 
   const onChangePhone = e => {
@@ -88,13 +89,8 @@ const Facilityrental = () => {
     else setCheck(false);
   };
 
-  const onMouseEnter = e => {
-    console.log(e.target);
-  };
-
   const reservationRequest = () => {
-    console.log(check);
-    if ([reason, startTime, endTime, maximum, phone].includes("") || !check) {
+    if ([reason, startTime, endTime, total, phone].includes("") || !check) {
       setError("빈칸을 모두 채워주세요.");
       return;
     }
@@ -108,7 +104,7 @@ const Facilityrental = () => {
       type: RESERVATION_REQUEST,
       data: {
         reason,
-        maximum,
+        total,
         phone,
         selectedRoom,
         token,
@@ -159,8 +155,8 @@ const Facilityrental = () => {
 
                 <Form.Item>
                   <InputNumber
-                    id="maximum"
-                    onChange={onChangeMaximum}
+                    id="total"
+                    onChange={onChangeTotal}
                     min={3}
                     max={30}
                     defaultVAlue={3}
@@ -197,7 +193,7 @@ const Facilityrental = () => {
                   </div>
                 ) : (
                   <DesTimeWrapper>
-                    <div className="arrow_box"></div>
+                    <div className="arrow_box" />
                     <InspectionIcon
                       type="close-circle"
                       theme="twoTone"
@@ -211,20 +207,19 @@ const Facilityrental = () => {
                       type="check-circle"
                       theme="twoTone"
                       twoToneColor="#52c41a"
-                      style={{ marginTop: "100px" }}
                     />
                   </div>
                 ) : (
-                  <div name="desReason" onMouseEnter={onMouseEnter}>
+                  <DesReasonWrapper>
+                    <div className="arrow_box"></div>
                     <InspectionIcon
                       type="close-circle"
                       theme="twoTone"
                       twoToneColor="#eb2f96"
-                      style={{ marginTop: "100px" }}
                     />
-                  </div>
+                  </DesReasonWrapper>
                 )}
-                {maximum ? (
+                {total ? (
                   <div>
                     <InspectionIcon
                       type="check-circle"
@@ -234,14 +229,14 @@ const Facilityrental = () => {
                     />
                   </div>
                 ) : (
-                  <div name="desMaximum" onMouseEnter={onMouseEnter}>
+                  <TotalWrapper>
                     <InspectionIcon
                       type="close-circle"
                       theme="twoTone"
                       twoToneColor="#eb2f96"
-                      style={{ marginTop: "100px" }}
                     />
-                  </div>
+                    <div className="arrow_box"></div>
+                  </TotalWrapper>
                 )}
                 {phone ? (
                   <div>

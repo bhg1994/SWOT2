@@ -17,8 +17,6 @@ export const GuideFade = keyframes`
 `;
 
 export const ReservationWrapper = styled.div`
-
-    margin-right:100px;
     text-align:center;
 `
 

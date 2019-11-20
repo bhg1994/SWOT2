@@ -3,12 +3,13 @@ import { Table, Button, Modal, Typography } from "antd";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { ROOM_SELECT_REQUEST } from "../reducers/room";
-import { SwotMap } from "../containers";
 
 const { Text } = Typography;
 
-var lists;
-const LectureRoomList = ({ handleOk }) => {
+let lists;
+
+const LectureRoomList = ({ handleOk, Lectureroom }) => {
+  console.log(Lectureroom);
   const columns1 = [
     { title: "강의실코드", dataIndex: "roomNo", key: "roomNo" },
     { title: "강의실명", dataIndex: "roomName", key: "groupName" },
@@ -62,6 +63,7 @@ const LectureRoomList = ({ handleOk }) => {
   const [visible, setVisible] = useState(false);
   const [roomurl, setRoomurl] = useState("static/images/classrooms/1101.jpg");
   const [roomname, setRoomname] = useState("");
+  const [roomtotal, setRoomTotal] = useState(0);
 
   useEffect(() => {
     lists = [];
@@ -76,29 +78,12 @@ const LectureRoomList = ({ handleOk }) => {
   const onRowClick = record => {
     return {
       onClick: () => {
-        console.log(record.roomNo);
-
+        console.log(record);
         setRoomname(record.roomName);
         let url = "static/images/classrooms/" + record.roomNo + ".jpg";
         setRoomurl(url);
-        // switch(record.roomNo){
-        //   case "1101":{
-        //     setRoomurl("static/images/classrooms/1101.jpg");
-        //     break;
-        //   };
-        //   case "1102":{
-        //     setRoomurl("static/images/classrooms/1102.png");
-        //     break;
-        //   }
-        //   case "1112":{
-        //     setRoomurl("static/images/classrooms/1103.jpg");
-        //     break;
-        //   }
-        //   default:{
-        //     setRoomurl("");
-        //     break;
-        //   }
-        // }
+        setRoomTotal(record.total);
+
         dispatch({
           type: ROOM_SELECT_REQUEST,
           data: {
@@ -129,7 +114,7 @@ const LectureRoomList = ({ handleOk }) => {
         onRow={onRowClick}
       />
       <Modal
-        title={roomname}
+        title={Lectureroom}
         visible={visible}
         onCancel={handleCancel}
         footer={[
@@ -152,6 +137,13 @@ const LectureRoomList = ({ handleOk }) => {
             style={{ marginTop: "30px", fontSize: "20px" }}
           >
             강의실 : {roomname}
+          </Text>
+          <Text
+            strong
+            type="secondary"
+            style={{ marginTop: "15px", fontSize: "20px" }}
+          >
+            최대 수용 인원수 : {roomtotal}
           </Text>
         </div>
       </Modal>

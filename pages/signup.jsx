@@ -1,5 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 import SignupForm from "../containers/SignupForm";
 import Responsive from "../components/common/Responsive";
 
@@ -12,9 +11,4 @@ const Signup = () => {
     </>
   );
 };
-
-Signup.getInitialProps = async context => {
-  console.log("sign" + Object.keys(context));
-};
-
 export default Signup;
