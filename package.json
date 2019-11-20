@@ -49,7 +49,8 @@
   "scripts": {
     "dev": "nodemon",
     "build": "next build",
-    "start": "cross-env NODE_ENV=production PORT=80 pm2 start server"
+    "prestart": "npm run build",
+    "start": "cross-env NODE_ENV=production PORT=80 pm2 start server.js"
   },
   "proxy": "http://swot.devdogs.kr:8080/",
   "author": "Seong_Jin",
