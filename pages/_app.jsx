@@ -20,19 +20,14 @@ import rootSaga from "../sagas";
 import { LOAD_POST_REQUEST } from "../reducers/post";
 
 const SWOT = ({ Component, store, pageProps }) => {
-
   const [me, setMe] = useState([]);
-
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("myInfo"))) {
       let myInfo = JSON.parse(localStorage.getItem("myInfo"));
-      setMe(myInfo)
+      setMe(myInfo);
     }
-  }, [])
-  
-  
-  
+  }, []);
 
   return (
     <>
@@ -61,7 +56,7 @@ const SWOT = ({ Component, store, pageProps }) => {
                   ></img>
                 </a>
               </Link>
-              {me.name ?
+              {me.name ? (
                 <Link href="/profile">
                   <a>
                     <Avatar
@@ -70,10 +65,13 @@ const SWOT = ({ Component, store, pageProps }) => {
                         marginTop: "15px",
                         fontSize: "10px",
                         backgroundColor: "black"
-                      }}>{me.name}</Avatar>
+                      }}
+                    >
+                      {me.name}
+                    </Avatar>
                   </a>
                 </Link>
-                :
+              ) : (
                 <Link href="/login">
                   <a>
                     <Avatar
@@ -82,9 +80,13 @@ const SWOT = ({ Component, store, pageProps }) => {
                         marginTop: "15px",
                         fontSize: "10px",
                         backgroundColor: "black"
-                      }}>LOGIN</Avatar>
+                      }}
+                    >
+                      LOGIN
+                    </Avatar>
                   </a>
-                </Link>}
+                </Link>
+              )}
             </Header>
             <Content
               style={{
@@ -110,11 +112,10 @@ SWOT.propTypes = {
   pageProps: propTypes.object.isRequired
 };
 
-SWOT.getInitialProps = async (context) => {
-
+SWOT.getInitialProps = async context => {
   const { ctx, Component } = context;
   let pageProps = {};
-  console.log("home")
+  console.log("home");
 
   // if (!ctx.store.getState().post.posts) {
   //   console.log("post is empty")
@@ -125,13 +126,13 @@ SWOT.getInitialProps = async (context) => {
   //     }
   //   });
   // }
-  
+
   if (Component.getInitialProps) {
     pageProps = await Component.getInitialProps(ctx);
   }
-  
+
   return pageProps;
-}
+};
 
 const configureStore = (initialState, options) => {
   const sagaMiddleware = createSagaMiddleware();

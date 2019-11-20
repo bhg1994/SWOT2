@@ -28,7 +28,6 @@ import {
   START_TIME_SET,
   END_TIME_SET
 } from "../reducers/room.js";
-import { fail } from "assert";
 import Link from "next/link";
 
 const { Text } = Typography;
@@ -37,22 +36,33 @@ const { confirm } = Modal;
 var requestUserId;
 var apId;
 
-var dataListForTable=[];
+var dataListForTable = [];
 
 const Profile = () => {
+  const SMVTitle = (
+    <div style={{ textAlign: "center" }}>
+      <Text type="danger" style={{ fontSize: "20px" }}>
+        예약 페이지로 이동
+      </Text>
+    </div>
+  );
+
   const [visible, setVisible] = useState(false);
   const [boardId, setBoardId] = useState(0);
 
-  const [ SMVisible, setSMVisible] = useState(false);
+  const [SMVisible, setSMVisible] = useState(false);
 
-  const [userListforMyStudyApplications, setUserListforMyStudyApplications] = useState([]);
-  
-  const [ myApplicationList, setMyApplicationList] = useState([]);
+  const [
+    userListforMyStudyApplications,
+    setUserListforMyStudyApplications
+  ] = useState([]);
+
+  const [myApplicationList, setMyApplicationList] = useState([]);
 
   const { reservationStatus } = useSelector(state => state.lookup);
 
   const { studys, posts } = useSelector(state => state.post);
-  const [selectedStudy, setSelectedStudy] = useState();
+  const [selectedStudy, setSelectedStudy] = useState("");
   const {
     myApplyStudys,
     myApplyStudysApplications,
@@ -76,30 +86,29 @@ const Profile = () => {
     });
   }, []);
 
-  useEffect(() =>{
-    dataListForTable=[];
+  useEffect(() => {
+    dataListForTable = [];
     studyReservation.forEach(user => {
       let state;
       applications.forEach(application => {
-        if(user.id===application.userId)
-          state=application.state
+        if (user.id === application.userId) state = application.state;
       });
-      let stateString="";
-      switch(state){
+      let stateString = "";
+      switch (state) {
         case "S":
-          stateString = "완료됨"
+          stateString = "완료됨";
           break;
         case "T":
-          stateString = "승인됨"
+          stateString = "승인됨";
           break;
         case "C":
-          stateString = "대기중"
+          stateString = "대기중";
           break;
         case "D":
-          stateString = "거절됨"
+          stateString = "거절됨";
           break;
         case "R":
-          stateString = "취소됨"
+          stateString = "취소됨";
           break;
       }
 
@@ -110,35 +119,34 @@ const Profile = () => {
         name: user.name,
         phone: user.phone,
         state: stateString
-      }
+      };
       dataListForTable.push(dataForTable);
     });
     setUserListforMyStudyApplications(dataListForTable);
-  },[studyReservation]);
+  }, [studyReservation]);
 
-  useEffect(() =>{
-    dataListForTable=[];
+  useEffect(() => {
+    dataListForTable = [];
     myApplyStudys.forEach(board => {
       let state;
       myApplyStudysApplications.forEach(application => {
-        if(board.id===application.boardId)
-          state=application.state
+        if (board.id === application.boardId) state = application.state;
       });
-      
+
       let dataForTable = {
         id: board.id,
         title: board.title,
         body: board.body,
-        meetingDate : board.meetingDate,
-        startTime : board.startTime,
-        endTime : board.endTime,
+        meetingDate: board.meetingDate,
+        startTime: board.startTime,
+        endTime: board.endTime,
         total: board.total,
         state: state
-      }
+      };
       dataListForTable.push(dataForTable);
     });
     setMyApplicationList(dataListForTable);
-  },[myApplyStudys]);
+  }, [myApplyStudys]);
 
   const myStudys = studys.filter(study => study.code === 2);
 
@@ -172,7 +180,7 @@ const Profile = () => {
     applications.forEach(applicaton => {
       if (applicaton.userId === requestUserId) {
         apId = applicaton.id;
-        boardIdForAccept = applicaton.boardId; 
+        boardIdForAccept = applicaton.boardId;
       }
     });
 
@@ -181,7 +189,7 @@ const Profile = () => {
       data: {
         token,
         leaderId: apId,
-        boardId : boardIdForAccept
+        boardId: boardIdForAccept
       }
     });
   };
@@ -248,17 +256,16 @@ const Profile = () => {
     });
   };
 
-  const onStudyReservation = () =>{
+  const onStudyReservation = () => {
     let acceptedApp = [];
     applications.forEach(application => {
-      if(application.state==="T")
-        acceptedApp.push(application);
+      if (application.state === "T") acceptedApp.push(application);
     });
+    console.log(selectedStudy);
 
-    if(acceptedApp.length<1){
+    if (acceptedApp.length < 1) {
       alert("너무적음");
-      
-    }else{
+    } else {
       dispatch({
         type: INSERT_STUDY_RESERVATION_DATA,
         data: {
@@ -271,7 +278,7 @@ const Profile = () => {
         type: DATE_SELECT,
         data: selectedStudy.meetingDate
       });
-  
+
       timeSetter(selectedStudy.startTime, START_TIME_SET);
       timeSetter(selectedStudy.endTime, END_TIME_SET);
 
@@ -358,10 +365,14 @@ const Profile = () => {
                 <Card
                   style={{ margin: "40px" }}
                   title={study.title}
-                  extra={study.state === "T" ? (
-                    <Button size="small" onClick={showModal}>
-                      신청 현황
-                    </Button>) : ""
+                  extra={
+                    study.state === "T" ? (
+                      <Button size="small" onClick={showModal}>
+                        신청 현황
+                      </Button>
+                    ) : (
+                      ""
+                    )
                   }
                 >
                   <div style={{ marginBottom: "10px", textAlign: "end" }}>
@@ -415,12 +426,12 @@ const Profile = () => {
                 }
               >
                 <div style={{ marginBottom: "10px", textAlign: "end" }}>
-                {mystudy.state === "T" ? (
+                  {mystudy.state === "T" ? (
                     <Tag color="green">승인 완료</Tag>
                   ) : mystudy.state === "C" ? (
                     <Tag color="blue">승인 대기</Tag>
                   ) : (
-                      <Tag color="red">승인 거절</Tag>
+                    <Tag color="red">승인 거절</Tag>
                   )}
                 </div>
                 <Text type="warning">스터디 주제 : {mystudy.body}</Text>
@@ -447,9 +458,7 @@ const Profile = () => {
         onCancel={onCloseBtn}
         width="800px"
         footer={[
-          <Button onClick={onStudyReservation}>
-            강의실 예약
-          </Button>,
+          <Button onClick={onStudyReservation}>강의실 예약</Button>,
           <Button key="back" onClick={onCloseBtn}>
             닫기
           </Button>
@@ -459,7 +468,10 @@ const Profile = () => {
           type="team"
           style={{ fontSize: "20px", margin: "5px 20px 20px 0 " }}
         />
-        <Table dataSource={userListforMyStudyApplications} onRow={indexSelected}>
+        <Table
+          dataSource={userListforMyStudyApplications}
+          onRow={indexSelected}
+        >
           <Column title="유저 이메일" dataIndex="email" key="email" />
           <Column title="학번" dataIndex="studentId" key="studentId" />
           <Column title="유저 이름" dataIndex="name" key="name" />
@@ -485,20 +497,32 @@ const Profile = () => {
       </Modal>
 
       <Modal
-        title="예약 페이지로 이동"
+        title={SMVTitle}
         visible={SMVisible}
-        onCancel={()=>setSMVisible(false)}
+        onCancel={() => setSMVisible(false)}
         width="800px"
         footer={[
-          <Button >
+          <Button>
             <Link href="/studyReservation">확인</Link>
           </Button>,
-          <Button key="back" onClick={()=>setSMVisible(false)}>
+          <Button key="back" onClick={() => setSMVisible(false)}>
             닫기
           </Button>
         ]}
       >
-        여기에 현제 스터디 정보 들어갈꺼임 성진이 화이팅
+        <Card style={{ margin: "40px" }} title={selectedStudy.title}>
+          <Text type="warning">스터디 주제 : {selectedStudy.title}</Text>
+          <Divider />
+          <Text mark>
+            날짜 : {selectedStudy.meetingDate} ({selectedStudy.startTime} ~{" "}
+            {selectedStudy.endTime} )
+          </Text>
+          <br />
+          <br />
+          스터디 목적 : {selectedStudy.body} <br />
+          <Divider />
+          최대 인원 수 : {selectedStudy.total} 명
+        </Card>
       </Modal>
     </>
   );

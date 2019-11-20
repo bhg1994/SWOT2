@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  StudyBoard,
-  ReservationRoominfo,
-  StudyBoardPagination,
-  MainCarousel
-} from "../components";
+import { StudyBoard, MainCarousel } from "../components";
 import { SwotMap } from "../containers";
 import { Row, Col, Card, Typography, Divider } from "antd";
 import { STUDY_RESERVATION_OFF } from "../reducers/room";
@@ -16,8 +11,9 @@ const { Text } = Typography;
 
 const Home = () => {
   const dispatch = useDispatch();
+  const { notifyPosts, studyPosts } = useSelector(state => state.post);
 
-  const { posts } = useSelector(state => state.post);
+  console.log(notifyPosts, studyPosts);
 
   const NotificationTitle = (
     <div style={{ textAlign: "center" }}>
@@ -53,11 +49,11 @@ const Home = () => {
               style={{ marginBottom: "50px" }}
               extra={<a href="Notification">Notification ></a>}
             >
-              <Text>test</Text>
+              <Text type="secondary">{notifyPosts[0].body}</Text>
               <Divider />
-              <Text>test2</Text>
+              <Text type="warning">{notifyPosts[1].body}</Text>
               <Divider />
-              <Text>test3</Text>
+              <Text type="danger">{notifyPosts[2].body}</Text>
             </Card>
             <Col xs={24} md={12}>
               <StudyBoard />
@@ -65,9 +61,6 @@ const Home = () => {
             <Col xs={24} md={12} style={{ marginBottom: "70px" }}>
               <StudyBoard />
             </Col>
-            <div style={{ textAlign: "center" }}>
-              <StudyBoardPagination />
-            </div>
           </Card>
           <div>
             <Card
@@ -81,7 +74,6 @@ const Home = () => {
             >
               <Col xs={24} md={12}>
                 <SwotMap />
-                <ReservationRoominfo />
               </Col>
             </Card>
           </div>
@@ -96,12 +88,18 @@ Home.getInitialProps = async context => {
   context.store.dispatch({
     type: LOAD_ROOMLIST_REQUEST
   });
-  // context.store.dispatch({
-  //   type: LOAD_POST_REQUEST,
-  //   data: {
-  //     code: "1"
-  //   }
-  // });
+  context.store.dispatch({
+    type: LOAD_POST_REQUEST,
+    data: {
+      code: "1"
+    }
+  });
+  context.store.dispatch({
+    type: LOAD_POST_REQUEST,
+    data: {
+      code: "2"
+    }
+  });
 };
 
 export default Home;

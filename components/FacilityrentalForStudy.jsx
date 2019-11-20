@@ -10,7 +10,7 @@ import {
   Modal,
   InputNumber
 } from "antd";
-import { FormWrapper, Section } from "./css/Facilityrental";
+import { FormWrapper, Section, ErrorMessage } from "./css/Facilityrental";
 import { useDispatch, useSelector } from "react-redux";
 import { RESERVATION_REQUEST } from "../reducers/room";
 import { STUDY_CONFIRM_REQUEST } from "../reducers/study";
@@ -59,9 +59,9 @@ const FacilityrentalForStudy = () => {
   const [maximum, setMaximum] = useState(
     studyReservationData.applications.length + 1
   );
-  const [currentphoneNo, setCurrentphoneNo] = useState("");
   const [phone, setPhone] = useState(0);
-
+  const [error, setError] = useState(null);
+  const [check, setCheck] = useState(false);
   const [reason, onChangeReason] = useInput(
     names + studyReservationData.boards.body
   );
@@ -85,15 +85,8 @@ const FacilityrentalForStudy = () => {
 
   useEffect(() => {
     me = JSON.parse(localStorage.getItem("myInfo"));
-    setCurrentphoneNo(me.phone);
     setPhone(me.phone);
   }, []);
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    setVisible(true);
-    console.log(content);
-  };
 
   const handleOk = () => {
     setVisible(false);
@@ -109,12 +102,22 @@ const FacilityrentalForStudy = () => {
 
   const onChangePhone = e => {
     setPhone(e.target.value);
-    setCurrentphoneNo(e.target.value);
   };
 
-  // console.log(phone);
+  const oncheckChange = e => {
+    // e.target -> 내가 체크박스를 눌렀을 때 checked가 true로 됨
+    if (e.target.checked) setCheck(true);
+    else setCheck(false);
+  };
 
   const reservationRequest = () => {
+    if ([reason, phone].includes("") || !check) {
+      setError("빈칸을 모두 채워주세요.");
+      return;
+    }
+    setError(null);
+    setVisible(true);
+
     const token = localStorage.getItem("accessToken");
     stId = JSON.parse(localStorage.getItem("myInfo")).studentId;
     stName = JSON.parse(localStorage.getItem("myInfo")).name;
@@ -152,7 +155,7 @@ const FacilityrentalForStudy = () => {
             </Text>
           </div>
           <Divider />
-          <Form style={{ padding: 10 }} onSubmit={handleSubmit}>
+          <Form>
             <Text type="secondary" style={{ fontSize: "18px" }}>
               대여 시간
             </Text>
@@ -203,13 +206,14 @@ const FacilityrentalForStudy = () => {
                 addonBefore="신청자 전화번호"
                 onChange={onChangePhone}
                 style={{ width: "50%" }}
-                value={currentphoneNo}
+                value={phone}
               />
             </Form.Item>
             <Form.Item>
               <Text type="secondary">시설물 대여 규정에 동의합니다 : </Text>
-              <Checkbox />
+              <Checkbox checked={check} onChange={oncheckChange} />
             </Form.Item>
+            {error && <ErrorMessage>{error}</ErrorMessage>}
             <Form.Item>
               <Button onClick={reservationRequest}>대여 신청</Button>
             </Form.Item>

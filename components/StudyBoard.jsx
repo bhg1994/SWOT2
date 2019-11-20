@@ -1,38 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Card, Row, Col, Typography, Divider } from "antd";
 
 const { Text } = Typography;
 
 const StudyBoard = () => {
-  const [maintitle, setMaintitle] = useState("");
-  const [subtitle, setSubtitle] = useState("");
-  const [content, setContent] = useState("");
-  const [noticeimg, setNoticeimg] = useState("");
-  const [container, setContainer] = useState([]);
-
-  // useEffect : 클래스형 컴포넌트의 componentDidMount 와 componentDidUpdate 를 합친 형태
-  // useEffect(() => {
-  //   setMaintitle("Main--title");
-  //   setSubtitle("Sub-title");
-  //   setContent(
-  //     "Contents Contents Contents Contents Contents Contents Contents Contents Contents"
-  //   );
-  //   setNoticeimg(<img src="../../../images/groot.jpg"></img>);
-  // }, setContainer);
-
-  // const onChangeValue = e => {
-  //   e.preventDefault();
-  //   setContainer([
-  //     {
-  //       maintitle,
-  //       subtitle,
-  //       content,
-  //       noticeimg
-  //     }
-  //   ]);
-  //   console.log(container);
-  // };
-
   return (
     <>
       <Card

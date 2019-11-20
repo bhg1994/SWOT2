@@ -1,6 +1,5 @@
 import StudyBoard from './StudyBoard';
 import ReservationRoominfo from './ReservationRoominfo';
-import StudyBoardPagination from './StudyBoardPagination';
 import LectureRoominfo from './LectureRoominfo';
 import MainCarousel from './MainCarousel';
 import LectureRoomModal from './LectureRoomModal';
@@ -18,7 +17,6 @@ export {
     MainCarousel,
     ReservationRoominfo,
     StudyBoard,
-    StudyBoardPagination,
     LectureRoominfo,
     LectureRoomModal,
     ReservationTable,

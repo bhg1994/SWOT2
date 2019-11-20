@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Table, Divider, Modal, Button, Typography, Icon } from "antd";
 import { useSelector, useDispatch } from "react-redux";
-import { RESERVATION_SUBMIT_REQUEST, RESERVATION_DECLINE_REQUEST } from "../reducers/master";
+import {
+  RESERVATION_SUBMIT_REQUEST,
+  RESERVATION_DECLINE_REQUEST
+} from "../reducers/master";
 import TextArea from "antd/lib/input/TextArea";
 
 const { Column } = Table;
@@ -17,7 +20,6 @@ const LectureRoomApplication = () => {
   const [visible, setVisible] = useState(false);
   const [reason, setReason] = useState("");
 
-
   const showModal = () => {
     setVisible(true);
   };
@@ -28,8 +30,8 @@ const LectureRoomApplication = () => {
       data: {
         token: token,
         id: id,
-        reason: reason,
-      },
+        reason: reason
+      }
     });
     setVisible(false);
   };
@@ -51,9 +53,7 @@ const LectureRoomApplication = () => {
     parsing();
   }, []);
 
-
-  const idToName = (id) => {
-
+  const idToName = id => {
     let name = "";
     totalRoomList.forEach(room => {
       if (room.id === id) {
@@ -61,7 +61,7 @@ const LectureRoomApplication = () => {
       }
     });
     return name;
-  }
+  };
 
   const parsing = () => {
     accepted = [];
@@ -69,7 +69,7 @@ const LectureRoomApplication = () => {
     denied = [];
     reservationsList.forEach(reservation => {
       let name = idToName(reservation.roomId);
-      reservation.createdDate = name
+      reservation.createdDate = name;
       switch (reservation.state) {
         case "C":
           ready.push(reservation);
@@ -84,36 +84,34 @@ const LectureRoomApplication = () => {
           break;
       }
     });
-  }
+  };
 
-
-
-  const onRowClicked = (record) => {
+  const onRowClicked = record => {
     return {
       onMouseEnter: () => {
         id = record.id;
       }
-    }
-  }
-  const onSubmit = (e) => {
+    };
+  };
+  const onSubmit = e => {
     dispatch({
       type: RESERVATION_SUBMIT_REQUEST,
       data: {
         token: token,
-        id: id,
-      },
+        id: id
+      }
     });
-  }
-  const onDecline = (e) => {
+  };
+  const onDecline = e => {
     dispatch({
       type: RESERVATION_DECLINE_REQUEST,
       data: {
         token: token,
         id: id,
-        reason: reason,
-      },
+        reason: reason
+      }
     });
-  }
+  };
   const onChangeValue = e => {
     setReason(e.target.value);
   };
@@ -123,7 +121,12 @@ const LectureRoomApplication = () => {
   return (
     <>
       <div style={{ display: "flex", flexDirection: "row" }}>
-        <Icon type="sync" style={{ fontSize: "20px", margin: "5px 10px 0 0 " }} spin /><Title level={3}>신청 대기</Title>
+        <Icon
+          type="sync"
+          style={{ fontSize: "20px", margin: "5px 10px 0 0 " }}
+          spin
+        />
+        <Title level={3}>신청 대기</Title>
       </div>
       <Table dataSource={ready} pagination={true} onRow={onRowClicked}>
         <Column title="강의실명" dataIndex="createdDate" key="createdDate" />
@@ -131,18 +134,22 @@ const LectureRoomApplication = () => {
         <Column title="사유" dataIndex="reason" key="reason" />
         <Column title="시작시간" dataIndex="startTime" key="startTime" />
         <Column title="종료시간" dataIndex="endTime" key="endTime" />
-        <Column title="날짜" dataIndex="reservationDate" key="reservationDate" />
+        <Column
+          title="날짜"
+          dataIndex="reservationDate"
+          key="reservationDate"
+        />
         <Column title="학번" dataIndex="studentId" key="studentId" />
         <Column title="이름" dataIndex="studentName" key="studentName" />
-
-
 
         <Column
           title="확인란"
           key="action"
           render={() => (
             <span>
-              <Button type="primary" onClick={onSubmit}>수락</Button>
+              <Button type="primary" onClick={onSubmit}>
+                수락
+              </Button>
               <Divider type="vertical" />
               <Button onClick={showModal}>거절</Button>
             </span>
@@ -150,7 +157,11 @@ const LectureRoomApplication = () => {
         />
       </Table>
       <div style={{ display: "flex", flexDirection: "row" }}>
-        <Icon type="check-circle" style={{ fontSize: "20px", margin: "5px 10px 0 0 " }} /><Title level={3}>신청 완료</Title>
+        <Icon
+          type="check-circle"
+          style={{ fontSize: "20px", margin: "5px 10px 0 0 " }}
+        />
+        <Title level={3}>신청 완료</Title>
       </div>
       <Table dataSource={accepted} pagination={true} onRow={onRowClicked}>
         <Column title="강의실명" dataIndex="createdDate" key="createdDate" />
@@ -158,7 +169,11 @@ const LectureRoomApplication = () => {
         <Column title="사유" dataIndex="reason" key="reason" />
         <Column title="시작시간" dataIndex="startTime" key="startTime" />
         <Column title="종료시간" dataIndex="endTime" key="endTime" />
-        <Column title="날짜" dataIndex="reservationDate" key="reservationDate" />
+        <Column
+          title="날짜"
+          dataIndex="reservationDate"
+          key="reservationDate"
+        />
 
         <Column
           title="확인란"
@@ -172,7 +187,11 @@ const LectureRoomApplication = () => {
         />
       </Table>
       <div style={{ display: "flex", flexDirection: "row" }}>
-        <Icon type="close" style={{ fontSize: "20px", margin: "5px 10px 0 0 " }} /><Title level={3}>신청 거절</Title>
+        <Icon
+          type="close"
+          style={{ fontSize: "20px", margin: "5px 10px 0 0 " }}
+        />
+        <Title level={3}>신청 거절</Title>
       </div>
       <Table dataSource={denied} pagination={true} onRow={onRowClicked}>
         <Column title="강의실명" dataIndex="createdDate" key="createdDate" />
@@ -181,14 +200,20 @@ const LectureRoomApplication = () => {
         <Column title="거절 사유" dataIndex="failReason" key="failReason" />
         <Column title="시작시간" dataIndex="startTime" key="startTime" />
         <Column title="종료시간" dataIndex="endTime" key="endTime" />
-        <Column title="날짜" dataIndex="reservationDate" key="reservationDate" />
+        <Column
+          title="날짜"
+          dataIndex="reservationDate"
+          key="reservationDate"
+        />
 
         <Column
           title="확인란"
           key="action"
           render={() => (
             <span>
-              <Button type="primary" onClick={onSubmit}>수락</Button>
+              <Button type="primary" onClick={onSubmit}>
+                수락
+              </Button>
               <Divider type="vertical" />
             </span>
           )}
@@ -206,7 +231,8 @@ const LectureRoomApplication = () => {
           autosize={{ minRows: 3, maxRows: 6 }}
           rows={4}
           onChange={onChangeValue}
-          placeholder="내용 입력"></TextArea>
+          placeholder="내용 입력"
+        ></TextArea>
       </Modal>
     </>
   );
