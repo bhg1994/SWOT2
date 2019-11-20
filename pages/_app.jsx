@@ -114,7 +114,7 @@ SWOT.getInitialProps = async (context) => {
 
   const { ctx, Component } = context;
   let pageProps = {};
-  console.log("home")
+  console.log("home get initial")
 
   // if (!ctx.store.getState().post.posts) {
   //   console.log("post is empty")
