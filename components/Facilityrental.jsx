@@ -37,7 +37,7 @@ const { TextArea } = Input;
 
 const Facilityrental = () => {
   const [visible, setVisible] = useState(false);
-  const [total, setTotal] = useState("");
+  const [maximum, setTotal] = useState("");
   const [phone, setPhone] = useState(0);
   const [reason, onChangeReason] = useInput("");
   const [error, setError] = useState(null);
@@ -90,7 +90,7 @@ const Facilityrental = () => {
   };
 
   const reservationRequest = () => {
-    if ([reason, startTime, endTime, total, phone].includes("") || !check) {
+    if ([reason, startTime, endTime, maximum, phone].includes("") || !check) {
       setError("빈칸을 모두 채워주세요.");
       return;
     }
@@ -104,7 +104,7 @@ const Facilityrental = () => {
       type: RESERVATION_REQUEST,
       data: {
         reason,
-        total,
+        maximum,
         phone,
         selectedRoom,
         token,
@@ -155,7 +155,7 @@ const Facilityrental = () => {
 
                 <Form.Item>
                   <InputNumber
-                    id="total"
+                    id="maximum"
                     onChange={onChangeTotal}
                     min={3}
                     max={30}
@@ -219,7 +219,7 @@ const Facilityrental = () => {
                     />
                   </DesReasonWrapper>
                 )}
-                {total ? (
+                {maximum ? (
                   <div>
                     <InspectionIcon
                       type="check-circle"
