@@ -41,7 +41,7 @@ const SWOT = ({ Component, store, pageProps }) => {
         </Head>
         <Layout>
           <Slider />
-          <Layout style={{ marginLeft: "200px" }}>
+          <Layout>
             <Header style={{ background: "#fff", padding: 0 }}>
               <Link href="/">
                 <a>
@@ -115,8 +115,7 @@ SWOT.propTypes = {
 SWOT.getInitialProps = async context => {
   const { ctx, Component } = context;
   let pageProps = {};
-  console.log("home get initial")
-
+  console.log("home get initial");
 
   // if (!ctx.store.getState().post.posts) {
   //   console.log("post is empty")

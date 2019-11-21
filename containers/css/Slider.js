@@ -10,5 +10,7 @@ export const SiderWrapper = styled(Sider)`
     overflow: auto;
     height: 100vh;
     position: fixed;
-    left: 0;
+    @media(max-width: 1024px) {
+        
+}
 `
