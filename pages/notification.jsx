@@ -182,7 +182,7 @@ const notifycation = () => {
   return (
     <>
       <Layout style={{ backgroundColor: "white" }}>
-        <div style={{ textAlign: "center" }}>
+        <div style={{ marginRight: "100px", textAlign: "center" }}>
           <img src="static/images/notification_logo.png" />
         </div>
         <header style={{ display: "flex", marginTop: "20px" }}>

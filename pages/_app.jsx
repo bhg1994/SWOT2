@@ -42,7 +42,7 @@ const SWOT = ({ Component, store, pageProps }) => {
         <Layout>
           <Slider />
           <Layout>
-            <Header style={{ background: "#fff" }}>
+            <Header style={{ backgroundColor: "#fff" }}>
               <Link href="/">
                 <a>
                   <img
@@ -51,7 +51,7 @@ const SWOT = ({ Component, store, pageProps }) => {
                       float: "right",
                       position: "relative",
                       marginTop: "8px",
-                      right: "46%"
+                      right: "50%"
                     }}
                   ></img>
                 </a>
