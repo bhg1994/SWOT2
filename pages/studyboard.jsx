@@ -192,7 +192,7 @@ const studyboard = () => {
   return (
     <>
       <Layout style={{ backgroundColor: "white" }}>
-        <div style={{ margin: "0 110px 50px 0", textAlign: "center" }}>
+        <div style={{ marginBottom: "50px", textAlign: "center" }}>
           <img src="static/images/studyboard_logo.png" />
         </div>
         <header style={{ display: "flex" }}>

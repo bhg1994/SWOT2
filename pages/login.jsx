@@ -1,15 +1,16 @@
 import React from "react";
 
-import LoginForm from '../containers/LoginForm';
-
+import LoginForm from "../containers/LoginForm";
+import Responsive from "../components/common/Responsive";
 
 const login = () => {
   return (
     <>
-      <LoginForm />
+      <Responsive>
+        <LoginForm />
+      </Responsive>
     </>
-  )
-}
-
+  );
+};
 
 export default login;

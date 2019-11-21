@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import { Layout, Menu, Icon, Avatar, Row, Col } from "antd";
-const { Header, Sider, Content, Footer } = Layout;
-import propTypes, { elementType } from "prop-types";
+import { Layout, Avatar } from "antd";
+const { Header, Content } = Layout;
+import propTypes from "prop-types";
 import "@material-ui/core/styles";
 import Slider from "../containers/Slider";
 import MainFooter from "../components/MainFooter";
@@ -42,7 +42,7 @@ const SWOT = ({ Component, store, pageProps }) => {
         <Layout>
           <Slider />
           <Layout>
-            <Header style={{ background: "#fff", padding: 0 }}>
+            <Header style={{ background: "#fff" }}>
               <Link href="/">
                 <a>
                   <img
@@ -50,26 +50,28 @@ const SWOT = ({ Component, store, pageProps }) => {
                     style={{
                       float: "right",
                       position: "relative",
-                      right: "50%",
-                      marginTop: "8px"
+                      marginTop: "8px",
+                      right: "46%"
                     }}
                   ></img>
                 </a>
               </Link>
               {me.name ? (
                 <Link href="/profile">
-                  <a>
-                    <Avatar
-                      style={{
-                        float: "right",
-                        marginTop: "15px",
-                        fontSize: "10px",
-                        backgroundColor: "black"
-                      }}
-                    >
-                      {me.name}
-                    </Avatar>
-                  </a>
+                  <div>
+                    <a>
+                      <Avatar
+                        style={{
+                          float: "right",
+                          marginTop: "15px",
+                          fontSize: "10px",
+                          backgroundColor: "black"
+                        }}
+                      >
+                        {me.name}
+                      </Avatar>
+                    </a>
+                  </div>
                 </Link>
               ) : (
                 <Link href="/login">

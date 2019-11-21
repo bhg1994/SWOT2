@@ -103,7 +103,7 @@ const questionAnswer = () => {
         code: "3",
         title: questiontitle,
         body: questioncontent,
-        total: "0",
+        total: "0"
       }
     });
     setQuestiontitle("");
@@ -136,7 +136,7 @@ const questionAnswer = () => {
   return (
     <>
       <Layout style={{ backgroundColor: "white" }}>
-        <div style={{ marginRight: "110px", textAlign: "center" }}>
+        <div style={{ marginBottom: "50px", textAlign: "center" }}>
           <img src="static/images/Q&A_logo.png" />
         </div>
         <header style={{ display: "flex", marginTop: "20px" }}>
