@@ -53,7 +53,7 @@ const SWOT = ({ Component, store, pageProps }) => {
                       marginTop: "8px",
                       right: "50%"
                     }}
-                  ></img>
+                  />
                 </a>
               </Link>
               {me.name ? (
@@ -94,8 +94,7 @@ const SWOT = ({ Component, store, pageProps }) => {
               style={{
                 margin: "20px 20px 0",
                 padding: 24,
-                background: "#fff",
-                minHeight: 1000
+                background: "#fff"
               }}
             >
               <Component {...pageProps} />

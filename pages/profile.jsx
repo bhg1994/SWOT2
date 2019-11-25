@@ -64,8 +64,9 @@ const Profile = () => {
 
   const { reservationStatus } = useSelector(state => state.lookup);
 
-  const { studys, posts } = useSelector(state => state.post);
+  const { studys } = useSelector(state => state.post);
   const [selectedStudy, setSelectedStudy] = useState("");
+
   const {
     myApplyStudys,
     myApplyStudysApplications,
@@ -152,6 +153,7 @@ const Profile = () => {
   }, [myApplyStudys]);
 
   const myStudys = studys.filter(study => study.code === 2);
+  console.log(myStudys, studys);
 
   const showModal = () => {
     let token = localStorage.getItem("accessToken");

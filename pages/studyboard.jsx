@@ -41,7 +41,6 @@ const studyboard = () => {
   const [modifyvisible, setModifyvisible] = useState(false);
 
   const { studyPosts, isLoading } = useSelector(state => state.post);
-
   const [myinfoid, setMyinfoid] = useState(0);
 
   useEffect(() => {
@@ -234,13 +233,13 @@ const studyboard = () => {
               <Form.Item>
                 <div>
                   <TimePicker
-                    format="HH:mm"
+                    format="HH"
                     id="studystarttime"
                     onOk={onOk}
                     onChange={onStartime}
                   />
                   <TimePicker
-                    format="HH:mm"
+                    format="HH"
                     id="studyendtime"
                     style={{ marginLeft: "20px" }}
                     onOk={onOk}
@@ -316,7 +315,8 @@ const studyboard = () => {
             key="action"
             render={post => (
               <span>
-                {myinfoid === post.userId || myinfoid === 1 ? (
+                {(myinfoid === post.userId && post.state !== "S") ||
+                myinfoid === 1 ? (
                   <div>
                     <Button type="primary" onClick={showModifyNotifyModal}>
                       수정
@@ -362,17 +362,17 @@ const studyboard = () => {
           </Form.Item>
           <Form.Item>
             <TimePicker
-              format="HH:mm"
+              format="HH"
               id="studystarttime"
-              value={moment(studystarttime, "HH:mm")}
+              value={moment(studystarttime, "HH")}
               onOk={onOk}
               onChange={onStartime}
             />
             <TimePicker
-              format="HH:mm"
+              format="HH"
               id="studyendtime"
               style={{ marginLeft: "20px" }}
-              value={moment(studyendtime, "HH:mm")}
+              value={moment(studyendtime, "HH")}
               onOk={onOk}
               onChange={onEndtime}
             />

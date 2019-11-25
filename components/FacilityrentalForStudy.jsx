@@ -32,6 +32,7 @@ const FacilityrentalForStudy = () => {
   const { selectedRoom, studyReservationData } = useSelector(
     state => state.room
   );
+
   const userparser = (applications, users) => {
     let names = [];
     let content = "";
@@ -196,7 +197,7 @@ const FacilityrentalForStudy = () => {
                 onChange={onChangeMaximum}
                 min={1}
                 max={30}
-                defaultValue={studyReservationData.applications.length + 1}
+                defaultValue={studyReservationData.boards.total}
                 style={{ width: "130px" }}
               />
             </Form.Item>
@@ -218,7 +219,7 @@ const FacilityrentalForStudy = () => {
               <Button onClick={reservationRequest}>대여 신청</Button>
             </Form.Item>
 
-            <Form.Item>
+            {/* <Form.Item>
               <Modal
                 title="예약 신청 완료"
                 visible={visible}
@@ -231,7 +232,7 @@ const FacilityrentalForStudy = () => {
                   완료될 예정입니다.
                 </p>
               </Modal>
-            </Form.Item>
+            </Form.Item> */}
           </Form>
         </Section>
       </FormWrapper>

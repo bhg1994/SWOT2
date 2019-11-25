@@ -49,11 +49,11 @@ const Home = () => {
               style={{ marginBottom: "50px" }}
               extra={<a href="Notification">Notification ></a>}
             >
-              <Text type="secondary">{notifyPosts[0].body}</Text>
+              {/* <Text type="secondary">{notifyPosts[0].body}</Text>
               <Divider />
               <Text type="warning">{notifyPosts[1].body}</Text>
               <Divider />
-              <Text type="danger">{notifyPosts[2].body}</Text>
+              <Text type="danger">{notifyPosts[2].body}</Text> */}
             </Card>
             <Col xs={24} md={12}>
               <StudyBoard />

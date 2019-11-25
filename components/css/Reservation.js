@@ -18,6 +18,7 @@ export const GuideFade = keyframes`
 
 export const ReservationWrapper = styled.div`
     text-align:center;
+    
 `
 
 export const ReservationGuide = styled.div`
@@ -27,8 +28,10 @@ export const ReservationGuide = styled.div`
 `;
 
 export const MapWrapper = styled.div`
-    margin-top:10px;
+    margin-right:10px;
     border-radius:4px;
     margin:auto;
+    width:600px;
+    height:400px;
     box-shadow: 5px 5px 5px 5px gray;
 `
