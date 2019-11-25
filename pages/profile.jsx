@@ -443,21 +443,23 @@ const Profile = () => {
               <Card
                 style={{ marginTop: "40px" }}
                 title={mystudy.title}
-                extra={mystudy.state === "T"||mystudy.state === "S" ? (
-                  "" 
-                ) :
-                  <Button
-                    type="danger"
-                    size="small"
-                    id={mystudy.id}
-                    onClick={applicationCancel}
-                  >
-                    신청 취소
-                  </Button>
+                extra={
+                  mystudy.state === "T" || mystudy.state === "S" ? (
+                    ""
+                  ) : (
+                    <Button
+                      type="danger"
+                      size="small"
+                      id={mystudy.id}
+                      onClick={applicationCancel}
+                    >
+                      신청 취소
+                    </Button>
+                  )
                 }
               >
                 <div style={{ marginBottom: "10px", textAlign: "end" }}>
-                  {mystudy.state === "T"||mystudy.state === "S" ? (
+                  {mystudy.state === "T" || mystudy.state === "S" ? (
                     <Tag color="green">승인 완료</Tag>
                   ) : mystudy.state === "C" ? (
                     <Tag color="blue">승인 대기</Tag>
