@@ -1,9 +1,11 @@
 import React from "react";
-import { Card, Row, Col, Typography, Divider } from "antd";
-
+import { Card, Typography, Divider } from "antd";
+import { useDispatch, useSelector } from "react-redux";
 const { Text } = Typography;
 
 const StudyBoard = () => {
+  const { studyPosts, isLoading } = useSelector(state => state.post);
+  console.log(studyPosts);
   return (
     <>
       <Card
@@ -12,17 +14,16 @@ const StudyBoard = () => {
         hoverable
         cover={<img alt="example" src="static/images/lectureroom.jpg" />}
       >
-        <Text type="warning">간단한 사이드 프로젝트 해커톤</Text>
+        <Text type="warning">{studyPosts[0].title}</Text>
         <Divider />
-        <Text mark>날짜 : 9월 28일 오전 9시 ~ 오후 9시</Text>
-        <br />
-        <Text>
-          목적 : 주제는 투두 캘린더로 평소에 쉽게 접할 수 있는 투두앱 보다는
-          아주 약간 조금더 고도화 될 수 있기 때문에 이 점에 대해서 인지한 후
-          스터디 예약 신청 부탁 드리겠습니다.
+        <Text mark>
+          날짜 : {studyPosts[0].meetingDate} {studyPosts[0].startTime}시 ~
+          {studyPosts[0].endTime}시
         </Text>
+        <br />
+        <Text>목적 : {studyPosts[0].body}</Text>
         <Divider />
-        <Text>최대 인원수 : 6명</Text>
+        <Text>최대 인원수 : {studyPosts[0].total}명</Text>
       </Card>
       <Card
         title="스터디 모집 게시글"
@@ -30,16 +31,16 @@ const StudyBoard = () => {
         style={{ margin: "50px 0 0 0", width: "300px" }}
         cover={<img alt="example" src="static/images/lectureroom2.jpg" />}
       >
-        <Text type="warning">자바스크립트 스터디</Text>
+        <Text type="warning">{studyPosts[1].title}</Text>
         <Divider />
-        <Text mark>날짜 : 9월 27일 오후 1시 ~ 오후 5시</Text>
-        <br />
-        <Text>
-          목적 : 자바스크립트를 활용하여 HTTP통신, JSON, 동기/비동기, 내장객체,
-          this바인딩, 프로토타입에 관하여 간단하게 개념 정리
+        <Text mark>
+          날짜 : {studyPosts[1].meetingDate} {studyPosts[1].startTime}시 ~
+          {studyPosts[1].endTime}시
         </Text>
+        <br />
+        <Text>목적 : {studyPosts[1].body}</Text>
         <Divider />
-        <Text>최대 인원수 : 4명</Text>
+        <Text>최대 인원수 : {studyPosts[1].total}명</Text>
       </Card>
     </>
   );

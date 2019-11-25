@@ -1,5 +1,5 @@
 import React from "react";
-import { StudyBoard, MainCarousel } from "../components";
+import { StudyBoard, StudyBoardtwo, MainCarousel } from "../components";
 import { SwotMap } from "../containers";
 import { Row, Col, Card, Typography, Divider } from "antd";
 import { STUDY_RESERVATION_OFF } from "../reducers/room";
@@ -49,19 +49,21 @@ const Home = () => {
               style={{ marginBottom: "50px" }}
               extra={<a href="Notification">Notification ></a>}
             >
-              {/* <Text type="secondary">{notifyPosts[0].body}</Text>
+              <Text type="secondary">{notifyPosts[0].body}</Text>
               <Divider />
               <Text type="warning">{notifyPosts[1].body}</Text>
               <Divider />
-              <Text type="danger">{notifyPosts[2].body}</Text> */}
+              <Text type="danger">{notifyPosts[2].body}</Text>
             </Card>
-            <Col xs={24} md={12}>
+
+            <Col span={12}>
               <StudyBoard />
             </Col>
-            <Col xs={24} md={12} style={{ marginBottom: "70px" }}>
-              <StudyBoard />
+            <Col span={12}>
+              <StudyBoardtwo />
             </Col>
           </Card>
+
           <div>
             <Card
               extra={<a href="reservation">Lecture ></a>}

@@ -1,4 +1,5 @@
 import StudyBoard from './StudyBoard';
+import StudyBoardtwo from './StudyBoardtwo';
 import ReservationRoominfo from './ReservationRoominfo';
 import LectureRoominfo from './LectureRoominfo';
 import MainCarousel from './MainCarousel';
@@ -27,4 +28,5 @@ export {
     BuildingList,
     MainFooter,
     ReservationTime,
+    StudyBoardtwo
 };
