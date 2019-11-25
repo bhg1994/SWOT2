@@ -119,7 +119,7 @@ const NicknameEditForm = () => {
           </Form.Item>
           <Form.Item>
             <Input
-              addonBefore="상메"
+              addonBefore="상테메세지"
               onChange={onChangeMsg}
               style={{ width: "50%" }}
             />
