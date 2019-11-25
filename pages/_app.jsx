@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import { Layout, Menu, Icon, Avatar, Row, Col } from "antd";
-const { Header, Sider, Content, Footer } = Layout;
-import propTypes, { elementType } from "prop-types";
+import { Layout, Avatar } from "antd";
+const { Header, Content } = Layout;
+import propTypes from "prop-types";
 import "@material-ui/core/styles";
 import Slider from "../containers/Slider";
 import MainFooter from "../components/MainFooter";
@@ -41,8 +41,8 @@ const SWOT = ({ Component, store, pageProps }) => {
         </Head>
         <Layout>
           <Slider />
-          <Layout style={{ marginLeft: "200px" }}>
-            <Header style={{ background: "#fff", padding: 0 }}>
+          <Layout>
+            <Header style={{ backgroundColor: "#fff" }}>
               <Link href="/">
                 <a>
                   <img
@@ -50,26 +50,28 @@ const SWOT = ({ Component, store, pageProps }) => {
                     style={{
                       float: "right",
                       position: "relative",
-                      right: "50%",
-                      marginTop: "8px"
+                      marginTop: "8px",
+                      right: "50%"
                     }}
-                  ></img>
+                  />
                 </a>
               </Link>
               {me.name ? (
                 <Link href="/profile">
-                  <a>
-                    <Avatar
-                      style={{
-                        float: "right",
-                        marginTop: "15px",
-                        fontSize: "10px",
-                        backgroundColor: "black"
-                      }}
-                    >
-                      {me.name}
-                    </Avatar>
-                  </a>
+                  <div>
+                    <a>
+                      <Avatar
+                        style={{
+                          float: "right",
+                          marginTop: "15px",
+                          fontSize: "10px",
+                          backgroundColor: "black"
+                        }}
+                      >
+                        {me.name}
+                      </Avatar>
+                    </a>
+                  </div>
                 </Link>
               ) : (
                 <Link href="/login">
@@ -92,8 +94,8 @@ const SWOT = ({ Component, store, pageProps }) => {
               style={{
                 margin: "20px 20px 0",
                 padding: 24,
-                background: "#fff",
-                minHeight: 1000
+                minHeight: 1000,
+                background: "#fff"
               }}
             >
               <Component {...pageProps} />
@@ -115,8 +117,7 @@ SWOT.propTypes = {
 SWOT.getInitialProps = async context => {
   const { ctx, Component } = context;
   let pageProps = {};
-  console.log("home get initial")
-
+  console.log("home get initial");
 
   // if (!ctx.store.getState().post.posts) {
   //   console.log("post is empty")

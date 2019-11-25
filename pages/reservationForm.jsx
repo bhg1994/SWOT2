@@ -39,7 +39,7 @@ const reservationForm = () => {
   return (
     <>
       <Responsive>
-        <div style={{ textAlign: "center" }}>
+        <div style={{ textAlign: "center", marginRight: "100px" }}>
           <img src={`static/images/classrooms/${selectedRoomCode}.jpg`}></img>
         </div>
         <List

@@ -12,7 +12,11 @@ const {
 export const SignupWrapper = styled.section`
     margin:auto;
     width:60%;
+    @media(max-width: 1024px) {
+    margin :0;
+}
 `
+
 
 export const SignupContainer = styled.section`
     padding:40px;

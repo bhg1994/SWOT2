@@ -13,6 +13,11 @@ export const SectionWrapper = styled.section`
     top:50%;
     margin-left:-300px;
     margin-top:-250px;
+
+    @media(max-width: 1024px) {
+    margin-left:-200px;
+    width:600px;
+    }
 `
 
 export const LoginWrap = styled.div`
@@ -21,17 +26,30 @@ export const LoginWrap = styled.div`
     width:70%;
     height:100%;
     margin: auto;
+
+    @media(max-width: 1024px) {
+    margin-left:100px;
+    width:50%;
+    }
     
+    @media(max-width: 768px){
+    width:40%;
+}
 `
 
 export const LoginContainer = styled.div`
     position: absolute;
     margin:40px;
+
 `
 
 export const Logintext = styled.label`
     font-size:20px;
     margin-bottom:20px;
+
+    @media(max-width: 768px){
+    font-size:15px;
+}
 `
 
 export const Email = styled.div`
@@ -48,6 +66,12 @@ export const InputAddress = styled(Input)`
     margin-top:20px;
     width:300px;
     height:40px;
+    @media(max-width: 1024px) {
+    width:200px;
+    }
+    @media(max-width: 768px){
+    width: 150px;
+}
 `
 
 export const Password = styled.div`
@@ -60,6 +84,13 @@ export const InputPassword = styled(Input)`
     margin-top:20px;
     width:300px;
     height:40px;
+    @media(max-width: 1024px) {
+    width:200px;
+    }
+        
+    @media(max-width: 768px){
+    width:150px;
+}
 `
 
 export const LoginButton = styled(Button)`
@@ -68,6 +99,16 @@ export const LoginButton = styled(Button)`
     height:50px;
     color:white;
     background-color:black;
+
+    @media(max-width: 1024px) {
+    width:100px;
+    }
+        
+    @media(max-width: 768px){
+        margin-top:30px;
+        width:80px;
+}
+
 `
 
 export const RegisterWrapper = styled.div`
@@ -75,6 +116,11 @@ export const RegisterWrapper = styled.div`
     display: inline-block;
     width:30%;
     height:100%;
+    
+    @media(max-width: 768px){
+    width:25%;
+}
+
 `
 
 export const RegisterContainer = styled.div`
@@ -86,11 +132,19 @@ export const TextRegister = styled.label`
     font-size:20px;
     color:white;
     margin-top:20px;
+
+        
+    @media(max-width: 768px){
+    font-size:15px; 
+}
 `
 
 export const Article = styled.article`
     font-size:15px;
     margin-top:20px;
+    @media(max-width: 1024px) {
+    display:none;
+    }
 `
 
 export const RegisterButton = styled(Button)`
@@ -99,6 +153,15 @@ export const RegisterButton = styled(Button)`
     height:50px;
     color:white;
     background-color:gray;
+    @media(max-width: 1024px) {
+    width:120px;
+    font-size:12px;
+    }   
+        
+    @media(max-width: 768px){
+    width: 100px;   
+    font-size:10px;
+}
 `
 
 export const ChangePwButton = styled(Button)`
@@ -107,63 +170,14 @@ export const ChangePwButton = styled(Button)`
     height:50px;
     color:black;
     background-color:white;
-`
 
-// ["@media (max-width:1080px)"]: {
-//     wrapper: {
-//       position: "absolute",
-//       width: 600,
-//       height: 500,
-//       left: "50%",
-//       top: "50%",
-//       marginLeft: -300,
-//       marginTop: -250
-//     },
-//     loginwrap: {
-//       width: "60%",
-//       height: "100%"
-//     },
-//     registerwrap: {
-//       width: "40%",
-//       height: "100%"
-//     }
-//   },
-//   ["@media (max-width:780px)"]: {
-//     wrapper: {
-//       position: "absolute",
-//       width: 400,
-//       height: 500,
-//       left: "50%",
-//       top: "50%",
-//       marginLeft: -200,
-//       marginTop: -250
-//     },
-//     loginwrap: {
-//       width: "50%",
-//       height: "100%"
-//     },
-//     registerwrap: {
-//       width: "50%",
-//       height: "100%"
-//     },
-//     input: {
-//       width: 150
-//     }
-//   },
-//   ["@media (max-width:600px)"]: {
-//     wrapper: {
-//       position: "absolute",
-//       width: 200,
-//       height: 500,
-//       left: "50%",
-//       top: "50%",
-//       marginLeft: -100,
-//       marginTop: -250
-//     },
-//     input: {
-//       width: 120
-//     },
-//     registerwrap: {
-//       display: "none"
-//     }
-//   }
+    @media(max-width: 1024px) {
+    width:120px;
+    font-size:10px;
+    }   
+        
+    @media(max-width: 768px){
+    width: 100px;
+    font-size:8px;
+}
+`

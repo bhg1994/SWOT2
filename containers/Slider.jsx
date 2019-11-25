@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, Icon } from "antd";
+import { Menu, Icon, Layout } from "antd";
 import { SiderWrapper } from "../containers/css/Slider";
 import { useSelector } from "react-redux/lib/hooks/useSelector";
 
+const { Sider } = Layout;
 const Slider = () => {
   const [myinfoid, setMyinfoid] = useState(0);
 
@@ -16,9 +17,9 @@ const Slider = () => {
 
   return (
     <>
-      <SiderWrapper>
+      <Sider breakpoint="lg" collapsedWidth="50">
         <div className="logo" />
-        <Menu defaultSelectedKeys={["1"]} theme="dark" mode="inline">
+        <Menu defaultSelectedKeys={["1"]} theme="dark">
           <Menu.Item key="1">
             <Link href="/">
               <a>
@@ -27,6 +28,7 @@ const Slider = () => {
               </a>
             </Link>
           </Menu.Item>
+
           <Menu.Item key="2">
             <Link href="/signup">
               <a>
@@ -48,6 +50,7 @@ const Slider = () => {
           ) : (
             ""
           )}
+
           <Menu.Item key="4">
             <Link href="/notification">
               <a>
@@ -56,6 +59,7 @@ const Slider = () => {
               </a>
             </Link>
           </Menu.Item>
+
           {myinfoid && myinfoid !== 1 ? (
             <Menu.Item key="5">
               <Link href="/profile">
@@ -68,7 +72,7 @@ const Slider = () => {
           ) : (
             ""
           )}
-          {myinfoid !== 1 ? (
+          {myinfoid && myinfoid !== 1 ? (
             <Menu.Item key="6">
               <Link href="/reservation">
                 <a>
@@ -108,16 +112,8 @@ const Slider = () => {
           ) : (
             ""
           )}
-          {/* <Menu.Item key="10">
-            <Link href="/reservationForm">
-              <a>
-                <Icon type="github" />
-                <span>reservationForm</span>
-              </a>
-            </Link>
-          </Menu.Item> */}
         </Menu>
-      </SiderWrapper>
+      </Sider>
     </>
   );
 };

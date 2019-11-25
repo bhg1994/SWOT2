@@ -18,7 +18,7 @@ export const Section = styled.section`
 `
 
 export const InspectionIcon = styled(Icon)` 
-    margin-top:50px;
+    margin-top:46.5px;
     margin-right:30px;
     font-size: 25px;
 `

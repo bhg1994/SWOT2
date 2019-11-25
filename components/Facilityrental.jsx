@@ -258,7 +258,7 @@ const Facilityrental = () => {
               </section>
             </section>
 
-            <Form.Item>
+            {/* <Form.Item>
               <Modal
                 title="예약 신청 완료"
                 visible={visible}
@@ -271,7 +271,7 @@ const Facilityrental = () => {
                   완료될 예정입니다.
                 </p>
               </Modal>
-            </Form.Item>
+            </Form.Item> */}
           </Form>
         </Section>
       </FormWrapper>

@@ -37,7 +37,10 @@ const reservation = () => {
       <ReservationWrapper>
         <Layout style={{ backgroundColor: "white" }}>
           <div>
-            <img src="static/images/Reservation_logo.png" />
+            <img
+              src="static/images/Reservation_logo.png"
+              style={{ marginRight: "100px" }}
+            />
           </div>
           <MapWrapper>
             <SwotMap />

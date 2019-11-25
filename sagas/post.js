@@ -35,7 +35,7 @@ function loadPostAPI(postCode) {
     let code = postCode.code;
     console.log(code);
     return axios.get('http://swot.devdogs.kr:8080/api/auth/board/' + code + '/list'
-    
+
     ).then(response => {
         // console.log('response : ', JSON.stringify(response, null, 2));
         var info = response.data;
@@ -155,7 +155,7 @@ function createPostAPI(postInfo) {
     form.append('startTime', postInfo.startTime)
     form.append('endTime', postInfo.endTime)
     form.append('meetingDate', postInfo.meetingDate)
-    // form.append('total', postInfo.total)
+    form.append('total', postInfo.total)
 
 
     let token = localStorage.getItem("accessToken");
@@ -186,7 +186,7 @@ function* createPost(action) {
         const result = yield call(createPostAPI, action.data);
 
         if (result.responseData.result === "success") {
-            switch(result.code){
+            switch (result.code) {
                 case "1":
                     yield put({
                         type: CREATE_POST_1_SUCCESS,
@@ -205,10 +205,10 @@ function* createPost(action) {
                         data: result.responseData.info,
                     });
                     break;
-            }  
+            }
             alert('글이 작성되었습니다.');
 
-        
+
         } else {
             yield put({
                 type: CREATE_POST_FAILURE,
@@ -327,8 +327,8 @@ function* modifyPost(action) {
         if (result.result === "success") {
             yield put({
                 type: MODIFY_POST_SUCCESS,
-            });         
-            
+            });
+
             yield put({
                 type: LOAD_POST_REQUEST,
                 data: {

@@ -136,7 +136,7 @@ const notifycation = () => {
         code: "1",
         title: notificationtitle,
         body: notificationcontent,
-        total: "0",
+        total: "0"
       }
     });
     setNotificationtitle("");
@@ -188,7 +188,7 @@ const notifycation = () => {
   return (
     <>
       <Layout style={{ backgroundColor: "white" }}>
-        <div style={{ marginRight: "110px", textAlign: "center" }}>
+        <div style={{ marginRight: "100px", textAlign: "center" }}>
           <img src="static/images/notification_logo.png" />
         </div>
         <header style={{ display: "flex", marginTop: "20px" }}>

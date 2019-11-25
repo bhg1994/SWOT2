@@ -8,7 +8,9 @@ import {
   Button,
   Modal,
   Table,
-  Icon
+  Icon,
+  Row,
+  Col
 } from "antd";
 import NicknameEditForm from "../components/NicknameEditForm.jsx";
 import { LOAD_MYSTUDYPOST_REQUEST } from "../reducers/post";
@@ -29,6 +31,7 @@ import {
   END_TIME_SET
 } from "../reducers/room.js";
 import Link from "next/link";
+import Responsive from "../components/common/Responsive";
 
 const { Text } = Typography;
 const { Column } = Table;
@@ -61,8 +64,9 @@ const Profile = () => {
 
   const { reservationStatus } = useSelector(state => state.lookup);
 
-  const { studys, posts } = useSelector(state => state.post);
+  const { studys } = useSelector(state => state.post);
   const [selectedStudy, setSelectedStudy] = useState("");
+
   const {
     myApplyStudys,
     myApplyStudysApplications,
@@ -149,6 +153,7 @@ const Profile = () => {
   }, [myApplyStudys]);
 
   const myStudys = studys.filter(study => study.code === 2);
+  console.log(myStudys, studys);
 
   const showModal = () => {
     let token = localStorage.getItem("accessToken");
@@ -296,12 +301,20 @@ const Profile = () => {
 
   return (
     <>
-      <div>
+      <Responsive>
         <NicknameEditForm />
         <List
           itemLayout="horizontal"
           style={{ marginBottom: "40px" }}
-          grid={{ gutter: 16, xs: 1, sm: 2, md: 4, lg: 4, xl: 6, xxl: 3 }}
+          grid={{
+            gutter: 16,
+            xs: 3,
+            sm: 3,
+            md: 3,
+            lg: 3,
+            xl: 3,
+            xxl: 3
+          }}
           size="small"
           header={
             <div style={{ textAlign: "center", fontSize: "20px" }}>
@@ -313,7 +326,7 @@ const Profile = () => {
           renderItem={(item, i) => (
             <List.Item style={{ maraginTop: "20px" }}>
               <Card
-                style={{ margin: "40px" }}
+                style={{ marginTop: "40px" }}
                 title={"예약날짜 : " + item.reservationDate}
                 extra={
                   <Button size="small" id={item.id} onClick={reservationCancel}>
@@ -345,7 +358,15 @@ const Profile = () => {
         />
         <List
           style={{ marginBottom: "40px" }}
-          grid={{ gutter: 16, xs: 1, sm: 2, md: 4, lg: 4, xl: 6, xxl: 3 }}
+          grid={{
+            gutter: 16,
+            xs: 3,
+            sm: 3,
+            md: 3,
+            lg: 3,
+            xl: 3,
+            xxl: 3
+          }}
           size="small"
           header={
             <div style={{ textAlign: "center", fontSize: "20px" }}>
@@ -363,7 +384,7 @@ const Profile = () => {
                 }}
               >
                 <Card
-                  style={{ margin: "40px" }}
+                  style={{ marginTop: "40px" }}
                   title={study.title}
                   extra={
                     study.state === "T" ? (
@@ -400,7 +421,15 @@ const Profile = () => {
         />
         <List
           style={{ marginBottom: "40px" }}
-          grid={{ gutter: 16, xs: 1, sm: 2, md: 4, lg: 4, xl: 6, xxl: 3 }}
+          grid={{
+            gutter: 16,
+            xs: 3,
+            sm: 3,
+            md: 3,
+            lg: 3,
+            xl: 3,
+            xxl: 3
+          }}
           size="small"
           header={
             <div style={{ textAlign: "center", fontSize: "20px" }}>
@@ -412,7 +441,7 @@ const Profile = () => {
           renderItem={mystudy => (
             <List.Item>
               <Card
-                style={{ margin: "40px" }}
+                style={{ marginTop: "40px" }}
                 title={mystudy.title}
                 extra={mystudy.state === "T"||"S" ? (
                   "" 
@@ -451,7 +480,7 @@ const Profile = () => {
             </List.Item>
           )}
         />
-      </div>
+      </Responsive>
 
       {/* 스터디예약 현황 보기 모달 */}
       <Modal
