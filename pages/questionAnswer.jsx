@@ -51,6 +51,8 @@ const questionAnswer = () => {
   const [deletevisible, setDeletevisible] = useState(false);
 
   const handleCancel = () => {
+    setQuestiontitle("");
+    setQuestioncontent("");
     setcreateVisible(false);
     console.log("취소 버튼");
   };
@@ -60,6 +62,8 @@ const questionAnswer = () => {
   };
 
   const modifyhandleCancel = () => {
+    setQuestiontitle("");
+    setQuestioncontent("");
     setModifyvisible(false);
   };
 
@@ -130,6 +134,8 @@ const questionAnswer = () => {
         body: questioncontent
       }
     });
+    setQuestiontitle("");
+    setQuestioncontent("");
     setModifyvisible(false);
   };
 

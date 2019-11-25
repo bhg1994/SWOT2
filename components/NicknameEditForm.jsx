@@ -85,6 +85,9 @@ const NicknameEditForm = () => {
         msg: msg
       }
     });
+    onChangeMsg("");
+    onChangeName("");
+    onChangeStId("");
     setVisible(false);
   };
 
