@@ -44,7 +44,7 @@ const Home = () => {
       <div>
         <Row gutter={24} type="flex">
           <Card bordered={false} style={{ marginTop: "50px" }}>
-            <Card
+            {/* <Card
               title={NotificationTitle}
               style={{ marginBottom: "50px" }}
               extra={<a href="Notification">Notification ></a>}
@@ -54,7 +54,7 @@ const Home = () => {
               <Text type="warning">{notifyPosts[1].body}</Text>
               <Divider />
               <Text type="danger">{notifyPosts[2].body}</Text>
-            </Card>
+            </Card> */}
             <Col xs={24} md={12}>
               <StudyBoard />
             </Col>

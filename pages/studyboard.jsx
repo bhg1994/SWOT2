@@ -40,6 +40,15 @@ const studyboard = () => {
   const [id, setId] = useState(0);
   const [modifyvisible, setModifyvisible] = useState(false);
 
+  const setInit = () => {
+    setStudyDate("");
+    setStudycontent("");
+    setStudyendtime("");
+    setStudystarttime("");
+    setStudytitle("");
+    setMaximum(3);
+  }
+
   const { studyPosts, isLoading } = useSelector(state => state.post);
 
   const [myinfoid, setMyinfoid] = useState(0);
@@ -56,6 +65,7 @@ const studyboard = () => {
   const dispatch = useDispatch();
 
   const handleCancel = () => {
+    setInit();
     setVisible(false);
     console.log("취소 버튼");
   };
@@ -115,12 +125,13 @@ const studyboard = () => {
           meetingDate: studyDate
         }
       });
+      setInit();
     } else {
       confirm({
         title: "경고!",
         content: "내용을 전부 채워주세요",
         onOk() {},
-        onCancel() {}
+        onCancel() {setInit();}
       });
     }
 
@@ -166,7 +177,7 @@ const studyboard = () => {
           }
         });
       },
-      onCancel() {}
+      onCancel() {setInit();}
     });
   };
   const showModifyNotifyModal = () => {
@@ -174,6 +185,7 @@ const studyboard = () => {
   };
 
   const modifyhandleCancel = () => {
+    setInit();
     setModifyvisible(false);
   };
 
@@ -186,6 +198,7 @@ const studyboard = () => {
         body: studycontent
       }
     });
+    setInit();
     setModifyvisible(false);
   };
 
@@ -313,7 +326,7 @@ const studyboard = () => {
             key="action"
             render={post => (
               <span>
-                {myinfoid === post.userId || myinfoid === 1 ? (
+                {myinfoid === post.userId || myinfoid === 1 || post.state === "T" ? (
                   <div>
                     <Button type="primary" onClick={showModifyNotifyModal}>
                       수정

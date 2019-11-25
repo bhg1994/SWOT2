@@ -99,6 +99,8 @@ const notifycation = () => {
   const [modifybody, onChangebody] = useInput("");
 
   const handleCancel = () => {
+    setNotificationtitle("");
+    setNotificationcontent("");
     setVisible(false);
     console.log("취소 버튼");
   };
@@ -108,6 +110,8 @@ const notifycation = () => {
   };
 
   const modifyhandleCancel = () => {
+    setNotificationtitle("");
+    setNotificationcontent("");
     setModifyvisible(false);
   };
 
@@ -166,6 +170,8 @@ const notifycation = () => {
         body: modifybody
       }
     });
+    onChangebody("");
+    onChangetitle("");
     setModifyvisible(false);
   };
 
