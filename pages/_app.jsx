@@ -94,6 +94,7 @@ const SWOT = ({ Component, store, pageProps }) => {
               style={{
                 margin: "20px 20px 0",
                 padding: 24,
+                minHeight: 1000,
                 background: "#fff"
               }}
             >
