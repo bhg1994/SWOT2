@@ -443,7 +443,7 @@ const Profile = () => {
               <Card
                 style={{ marginTop: "40px" }}
                 title={mystudy.title}
-                extra={mystudy.state === "T"||"S" ? (
+                extra={mystudy.state === "T"||mystudy.state === "S" ? (
                   "" 
                 ) :
                   <Button
@@ -457,7 +457,7 @@ const Profile = () => {
                 }
               >
                 <div style={{ marginBottom: "10px", textAlign: "end" }}>
-                  {mystudy.state === "T"||"S" ? (
+                  {mystudy.state === "T"||mystudy.state === "S" ? (
                     <Tag color="green">승인 완료</Tag>
                   ) : mystudy.state === "C" ? (
                     <Tag color="blue">승인 대기</Tag>
