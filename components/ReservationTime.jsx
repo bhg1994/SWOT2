@@ -7,13 +7,20 @@ import {
   SelecttimeBtn
 } from "../components/css/ReservationTime";
 import { useDispatch, useSelector } from "react-redux";
-import { START_TIME_SELECT, END_TIME_SELECT } from "../reducers/room";
+import { START_TIME_SELECT, END_TIME_SELECT, POSSIBLE_TIME_SET } from "../reducers/room";
 import { useEffect, useState } from "react";
 
 var justClickedId = "";
 var startId = "";
 var beforeId = "";
 var reservations = [];
+
+var map = new Map();
+for(let i = 0; i<24; i++){
+  map.set(i,true);
+}
+
+
 
 const ReservationTime = ({ value }) => {
   const times = [
@@ -56,7 +63,7 @@ const ReservationTime = ({ value }) => {
     });
     console.log(reservations);
     if (value) {
-      oninit();
+      oninit(reservations);
       //disable();
     }
   }, [roomReservations]);
@@ -83,7 +90,7 @@ const ReservationTime = ({ value }) => {
     justClickedId = e.target.id;
 
     if (startId === justClickedId) {
-      oninit();
+      oninit(reservations);
       return;
     }
 
@@ -113,7 +120,7 @@ const ReservationTime = ({ value }) => {
     }
     
   };
-  const oninit = () => {
+  const oninit = (reservations) => {
     for (let i = 8; i < 22; i++) {
       document.getElementById(i).style.backgroundColor = "white";
       document.getElementById(i).disabled = false;
@@ -128,18 +135,37 @@ const ReservationTime = ({ value }) => {
       type: END_TIME_SELECT,
       data: ""
     });
-    disable();
+    disable(reservations);
   };
+  
 
-  const disable = () => {
+  const disable = (reservations) => {
+    console.log(reservations);
     for (let i = 0; i < reservations.length; i++) {
       let length =
         parseInt(reservations[i].endTime) - parseInt(reservations[i].startTime);
       for (let j = 0; j < length; j++) {
         let index = parseInt(reservations[i].startTime) + j;
         document.getElementById(index).disabled = true;
-        console.log(index);
+        map.set(index,false);
+        console.log(map);
       }
+    }
+    if(reservations.length===0){
+      let map2 = new Map();
+      for(let i = 0; i<24; i++){
+        map2.set(i,true);
+      }
+      dispatch({
+        type: POSSIBLE_TIME_SET,
+        data: map2,
+      });
+    }
+    else{
+      dispatch({
+        type: POSSIBLE_TIME_SET,
+        data: map,
+      });
     }
   };
 

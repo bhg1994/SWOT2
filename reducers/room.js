@@ -14,6 +14,7 @@ export const initialState = {
     studyReservationData: null,
     sTime: "",
     eTime: "",
+    possibleTime: null,
 };
 
 export const RESERVATION_REQUEST = 'RESERVATION_REQUEST';
@@ -42,6 +43,8 @@ export const INSERT_STUDY_RESERVATION_DATA = 'INSERT_STUDY_RESERVATION_DATA';
 
 export const START_TIME_SET = 'START_TIME_SET';
 export const END_TIME_SET = 'END_TIME_SET';
+
+export const POSSIBLE_TIME_SET = 'POSSIBLE_TIME_SET'
 
 
 
@@ -178,6 +181,12 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 eTime: action.data
+            }
+        }
+        case POSSIBLE_TIME_SET: {
+            return{
+                ...state,
+                possibleTime: action.data,
             }
         }
 

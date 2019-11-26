@@ -13,13 +13,22 @@ import FacilityrentalForStudy from "../components/FacilityrentalForStudy";
 
 const { Text } = Typography;
 
+var map = new Map();
+var isPossible;
+for(let i = 0; i<24; i++){
+  map.set(i,true);
+}
+
 const reservationForm = () => {
   const [lookup, setLookup] = useState("");
 
   const dispatch = useDispatch();
-  const { selectedRoom, isStudyReservation, selectedRoomName } = useSelector(
+  const { selectedRoom, isStudyReservation, selectedRoomName, possibleTime, sTime, eTime } = useSelector(
     state => state.room
   );
+
+
+  
 
   if (!isStudyReservation) {
     dispatch({
@@ -32,6 +41,23 @@ const reservationForm = () => {
   }, [selectedRoom]);
 
   useEffect(() => {
+    isPossible=true;
+    for(let i=0; i<24; i++){
+      if(!map.get(i)){
+        if(!possibleTime.get(i)){
+          isPossible=false;
+        }
+      }
+    }
+    console.log("ok?: "+isPossible);
+  }, [possibleTime]);
+
+  useEffect(() => {
+    for(let i=0; i<eTime-sTime; i++){
+      let index = parseInt(sTime)+ i;
+      map.set(index,false);
+    }
+    
     const token = localStorage.getItem("accessToken");
     dispatch({
       type: LOAD_ROOMLIST_REQUEST,
@@ -39,6 +65,7 @@ const reservationForm = () => {
         token: token
       }
     });
+    console.log(map);
   }, []);
 
   const onButton = () => {
@@ -81,6 +108,7 @@ const reservationForm = () => {
         <div style={{ margin: "auto", width: "80%" }}>
           <ReservationTime value={lookup} />
         </div>
+        {isPossible  ? "" : <div>12321</div>}
         {lookup === "" ? "" : <FacilityrentalForStudy />}
       </Responsive>
     </>
