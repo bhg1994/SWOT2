@@ -1,12 +1,14 @@
 import React from "react";
 import { StudyBoard, StudyBoardtwo, MainCarousel } from "../components";
+import Link from "next/link";
 import { SwotMap } from "../containers";
-import { Row, Col, Card, Typography, Divider } from "antd";
+import { Table, Row, Col, Card, Typography, Divider } from "antd";
 import { STUDY_RESERVATION_OFF } from "../reducers/room";
 import { useDispatch, useSelector } from "react-redux";
 import { LOAD_ROOMLIST_REQUEST } from "../reducers/master";
 import { LOAD_POST_REQUEST } from "../reducers/post";
 
+const { Column } = Table;
 const { Text } = Typography;
 
 const Home = () => {
@@ -14,14 +16,6 @@ const Home = () => {
   const { notifyPosts, studyPosts } = useSelector(state => state.post);
 
   console.log(notifyPosts, studyPosts);
-
-  const NotificationTitle = (
-    <div style={{ textAlign: "center" }}>
-      <Text type="danger" style={{ fontSize: "20px" }}>
-        공지사항
-      </Text>
-    </div>
-  );
 
   const SWOTMapTitle = (
     <div style={{ textAlign: "center" }}>
@@ -41,38 +35,37 @@ const Home = () => {
   return (
     <>
       <MainCarousel />
-      <div>
+      <div style={{ marginTop: "100px" }}>
         <Row gutter={24} type="flex">
-          <Card bordered={false} style={{ marginTop: "50px" }}>
-            {/* <Card
-              title={NotificationTitle}
-              style={{ marginBottom: "50px" }}
-              extra={<a href="Notification">Notification ></a>}
-            >
-              <Text type="secondary">{notifyPosts[0].body}</Text>
-              <Divider />
-              <Text type="warning">{notifyPosts[1].body}</Text>
-              <Divider />
-              <Text type="danger">{notifyPosts[2].body}</Text>
-            </Card> */}
-            <Col xs={24} md={12}>
-
-              <StudyBoard />
-            </Col>
-            <Col span={12}>
-              <StudyBoardtwo />
-            </Col>
-          </Card>
-
+          <Col xs={24} md={12}>
+            <Table dataSource={notifyPosts} pagination={false}>
+              <Column title="날짜" dataIndex="createdDate" key="createdDate" />
+              <Column
+                title="공지사항"
+                dataIndex="title"
+                key="title"
+                render={text => (
+                  <Link href="/notification">
+                    <a>{text}</a>
+                  </Link>
+                )}
+              />
+              <Column title="내용" dataIndex="body" key="body" />
+            </Table>
+            <Card bordered={false} style={{ marginTop: "50px" }}>
+              <Col xs={24} md={12}>
+                <StudyBoard />
+              </Col>
+              <Col span={12}>
+                <StudyBoardtwo />
+              </Col>
+            </Card>
+          </Col>
           <div>
             <Card
               extra={<a href="reservation">Lecture ></a>}
               title={SWOTMapTitle}
               hoverable
-              style={{
-                textAlign: "center",
-                marginTop: "74px"
-              }}
             >
               <Col xs={24} md={12}>
                 <SwotMap />

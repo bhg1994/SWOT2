@@ -18,7 +18,6 @@ export const GuideFade = keyframes`
 
 export const ReservationWrapper = styled.div`
     text-align:center;
-    
 `
 
 export const ReservationGuide = styled.div`

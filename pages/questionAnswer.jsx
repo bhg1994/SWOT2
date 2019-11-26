@@ -143,10 +143,7 @@ const questionAnswer = () => {
     <>
       <Layout style={{ backgroundColor: "white" }}>
         <div style={{ marginBottom: "50px", textAlign: "center" }}>
-          <img
-            src="static/images/Q&A_logo.png"
-            style={{ marginRight: "100px" }}
-          />
+          <img src="static/images/Q&A_logo.png" />
         </div>
         <header style={{ display: "flex", marginTop: "20px" }}>
           <div style={{ width: "150px", marginTop: "6px" }}>

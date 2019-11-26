@@ -9,6 +9,15 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { START_TIME_SELECT, END_TIME_SELECT, POSSIBLE_TIME_SET } from "../reducers/room";
 import { useEffect, useState } from "react";
+import * as Scroll from "react-scroll";
+import {
+  Link,
+  Element,
+  Events,
+  animateScroll as scroll,
+  scrollSpy,
+  scroller
+} from "react-scroll";
 
 var justClickedId = "";
 var startId = "";
@@ -51,7 +60,9 @@ const ReservationTime = ({ value }) => {
   ];
 
   const dispatch = useDispatch();
-  const { roomReservations, isStudyReservation } = useSelector(state => state.room);
+  const { roomReservations, isStudyReservation } = useSelector(
+    state => state.room
+  );
   const { date } = useSelector(state => state.room);
 
   useEffect(() => {
@@ -69,56 +80,57 @@ const ReservationTime = ({ value }) => {
   }, [roomReservations]);
 
   const onClick = e => {
-    if(!isStudyReservation){
+    scroll.scrollTo(400);
+    if (!isStudyReservation) {
       console.log(e.target.id);
-    let element = document.getElementById(e.target.id);
+      let element = document.getElementById(e.target.id);
 
-    if (startId === "") {
-      startId = e.target.id;
-      element.style.backgroundColor = "pink";
-      beforeId = e.target.id;
-      dispatch({
-        type: START_TIME_SELECT,
-        data: startId
-      });
-      dispatch({
-        type: END_TIME_SELECT,
-        data: String(parseInt(startId) + 1)
-      });
-      return;
-    }
-    justClickedId = e.target.id;
+      if (startId === "") {
+        startId = e.target.id;
+        element.style.backgroundColor = "pink";
+        beforeId = e.target.id;
+        dispatch({
+          type: START_TIME_SELECT,
+          data: startId
+        });
+        dispatch({
+          type: END_TIME_SELECT,
+          data: String(parseInt(startId) + 1)
+        });
+        return;
+      }
+      justClickedId = e.target.id;
 
     if (startId === justClickedId) {
       oninit(reservations);
       return;
     }
 
-    if (
-      parseInt(beforeId) - parseInt(justClickedId) === -1 ||
-      parseInt(beforeId) - parseInt(justClickedId) === 0
-    ) {
-      if (parseInt(justClickedId) - parseInt(startId) < 5) {
-        if (element.style.backgroundColor != "pink") {
-          element.style.backgroundColor = "pink";
-          beforeId = e.target.id;
-          dispatch({
-            type: END_TIME_SELECT,
-            data: String(parseInt(beforeId) + 1)
-          });
-        } else {
-          element.style.backgroundColor = "white";
-          beforeId = String(parseInt(justClickedId) - 1);
-          console.log(beforeId);
-          dispatch({
-            type: END_TIME_SELECT,
-            data: String(parseInt(beforeId) + 1)
-          });
+
+      if (
+        parseInt(beforeId) - parseInt(justClickedId) === -1 ||
+        parseInt(beforeId) - parseInt(justClickedId) === 0
+      ) {
+        if (parseInt(justClickedId) - parseInt(startId) < 5) {
+          if (element.style.backgroundColor != "pink") {
+            element.style.backgroundColor = "pink";
+            beforeId = e.target.id;
+            dispatch({
+              type: END_TIME_SELECT,
+              data: String(parseInt(beforeId) + 1)
+            });
+          } else {
+            element.style.backgroundColor = "white";
+            beforeId = String(parseInt(justClickedId) - 1);
+            console.log(beforeId);
+            dispatch({
+              type: END_TIME_SELECT,
+              data: String(parseInt(beforeId) + 1)
+            });
+          }
         }
       }
     }
-    }
-    
   };
   const oninit = (reservations) => {
     for (let i = 8; i < 22; i++) {

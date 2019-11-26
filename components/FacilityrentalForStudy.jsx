@@ -184,8 +184,8 @@ const FacilityrentalForStudy = () => {
                 onChange={onChangeReason}
                 autosize={{ minRows: 4, maxRows: 8 }}
                 style={{ width: "50%" }}
+                disabled
                 rows={4}
-                placeholder="강의실 대여 신청자는 학번과 이름을 모두 기재해 주시기 바랍니다. 인원과 차이가 있을 시, 대여 반려의 사유가 됩니다."
               />
             </Form.Item>
             <Text type="secondary" style={{ fontSize: "18px" }}>
@@ -197,6 +197,7 @@ const FacilityrentalForStudy = () => {
                 onChange={onChangeMaximum}
                 min={1}
                 max={30}
+                disabled
                 defaultValue={studyReservationData.boards.total}
                 style={{ width: "130px" }}
               />
