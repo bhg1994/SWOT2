@@ -8,6 +8,7 @@ import {
   ReservationWrapper,
   ReservationGuide
 } from "../components/css/Reservation";
+import { animateScroll as scroll } from "react-scroll";
 
 const { Text } = Typography;
 
@@ -25,6 +26,7 @@ const reservationForm = () => {
         roomId: selectedRoom
       }
     });
+    scroll.scrollTo(150);
   };
 
   function onChange(date, dateString) {
@@ -39,11 +41,12 @@ const reservationForm = () => {
   return (
     <>
       <Responsive>
-        <div style={{ textAlign: "center", marginRight: "100px" }}>
+        <div style={{ textAlign: "center" }}>
           <img src={`static/images/classrooms/${selectedRoomCode}.jpg`}></img>
         </div>
         <List
           style={{
+            margin: "auto",
             marginTop: "30px"
           }}
         >
@@ -61,14 +64,18 @@ const reservationForm = () => {
                 대여일자 선택
               </Text>
               <DatePicker onChange={onChange} />
-              <Button
-                style={{ marginLeft: "30px" }}
-                type="primary"
-                icon="search"
-                onClick={onButton}
-              >
-                조 회
-              </Button>
+              {dateSelected ? (
+                <Button
+                  style={{ marginLeft: "30px" }}
+                  type="primary"
+                  icon="search"
+                  onClick={onButton}
+                >
+                  조 회
+                </Button>
+              ) : (
+                ""
+              )}
             </div>
           </List.Item>
         </List>

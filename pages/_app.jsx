@@ -51,7 +51,7 @@ const SWOT = ({ Component, store, pageProps }) => {
                       float: "right",
                       position: "relative",
                       marginTop: "8px",
-                      right: "50%"
+                      right: "46%"
                     }}
                   />
                 </a>

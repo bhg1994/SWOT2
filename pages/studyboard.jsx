@@ -47,7 +47,7 @@ const studyboard = () => {
     setStudystarttime("");
     setStudytitle("");
     setMaximum(3);
-  }
+  };
 
   const { studyPosts, isLoading } = useSelector(state => state.post);
   const [myinfoid, setMyinfoid] = useState(0);
@@ -130,7 +130,9 @@ const studyboard = () => {
         title: "경고!",
         content: "내용을 전부 채워주세요",
         onOk() {},
-        onCancel() {setInit();}
+        onCancel() {
+          setInit();
+        }
       });
     }
 
@@ -176,7 +178,9 @@ const studyboard = () => {
           }
         });
       },
-      onCancel() {setInit();}
+      onCancel() {
+        setInit();
+      }
     });
   };
   const showModifyNotifyModal = () => {
@@ -205,10 +209,7 @@ const studyboard = () => {
     <>
       <Layout style={{ backgroundColor: "white" }}>
         <div style={{ marginBottom: "50px", textAlign: "center" }}>
-          <img
-            src="static/images/studyboard_logo.png"
-            style={{ marginRight: "100px" }}
-          />
+          <img src="static/images/studyboard_logo.png" />
         </div>
         <header style={{ display: "flex" }}>
           <div style={{ width: "150px" }}>
@@ -330,7 +331,6 @@ const studyboard = () => {
               <span>
                 {(myinfoid === post.userId && post.state !== "S") ||
                 myinfoid === 1 ? (
-
                   <div>
                     <Button type="primary" onClick={showModifyNotifyModal}>
                       수정

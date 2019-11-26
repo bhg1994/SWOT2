@@ -118,6 +118,9 @@ const LectureRoomList = ({ handleOk, Lectureroom }) => {
         visible={visible}
         onCancel={handleCancel}
         footer={[
+          <Link href="/reservationForm">
+            <Button key="reservationPage">강의실 예약</Button>
+          </Link>,
           <Button key="back" onClick={handleCancel}>
             닫기
           </Button>

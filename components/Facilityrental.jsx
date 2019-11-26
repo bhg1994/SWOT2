@@ -23,9 +23,13 @@ import {
 } from "../components/css/Facilityrental";
 import { useDispatch, useSelector } from "react-redux";
 import { RESERVATION_REQUEST } from "../reducers/room";
+import { animateScroll as scroll } from "react-scroll";
 
 export const useInput = (initValue = null) => {
   const [value, setter] = useState(initValue);
+  if (value !== initValue) {
+    scroll.scrollTo(550);
+  }
   const handler = useCallback(e => {
     setter(e.target.value);
   }, []);
@@ -37,7 +41,7 @@ const { TextArea } = Input;
 
 const Facilityrental = () => {
   const [visible, setVisible] = useState(false);
-  const [maximum, setTotal] = useState("");
+  const [total, setTotal] = useState(3);
   const [phone, setPhone] = useState(0);
   const [reason, onChangeReason] = useInput("");
   const [error, setError] = useState(null);
@@ -85,12 +89,13 @@ const Facilityrental = () => {
 
   const oncheckChange = e => {
     // e.target -> 내가 체크박스를 눌렀을 때 checked가 true로 됨
+    scroll.scrollTo(600);
     if (e.target.checked) setCheck(true);
     else setCheck(false);
   };
 
   const reservationRequest = () => {
-    if ([reason, startTime, endTime, maximum, phone].includes("") || !check) {
+    if ([reason, startTime, endTime, total, phone].includes("") || !check) {
       setError("빈칸을 모두 채워주세요.");
       return;
     }
@@ -104,7 +109,7 @@ const Facilityrental = () => {
       type: RESERVATION_REQUEST,
       data: {
         reason,
-        maximum,
+        total,
         phone,
         selectedRoom,
         token,
@@ -155,11 +160,11 @@ const Facilityrental = () => {
 
                 <Form.Item>
                   <InputNumber
-                    id="maximum"
+                    id="total"
                     onChange={onChangeTotal}
                     min={3}
                     max={30}
-                    defaultVAlue={3}
+                    defaultValue={total}
                     style={{ width: "130px" }}
                   />
                 </Form.Item>
@@ -174,8 +179,12 @@ const Facilityrental = () => {
                 </Form.Item>
 
                 <Form.Item>
-                  <Text type="secondary">시설물 대여 규정에 동의합니다 : </Text>
-                  <Checkbox checked={check} onChange={oncheckChange} />
+                  <div style={{ marginTop: "12px" }}>
+                    <Text type="secondary">
+                      시설물 대여 규정에 동의합니다 :{" "}
+                    </Text>
+                    <Checkbox checked={check} onChange={oncheckChange} />
+                  </div>
                 </Form.Item>
                 {error && <ErrorMessage>{error}</ErrorMessage>}
                 <Form.Item>
@@ -219,7 +228,7 @@ const Facilityrental = () => {
                     />
                   </DesReasonWrapper>
                 )}
-                {maximum ? (
+                {total ? (
                   <div>
                     <InspectionIcon
                       type="check-circle"
@@ -239,6 +248,24 @@ const Facilityrental = () => {
                   </TotalWrapper>
                 )}
                 {phone ? (
+                  <div>
+                    <InspectionIcon
+                      type="check-circle"
+                      theme="twoTone"
+                      twoToneColor="#52c41a"
+                    />
+                  </div>
+                ) : (
+                  <div>
+                    <InspectionIcon
+                      type="close-circle"
+                      theme="twoTone"
+                      twoToneColor="#eb2f96"
+                    />
+                  </div>
+                )}
+
+                {check ? (
                   <div>
                     <InspectionIcon
                       type="check-circle"
