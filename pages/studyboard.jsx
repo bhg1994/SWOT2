@@ -70,6 +70,7 @@ const studyboard = () => {
   };
 
   const showModal = () => {
+    setInit();
     setVisible(true);
   };
 
